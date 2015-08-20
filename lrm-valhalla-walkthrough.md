@@ -55,7 +55,7 @@ Now that you have downloaded the required dependent files, you are ready to star
 To see the changes to your map, you need to run it locally on your machine. You need to start a web server to do this because the scripts could be blocked by your browser’s security.
 
 1. Open a terminal window in the path of your working folder.
-2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...
+2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`
 3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
 If the step was successful, you should see a blank index page with your title showing in the browser tab.
@@ -68,9 +68,9 @@ As you are working, it’s a good idea to save your edits and periodically reloa
 
 When you are referencing local files, you will need to modify the path to reflect your working directory. For example, if your Valhalla files are in a folder called lrm-valhalla, the path would look like this: `<link rel="stylesheet" href="\lrm-valhalla\leaflet.routing.valhalla.css"/>`
 
-1. In index.html, in the <head> section, add a reference to your Leaflet CSS file, substituting your root path to the leaflet folder. `<link rel="stylesheet" href="leaflet.css"/>`
-2. In the <head> section, add reference to the Valhalla CSS file, substituting your path to the lrm-valhalla folder. This file can be used instead of the CSS file from the Leaflet Routing Machine plug-in because it contains all the LRM icons, as well as additional ones for Valhalla. `<link rel="stylesheet" href="leaflet.routing.valhalla.css"/>`
-3. In the <body> section, add the Leaflet JavaScript file. `<script src="leaflet.js"></script>`
+1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file, substituting your root path to the leaflet folder. `<link rel="stylesheet" href="leaflet.css"/>`
+2. In the `<head>` section, add reference to the Valhalla CSS file, substituting your path to the lrm-valhalla folder. This file can be used instead of the CSS file from the Leaflet Routing Machine plug-in because it contains all the LRM icons, as well as additional ones for Valhalla. `<link rel="stylesheet" href="leaflet.routing.valhalla.css"/>`
+3. In the `<body>` section, add the Leaflet JavaScript file. `<script src="leaflet.js"></script>`
 4. Add Tangram JavaScript file, which is the rendering engine you will be using to draw the map. `<script src="https://mapzen.com/tangram/0.2/tangram.min.js"></script>`
 5. Add the Leaflet Routing Machine JavaScript file, substituting your path to the leaflet-routing-machine folder. `<script src="leaflet-routing-machine.js"></script>`
 6. Add the Valhalla JavaScript file, substituting your path to the lrm-valhalla folder. `<script src="lrm-valhalla.js"></script>`
