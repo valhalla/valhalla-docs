@@ -109,6 +109,7 @@ With the script references in the `<body>`, it is possible that code could load 
     }
   </style>
   ```
+  
 2. At the top of the `<body>` section, add the `<div>`.
   ```html
   <div id="map"></div>
@@ -164,17 +165,17 @@ At this point, you have enabled the basic Leaflet controls, but still need to te
 Tangram uses a scene file in .yaml format to specify the what it should draw and how the features should appear in the map. A basic scene file has a reference to a data source (in this case, OpenStreetMap data from Mapzen’s vector tile service) and the colors and types of features to draw. In the code you will add, the `scene:` item sets the Tangram scene file to use for drawing and `attribution:` is what appears in the bottom corner of the map as the map attribution, overriding the default Leaflet attribution.
 
 1. Inside the `<script>` tags, between the `var map = L.map('map');` and `layer.addTo(map);` lines, add the following code to use Tangram.
-```html
-var layer = Tangram.leafletLayer({
-  scene: 'scene.yaml',
-  attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-});
-```
+  ```html
+  var layer = Tangram.leafletLayer({
+    scene: 'scene.yaml',
+    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+  });
+  ```
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
-```html
-map.setView([57.74, 11.94], 11);
-```
+  ```html
+  map.setView([57.74, 11.94], 11);
+  ```
 
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified. CHANGE THESE TO PROPER COORDINATES
 
@@ -195,7 +196,8 @@ Your `<script>` section of the `<body>` should look like this:
   </script>
 
   [...]
-</body>```
+</body>
+```
 
 ## Add waypoints for routing
 So far, you have referenced the necessary files, initialized Leaflet with a map container on the  page, and added Tangram to the map. Now, you are ready to add the routing code to your page using the Leaflet Routing Machine plug-in, using `L.Routing.control`.
@@ -203,16 +205,18 @@ So far, you have referenced the necessary files, initialized Leaflet with a map 
 In the simplest implementation, your map will not provide the ability to search for places through geocoding or inputting coordinates otherwise. Therefore, you need to set the waypoints in your code. As you add functionality to your web page, you can set the initial coordinates through user interaction.
 
 1. Add // to comment out the line you added to set the extent. You no longer need this because the routing environment will be specifying it.  
-```html
-//map.setView([57.74, 11.94], 11);```
+  ```html
+  //map.setView([57.74, 11.94], 11);```
+  
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
-```html
+  ```html
     L.Routing.control({
       waypoints: [
         L.latLng(57.74, 11.94),
         L.latLng(57.6792, 11.949)
       ]
     }).addTo(map);```
+    
 2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration.
 
 ## Set Valhalla as the routing engine
@@ -224,17 +228,19 @@ The code that you will paste in for `router:` two items with placeholders. You n
 For this map, you will be able to drag the start and end points around to produce a route when the map is displayed. By default, the route will not update as you drag until you drop the endpoint on the map. You can set the option for `routeWhileDragging` to true if you want to recalculate the route while moving points on the map, although it can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
 
 1. In the L.Routing.control block, following the waypoints, add the following code to initialize Valhalla.
-```html
-router: L.Routing.valhalla('<my api key>', '<my routing mode>'),
-formatter: new L.Routing.Valhalla.Formatter(),
-summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
-routeWhileDragging: false
-```
+  ```html
+  router: L.Routing.valhalla('<my api key>', '<my routing mode>'),
+  formatter: new L.Routing.Valhalla.Formatter(),
+  summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+  routeWhileDragging: false
+  ```
+  
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
 3. Paste your own API key in place of `<my api key>` inside the single quotes.
 4. Change `<my routing mode>` to `auto` to perform routing by automobile. The line should look something like this:
-```html
-router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),```
+  ```html
+  router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
+  ```
 
 NEED TO USE SAME COORDINATES
 The routing section should look something like this:
