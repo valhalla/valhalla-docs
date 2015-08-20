@@ -36,16 +36,16 @@ Note that the folder paths shown in this walkthrough use simplified versions of 
 Now that you have downloaded the required dependent files, you are ready to start building your application. If you are using the [Node.js](https://nodejs.org/) framework or are adding routing to an existing web application, you may want to use a different file organization. This example uses the simplest structure, a single index.html file.
 
 1. At the root level of your working folder, create a file called index.html and open it in a text editor.
-2. Add the basic HTML tags, including <!DOCTYPE HTML>, <html>, <head>, and <body>. Your HTML might look like this:
-```html  
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-</body>
-</html>
-```
+2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
+  ```html  
+  <!DOCTYPE html>
+  <html>
+  <head>
+  </head>
+  <body>
+  </body>
+  </html>
+  ```
 
 3. In the <head> tag, add a title, such as `<title>My Valhalla Map</title>`.
 4. Save your edits to the index.html file.
@@ -56,7 +56,7 @@ To see the changes to your map, you need to run it locally on your machine. You 
 
 1. Open a terminal window in the path of your working folder.
 2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...
-3. Open your browser to http://localhost:8000. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
+3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
 If the step was successful, you should see a blank index page with your title showing in the browser tab.
 
@@ -100,29 +100,31 @@ To display a Leaflet map on a page, you need a `<div>` element with an ID value,
 With the script references in the `<body>`, it is possible that code could load before its dependencies. To resolve this, you can wrap the scripts in a function.
 
 1. At the bottom of the `<head>` section, add a `<style>` tag and the following size attributes.
-```html
-<style>
-  #map {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
-</style>
-```
+  ```html
+  <style>
+   #map {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+    }
+  </style>
+  ```
 2. At the top of the `<body>` section, add the `<div>`.
-```html
-<div id="map"></div>```
-
+  ```html
+  <div id="map"></div>
+  ```
 3. Immediately below the `<div>`, add the following JavaScript within a `<script>` tag to initialize Leaflet. You need to include the script within a function so it after any the JavaScript dependencies you referenced in the `<body>` tag.
-```html
-<script>
-function loadMap(){
-        var map = L.map('map');
-window.onload = loadMap;
-</script>```
+  ```html
+  <script>
+  function loadMap(){
+    var map = L.map('map');
+  window.onload = loadMap;
+  </script>
+  ```
 4. Save your edits and refresh the browser. You should see a blank canvas with zoom controls and an attribution in the corner.
 
 Your index.html should look something like this:
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -152,7 +154,8 @@ Your index.html should look something like this:
   <script src="\leaflet-routing-machine\leaflet-routing-machine.js"></script>
   <script src="\lrm-valhalla\lrm-valhalla.js"></script>
 </body>
-</html>```
+</html>
+```
 
 ## Add a Tangram map to the frame
 
@@ -165,14 +168,15 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
 var layer = Tangram.leafletLayer({
   scene: 'scene.yaml',
   attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-});```
+});
+```
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
 ```html
 map.setView([57.74, 11.94], 11);
 ```
-CHANGE THESE TO PROPER COORDINATES
-3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified.
+
+3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified. CHANGE THESE TO PROPER COORDINATES
 
 Your `<script>` section of the `<body>` should look like this:
 ```html
