@@ -145,6 +145,7 @@ With the script references in the `<body>`, it is possible that code could load 
   window.onload = loadMap;
   </script>
   ```
+  
 4. Save your edits and refresh the browser. You should see a blank canvas with zoom controls and an attribution in the corner.
 
 Your index.html should look something like this:
