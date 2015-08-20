@@ -230,7 +230,8 @@ In the simplest implementation, your map will not provide the ability to search 
 
 1. Add // to comment out the line you added to set the extent. You no longer need this because the routing environment will be specifying it.  
   ```html
-  //map.setView([57.74, 11.94], 11);```
+  //map.setView([57.74, 11.94], 11);
+  ```
   
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
   ```html
@@ -239,7 +240,8 @@ In the simplest implementation, your map will not provide the ability to search 
         L.latLng(57.74, 11.94),
         L.latLng(57.6792, 11.949)
       ]
-    }).addTo(map);```
+    }).addTo(map);
+    ```
     
 2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration.
 
@@ -279,7 +281,8 @@ L.Routing.control({
    formatter: new L.Routing.Valhalla.Formatter(),
    summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
    routeWhileDragging: false
- }).addTo(map);```
+ }).addTo(map);
+ ```
 
 When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can go back to the code and change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking.
 
