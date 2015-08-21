@@ -249,11 +249,11 @@ In the simplest implementation, your map will not provide the ability to search 
 
 By default, the Leaflet Routing Machine plug-in uses the Open Source Routing Machine to perform the routing queries. To use a different engine, you need to set the `router:` as Valhalla and initialize a `formatter:`, which does not need a value because the Valhalla libraries already contain functions for units and other conversions.
 
-The code that you will paste in for `router:` two items with placeholders. You need to replace these with your own API key and the routing mode you want to use in your map.
+The code you are given for `router:` has two items with placeholders. You need to replace these with your own API key and the routing mode you want to use in your map.
 
-For this map, you will be able to drag the start and end points around to produce a route when the map is displayed. By default, the route will not update as you drag until you drop the endpoint on the map. You can set the option for `routeWhileDragging` to true if you want to recalculate the route while moving points on the map, although it can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
+For this map, you will be able to drag the start and end points to update the routing, but the route will not be recalculated until you drop the points. You can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, but this can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
 
-1. In the L.Routing.control block, following the waypoints, add the following code to initialize Valhalla.
+1. In the `L.Routing.control` block, after the waypoints, add the following code to initialize Valhalla as the router.
   ```html
   router: L.Routing.valhalla('<my api key>', '<my routing mode>'),
   formatter: new L.Routing.Valhalla.Formatter(),
@@ -263,25 +263,25 @@ For this map, you will be able to drag the start and end points around to produc
   
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
 3. Paste your own API key in place of `<my api key>` inside the single quotes.
-4. Change `<my routing mode>` to `auto` to perform routing by automobile. The line should look something like this:
+4. Change `<my routing mode>` to `auto` to perform routing by automobile.
   ```html
   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
   ```
 
 NEED TO USE SAME COORDINATES
-The routing section should look something like this:
-```html
-//map.setView([57.74, 11.94], 11);
-L.Routing.control({
-   waypoints: [
-     L.latLng(34.417,-119.868),
-     L.latLng(34.417,-119.854)
-   ],
-   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
-   formatter: new L.Routing.Valhalla.Formatter(),
-   summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
-   routeWhileDragging: false
- }).addTo(map);
+The routing section should look something like this, but with your own API key:
+  ```html
+  //map.setView([57.74, 11.94], 11);
+  L.Routing.control({
+    waypoints: [
+      L.latLng(34.417,-119.868),
+      L.latLng(34.417,-119.854)
+    ],
+    router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
+    formatter: new L.Routing.Valhalla.Formatter(),
+    summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+    routeWhileDragging: false
+  }).addTo(map);
  ```
 
 When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can go back to the code and change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking.
