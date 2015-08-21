@@ -2,9 +2,9 @@
 
 Valhalla is a free and open-source service that adds routing and navigation to web or mobile applications. In this walkthrough, you will learn how to make a web map featuring the Valhalla routing engine. The map you create will display the route line between points, a text narrative of maneuvers, a length and time en route summary of travel between points, functionality to drag the route start and endpoints to get a different path, and the ability change the mode of transportation, such as automobile or pedestrian.
 
-The map also uses some of Mapzen’s other technology, including the vector tile service and the Tangram renderer to draw the features on the map.
+The map also uses other Mapzen technology, including the [vector tile service](https://mapzen.com/projects/vector-tiles/) and the [Tangram renderer](https://mapzen.com/projects/tangram) to draw the features on the map.
 
-To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the code is provided for you. You will need a free API key to use Valhalla, which requires a GitHub account for authorization. You can use the text editor and operating system you prefer, and must maintain an Internet connection while working on the tutorial. It should take you about an hour to complete this.
+To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the code is provided. You will need a [free API key](https://mapzen.com/developers) to use Valhalla, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection to complete the tutorial. The tutorial should take about an hour to complete.
 
 ## Sign up for a Valhalla API key
 To use the Valhalla routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
@@ -14,11 +14,11 @@ Valhalla is a free, shared routing service. As such, there are limitations on re
 1. Go to https://mapzen.com/developers.
 2. Sign in with your GitHub account. If you have not done this before, you need to agree to the terms first.
 3. Create a new key for Valhalla, and optionally, give it a name so you can remember the purpose of the project.
-4. Keep this web page open so you can copy the key into the code later.
+4. Keep the web page open so you can copy the key into the code later.
 
 ## Download and install the dependencies
 
-The map uses the basic Leaflet framework, which is a JavaScript library to make web and mobile maps and includes controls from zooming, displaying attributions on a map, and drawing symbols. Leaflet is extensible, so developers have built many additional tools to enhance its functionality, including the Leaflet Routing Machine, which adds routing to a Leaflet map. The LRM-Valhalla plug-in further extends the routing functionality to use the Valhalla routing engine.
+The map uses the Leaflet framework, which is a JavaScript library to make web and mobile maps---including controls from zooming, displaying attributions on a map, and drawing symbols. Leaflet is extensible, and developers have built many additional tools to enhance its functionality, including the Leaflet Routing Machine (LRM), which adds routing to a Leaflet map. The LRM-Valhalla plug-in further extends the routing functionality to use the Valhalla routing engine.
 
 To set up your development environment, you need to install Leaflet, the Leaflet Routing Machine, and LRM-Valhalla. There are several ways you can obtain these files, including through a package manager, such as [npm](https://www.npmjs.com/). If you want to use other methods, see the documentation for those products.
 
