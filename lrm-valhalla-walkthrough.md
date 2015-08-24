@@ -25,7 +25,7 @@ To set up your development environment, you need to install Leaflet, the Leaflet
 1. Create a working folder on your machine where you can place the downloaded files.
 2. Download Leaflet from http://leafletjs.com/download.html.
 3. Download Leaflet Routing Machine from http://www.liedman.net/leaflet-routing-machine/download/.
-4. Download LRM-Valhalla from https://mapzen.com/resources/lrm-valhalla-0.0.9.zip.
+4. Download LRM-Valhalla from http://mapzen.com/resources/lrm-valhalla.zip.
 5. Download a [Tangram scene file](https://github.com/valhalla/lrm-valhalla/blob/master/examples/scene.yaml) or use your own and place it in the root level of your working folder.
 6. Unzip the files you downloaded and move the subfolders to your main working folder.
 
