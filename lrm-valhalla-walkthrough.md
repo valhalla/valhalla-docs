@@ -83,7 +83,7 @@ When you are referencing local files, you will need to modify the path to reflec
   <script src="leaflet.js"></script>
   ```
   
-4. Add Tangram JavaScript file, which is the rendering engine you will be using to draw the map. 
+4. Add the Tangram JavaScript file, which is the rendering engine you will be using to draw the map. 
   ```html
   <script src="https://mapzen.com/tangram/0.2/tangram.min.js"></script>
   ```
