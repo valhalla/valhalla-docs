@@ -203,7 +203,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
   map.setView([41.9067,-89.0688], 11);
   ```
 
-3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified. CHANGE THESE TO PROPER COORDINATES
+3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified.
 
 Your `<script>` section of the `<body>` should look like this:
 ```html
