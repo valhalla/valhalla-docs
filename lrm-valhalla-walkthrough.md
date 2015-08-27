@@ -285,7 +285,7 @@ The routing section should look something like this, but with your own API key:
   }).addTo(map);
  ```
 
-When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking, although this particular route would exceed Valhalla's limits for other modes of transport.
+When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking, although this particular route would exceed Valhalla's limits for other modes of transport.
 
 ## Walkthrough summary and next steps
 In this walkthrough, you learned the basics of making a map with Valhalla routing within the Leaflet and Leaflet Routing Machine frameworks. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the mode of routing, or set other options for routing. You can also drag the route to change the start and end points or the points through which the route should pass.
