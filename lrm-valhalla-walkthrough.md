@@ -200,7 +200,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
   ```html
-  map.setView([41.9067, -89.0688], 11);
+  map.setView([41.9067,-89.0688], 11);
   ```
 
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified. CHANGE THESE TO PROPER COORDINATES
@@ -217,7 +217,7 @@ Your `<script>` section of the `<body>` should look like this:
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
-    map.setView([41.9067, -89.0688], 11);
+    map.setView([41.9067,-89.0688], 11);
   window.onload = loadMap;
   </script>
 
@@ -232,14 +232,14 @@ In the simplest implementation, your map will not provide the ability to search 
 
 1. Add // to comment out the line you added to set the extent. You no longer need this because the routing environment will be specifying it.  
   ```html
-  //map.setView([41.9067, -89.0688], 11);
+  //map.setView([41.9067,-89.0688], 11);
   ```
   
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
   ```html
     L.Routing.control({
       waypoints: [
-        L.latLng(41.9067, -89.0688),
+        L.latLng(41.9067,-89.0688),
         L.latLng(41.5893,-90.5715)
       ]
     }).addTo(map);
@@ -272,10 +272,10 @@ For this map, you will be able to drag the start and end points to update the ro
 
 The routing section should look something like this, but with your own API key:
   ```html
-  //map.setView([41.9067, -89.0688], 11);
+  //map.setView([41.9067,-89.0688], 11);
   L.Routing.control({
     waypoints: [
-      L.latLng(41.9067, -89.0688),
+      L.latLng(41.9067,-89.0688),
       L.latLng(41.5893,-90.5715)
     ],
     router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
