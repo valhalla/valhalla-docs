@@ -6,6 +6,8 @@ The map also uses other Mapzen technology, including the [vector tile service](h
 
 To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the code is provided. You will need a [free API key](https://mapzen.com/developers) to use Valhalla, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection to complete the tutorial. The tutorial should take about an hour to complete.
 
+In this walkthrough, you will be taking your family on a [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) by car from your home of Chicago, Illinois to visit a theme park in Southern California. In your code, you will enter the start and end points of your trip and Valhalla will calculate the route. Valhalla also provides the ability for you to specify points through which your route should pass, such as visiting family in Kansas and Arizona and bobbing your head at Grand Canyon National Park, but that is beyond the scope of this introduction. 
+
 ## Sign up for a Valhalla API key
 To use the Valhalla routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
@@ -18,7 +20,7 @@ Valhalla is a free, shared routing service. As such, there are limitations on re
 
 ## Download and install the dependencies
 
-The map uses the Leaflet framework, which is a JavaScript library to make web and mobile maps---including controls from zooming, displaying attributions on a map, and drawing symbols. Leaflet is extensible, and developers have built many additional tools to enhance its functionality, including the Leaflet Routing Machine (LRM), which adds routing to a Leaflet map. The LRM-Valhalla plug-in further extends the routing functionality to use the Valhalla routing engine.
+The map uses the Leaflet framework, which is a JavaScript library to make web and mobile maps and provides tools for zooming, displaying attributions on a map, and drawing symbols. Leaflet is extensible, and developers have built many additional tools to enhance its functionality, including the Leaflet Routing Machine (LRM), which adds routing to a Leaflet map. The LRM-Valhalla plug-in further extends the routing functionality to use the Valhalla routing engine.
 
 To set up your development environment, you need to install Leaflet, the Leaflet Routing Machine, and LRM-Valhalla. There are several ways you can obtain these files, including through a package manager, such as [npm](https://www.npmjs.com/). If you want to use other methods, see the documentation for those products.
 
@@ -198,7 +200,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
   ```html
-  map.setView([57.74, 11.94], 11);
+  map.setView([41.9067, -89.0688], 11);
   ```
 
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified. CHANGE THESE TO PROPER COORDINATES
@@ -215,7 +217,7 @@ Your `<script>` section of the `<body>` should look like this:
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
-    map.setView([57.74, 11.94], 11);
+    map.setView([41.9067, -89.0688], 11);
   window.onload = loadMap;
   </script>
 
@@ -230,15 +232,15 @@ In the simplest implementation, your map will not provide the ability to search 
 
 1. Add // to comment out the line you added to set the extent. You no longer need this because the routing environment will be specifying it.  
   ```html
-  //map.setView([57.74, 11.94], 11);
+  //map.setView([41.9067, -89.0688], 11);
   ```
   
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
   ```html
     L.Routing.control({
       waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949)
+        L.latLng(41.9067, -89.0688),
+        L.latLng(41.5893,-90.5715)
       ]
     }).addTo(map);
     ```
@@ -268,14 +270,13 @@ For this map, you will be able to drag the start and end points to update the ro
   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
   ```
 
-NEED TO USE SAME COORDINATES
 The routing section should look something like this, but with your own API key:
   ```html
-  //map.setView([57.74, 11.94], 11);
+  //map.setView([41.9067, -89.0688], 11);
   L.Routing.control({
     waypoints: [
-      L.latLng(34.417,-119.868),
-      L.latLng(34.417,-119.854)
+      L.latLng(41.9067, -89.0688),
+      L.latLng(41.5893,-90.5715)
     ],
     router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
     formatter: new L.Routing.Valhalla.Formatter(),
@@ -284,9 +285,9 @@ The routing section should look something like this, but with your own API key:
   }).addTo(map);
  ```
 
-When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can go back to the code and change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking.
+When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking, although this particular route would exceed Valhalla's limits for other modes of transport.
 
 ## Walkthrough summary and next steps
-In this walkthrough, you learned the basics of making a map with Valhalla routing within the Leaflet and Leaflet Routing Machine frameworks. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the mode of routing, or set other options for routing.
+In this walkthrough, you learned the basics of making a map with Valhalla routing within the Leaflet and Leaflet Routing Machine frameworks. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the mode of routing, or set other options for routing. You can also drag the route to change the start and end points or the points through which the route should pass.
 
 Each of the routing modes that Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment. You can review the documentation to learn more about costing options with Valhalla.
