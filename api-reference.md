@@ -1,10 +1,11 @@
 
-
-## Valhalla routing service API reference
+# Valhalla routing service API reference
 
 Valhalla is a free, open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
 
 The Valhalla routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub (use the [Thor repository](https://github.com/valhalla/thor) for comments about route paths or [Odin repository](https://github.com/valhalla/odin) for narration). You can also send a message to routing@mapzen.com.
+
+The default logic for the OpenStreetMap tags, keys, and values that Valhalla uses when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
 #### API keys and service limits
 
