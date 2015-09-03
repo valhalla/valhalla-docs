@@ -31,7 +31,7 @@ To set up your development environment, you need to install Leaflet, the Leaflet
 5. Download a [Tangram scene file](https://github.com/valhalla/lrm-valhalla/blob/master/examples/scene.yaml) or use your own and place it in the root level of your working folder.
 6. Unzip the files you downloaded and move the subfolders to your main working folder.
 
-Note that the folder paths shown in this walkthrough use simplified versions of the default folder names (for example, \leaflet instead of a folder named \leaflet-x.x.x with release numbers). You can rename your folders or substitute your paths as needed. There are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md), so you can use a more sophisticated structure for your own work as you progress in your development.
+Note that the folder paths shown in this walkthrough use simplified versions of the default folder names (for example, /leaflet instead of a folder named /leaflet-x.x.x with release numbers). You can rename your folders or substitute your paths as needed. There are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md), so you can use a more sophisticated structure for your own work as you progress in your development.
 
 ## Create an index page
 
@@ -68,7 +68,7 @@ Because you are working with several external cascading style sheet (CSS) and Ja
 
 As you are working, it’s a good idea to save your edits and periodically reload the browser page. This helps you identify problems quicker and trace them back to your most recent changes. You can also monitor the terminal window for error messages. For example, seeing a 404 error in this walkthrough often means that the file cannot be found and you should make sure the paths in your HTML match the locations on disk.
 
-When you are referencing local files, you will need to modify the path to reflect your working directory. For example, if your Valhalla files are in a folder called lrm-valhalla, the path would look like this: `<link rel="stylesheet" href="\lrm-valhalla\leaflet.routing.valhalla.css"/>`
+When you are referencing local files, you will need to modify the path to reflect your working directory. For example, if your Valhalla files are in a folder called lrm-valhalla, the path would look like this: `<link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>` 
 
 1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file, substituting your root path to the leaflet folder. 
   ```html
@@ -107,14 +107,14 @@ After adding these, your index.html file should look something like this. Note t
   <html>
   <head>
     <title>My Valhalla Map</title>
-    <link rel="stylesheet" href="\leaflet\leaflet.css"/>
-    <link rel="stylesheet" href="\lrm-valhalla\leaflet.routing.valhalla.css"/>
+    <link rel="stylesheet" href="/leaflet/leaflet.css"/>
+    <link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>
   </head>
   <body>
-    <script src="\leaflet\leaflet.js"></script>
-    <script src="https://mapzen.com/tangram/0.2/tangram.min.js"></script>
-    <script src="\leaflet-routing-machine\leaflet-routing-machine.js"></script>
-    <script src="\lrm-valhalla\lrm-valhalla.js"></script>
+    <script src="/leaflet/leaflet.js"></script>
+    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+    <script src="/leaflet-routing-machine/leaflet-routing-machine.js"></script>
+    <script src="/lrm-valhalla/lrm-valhalla.js"></script>
   </body>
   </html>
 ```
@@ -157,8 +157,8 @@ Your index.html should look something like this:
 <html>
 <head>
   <title>My Valhalla Map</title>
-  <link rel="stylesheet" href="\leaflet\leaflet.css"/>
-  <link rel="stylesheet" href="\lrm-valhalla\leaflet.routing.valhalla.css"/>
+  <link rel="stylesheet" href="/leaflet/leaflet.css"/>
+  <link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>
   <style>
   #map {
     height: 100%;
@@ -176,10 +176,10 @@ Your index.html should look something like this:
   };
   window.onload = loadMap;
   </script>
-  <script src="\leaflet\leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.2/tangram.min.js"></script>
-  <script src="\leaflet-routing-machine\leaflet-routing-machine.js"></script>
-  <script src="\lrm-valhalla\lrm-valhalla.js"></script>
+  <script src="/leaflet/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="/leaflet-routing-machine/leaflet-routing-machine.js"></script>
+  <script src="/lrm-valhalla/lrm-valhalla.js"></script>
 </body>
 </html>
 ```
