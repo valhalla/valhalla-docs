@@ -52,9 +52,9 @@ Now that you have downloaded the required dependent files, you are ready to star
 3. In the <head> tag, add a title, such as `<title>My Valhalla Map</title>`.
 4. Save your edits to the index.html file.
 
-## Get the project running locally
+## Start a server to get the project running locally
 
-To see the changes to your map, you need to run it locally on your machine. You need to start a web server to do this because the scripts could be blocked by your browser’s security.
+To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security.
 
 1. Open a terminal window in the path of your working folder.
 2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`
