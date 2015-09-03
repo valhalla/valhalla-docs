@@ -31,7 +31,7 @@ To set up your development environment, you need to install Leaflet, the Leaflet
 5. Download a [Tangram scene file](https://github.com/valhalla/lrm-valhalla/blob/master/examples/scene.yaml) or use your own and place it in the root level of your working folder.
 6. Unzip the files you downloaded and move the subfolders to your main working folder.
 
-Note that the folder paths shown in this walkthrough use simplified versions of the default folder names (for example, \leaflet instead of a folder named \leaflet-x.x.x with release numbers). You can rename your folders or substitute your paths as needed. There are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md), so you can use a more sophisticated structure for your own work as you progress in your development.
+Note that the folder paths shown in this walkthrough use simplified versions of the default folder names (for example, /leaflet instead of a folder named /leaflet-x.x.x with release numbers). You can rename your folders or substitute your paths as needed. There are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md), so you can use a more sophisticated structure for your own work as you progress in your development.
 
 ## Create an index page
 
