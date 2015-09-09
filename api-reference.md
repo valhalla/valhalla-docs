@@ -220,8 +220,8 @@ The maneuver `sign` may contain four lists of interchange sign elements as follo
 
 Each maneuver sign element includes:
 | Maneuver Sign Element Item | Description |
-| :--------- | :---------- |
-| `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li></ul> |
+| :------------------ | :---------- |
+| `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
 
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
