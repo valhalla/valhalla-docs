@@ -28,7 +28,7 @@ To set up your development environment, you need to install Leaflet, the Leaflet
 2. Download Leaflet from http://leafletjs.com/download.html.
 3. Download Leaflet Routing Machine from http://www.liedman.net/leaflet-routing-machine/download/.
 4. Download LRM-Valhalla from http://mapzen.com/resources/lrm-valhalla.zip.
-5. Download a [Tangram scene file](https://github.com/valhalla/lrm-valhalla/blob/master/examples/scene.yaml) or use your own and place it in the root level of your working folder.
+5. Download a [Tangram scene file](https://raw.githubusercontent.com/valhalla/lrm-valhalla/master/examples/scene.yaml) or use your own and place it in the root level of your working folder.
 6. Unzip the files you downloaded and move the subfolders to your main working folder.
 
 Note that the folder paths shown in this walkthrough use simplified versions of the default folder names (for example, /leaflet instead of a folder named /leaflet-x.x.x with release numbers). You can rename your folders or substitute your paths as needed. There are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md), so you can use a more sophisticated structure for your own work as you progress in your development.
@@ -139,11 +139,12 @@ With the script references in the `<body>`, it is possible that code could load 
   ```html
   <div id="map"></div>
   ```
-3. Immediately below the `<div>`, add the following JavaScript within a `<script>` tag to initialize Leaflet. You need to include the script within a function so it after any the JavaScript dependencies you referenced in the `<body>` tag.
+3. Immediately below the `<div>`, add the following JavaScript within a `<script>` tag to initialize Leaflet. You need to include the script within a function so it loads after any the JavaScript dependencies you referenced in the `<body>` tag.
   ```html
   <script>
   function loadMap(){
     var map = L.map('map');
+  }
   window.onload = loadMap;
   </script>
   ```
@@ -157,8 +158,8 @@ Your index.html should look something like this:
 <html>
 <head>
   <title>My Valhalla Map</title>
-  <link rel="stylesheet" href="/leaflet/leaflet.css"/>
-  <link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>
+  <link rel="stylesheet" href="leaflet/leaflet.css"/>
+  <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css"/>
   <style>
   #map {
     height: 100%;
@@ -172,14 +173,13 @@ Your index.html should look something like this:
   <script>
   function loadMap(){
     var map = L.map('map');
-    layer.addTo(map);
-  };
+  }
   window.onload = loadMap;
   </script>
-  <script src="/leaflet/leaflet.js"></script>
+  <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="/leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="/lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
+  <script src="lrm-valhalla/lrm-valhalla.js"></script>
 </body>
 </html>
 ```
@@ -190,12 +190,13 @@ At this point, you have enabled the basic Leaflet controls, but still need to te
 
 Tangram uses a scene file in .yaml format to specify the what it should draw and how the features should appear in the map. A basic scene file has a reference to a data source (in this case, OpenStreetMap data from Mapzen’s vector tile service) and the colors and types of features to draw. In the code you will add, the `scene:` item sets the Tangram scene file to use for drawing and `attribution:` is what appears in the bottom corner of the map as the map attribution, overriding the default Leaflet attribution.
 
-1. Inside the `<script>` tags, between the `var map = L.map('map');` and `layer.addTo(map);` lines, add the following code to use Tangram.
+1. Inside the `<script>` tags, after the `var map = L.map('map');` line, add the following code to use Tangram.
   ```html
   var layer = Tangram.leafletLayer({
     scene: 'scene.yaml',
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
   });
+  layer.addTo(map);
   ```
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
@@ -218,6 +219,7 @@ Your `<script>` section of the `<body>` should look like this:
     });
     layer.addTo(map);
     map.setView([41.9067,-89.0688], 11);
+  }
   window.onload = loadMap;
   </script>
 
@@ -255,8 +257,12 @@ The code you are given for `router:` has two items with placeholders. You need t
 
 For this map, you will be able to drag the start and end points to update the routing, but the route will not be recalculated until you drop the points. You can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, but this can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
 
-1. In the `L.Routing.control` block, after the waypoints, add the following code to initialize Valhalla as the router.
+1. Replace the `L.Routing.control` block with the following code to initialize Valhalla as the router.
   ```html
+  waypoints: [
+    L.latLng(41.9067,-89.0688),
+    L.latLng(41.5893,-90.5715)
+  ],
   router: L.Routing.valhalla('<my api key>', '<my routing mode>'),
   formatter: new L.Routing.Valhalla.Formatter(),
   summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
