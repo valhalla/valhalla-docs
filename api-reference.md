@@ -175,6 +175,7 @@ Each maneuver includes:
 | `rough` | True if the maneuver is unpaved or rough pavement, or has any portions that have rough pavement. |
 | `gate` | True if a gate is encountered on this maneuver. |
 | `ferry` | True if a ferry is encountered on this maneuver. |
+| `sign` | Contains the interchange guide information at a road junction associated with this maneuver. See below for details. |
 
 For the maneuver `type`, the following are available:
 
@@ -210,9 +211,23 @@ kRoundaboutExit = 27;
 kFerryEnter = 28;
 kFerryExit = 29;
 ```
+
+The maneuver `sign` may contain four lists of interchange sign elements as follows:
+* `exit_number_elements` = list of exit number elements. If an exit number element exists, it is typically just one value.
+* `exit_branch_elements` = list of exit branch elements. The exit branch element text is the subsequent road name or route number after the sign.
+* `exit_toward_elements` = list of exit toward elements. The exit toward element text is the location where the road ahead goes - the location is typically a control city, but may also be a future road name or route number.
+* `exit_name_elements` = list of exit name elements. The exit name element is the interchange identifier - typically not used in the US.
+
+Each maneuver sign element includes:
+
+| Maneuver Sign Element Item | Description |
+| :------------------ | :---------- |
+| `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
+| `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
+
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
-In the future, look for additional maneuver information to enhance navigation applications, including verbal instructions and landmark usage.
+In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
 #### Return Codes and Conditions
 
