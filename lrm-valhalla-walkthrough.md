@@ -239,12 +239,12 @@ In the simplest implementation, your map will not provide the ability to search 
   
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
   ```html
-    L.Routing.control({
-      waypoints: [
-        L.latLng(41.9067,-89.0688),
-        L.latLng(41.5893,-90.5715)
-      ]
-    }).addTo(map);
+  L.Routing.control({
+    waypoints: [
+      L.latLng(41.9067,-89.0688),
+      L.latLng(41.5893,-90.5715)
+    ]
+  }).addTo(map);
   ```
     
 2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration.
@@ -277,19 +277,19 @@ For this map, you will be able to drag the start and end points to update the ro
   ```
 
 The routing section should look something like this, but with your own API key:
-  ```html
-  //map.setView([41.9067,-89.0688], 11);
-  L.Routing.control({
-    waypoints: [
-      L.latLng(41.9067,-89.0688),
-      L.latLng(41.5893,-90.5715)
-    ],
-    router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
-    formatter: new L.Routing.Valhalla.Formatter(),
-    summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
-    routeWhileDragging: false
-  }).addTo(map);
-  ```
+```html
+//map.setView([41.9067,-89.0688], 11);
+L.Routing.control({
+  waypoints: [
+    L.latLng(41.9067,-89.0688),
+    L.latLng(41.5893,-90.5715)
+  ],
+  router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
+  formatter: new L.Routing.Valhalla.Formatter(),
+  summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+  routeWhileDragging: false
+}).addTo(map);
+```
 
 When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking, although this particular route would exceed Valhalla's limits for other modes of transport.
 
