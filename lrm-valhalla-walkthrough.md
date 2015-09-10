@@ -42,10 +42,10 @@ Now that you have downloaded the required dependent files, you are ready to star
   ```html  
   <!DOCTYPE html>
   <html>
-  <head>
-  </head>
-  <body>
-  </body>
+    <head>
+    </head>
+    <body>
+    </body>
   </html>
   ```
 
@@ -191,7 +191,7 @@ At this point, you have enabled the basic Leaflet controls, but still need to te
 Tangram uses a scene file in .yaml format to specify the what it should draw and how the features should appear in the map. A basic scene file has a reference to a data source (in this case, OpenStreetMap data from Mapzen’s vector tile service) and the colors and types of features to draw. In the code you will add, the `scene:` item sets the Tangram scene file to use for drawing and `attribution:` is what appears in the bottom corner of the map as the map attribution, overriding the default Leaflet attribution.
 
 1. Inside the `<script>` tags, after the `var map = L.map('map');` line, add the following code to use Tangram.
-  ```html
+  ```js
   var layer = Tangram.leafletLayer({
     scene: 'scene.yaml',
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
@@ -200,7 +200,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
   ```
 
 2. After the Tangram section, add a line to initialize the map display. This sets the coordinates of the map and the zoom level.
-  ```html
+  ```js
   map.setView([41.9067,-89.0688], 11);
   ```
 
@@ -233,12 +233,12 @@ So far, you have referenced the necessary files, initialized Leaflet with a map 
 In the simplest implementation, your map will not provide the ability to search for places through geocoding or inputting coordinates otherwise. Therefore, you need to set the waypoints in your code. As you add functionality to your web page, you can set the initial coordinates through user interaction.
 
 1. Add // to comment out the line you added to set the extent. You no longer need this because the routing environment will be specifying it.  
-  ```html
+  ```js
   //map.setView([41.9067,-89.0688], 11);
   ```
   
 2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing.
-  ```html
+  ```js
   L.Routing.control({
     waypoints: [
       L.latLng(41.9067,-89.0688),
@@ -258,7 +258,7 @@ The code you are given for `router:` has two items with placeholders. You need t
 For this map, you will be able to drag the start and end points to update the routing, but the route will not be recalculated until you drop the points. You can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, but this can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
 
 1. Replace the `L.Routing.control` block with the following code to initialize Valhalla as the router.
-  ```html
+  ```js
   waypoints: [
     L.latLng(41.9067,-89.0688),
     L.latLng(41.5893,-90.5715)
@@ -272,12 +272,12 @@ For this map, you will be able to drag the start and end points to update the ro
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
 3. Paste your own API key in place of `<my api key>` inside the single quotes.
 4. Change `<my routing mode>` to `auto` to perform routing by automobile.
-  ```html
+  ```js
   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
   ```
 
 The routing section should look something like this, but with your own API key:
-```html
+```js
 //map.setView([41.9067,-89.0688], 11);
 L.Routing.control({
   waypoints: [
