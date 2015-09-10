@@ -103,20 +103,20 @@ When you are referencing local files, you will need to modify the path to reflec
 After adding these, your index.html file should look something like this. Note that JavaScript can be inserted in either the `<head>` or the `<body>`, but the bottom of the `<body>` may improve loading of the page. To make sure the scripts load in the proper order, you will need to add some code in the next steps.
 
 ```html
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <title>My Valhalla Map</title>
-    <link rel="stylesheet" href="/leaflet/leaflet.css"/>
-    <link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>
-  </head>
-  <body>
-    <script src="/leaflet/leaflet.js"></script>
-    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-    <script src="/leaflet-routing-machine/leaflet-routing-machine.js"></script>
-    <script src="/lrm-valhalla/lrm-valhalla.js"></script>
-  </body>
-  </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Valhalla Map</title>
+  <link rel="stylesheet" href="/leaflet/leaflet.css"/>
+  <link rel="stylesheet" href="/lrm-valhalla/leaflet.routing.valhalla.css"/>
+</head>
+<body>
+  <script src="/leaflet/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="/leaflet-routing-machine/leaflet-routing-machine.js"></script>
+  <script src="/lrm-valhalla/lrm-valhalla.js"></script>
+</body>
+</html>
 ```
 
 ## Add a map to the page
@@ -127,10 +127,10 @@ With the script references in the `<body>`, it is possible that code could load 
 1. At the bottom of the `<head>` section, add a `<style>` tag and the following size attributes.
   ```html
   <style>
-   #map {
-     height: 100%;
-     width: 100%;
-     position: absolute;
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
     }
   </style>
   ```
@@ -245,7 +245,7 @@ In the simplest implementation, your map will not provide the ability to search 
         L.latLng(41.5893,-90.5715)
       ]
     }).addTo(map);
-    ```
+  ```
     
 2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration.
 
@@ -289,7 +289,7 @@ The routing section should look something like this, but with your own API key:
     summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
     routeWhileDragging: false
   }).addTo(map);
- ```
+  ```
 
 When you refresh the map, you should see the map, route line, and updated icons and summary text in the narration box. You can change ‘auto’ to ‘pedestrian’ or ‘bicycle’ if you want to build a route for walking or biking, although this particular route would exceed Valhalla's limits for other modes of transport.
 
