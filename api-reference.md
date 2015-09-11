@@ -50,6 +50,7 @@ To build a route, you need to specify two `break` locations. In addition, you ca
 | `way_id` | (optional) OpenStreetMap identification number for a polyline [way] (http://wiki.openstreetmap.org/wiki/Way). The way ID may be used to assist finding the correct routing location at the specified latitude, longitude. This is not currently implemented. |
 
 Optionally, you can include the following location information without impacting the routing. This information is carried through the request and returned as a convenience.
+
 * `name` = Location or business name. The name may be used in the route narration directions, such as "You have arrived at _&lt;business name&gt;_.")
 * `city` = City name.
 * `state` = State name.
@@ -95,6 +96,7 @@ These options are available for `auto`, `auto_shorter`, and `bus` costing method
 
 ##### Bicycle costing options
 The default bicycle costing is tuned toward road bicycles with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes use regular roads where needed or where no direct bicycle lane options exist, but avoid roads without bicycle access. The costing model recognizes several factors unique to bicycle travel and offers several options for tuning bicycle routes. Several factors unique to travel by bicycle influence the resulting route.
+
 *	The types of roads suitable for bicycling depend on the type of bicycle. Road bicycles (skinny or narrow tires) generally are suited to paved roads or perhaps very short sections of compacted gravel. They are not designed for riding on coarse gravel or most paths and tracks through wooded areas or farmland. Mountain bikes, on the other hand, are able to traverse a wider set of surfaces.
 *	Average travel speed can be highly variable and can depend on bicycle type, fitness and experience of the cyclist, road surface, and hills. The costing model assumes a default speed on smooth, flat roads for each supported bicycle type. This speed can be overriden by an input option. The base speed is modulated by surface type (in conjunction with the bicycle type). Coming Soon: Logic to modify speed based on the hilliness of a road section.
 *	Bicyclists vary in their tolerance for riding on roads. Most novice bicyclists, and even other bicyclists, prefer cycleways and dedicated cycling paths and would rather avoid all but the quietest neighborhood roads. Other cyclists may be experienced riding on roads and prefer to take roadways because they often provide the fastest way to get between two places. The bicycle costing model accounts for this with a `use_roads` factor to indicate a cyclist's tolerance for riding on roads.
@@ -212,6 +214,7 @@ kFerryExit = 29;
 ```
 
 The maneuver `sign` may contain four lists of interchange sign elements as follows:
+
 * `exit_number_elements` = list of exit number elements. If an exit number element exists, it is typically just one value.
 * `exit_branch_elements` = list of exit branch elements. The exit branch element text is the subsequent road name or route number after the sign.
 * `exit_toward_elements` = list of exit toward elements. The exit toward element text is the location where the road ahead goes - the location is typically a control city, but may also be a future road name or route number.
