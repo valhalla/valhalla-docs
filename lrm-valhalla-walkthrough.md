@@ -42,10 +42,10 @@ Now that you have downloaded the required dependent files, you are ready to star
   ```html  
   <!DOCTYPE html>
   <html>
-    <head>
-    </head>
-    <body>
-    </body>
+  <head>
+  </head>
+  <body>
+  </body>
   </html>
   ```
 
@@ -102,7 +102,7 @@ When you are referencing local files, you will need to modify the path to reflec
 
 After adding these, your index.html file should look something like this. Note that JavaScript can be inserted in either the `<head>` or the `<body>`, but the bottom of the `<body>` may improve loading of the page. To make sure the scripts load in the proper order, you will need to add some code in the next steps.
 
-```html
+```html hl_lines="4 5 6 9 10 11 12"
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,7 +153,7 @@ With the script references in the `<body>`, it is possible that code could load 
 
 Your index.html should look something like this:
 
-```html
+```html hl_lines="7 8 9 10 11 12 13 16 17 18 19 20 21 22"
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,7 +207,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified.
 
 Your `<script>` section of the `<body>` should look like this:
-```html
+```html hl_lines="6 7 8 9 10 11"
 <body>
   <div id="map"></div>
   <script>
