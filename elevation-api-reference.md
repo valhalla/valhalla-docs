@@ -17,7 +17,7 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 We currently have a single action, `/height?`, that can be requested from the Elevation Service. As the name implies, this can be to get the height at a specific set of locations. If the parameter `range` is also provided and set to `true` both the cumulative distance as well as the height will be returned for each point. This can be used to generate a graph along a computed route since the returned 2d array is essentially just an x (range) and y (height) for each shape point.  Steepness/gradient can also be easily computed from a profile request. Requests takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location/shape information and the optional range parameter.
 
-Here is an example request of an profile request using shape:
+Here is an example request of a profile request using shape:
 
     elevation.dev.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&api_key=
 

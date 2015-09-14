@@ -34,5 +34,5 @@ The Valhalla organization is comprised of several repositories each responsible 
 * tiled routing - method of building a path on graph data that has been split into square cells.
 * time - the number of seconds estimated to complete a maneuver or trip, including any additional costs.
 * trip - results of an entire route, including locations, legs, and maneuvers.
-* elevation - the height with respect to sea level at a specific location (lat,lng).
-* elevation profile - computing the range (cumulative distance) and height for a series of lat,lng pairs of a line or shape.  This is very useful for charting/graphing.
+* height - with respect to elevation, the height above or below sea level at a specific location (lat,lng).
+* height with range - computing the range (cumulative distance) and height for a series of lat,lng pairs of a line or shape.  This is very useful for charting/graphing.
