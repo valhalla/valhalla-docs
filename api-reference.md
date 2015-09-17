@@ -58,6 +58,7 @@ Optionally, you can include the following location information without impacting
 * `country` = Country name.
 * `phone` = Telephone number.
 * `url` = URL for the place or location.
+* `side_of_street` = (response only) The side of street of a `break` `location` that is determined based on the actual route when the `location` is offset from the street. The possible values are `left` and `right`.
 
 Future Valhalla development work includes adding location options and information related to time at each location. This will allow routes to specify a start time or an arrive by time at each location. There is also ongoing work to improve support for `through` locations.
 
