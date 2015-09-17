@@ -34,7 +34,7 @@ Note that you must append your own [Valhalla API key](https://mapzen.com/develop
 
 #### Locations
 
-You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified, with a maximum of two locations currently supported.
+You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified, with a maximum of eight locations currently supported.
 
 A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Valhalla is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input to Valhalla.  
 
