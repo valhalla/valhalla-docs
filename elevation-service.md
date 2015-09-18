@@ -20,6 +20,8 @@ If a `range` parameter is provided and set to `true`, both the cumulative distan
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
+###Shape request
+
 A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, whose coordinates can be used as input to the elevation service.
 
 These parameters are available for `shape`.
@@ -35,6 +37,8 @@ Here is an example of a profile request using `shape`:
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the height and range for each point.
 
+###Encoded polyline request
+
 The `encoded_polyline` parameter is a string of a polyline-encoded shape and has the following parameters.
 
 | Encoded polyline parameters | Description |
@@ -44,6 +48,8 @@ The `encoded_polyline` parameter is a string of a polyline-encoded shape and has
 Here is an example `encoded_polyline` request:
 
     elevation.mapzen.com/height?json={"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}&api_key=elevation-xxxxxx
+
+###Range parameter
 
 The `range` parameter is a boolean value that controls whether or not the returned array is one- or two-dimensional as described below. This can be used to generate a graph along a computed route since the returned 2d array is essentially just an x (range) and y (height) for each shape point. Steepness or gradient can also be computed from a profile request. 
 
