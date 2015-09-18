@@ -1,19 +1,19 @@
 
-## Elevation Service API Reference
+## Elevation service API reference
 
-The elevation service is a free, open-source web API (and c++ library) that lets you access DEM (digital elevation model) data. This data has many applications in the domain of routing such as computing steepness of edges in the route graph or generating an elevation profile along a computed route. If you find a unique use for it, let us know at [routing@mapzen.com](mailto:routing@mapzen.com) know! This page documents the inputs and outputs to the service.
+The elevation service is a free, open-source web API (and C++ library) that lets you access digital elevation model (DEM) data. This data has many applications in the domain of routing such as computing steepness of edges in the route graph or generating an elevation profile along a computed route. If you find a unique use for it, let us know at [routing@mapzen.com](mailto:routing@mapzen.com) know! This page documents the inputs and outputs to the service.
 
 The elevation service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in [Skadi GitHub repository](https://github.com/valhalla/skadi/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
-#### API keys and Service Limits
+#### API keys and service limits
 
-To use the Elevation service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the elevation service, you must first obtain a free developer API key for elevation from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
 This service is a free, shared service. As such, there are limitations on the number of sampled points to prevent individual users from degrading the overall system performance.
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
-### Inputs for the Elevation Service
+### Inputs of the elevation service
 
 We currently have a single action, `/height?`, that can be requested from the Elevation Service. As the name implies, this can be to get the height at a specific set of locations. If the parameter `range` is also provided and set to `true` both the cumulative distance as well as the height will be returned for each point. This can be used to generate a graph along a computed route since the returned 2d array is essentially just an x (range) and y (height) for each shape point.  Steepness/gradient can also be easily computed from a profile request. Requests takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location/shape information and the optional range parameter.
 
@@ -29,7 +29,7 @@ Another option when requesting a profile would be to use an encoded polyline.
 
 Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-#### Input Parameters
+#### Input parameters
 
 You must either specify the input locations using the `shape` parameter or the `encoded_polyline` parameter. The `range` parameter is optional and assumed to be `false` if omitted.
 
@@ -54,7 +54,7 @@ The `range` parameter is simply a boolean value which controls whether or not th
 | :--------- | :----------- |
 | `range` | `true` or `false`. Defaulted to `false`.|
 
-### Output
+### Outputs of the elevation service
 
 The profile results are returned with the form of shape that was supplied in the request along with a 2D array representing the x and y of each input point in the elevation profile.
 
