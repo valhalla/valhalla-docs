@@ -9,7 +9,7 @@ The elevation service is in active development. You can follow the [Mapzen blog]
 
 To use the Elevation service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-This service is a free, shared service. As such, there are limitations on the number of locations to prevent individual users from degrading the overall system performance.
+This service is a free, shared service. As such, there are limitations on the number of sampled points to prevent individual users from degrading the overall system performance.
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
@@ -67,5 +67,6 @@ The profile results are returned with the form of shape that was supplied in the
 | `y coordinate` | y is the height or elevation of the associated lat,lng pair. The height will be returned as `null` if no height data exists for a given location. |
 | `height` | An array of height for the associated lat,lng coordinates. |
 
+### Data Sources and Known Issues
 
-In the future, look for additional elevation services information to enhance navigation applications.
+Currently the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/) and [GEBCO](http://www.gebco.net/data_and_products/gridded_bathymetry_data/) DEMs. These sets provide global coverage at varying resolutions up to approximately 30 meters. It should be noted that both SRTM and GMTED zero fill oceans and other bodies of water; in these areas we use GEBCO to provide bathymetry (as well as in regions which are not coverged by SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are always looking for better datasets such as the NED and NARCAN sources. If you find any data issues or can suggest any suplimental open datasets please let us know.
