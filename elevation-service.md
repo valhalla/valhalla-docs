@@ -20,7 +20,7 @@ If a `range` parameter is provided and set to `true`, both the cumulative distan
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-###Shape request
+###Request with a shape list for locations
 
 A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, whose coordinates can be used as input to the elevation service.
 
@@ -37,21 +37,21 @@ Here is an example of a profile request using `shape`:
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the height and range for each point.
 
-###Encoded polyline request
+###Request with an encoded polyline for locations
 
 The `encoded_polyline` parameter is a string of a polyline-encoded shape and has the following parameters.
 
 | Encoded polyline parameters | Description |
 | :--------- | :----------- |
-| `encoded_polyline` | A set of encoded lat,lng pairs of a line or shape.|
+| `encoded_polyline` | A set of encoded latitude, longitude pairs of a line or shape.|
 
 Here is an example `encoded_polyline` request:
 
     elevation.mapzen.com/height?json={"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}&api_key=elevation-xxxxxx
 
-###Range parameter
+###Request height and distance with the range parameter
 
-The `range` parameter is a boolean value that controls whether or not the returned array is one- or two-dimensional as described below. This can be used to generate a graph along a computed route since the returned 2d array is essentially just an x (range) and y (height) for each shape point. Steepness or gradient can also be computed from a profile request. 
+The `range` parameter is a boolean value that controls whether or not the returned array is one- or two-dimensional, which returns distance along with the height. This can be used to generate a graph along a route, because a 2D-array has values for x (the range) and y (the height) at each shape point. Steepness or gradient can also be computed from a profile request. 
 
 | Range parameters | Description |
 | :--------- | :----------- |
@@ -63,12 +63,12 @@ The profile results are returned with the form of shape that was supplied in the
 
 | Item | Description |
 | :---- | :----------- |
-| `shape` | The specified shape coordinates are returned from the input request. |
-| `encoded_polyline` | The specified encoded polyline coordinates are returned from the input request. |
-| `range_height` | The 2D array of range (x) and height (y) per lat,lng coordinate. |
-| `x coordinate` | x is the range or distance along the input locations. It is the cumulative distance along the previous lat,lng coordinates up to the current coordinate. x for the first coordinate in the shape will always be 0. |
-| `y coordinate` | y is the height or elevation of the associated lat,lng pair. The height will be returned as `null` if no height data exists for a given location. |
-| `height` | An array of height for the associated lat,lng coordinates. |
+| `shape` | The specified shape coordinates from the input request. |
+| `encoded_polyline` | The specified encoded polyline coordinates from the input request. |
+| `range_height` | The 2D array of range (x) and height (y) per latitude, longitude coordinate. |
+| `x coordinate` | The range or distance along the input locations. It is the cumulative distance along the previous lat,lon coordinates up to the current coordinate. The x-value for the first coordinate in the shape will always be 0. |
+| `y coordinate` | The height or elevation of the associated latitude, longitude pair. The height is returned as `null` if no height data exists for a given location. |
+| `height` | An array of height for the associated latitude, longitude coordinates. |
 
 ##Data sources and known issues
 
