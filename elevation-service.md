@@ -35,7 +35,13 @@ Here is an example of a profile request using `shape`:
 
     elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&api_key=elevation-xxxxxx
 
-This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the height and range for each point.
+This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the `range` and `height` (as `range_height` in the response) for each point.
+
+    {"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"range_height":[[0,307],[8467,272],[25380,204],[32162,204],[42309,180],[54533,198]]}
+    
+Without the range, the result looks something like this, with only a `height`:
+
+    {"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"height":[307,272,204,204,180,198]}
 
 ###Request with an encoded polyline for locations
 
@@ -51,7 +57,7 @@ Here is an example `encoded_polyline` request:
 
 ###Request height and distance with the range parameter
 
-The `range` parameter is a boolean value that controls whether or not the returned array is one- or two-dimensional, which returns distance along with the height. This can be used to generate a graph along a route, because a 2D-array has values for x (the range) and y (the height) at each shape point. Steepness or gradient can also be computed from a profile request. 
+The `range` parameter is a boolean value that controls whether or not the returned array is one-dimensional (height only) or two-dimensional (with a range and height). This can be used to generate a graph along a route, because a 2D-array has values for x (the range) and y (the height) at each shape point. Steepness or gradient can also be computed from a profile request. 
 
 | Range parameters | Description |
 | :--------- | :----------- |
@@ -59,17 +65,17 @@ The `range` parameter is a boolean value that controls whether or not the return
 
 ##Outputs of the elevation service
 
-The profile results are returned with the form of shape that was supplied in the request along with a 2D array representing the x and y of each input point in the elevation profile.
+The profile results are returned with the form of shape (shape points or encoded polylines) that was supplied in the request, along with a 2D array representing the x and y of each input point in the elevation profile.
 
 | Item | Description |
 | :---- | :----------- |
 | `shape` | The specified shape coordinates from the input request. |
 | `encoded_polyline` | The specified encoded polyline coordinates from the input request. |
-| `range_height` | The 2D array of range (x) and height (y) per latitude, longitude coordinate. |
-| `x coordinate` | The range or distance along the input locations. It is the cumulative distance along the previous lat,lon coordinates up to the current coordinate. The x-value for the first coordinate in the shape will always be 0. |
+| `range_height` | The 2D array of range (x) and height (y) per input latitude, longitude coordinate. |
+| `x coordinate` | The range or distance along the input locations. It is the cumulative distance along the previous latitiude, longitude coordinates up to the current coordinate. The x-value for the first coordinate in the shape will always be 0. |
 | `y coordinate` | The height or elevation of the associated latitude, longitude pair. The height is returned as `null` if no height data exists for a given location. |
 | `height` | An array of height for the associated latitude, longitude coordinates. |
 
 ##Data sources and known issues
 
-Currently the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/) and [GEBCO](http://www.gebco.net/data_and_products/gridded_bathymetry_data/) DEMs. These sets provide global coverage at varying resolutions up to approximately 30 meters. It should be noted that both SRTM and GMTED zero fill oceans and other bodies of water; in these areas we use GEBCO to provide bathymetry (as well as in regions which are not coverged by SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are considering how to best integrate NED and NRCAN sources, and are always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets please let us know by filing an issue in [valhalla/skadi](https://github.com/valhalla/skadi).
+Currently, the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/) and [GEBCO](http://www.gebco.net/data_and_products/gridded_bathymetry_data/) DEMs. These sets provide global coverage at varying resolutions up to approximately 30 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water; in these areas, GEBCO provides bathymetry (as well as in regions which are not coverged by SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are considering how to best integrate NED and NRCAN sources, and are always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets, please let us know by filing an issue in [valhalla/skadi](https://github.com/valhalla/skadi).
