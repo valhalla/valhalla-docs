@@ -14,13 +14,11 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 ##Inputs of the elevation service
 
-The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of two or more locations within a JSON array, while an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en) stores multiple locations within a single string. 
-
-If a `range` parameter is provided and set to `true`, both the cumulative distance and the height are returned for each point. However, `range` is optional and assumed to be `false` if omitted.
+The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of two or more locations within a JSON array, while an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en) stores multiple locations within a single string. If you include a `range` parameter and set it to `true`, both the height and cumulative distance are returned for each point. 
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-###Use a shape list for locations
+###Use a shape list for input locations
 
 A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, whose coordinates can be used as input to the elevation service.
 
@@ -43,7 +41,7 @@ Without the `range`, the result looks something like this, with only a `height`:
 
     {"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"height":[307,272,204,204,180,198]}
 
-###Use an encoded polyline for locations
+###Use an encoded polyline for input locations
 
 The `encoded_polyline` parameter is a string of a polyline-encoded shape and has the following parameters.
 
@@ -58,6 +56,8 @@ Here is an example `encoded_polyline` request:
 ###Get height and distance with the range parameter
 
 The `range` parameter is a boolean value that controls whether or not the returned array is one-dimensional (height only) or two-dimensional (with a range and height). This can be used to generate a graph along a route, because a 2D-array has values for x (the range) and y (the height) at each shape point. Steepness or gradient can also be computed from a profile request. 
+
+The `range` is optional and assumed to be `false` if omitted.
 
 | Range parameters | Description |
 | :--------- | :----------- |
