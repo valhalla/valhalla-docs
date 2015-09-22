@@ -29,9 +29,9 @@ In the future, we may also provide a second action, '/weight?'.
 
 | Matrix Type | Description |
 | :--------- | :----------- |
-| `one_to_many` | To return a row vector of computed time and distance from the origin location to each additional location lat/lon provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
-| `many_to_one` | To return a row vector of computed time and distance from each of the location lat/lon's to the destination location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
-| `many_to_many` | To return a square matrix of computed time and distance from each location lat/lon to every other location lat/lon.  This means that the first element and last element in the square matrix will be [0,0.00].  |
+| `one_to_many` | To return a row vector of computed time and distance from the first (origin) location to each additional location provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
+| `many_to_one` | To return a row vector of computed time and distance from each location to the last (destination) location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
+| `many_to_many` | To return a square matrix of computed time and distance from each location to every other location.  This means that the main diagonal of the square matrix will be [0,0.00] all the way through.  |
 
 
 #### Input for the Time Distance API
@@ -70,8 +70,8 @@ The matrix results are returned with.
 | Item | Description |
 | :---- | :----------- |
 | `matrix_type` | The specified type of matrix that was requested. Values may be either `one_to_many`, `many_to_one` or `many_to_many` |
-| `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the origin location to each additional location. |
-| `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the destination location. |
+| `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
+| `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
 | `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
 | `location` | The specified lat/lon coordinates are returned from the input request. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
