@@ -29,9 +29,9 @@ In the future, we may also provide a second action, '/weight?'.
 
 | Matrix Type | Description |
 | :--------- | :----------- |
-| one_to_many | To return a row vector of computed time and distance from the origin location to each additional location lat/lon provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
-| many_to_one | To return a row vector of computed time and distance from each of the location lat/lon's to the destination location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
-| many_to_many | To return a square matrix of computed time and distance from each location lat/lon to every other location lat/lon.  This means that the first element and last element in the square matrix will be [0,0.00].  |
+| `one_to_many` | To return a row vector of computed time and distance from the origin location to each additional location lat/lon provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
+| `many_to_one` | To return a row vector of computed time and distance from each of the location lat/lon's to the destination location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
+| `many_to_many` | To return a square matrix of computed time and distance from each location lat/lon to every other location lat/lon.  This means that the first element and last element in the square matrix will be [0,0.00].  |
 
 
 #### Input for the Time Distance API
