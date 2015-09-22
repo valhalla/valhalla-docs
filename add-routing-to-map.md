@@ -312,7 +312,7 @@ Your `<body>` section should look like this:
 
 By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` as Valhalla and initialize a `formatter:`, which does not need a value because the Valhalla libraries already contain functions for units and other conversions.
 
-1. Replace the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
   ```js
   L.Routing.control({
     waypoints: [
