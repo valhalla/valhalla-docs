@@ -81,10 +81,10 @@ You HTML should look like this:
 To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
 
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
-2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`
+2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...` If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
   ![Start local server with Python](images/start-python-server.png)
-3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
+3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) 
 
 If the step was successful, you should see a blank index page with your title (My Routing Map) showing in the browser tab.
 
