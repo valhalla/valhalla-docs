@@ -13,8 +13,8 @@ Valhalla is a free, shared routing service. As such, there are limitations on re
 
 The following time and distance limitations that are currently in place:
 
-* one-to-many & many-to-one requests have a limit of <?> locations.
-* many-to-many requests have a limit of <?> locations.
+* `one_to_many` and `many_to_one` requests have a limit of <?> locations.
+* `many_to_many` requests have a limit of <?> locations.
 * max distance between any two locations is <will these be the same as the limits on the route api reference page?>.
 
 Please also refer to the [Valhalla API Limits](https://mapzen.com/documentation/valhalla/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place.
@@ -23,15 +23,15 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 #### Request Actions/Methods
 
-We currently provide one time distance action, '/timedistance?' that can be requested from the Time Distance Service.  This action can compute one of three types of matrices, either "matrix_type":"one-to-many", "matrix_type":"many-to-one" or "matrix_type":"many-to-many".  
+We currently provide one time distance action, '/timedistance?' that can be requested from the Time Distance Service.  This action can compute one of three types of matrices, either "matrix_type":"one_to_many", "matrix_type":"many_to_one" or "matrix_type":"many_to_many".  
 
 In the future, we may also provide a second action, '/weight?'.
 
 | Matrix Type | Description |
 | :--------- | :----------- |
-| one-to-many | To return a row vector of computed time and distance from the origin location to each additional location lat/lon provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
-| many-to-one | To return a row vector of computed time and distance from each of the location lat/lon's to the destination location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
-| many-to-many | To return a square matrix of computed time and distance from each location lat/lon to every other location lat/lon.  This means that the first element and last element in the square matrix will be [0,0.00].  |
+| one_to_many | To return a row vector of computed time and distance from the origin location to each additional location lat/lon provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
+| many_to_one | To return a row vector of computed time and distance from each of the location lat/lon's to the destination location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
+| many_to_many | To return a square matrix of computed time and distance from each location lat/lon to every other location lat/lon.  This means that the first element and last element in the square matrix will be [0,0.00].  |
 
 
 #### Input for the Time Distance API
@@ -42,7 +42,7 @@ Here is an example time distance request using pedestrian costing:
 
 From the office, I want to know the times and distances to each restaraunt location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
-    valhalla.mapzen.com/timedistance?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many-to-many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
+    valhalla.mapzen.com/timedistance?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many_to_many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
     
 <this may change to its own timedistance domain depending on outcome of design discussion.  If so, would we want to use Matrix instead for domain name?>
 
@@ -69,13 +69,13 @@ The matrix results are returned with.
 
 | Item | Description |
 | :---- | :----------- |
-| `matrix_type` | The specified type of matrix that was requested. Values may be either one-to-many, many-to-one or many-to-many |
+| `matrix_type` | The specified type of matrix that was requested. Values may be either `one_to_many`, `many_to_one` or `many_to_many` |
 | `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the origin location to each additional location. |
 | `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the destination location. |
 | `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
 | `location` | The specified lat/lon coordinates are returned from the input request. |
-| `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for one-to-many, the last element in a many-to-one, and the first and last elements of a many-to-many.  |
-| `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for one-to-many, the last element in a many-to-one, and the first and last elements of a many-to-many. |
+| `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
+| `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
 
 #### Return Codes and Conditions
 
