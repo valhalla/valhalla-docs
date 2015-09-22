@@ -3,7 +3,7 @@
 
 The time distance service is a free, open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
 
-The time distance service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in [<?> GitHub repository](https://github.com/valhalla/<?>/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
+The time distance service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 	
 #### API keys and Service Limits
 
