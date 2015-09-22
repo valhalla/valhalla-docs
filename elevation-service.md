@@ -8,7 +8,7 @@ The elevation service is in active development. You can follow the [Mapzen blog]
 
 To use Mapzen's elevation service, you must first obtain a free, Elevation Service developer API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-This is a free, shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevation vations, rather than the resolution of the DEM in that area. 
+This is a free, shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area. 
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
@@ -20,7 +20,7 @@ An elevation service request takes the form of `elevation.mapzen.com/height?json
 
 ###Use a shape list for input locations
 
-A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, whose coordinates can be used as input to the elevation service.
+A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. 
 
 These parameters are available for `shape`.
 
@@ -78,4 +78,4 @@ The profile results are returned with the form of shape (shape points or encoded
 
 ##Data sources and known issues
 
-Currently, the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/) and [GEBCO](http://www.gebco.net/data_and_products/gridded_bathymetry_data/) DEMs. These sets provide global coverage at varying resolutions up to approximately 30 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water; in these areas, GEBCO provides bathymetry (as well as in regions which are not coverged by SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are considering how to best integrate NED and NRCAN sources, and are always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets, please let us know by filing an issue in [valhalla/skadi](https://github.com/valhalla/skadi).
+Currently, the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/) and [GEBCO](http://www.gebco.net/data_and_products/gridded_bathymetry_data/) DEMs. These sets provide global coverage at varying resolutions up to approximately 30 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water with a value of zero to indicate mean sea level; in these areas, GEBCO provides bathymetry (as well as in regions which are not coverged by SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are considering how to best integrate NED and NRCAN sources, and are always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets, please let us know by filing an issue in [valhalla/skadi](https://github.com/valhalla/skadi).
