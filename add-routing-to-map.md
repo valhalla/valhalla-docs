@@ -268,7 +268,7 @@ In the simplest implementation, your map will not provide the ability to search 
   //map.setView([41.8758,-87.6189], 15)
   ```
 
-2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
+2. Inside the `<script>` tag, and after what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
   ```js
   L.Routing.control({
     waypoints: [
