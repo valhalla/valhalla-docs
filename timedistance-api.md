@@ -70,9 +70,9 @@ The matrix results are returned with.
 | Item | Description |
 | :---- | :----------- |
 | `matrix_type` | The specified type of matrix that was requested. Values may be either one-to-many, many-to-one or many-to-many |
-| `one-to-many` | This will return a row vector (1 x n) of computed time and distance from the origin location to each additional location. |
-| `many-to-one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the destination location. |
-| `many-to-many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
+| `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the origin location to each additional location. |
+| `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the destination location. |
+| `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
 | `location` | The specified lat/lon coordinates are returned from the input request. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for one-to-many, the last element in a many-to-one, and the first and last elements of a many-to-many.  |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for one-to-many, the last element in a many-to-one, and the first and last elements of a many-to-many. |
