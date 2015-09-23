@@ -335,6 +335,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. You need to replace these with your own API key and the routing mode you want to use in your map.
 3. Paste your own API key in place of `your-api-key` inside the single quotes. It should look something like: `'valhalla-xxxxxx'`. The routing will only load if you use a valid API key.
 4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
+
   ```js
   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
   ```
@@ -428,6 +429,6 @@ The `<body>` section should look something like this, but with your own API key 
 ```
 
 ## Walkthrough summary and next steps
-In this walkthrough, you learned the basics of making a map with Valhalla routing with Leaflet. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment. 
+In this walkthrough, you learned the basics of making a map with Valhalla routing with Leaflet. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Valhalla.
