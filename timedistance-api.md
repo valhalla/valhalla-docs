@@ -40,7 +40,7 @@ An example request takes the form of `timedistance.mapzen.com/timedistance?json=
 
 Here is an example time distance request using pedestrian costing:
 
-From the office, I want to know the times and distances to each restaraunt location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
+From the office, I want to know the times and distances to each restaurant location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
     valhalla.mapzen.com/timedistance?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many_to_many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
     
