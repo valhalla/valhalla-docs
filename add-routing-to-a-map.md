@@ -9,7 +9,7 @@ Valhalla is a free and open-source service that adds routing and navigation to w
 
 In this walkthrough, you will be planning a family vacation [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Valhalla will calculate the route.
 
-To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You will need a [free API key](https://mapzen.com/developers) to use Valhalla, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection to complete the tutorial. The tutorial should take about an hour to complete.
+To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You will need a [free API key](https://mapzen.com/developers) to use Valhalla, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection while you are working. The tutorial should take about an hour to complete.
 
 The map also uses other Mapzen technology, including the [vector tile service](https://mapzen.com/projects/vector-tiles/) and the [Tangram graphics engine](https://mapzen.com/projects/tangram) to draw the features on the map.
 
@@ -384,12 +384,14 @@ Valhalla also provides the ability to specify additional waypoints through which
 The symbols for the basemap are set in the scene file, but the route line is hard to distinguish from the road line in your map. You can use `L.routing.control` to update the color of the route line.
 
 1. After the closing line of the `waypoints:` block and immediately before the `router:` block, insert the following source code:
+
   ```js
   lineOptions: {
     styles: [ {color: 'white',opacity: 0.8, weight: 12},
             {color: '#2676C6', opacity: 1, weight: 6}
   ]},
   ```
+
 2. Save your edits and refresh the browser. The line should change to blue and look thicker than before.
 
   ![Valhalla map showing route and directions](images/route-map-valhalla-line-color.png)
