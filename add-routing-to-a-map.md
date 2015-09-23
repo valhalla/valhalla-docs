@@ -279,7 +279,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
 
 The code you are given for `router:` has two items with placeholders. You need to replace these with your own API key and the routing mode you want to use in your map.
 
-For this map, you will be able to drag the start and end points to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, but this can be slow and costly to make many queries. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
+For this map, you will be able to drag the start and end points to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, but this can be slow and costly to make many queries. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. You can read more about the options available for `L.Routing.control` in the LRM API documentation.
 
 1. Replace the `L.Routing.control` block with the following code to initialize Valhalla as the router.
   ```js
