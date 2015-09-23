@@ -5,7 +5,7 @@ Valhalla is a free and open-source service that adds routing and navigation to w
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
 - functionality to drag the route start and endpoints to get a different path
-- the ability change the mode of transportation, such as automobile or pedestrian.
+- the ability change the mode of transportation, such as automobile or pedestrian
 
 In this walkthrough, you will be planning a family vacation [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Valhalla will calculate the route.
 
@@ -95,7 +95,7 @@ Because you are working with several external cascading style sheet (CSS) and Ja
 
 You will need to modify the path to reflect your working directory if you are not using the folder names suggested in the earlier section.
 
-1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file..
+1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file.
   ```html
   <link rel="stylesheet" href="leaflet/leaflet.css">
   ```
@@ -323,7 +323,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
 
 1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
   ```js
-	[...]
+  [...]
   L.Routing.control({
     waypoints: [
       L.latLng(41.8758,-87.6189),
@@ -334,7 +334,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
     summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
     routeWhileDragging: false
   }).addTo(map);
-	[...]
+  [...]
   ```
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. You need to replace these with your own API key and the routing mode you want to use in your map.
