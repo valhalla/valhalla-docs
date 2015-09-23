@@ -81,10 +81,10 @@ You HTML should look like this:
 To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
 
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
-2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`
+2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...` If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
   ![Start local server with Python](images/start-python-server.png)
-3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
+3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.) 
 
 If the step was successful, you should see a blank index page with your title (My Routing Map) showing in the browser tab.
 
@@ -268,7 +268,7 @@ In the simplest implementation, your map will not provide the ability to search 
   //map.setView([41.8758,-87.6189], 15)
   ```
 
-2. Inside the `<script>` tag, but below what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
+2. Inside the `<script>` tag, and after what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
   ```js
   L.Routing.control({
     waypoints: [
@@ -312,7 +312,7 @@ Your `<body>` section should look like this:
 
 By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` as Valhalla and initialize a `formatter:`, which does not need a value because the Valhalla libraries already contain functions for units and other conversions.
 
-1. Replace the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplatemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
   ```js
   L.Routing.control({
     waypoints: [
