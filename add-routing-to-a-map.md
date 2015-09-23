@@ -36,7 +36,7 @@ If you find links for multiple versions of the required libraries, you should do
 3. Download Leaflet Routing Machine from http://www.liedman.net/leaflet-routing-machine/download/.
 4. Download LRM-Valhalla from http://mapzen.com/resources/lrm-valhalla.zip.
 5. Unzip the files you downloaded and move the subfolders to your main working folder.
-6. For simplicity, rename the subfolders inside your `routing-tutorial` folders to remove the release numbers. For example, rename the `leaflet-x.x.x` folder to `leaflet`.
+6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `leaflet-x.x.x` folder to `leaflet`.
 
 	![Folder structure of tutorial files](images/folder-structure.png)
 
@@ -54,9 +54,9 @@ Now that you have downloaded the required dependent files, you are ready to star
   <!DOCTYPE html>
   <html>
   <head>
-    </head>
-    <body>
-    </body>
+  </head>
+  <body>
+  </body>
   </html>
   ```
 
@@ -67,11 +67,11 @@ You HTML should look like this:
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Routing Map</title>
-  </head>
-  <body>
-  </body>
+<head>
+  <title>My Routing Map</title>
+</head>
+<body>
+</body>
 </html>
 ```
 
@@ -80,7 +80,7 @@ You HTML should look like this:
 To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
 
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
-2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...` If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
+2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`. If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
   ![Start local server with Python](images/start-python-server.png)
 3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.)
@@ -125,6 +125,8 @@ You will need to modify the path to reflect your working directory if you are no
   <script src="lrm-valhalla/lrm-valhalla.js"></script>
   ```
 
+7. Save your edits and refresh the browser.
+
 After adding these, your index.html file should look something like this. Note that JavaScript can be inserted in either the `<head>` or the `<body>`, but the `<body>` may improve loading of the page.
 
 ```html
@@ -165,9 +167,11 @@ To display a Leaflet map on a page, you need a `<div>` element with an ID value,
   </style>
   ```
 2. At the top of the `<body>` section, add the `<div>`.
+
   ```html
   <div id="map"></div>
   ```
+
 3. Immediately after the other `<script>` references, add the following JavaScript within a `<script>` tag to initialize Leaflet. `L.xxxxx` is a convention used with the Leaflet API. To make sure the scripts load in the proper order, this code must be placed after the dependencies.
   ```html
   <script>
@@ -222,7 +226,7 @@ Note that Tangram and the vector tile service are not required for Valhalla rout
 1. Inside the `<script>` tags, immediately after the `var map = L.map('map');` line, add the following code to use Tangram.
   ```js
   var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/rhonda-tutorial-updates/examples/skin-and-bones-scene.yaml',
+    scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
   });
   layer.addTo(map);
@@ -249,7 +253,7 @@ Your `<body>` section should look like this:
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/rhonda-tutorial-updates/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -266,12 +270,12 @@ So far, you have referenced the necessary files, initialized Leaflet with a map 
 
 In the simplest implementation, your map will not provide the ability to search for places through geocoding or inputting coordinates otherwise. Therefore, you need to set the waypoints in your code. As you add functionality to your web page, you can set the initial coordinates through user interaction.
 
-1. Add `//` at the beginning of the `map.setView([41.8758,-87.6189], 15)` line to comment out that code. You no longer need to set the extent manually like this because the routing environment will be specifying it.
+1. Add `//` at the beginning of the `map.setView([41.8758,-87.6189], 16)` line to comment out that code. You no longer need to set the extent manually like this because the routing environment will be specifying it.
   ```js
   //map.setView([41.8758,-87.6189], 16)
   ```
 
-2. Inside the `<script>` tag, and after what you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
+2. Inside the `<script>` tag, and after the commented line, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
   ```js
   L.Routing.control({
     waypoints: [
@@ -297,7 +301,7 @@ Your `<body>` section should look like this:
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/rhonda-tutorial-updates/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -357,7 +361,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/rhonda-tutorial-updates/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -408,7 +412,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/rhonda-tutorial-updates/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -433,6 +437,6 @@ The `<body>` section should look something like this, but with your own API key 
 ```
 
 ## Walkthrough summary and next steps
-In this walkthrough, you learned the basics of making a map with Valhalla routing with Leaflet. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Valhalla routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Valhalla.
