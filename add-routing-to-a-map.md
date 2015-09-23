@@ -154,6 +154,7 @@ However, seeing a 404 error often means that the file cannot be found. You shoul
 To display a Leaflet map on a page, you need a `<div>` element with an ID value, as well as a size for the box containing the map. Then, you can add the code to set the map and use Tangram to render it. If you want to know more about initializing a Leaflet map, see the [Leaflet getting started documentation](http://leafletjs.com/examples/quick-start.html).
 
 1. At the bottom of the `<head>` section, add a `<style>` tag and the following size attributes to set the size of the map.
+
   ```html
   <style>
     #map {
@@ -339,6 +340,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
   ```js
   router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
   ```
+
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
 
   ![Valhalla map showing route and directions](images/route-map-valhalla.png)
