@@ -1,0 +1,3234 @@
+# This style is an homage to Michal Migurski's High Road demo:
+# https://github.com/migurski/HighRoad
+# It uses stops to set line and outline widths at various zoom levels,
+# and the sort_key property to arrange bridges, overpasses, and tunnels
+# by depth.
+#
+
+labels-global:
+    - &text_visible_continent         true
+    - &text_visible_admin             true
+    - &text_visible_populated_places  true
+    - &label_visible_poi_landuse      true
+    - &icon_visible_poi_landuse       true
+    - &text_visible_poi_landuse       true
+    - &text_visible_water_labels      true
+    - &text_visible_highway           true
+    - &text_visible_highway_e         false
+    - &text_visible_trunk_primary     true
+    - &text_visible_trunk_primary_e   false
+    - &text_visible_secondary         true
+    - &text_visible_secondary_e       false
+    - &text_visible_tertiary          true
+    - &text_visible_tertiary_e        false
+    - &text_visible_minor_road        true
+    - &text_visible_minor_road_e      true
+    - &text_visible_service_road      true
+    - &text_visible_path              true
+    - &text_visible_steps             true
+
+
+#banana-colors:
+#   cameras:
+#       - &camera_settings            { type: isometric, axis: [0, .1], vanishing_point: [0, -500] }
+#
+#   lights:
+#       - &light_settings             { type: directional, direction: [1, 1, -.9], diffuse: 0.5, ambient: 0.85 }
+#
+#   styles:
+#       - &line_type                 flatlines
+#       - &polygon_type              flatpolys
+#
+#   roads:
+#       - &highway1                   '#fc0'
+#       - &highway_link1              '#f6e0a1'
+#       - &highway_casing1            black
+#       - &highway_tunnel1            [0.8, 0.8, 0.7]
+#       - &highway_tunnel_casing1     [0.9, 0.9, 0.8]
+#       - &highway_link_tunnel_casing1 [0.8, 0.8, 0.7]
+#       - &ferry1                     '#8bb5e4'
+#       - &major_road1                [1, 1, 1]
+#       - &major_road1b               [0.90, 0.90, 0.90]
+#       - &major_road1c               [0.85, 0.85, 0.85]
+#       - &major_road2                [0.80, 0.80, 0.80]
+#       - &major_road2a               [0.83, 0.83, 0.83]
+#       - &major_road2b               [0.75, 0.75, 0.75]
+#       - &major_road3                [0.70, 0.70, 0.70]
+#       - &major_road4                [0.60, 0.60, 0.60]
+#       - &major_casing1              black               # same as highway_casing1
+#       - &major_casing2              grey                # zoomed out
+#       - &major_tunnel1              '#ffdb99'           # light orange (major_route1)
+#       - &major_tunnel_casing1       [0.9, 0.9, 0.8]
+#       - &major_route1               orange
+#       - &major_route2               orange              # zoomed out
+#       - &minor_route                orange              # same as major_route
+#       - &minor_road1                [0.60, 0.60, 0.60]  # natural earth
+#       - &minor_road2                [0.80, 0.80, 0.80]  # natural earth, same as major_road2
+#       - &minor_road3                '#ccc'
+#       - &minor_road4                '#868686'           # zoomed out
+#       - &minor_road5                '#909090'           # zoomed out, again
+#       - &minor_tunnel1              [0.8, 0.8, 0.7]
+#       - &minor_tunnel_casing1       white
+#       - &service_road1              '#ccc'
+#       - &service_road2              '#bbb'
+#       - &service_road_casing1       grey
+#       - &service_road_casing2       '#444'
+#       - &path1                      '#bcc19e'
+#       - &path2                      '#c1bc9d'           # zoomed out
+#       - &path_casing1               '#5d6b5d'
+#       - &path_bridge_casing1        black
+#       - &path_bridge_casing2        grey                # zoomed out
+#       - &path_steps1                '#bcc19e'
+#
+#   boundaries:
+#       - &country_boundary           '#222'
+#       - &region_boundary            '#555'
+#       - &subregion_boundary         '#bbb'
+#
+#   areas:
+#       - &scene1      '#eee'              # map background, water
+#       - &water1      [0.83, 0.83, 0.83]  # water
+#       - &water2      [0.50, 0.50, 0.50]  # playa
+#       - &water1_o    [0.30, 0.30, 0.30]  # water stroke
+#       - &water2_o    [0.70, 0.70, 0.90]  # water stroke
+#       - &earth1      '#666'              # land color
+#       - &earth1_r    '#666'              # land color road
+#       - &earth2      '#555'              # urban
+#       - &green1      '#6e7e6d'           # park
+#       - &green1_r    '#6e7e6d'           # park roads
+#       - &green2      '#879886'           # cemetery
+#       - &green3      '#8ba289'           # golf course
+#       - &green4      '#526054'           # farm faint
+#       - &green5      '#5a695c'           # farm
+#       - &green6      '#648560'           # nature reserve
+#       - &green7      '#647262'           # forest
+#       - &green8      '#849583'           # conservation
+#       - &orange1     '#bfb08e'           # stadium
+#       - &brown1      '#7e7b6d'           # university
+#       - &brown1_r    '#7e7b6d'           # university roads
+#       - &brown2      '#ada497'           # school
+#       - &brown3      '#c7b7a2'           # playground
+#       - &red1        '#ad8d8d'           # hospital
+#       - &red1_r      '#ad8d8d'           # hospital roads
+#       - &grey1       '#717171'           # pedestrian, retail, airport apron, parking, church
+#       - &grey2       [0.5, 0.5, 0.5]     # airport runway
+#       - &grey3       grey                # railway
+#       - &grey4       [0.7, 0.7, 0.7]     # airport taxiway
+#       - &grey5       [0.55, 0.55, 0.55]  # airport taxiway
+#       - &mystry1     '#bfb08e'           # recreation ground
+#       - &building1   [.3, .3, .3]        # building
+#       - &building2   [.2, .2, .2]        # building stroke
+#       - &building_o  5                   # building stroke order
+#       - &purple      '#645d66'           # airport
+#
+#   labels:
+#       - &text_fill         '#fff'             # WHITE
+#       - &text_fill2        '#555'             # WHITE
+#       - &text_stroke       '#444'             # land color
+#       - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+
+#toner-colors:
+#    cameras:
+#        - &camera_settings            { type: isometric, axis: [0, .1], vanishing_point: [0, -500] }
+#
+#    lights:
+#        - &light_settings             { type: directional, direction: [1, 1, -.9], diffuse: 0.5, ambient: 0.85 }
+#
+#    styles:
+#        - &line_type                  flatlines
+#        - &polygon_type              flatpolys
+#
+#    roads:
+#        - &highway1                   black
+#        - &highway_link1              [0.3, 0.3, 0.3]
+#        - &highway_casing1            white
+#        - &highway_tunnel1            [0.8, 0.8, 0.8]
+#        - &highway_tunnel_casing1     [0.95, 0.95, 0.95]
+#        - &highway_link_tunnel_casing1 [0.95, 0.95, 0.95]
+#        - &ferry1                     [0.30, 0.30, 0.30]
+#        - &major_road1                [0, 0, 0]
+#        - &major_road1b               [0.10, 0.10, 0.10]
+#        - &major_road1c               [0.15, 0.15, 0.15]
+#        - &major_road2                [0.20, 0.20, 0.20]
+#        - &major_road2a               [0.17, 0.17, 0.17]
+#        - &majr_road2b               [0.25, 0.25, 0.25]
+#        - &major_road3                [0.30, 0.30, 0.30]
+#        - &major_casing1              white               # same as highway_casing1
+#        - &major_casing2              grey                # zoomed out
+#        - &major_tunnel1              grey
+#        - &major_tunnel_casing1       [0.95, 0.95, 0.95]
+#        - &major_route1               black
+#        - &major_route2               [0.40, 0.40, 0.40]  # zoomed out
+#        - &minor_route                black               # same as major_route
+#        - &major_road4                [0.40, 0.40, 0.40]
+#        - &minor_road1                [0.40, 0.40, 0.40]  # natural earth
+#        - &minor_road2                [0.20, 0.20, 0.20]  # natural earth, same as major_road2
+#        - &minor_road3                '#ccc'
+#        - &minor_road4                '#ccc'              # zoomed out
+#        - &minor_road5                '#909090'           # zoomed out, again
+#        - &minor_tunnel1              [0.9, 0.9, 0.9]
+#        - &minor_tunnel_casing1       [0.1, 0.1, 0.1]
+#        - &service_road1              white
+#        - &service_road2              '#bbb'
+#        - &service_road_casing1       grey
+#        - &service_road_casing2       '#444'
+#        - &path1                      '#b3b3b3'
+#        - &path2                      '#b3b3b3'           # zoomed out
+#        - &path_casing1               '#5d6b5d'
+#        - &path_bridge_casing1        grey
+#        - &path_bridge_casing2        grey                # zoomed out
+#        - &path_steps1                grey
+#
+#    boundaries:
+#        - &country_boundary           '#444'
+#        - &region_boundary            '#bbb'
+#        - &subregion_boundary         '#ccc'
+#
+#    areas:
+#        - &scene1      black               # map background, water
+#        - &scene2      0.9,0.9,0.9         # map background, water
+#        - &water1      black               # water
+#        - &water2      [0.50, 0.50, 0.50]  # playa
+#        - &water1_o    blue                # water stroke
+#        - &earth1      white               # land color
+#        - &earth2      '#111'              # urban
+#        - &green1      [0.50,0.50,0.50]    # park
+#        - &green1b     0.80,0.80,0.80      # park
+#        - &green2      '#949494'           # cemetery
+#        - &green3      '#9a9a9a'           # golf course
+#        - &green4      [0.90,0.90,0.90]    # farm faint
+#        - &green5      [0.75,0.75,0.75]    # farm
+#        - &green6      [0.40,0.40,0.40]    # nature reserve
+#        - &green7      '#aaaaaa'           # forest
+#        - &green8      '#bbbbbb'           # conservation
+#        - &orange1     '#aaaaaa'           # stadium
+#        - &brown1      '#7b7b7b'           # university
+#        - &brown2      '#aaaaaa'           # school
+#        - &brown3      '#b8b8b8'           # playground
+#        - &red1        '#a2a2a2'           # hospital
+#        - &grey1       '#cccccc'           # pedestrian, retail, airport apron, parking, church
+#        - &grey2       [0.5, 0.5, 0.5]     # airport runway
+#        - &grey3       grey                # railway
+#        - &purple      '#645d66'           # airport
+#        - &mystry1     '#aaaaaa'           # recreation ground (type of park, sometimes around reservoirs)
+#        - &building1   white               # building
+#        - &building2   black               # building stroke
+#        - &building_o  25                  # building stroke order
+#
+#    labels:
+#        - &text_fill         black              # BLACK
+#        - &text_fill2        '#555'             # WHITE
+#        - &text_stroke       white              # land color
+#        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+
+#blueprint-colors:
+#    cameras:
+#        - &camera_settings            { type: perspective, vanishing_point: [0, -500] }
+#
+#    lights:
+#        - &light_settings             { type: directional, direction: [.1, .5, -1], diffuse: 0.7, ambient: 0.5 }
+#
+#    styles:
+#        - &water_type                base
+#        - &earth_type                base
+#        - &line_type                 roads
+#        - &polygon_type              base
+#        - &building_type             buildings
+#        - &buildings_line_type       buildingsLines
+#
+#    roads:
+#        - &highway1                   '#0080c8'     #BLUE
+#        - &highway_link1              '#198ccd'     #90%
+#        - &highway_casing1            white
+#        - &highway_tunnel1            '#3399d3'     #80%
+#        - &highway_tunnel_casing1     '#0d86cb'     #95%
+#        - &highway_link_tunnel_casing1 '#0d86cb'    #95%
+#        - &ferry1                     '#8bb5e4'
+#        - &major_road1                '#3399d3'     #80%
+#        - &major_road1b               '#e5f2f9'     #10%
+#        - &major_road1c               '#d4eaf6'     #15%
+#        - &major_road2                '#cce6f4'     #20%
+#        - &major_road2a               '#d4eaf6'     #17%
+#        - &major_road2b               '#bfdff1'     #25%
+#        - &major_road3                '#b2d9ee'     #30%
+#        - &major_casing1              white         # same as highway_casing1
+#        - &major_casing2              '#7fbfe3'     #50% - zoomed out
+#        - &major_tunnel1              '#3399d3'     #80%
+#        - &major_tunnel_casing1       '#0d86cb'     #95%
+#        - &major_route1               '#7fbfe3'     #50% warm
+#        - &major_route2               '#99cce9'     #40% - zoomed out
+#        - &minor_route                '#7fbfe3'     # same as major_route
+#        - &major_road4                '#99cce9'     #40%
+#        - &minor_road1                '#99cce9'     #40% - natural earth
+#        - &minor_road2                '#cce6f4'     #20% - natural earth, same as major_road2
+#        - &minor_road3                '#cce6f4'     #20%
+#        - &minor_road4                '#d4eaf6'     #17% - zoomed out
+#        - &minor_road5                '#e5f2f9'     #10% - zoomed out, again
+#        - &minor_tunnel1              '#3399d3'     #80%
+#        - &minor_tunnel_casing1       '#0d86cb'     #95%
+#        - &service_road1              white
+#        - &service_road2              '#bbb'
+#        - &service_road_casing1       '#d4eaf6'     #17%
+#        - &service_road_casing2       '#444'
+#        - &path1                      '#66b3de'     #60%
+#        - &path2                      '#7fbfe3'     #50% - zoomed out
+#        - &path_casing1               '#5d6b5d'
+#        - &path_bridge_casing1        '#7fbfe3'     #50%
+#        - &path_bridge_casing2        '#7fbfe3'     #50% - zoomed out
+#        - &path_steps1                '#7fbfe3'     #50%
+#
+#    boundaries:
+#        - &country_boundary           '#3399d3'
+#        - &region_boundary            '#99cce9'
+#        - &subregion_boundary         '#d4eaf6'
+#
+#    areas:
+#        - &scene1      '#3091c8'              # map background, water
+#        - &water1      '#3091c8'              # water
+#        - &water2      [0.50, 0.50, 0.50]     # playa
+#        - &water1_o    blue                   # water stroke
+#        - &earth1      white                  # land color
+#        - &earth2      '#111'                 # urban
+#        - &green1      '#7fbfe3'              # 50% - park
+#        - &green2      '#99cce9'              # 40% - cemetery
+#        - &green3      '#b2d9ee'              # 30% - golf course
+#        - &green4      '#e5f2f9'              # 10% - farm faint
+#        - &green5      '#bfdff1'              # 25% - farm
+#        - &green6      '#66b3de'              # 60% - nature reserve
+#        - &green7      '#99cce9'              # 40% - forest
+#        - &green8      '#bbbbbb'              # 40% - conservation
+#        - &orange1     '#99cce9'              # 40% - stadium
+#        - &brown1      '#3399d3'              # 80% - university
+#        - &brown2      '#99cce9'              # 40% - school
+#        - &brown3      '#66b3de'              # 60% - playground
+#        - &red1        '#4ca6d8'              # 70% - hospital
+#        - &grey1       '#e5f2f9'              # 10% - pedestrian, retail, airport apron, parking, church
+#        - &grey2       '#7fbfe3'              # 50% - airport runway
+#        - &grey3       '#b2d9ee'              # 30% - railway
+#        - &purple      '#645d66'              # airport
+#        - &mystry1     '#99cce9'              # 40% - recreation ground (type of park, sometimes around reservoirs)
+#        - &building1   '#b2d9ee'              # 30% - building
+#        - &building2   '#b2d9ee'              # building stroke
+#        - &building_o  25                     # building stroke order
+#
+#    labels:
+#        - &text_fill         '#0080c8'             # BLUE
+#        - &text_fill2        '#555'                # WHITE
+#        - &text_stroke       white                 # land color
+#        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+
+#sepia-tone-colors:
+#    cameras:
+#        - &camera_settings            { type: perspective, vanishing_point: [0, -500] }
+#    lights:
+#        - &light_settings             { type: directional, direction: [.1, .5, -1], diffuse: 0.7, ambient: 0.5 }
+#
+#    styles:
+#        - &water_type                base
+#        - &earth_type                base
+#        - &line_type                 roads
+#        - &polygon_type              base
+#        - &building_type             buildings
+#        - &buildings_line_type       buildingsLines
+#
+#    roads:
+#        - &highway1                   '#706249'     #SEPIA
+#        - &highway_link1              '#8d816d'     #85%
+#        - &highway_casing1            white
+#        - &highway_tunnel1            '#8d816d'     #80%
+#        - &highway_tunnel_casing1     '#776a52'     #95%
+#        - &highway_link_tunnel_casing1 '#776a52'    #95%
+#        - &ferry1                     '#8bb5e4'
+#        - &major_road1                '#8d816d'     #80%
+#        - &major_road1b               '#f0efec'     #10%
+#        - &major_road1c               '#e7e5e0'     #15%
+#        - &major_road2                '#f0efec'     #20%
+#        - &major_road2a               '#e7e5e0'     #17%
+#        - &major_road2b               '#dbd8d1'     #25%
+#        - &major_road3                '#d4d0c8'     #30%
+#        - &major_casing1              white         # same as highway_casing1
+#        - &major_casing2              '#b7b0a4'     #50% - zoomed out
+#        - &major_tunnel1              '#8d816d'     #80%
+#        - &major_tunnel_casing1       '#776a52'     #95%
+#        - &major_route1               '#a9a192'     #60% warm
+#        - &major_route2               '#b7b0a4'     #50% - zoomed out
+#        - &minor_route                '#a9a192'     # same as major_route
+#        - &major_road4                '#c6c0b6'     #40%
+#        - &minor_road1                '#c6c0b6'     #40% - natural earth
+#        - &minor_road2                '#f0efec'     #20% - natural earth, same as major_road2
+#        - &minor_road3                '#f0efec'     #20%
+#        - &minor_road4                '#e7e5e0'     #17% - zoomed out
+#        - &minor_road5                '#f0efec'     #10% - zoomed out, again
+#        - &minor_tunnel1              '#8d816d'     #80%
+#        - &minor_tunnel_casing1       '#776a52'     #95%
+#        - &service_road1              white
+#        - &service_road2              '#bbb'
+#        - &service_road_casing1       '#e7e5e0'     #17%
+#        - &service_road_casing2       '#444'
+#        - &path1                      '#a9a192'     #60%
+#        - &path2                      '#b0a99b'     #55% - zoomed out
+#        - &path_casing1               '#5d6b5d'
+#        - &path_bridge_casing1        '#b7b0a4'     #50%
+#        - &path_bridge_casing2        '#b7b0a4'     #50% - zoomed out
+#        - &path_steps1                '#b7b0a4'     #50%
+#
+#    boundaries:
+#         - &country_boundary           '#222'
+#         - &region_boundary            '#555'
+#         - &subregion_boundary         '#bbb'
+#
+#    areas:
+#        - &scene1      '#cfc8ba'              # map background, water
+#        - &water1      '#cfc8ba'              # water
+#        - &water2      [0.50, 0.50, 0.50]     # playa
+#        - &water1_o    blue                   # water stroke
+#        - &earth1      white                  # land color
+#        - &earth2      '#111'                 # urban
+#        - &green1      '#b7b0a4'              # 50% - park
+#        - &green2      '#c6c0b6'              # 40% - cemetery
+#        - &green3      '#d4d0c8'              # 30% - golf course
+#        - &green4      '#f0efec'              # 10% - farm faint
+#        - &green5      '#dbd8d1'              # 25% - farm
+#        - &green6      '#a9a192'              # 60% - nature reserve
+#        - &green7      '#c6c0b6'              # 40% - forest
+#        - &green8      '#c6c0b6'              # 40% - conservation
+#        - &orange1     '#c6c0b6'              # 40% - stadium
+#        - &brown1      '#8d816d'              # 80% - university
+#        - &brown2      '#c6c0b6'              # 40% - school
+#        - &brown3      '#a9a192'              # 60% - playground
+#        - &red1        '#9b917f'              # 70% - hospital
+#        - &grey1       '#f0efec'              # 10% - pedestrian, retail, airport apron, parking, church
+#        - &grey2       '#b7b0a4'              # 50% - airport runway
+#        - &grey3       '#d4d0c8'              # 30% - railway
+#        - &purple      '#645d66'              # airport
+#        - &mystry1     '#c6c0b6'              # 40% - recreation ground (type of park, sometimes around reservoirs)
+#        - &building1   '#d4d0c8'              # 30% - building
+#        - &building2   '#706249'              # building stroke
+#        - &building_o  25                     # building stroke order
+#
+#    labels:
+#        - &text_fill         '#706249'             # SEPIA
+#        - &text_fill2        '#555'                # WHITE
+#        - &text_stroke       white                 # land color
+#        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+
+#data-exploration-colors:
+#    cameras:
+#        - &camera_settings              { type: isometric, axis: [0, .1], vanishing_point: [0, -500] }
+#    lights:
+#        - &light_settings               { type: directional, direction: [1, 1, -.9], diffuse: 0.5, ambient: 0.85 }
+#
+#    styles:
+#        - &line_type                    flatlines
+#        - &polygon_type                 flatpolys
+#
+#    roads:
+#        - &highway1                      '#fc0'
+#        - &highway_link1                 red
+#        - &highway_casing1               black
+#        - &highway_tunnel1               maroon
+#        - &highway_tunnel_casing1        [0.8, 0.8, 0.7]
+#        - &highway_link_tunnel_casing1   [0.8, 0.8, 0.7]
+#        - &ferry1                        '#8bb5e4'
+#        - &major_road1                   [1.00, 1.00, 1.00]
+#        - &major_road1r                  green
+#        - &major_road1b                  teal
+#        - &major_road1c                  teal
+#        - &major_road2                   teal
+#        - &major_road2r                  lime
+#        - &major_road2a                  teal
+#        - &major_road2b                  teal
+#        - &major_road3                   teal
+#        - &major_casing1                 black               # same as highway_casing1
+#        - &major_casing2                 grey                # zoomed out
+#        - &major_tunnel1                 aqua
+#        - &major_tunnel_casing1         [0.8, 0.8, 0.7]
+#        - &major_route1                  orange
+#        - &major_route2                  orange              # zoomed out
+#        - &minor_route                   purple              # same as major_route
+#        - &major_road4                   [0.60, 0.60, 0.60]
+#        - &minor_road1                   [0.60, 0.60, 0.60]  # natural earth
+#        - &minor_road2                   [0.80, 0.80, 0.80]  # natural earth, same as major_road2
+#        - &minor_road3                   '#ccc'
+#        - &minor_road4                   '#868686'           # zoomed out
+#        - &minor_road5                   '#909090'           # zoomed out, again
+#        - &minor_tunnel1                 fuchsia
+#        - &minor_tunnel_casing1          [0.8, 0.8, 0.7]
+#        - &service_road1                 white
+#        - &service_road2              '#bbb'
+#        - &service_road_casing1          grey
+#        - &service_road_casing2       '#444'
+#        - &path1                         '#bcc19e'
+#        - &path2                         '#c1bc9d'           # zoomed out
+#        - &path_casing1                  '#5d6b5d'
+#        - &path_bridge_casing1           black
+#        - &path_bridge_casing2           grey                # zoomed out
+#        - &path_steps1                   black
+#
+#    boundaries:
+#        - &country_boundary             '#222'
+#        - &region_boundary              '#555'
+#        - &subregion_boundary           '#bbb'
+#
+#    areas:
+#        - &scene1      '#eee'              # map background, water
+#        - &water1      [0.83, 0.83, 0.83]  # water
+#        - &water2      [0.50, 0.50, 0.50]  # playa
+#        - &water1_o    blue                # water stroke
+#        - &earth1      white               # land color
+#        - &earth2      '#111'              # urban
+#        - &green1      [0.50,0.50,0.50]    # park
+#        - &green2      '#949494'           # cemetery
+#        - &green3      '#9a9a9a'           # golf course
+#        - &green4      [0.90,0.90,0.90]    # farm faint
+#        - &green5      [0.75,0.75,0.75]    # farm
+#        - &green6      [0.40,0.40,0.40]    # nature reserve
+#        - &green7      '#aaaaaa'           # forest
+#        - &green8      '#bbbbbb'           # 40% - conservation
+#        - &orange1     '#aaaaaa'           # stadium
+#        - &brown1      '#7b7b7b'           # university
+#        - &brown2      '#aaaaaa'           # school
+#        - &brown3      '#b8b8b8'           # playground
+#        - &red1        '#a2a2a2'           # hospital
+#        - &grey1       '#787878'           # pedestrian, retail, airport apron, parking, church
+#        - &grey2       [0.5, 0.5, 0.5]     # airport runway
+#        - &grey3       grey                # railway
+#        - &purple      '#645d66'           # airport
+#        - &mystry1     '#aaaaaa'           # recreation ground (type of park, sometimes around reservoirs)
+#        - &building1   [0.3, 0.3, 0.3]     # building
+#        - &building2   [0.2, 0.2, 0.2]     # building stroke
+#        - &building_o  5                   # building stroke order
+#
+#    labels:
+#        - &text_fill         white              # WHITE
+#        - &text_fill2        '#555'             # WHITE
+#        - &text_stroke       '#444'             # land color
+#        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+# For Aaron
+# https://collection.cooperhewitt.org/objects/18382391/
+# https://collection.cooperhewitt.org/objects/18382391/colors/
+#brass-cat:
+#    cameras:
+#        - &camera_settings            { type: perspective, vanishing_point: [0, -500] }
+#    lights:
+#        - &light_settings             { type: directional, direction: [.1, .5, -1], diffuse: 0.7, ambient: 0.5 }
+#
+#    styles:
+#        - &water_type                base
+#        - &earth_type                base
+#        - &line_type                 roads
+#        - &polygon_type              base
+#        - &building_type             buildings
+#        - &buildings_line_type       buildingsLines
+#
+#    roads:
+#        - &highway1                   '#85754e'     #SEPIA
+#        - &highway_link1              '#8d816d'     #85%
+#        - &highway_casing1            white
+#        - &highway_tunnel1            '#8d816d'     #80%
+#        - &highway_tunnel_casing1     '#776a52'     #95%
+#        - &highway_link_tunnel_casing1 '#776a52'    #95%
+#        - &ferry1                     '#8bb5e4'
+#        - &major_road1                '#8d816d'     #80%
+#        - &major_road1b               '#f0efec'     #10%
+#        - &major_road1c               '#e7e5e0'     #15%
+#        - &major_road2                '#f0efec'     #20%
+#        - &major_road2a               '#e7e5e0'     #17%
+#        - &major_road2b               '#dbd8d1'     #25%
+#        - &major_road3                '#d4d0c8'     #30%
+#        - &major_casing1              white         # same as highway_casing1
+#        - &major_casing2              '#b7b0a4'     #50% - zoomed out
+#        - &major_tunnel1              '#8d816d'     #80%
+#        - &major_tunnel_casing1       '#776a52'     #95%
+#        - &major_route1               '#a9a192'     #60% warm
+#        - &major_route2               '#b7b0a4'     #50% - zoomed out
+#        - &minor_route                '#a9a192'     # same as major_route
+#        - &major_road4                '#c6c0b6'     #40%
+#        - &minor_road1                '#c6c0b6'     #40% - natural earth
+#        - &minor_road2                '#f0efec'     #20% - natural earth, same as major_road2
+#        - &minor_road3                '#f0efec'     #20%
+#        - &minor_road4                '#e7e5e0'     #17% - zoomed out
+#        - &minor_road5                '#f0efec'     #10% - zoomed out, again
+#        - &minor_tunnel1              '#8d816d'     #80%
+#        - &minor_tunnel_casing1       '#776a52'     #95%
+#        - &service_road1              white
+#        - &service_road2              white
+#        - &service_road_casing1       '#e7e5e0'     #17%
+#        - &service_road_casing2       '#e7e5e0'
+#        - &path1                      '#a9a192'     #60%
+#        - &path2                      '#b0a99b'     #55% - zoomed out
+#        - &path_casing1               '#5d6b5d'
+#        - &path_bridge_casing1        '#b7b0a4'     #50%
+#        - &path_bridge_casing2        '#b7b0a4'     #50% - zoomed out
+#        - &path_steps1                '#b7b0a4'     #50%
+#
+#    boundaries:
+#         - &country_boundary           '#222'
+#         - &region_boundary            '#696969'
+#         - &subregion_boundary         '#bbb'
+#
+#    areas:
+#        - &scene1      '#e1dbd0'              # map background, water
+#        - &water1      '#e1dbd0'              # water
+#        - &water2      [0.50, 0.50, 0.50]     # playa
+#        - &water1_o    blue                   # water stroke
+#        - &earth1      white                  # land color
+#        - &earth2      '#111'                 # urban
+#        - &green1      '#b0b7a4'              # 50% - park
+#        - &green2      '#c6c0b6'              # 40% - cemetery
+#        - &green3      '#d4d0c8'              # 30% - golf course
+#        - &green4      '#f0efec'              # 10% - farm faint
+#        - &green5      '#dbd8d1'              # 25% - farm
+#        - &green6      '#a9a192'              # 60% - nature reserve
+#        - &green7      '#c6c0b6'              # 40% - forest
+#        - &green8      '#c6c0b6'              # 40% - conservation
+#        - &orange1     '#c6c0b6'              # 40% - stadium
+#        - &brown1      '#c5c1ae'              # 80% - university
+#        - &brown2      '#c6c0b6'              # 40% - school
+#        - &brown3      '#a9a192'              # 60% - playground
+#        - &red1        '#d7c9c6'              # 70% - hospital
+#        - &grey1       '#f0efec'              # 10% - pedestrian, retail, airport apron, parking, church
+#        - &grey2       '#b7b0a4'              # 50% - airport runway
+#        - &grey3       '#d4d0c8'              # 30% - railway
+#        - &purple      '#645d66'              # airport
+#        - &mystry1     '#c6c0b6'              # 40% - recreation ground (type of park, sometimes around reservoirs)
+#        - &building1   '#d4d0c8'              # 30% - building
+#        - &building2   '#706249'              # building stroke
+#        - &building_o  25                     # building stroke order
+#
+#    labels:
+#        - &text_fill         '#85754e'             # SEPIA
+#        - &text_fill2        white                 # WHITE
+#        - &text_stroke       white                 # land color
+#        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+traditional-colors:
+    cameras:
+        - &camera_settings            { type: isometric, axis: [0, .1], vanishing_point: [0, -500] }
+
+    lights:
+        - &light_settings             { type: directional, direction: [1, 1, -.9], diffuse: 0.5, ambient: 0.85 }
+
+    styles:
+        - &line_type                 flatlines
+        - &polygon_type              flatpolys
+
+    roads:
+        - &highway1                   '#D16768'
+        - &highway_link1              '#d19596'
+        - &highway_casing1            '#D16768'
+        - &highway_tunnel1            '#d19596'       #85%
+        - &highway_tunnel_casing1     [0.3, 0.3, 0.3] #95%
+        - &highway_link_tunnel_casing1 '#D16768'      #95%
+        - &ferry1                     '#8bb5e4'
+        - &major_road1                white    #80%
+        - &major_road1b               white    #10%
+        - &major_road1c               white    #15%
+        - &major_road2                white    #20%
+        - &major_road2a               white    #17%
+        - &major_road2b               white    #25%
+        - &major_road3                white    #30%
+        - &major_road4                white
+        - &major_casing1              '#d19596'           # same as highway_casing1
+        - &major_casing2              '#d19596'           # zoomed out
+        - &major_tunnel1              grey                # light orange (major_route1)
+        - &major_tunnel_casing1       [0.3, 0.3, 0.3]
+        - &major_route1               '#d19596'
+        - &major_route2               '#d19596'           # zoomed out
+        - &minor_route                '#d19596'           # same as major_route
+        - &minor_road1                [0.40, 0.40, 0.40]  # natural earth
+        - &minor_road2                [0.20, 0.20, 0.20]  # natural earth, same as major_road2
+        - &minor_road3                white
+        - &minor_road4                white               # zoomed out
+        - &minor_road5                white               # zoomed out, again
+        - &minor_casing1              white               # same as highway_casing1
+        - &minor_casing2              white               # zoomed out
+        - &minor_tunnel1              white
+        - &minor_tunnel_casing1       [0.3, 0.3, 0.3]
+        - &service_road1              white
+        - &service_road2              white
+        - &service_road_casing1       white
+        - &service_road_casing2       white
+        - &path1                      '#bbb'
+        - &path2                      '#bbb'              # zoomed out
+        - &path_casing1               '#5d6b5d'
+        - &path_bridge_casing1        black
+        - &path_bridge_casing2        grey                # zoomed out
+        - &path_steps1                '#bcc19e'
+        - &path_steps1_b              '#f0ebeb'
+
+    boundaries:
+        - &country_boundary           '#222'
+        - &region_boundary            '#777'
+        - &subregion_boundary         '#bbb'
+
+    areas:
+        - &scene1      white           # map background, water
+        - &water1      '#9dc3de'           # water
+        - &water2      [0.50, 0.50, 0.50]  # playa
+        - &water1_o    '#9dc3de'           # water stroke
+        - &water2_o    '#9dc3de'           # water stroke 2
+        - &earth1      '#f0ebeb'           # land color
+        - &earth2      '#f0ebeb'           # urban
+        - &earth2_v    false               # urban
+        - &green1      '#bddec5'           # park
+        - &green1_r    '#bddec5'           # park roads
+        - &green1_b    [.65, .65, .65]     # park buildings
+        - &green1_bo   [.8, .8, .8]        # park building outlines
+        - &green2      '#b8d2bf'           # cemetery
+        - &green3      '#b8d2bf'           # golf course
+        - &green4      '#f0ebeb'           # farm faint
+        - &green4_v    false               # farm faint
+        - &green5      '#f0ebeb'           # farm
+        - &green6      '#94d59f'           # nature reserve
+        - &green7      '#bddec5'           # forest
+        - &green8      '#bddec5'           # conservation
+        - &orange1     '#bfb08e'           # stadium
+        - &brown1      '#D9CFC3'           # university
+        - &brown1_r    '#D9CFC3'           # university roads
+        - &brown1_b    [.65, .65, .65]     # university buildings
+        - &brown1_bo   [.8, .8, .8]        # university building outlines
+        - &brown2      '#D9CFC3'           # school
+        - &brown3      '#c7b7a2'           # playground
+        - &red1        '#d9c3c3'           # hospital
+        - &red1_r      '#d9c3c3'           # hospital roads
+        - &red1_b      [.65, .65, .65]     # hospital buildings
+        - &red1_bo     [.8, .8, .8]        # hospital building outlines
+        - &grey1       '#f0ebeb'           # pedestrian, retail, airport apron, parking, church
+        - &grey1_v     false               # pedestrian, retail, airport apron, parking, church
+        - &grey2       orange              # airport runway
+        - &grey3       '#c6c6c6'           # railway
+        - &grey4       '#ffc52a'           # airport taxiway
+        - &grey5       '#ffc52a'           # airport taxiway
+        - &grey6       '#c6c6c6'           # industrial
+        - &grey6_b     [.65, .65, .65]     # industrial buildings
+        - &grey6_bo    [.8, .8, .8]        # industrial building outlines
+        - &purple      '#f0e1e1'           # airport
+        - &purple_v    false               # airport
+        - &mystry1     '#d9d7c3'           # recreation ground
+        - &building1   [.65, .65, .65]     # building
+        - &building2   [.8, .8, .8]        # building stroke
+        - &building_o  5                   # building stroke order
+        - &building_e  true                # building stroke order
+
+    labels:
+        - &text_fill         '#000'             # WHITE
+        - &text_fill2        '#555'             # WHITE
+        - &text_stroke       '#fff'             # land color
+        - &townspot_sprite   townspot-l-rev     # depends on land color and text settings
+
+
+textures:
+    pois:
+        url: poi_icons_18@2x.png
+        filtering: mipmap
+        sprites:
+            # define sprites: [x origin, y origin, width, height]
+            adult-boutique: [252, 108, 36, 36]
+            airport: [180, 36, 36, 36]
+            animal-shelter: [432, 0, 36, 36]
+            antique-shop: [216, 108, 36, 36]
+            aquarium: [684, 252, 36, 36]
+            arcade: [576, 252, 36, 36]
+            art-gallery: [540, 252, 36, 36]
+            arts-crafts: [180, 108, 36, 36]
+            athletics-sports: [288, 216, 36, 36]
+            atm: [36, 216, 36, 36]
+            automotive-shop: [108, 216, 36, 36]
+            bagel-shop: [468, 288, 36, 36]
+            bakery: [144, 252, 36, 36]
+            bank: [72, 216, 36, 36]
+            bar: [468, 216, 36, 36]
+            baseball-field: [72, 144, 36, 36]
+            basketball-court: [36, 144, 36, 36]
+            basketball-stadium: [360, 252, 36, 36]
+            bathroom: [216, 144, 36, 36]
+            battlefield: [360, 144, 36, 36]
+            bbq: [36, 288, 36, 36]
+            beach: [288, 144, 36, 36]
+            beach-resort: [252, 144, 36, 36]
+            beer-garden: [576, 288, 36, 36]
+            bench: [756, 0, 36, 36]
+            bicycle-parking: [648, 180, 36, 36]
+            bike-shop: [0, 216, 36, 36]
+            boat-ferry: [144, 36, 36, 36]
+            boat-ramp: [360, 108, 36, 36]
+            bookstore: [937, 180, 36, 36]
+            bowling-alley: [504, 252, 36, 36]
+            breakfast: [108, 288, 36, 36]
+            bridal-shop: [144, 72, 36, 36]
+            bridge: [540, 144, 36, 36]
+            building: [684, 216, 36, 36]
+            burger: [360, 288, 36, 36]
+            bus-station: [72, 36, 36, 36]
+            butcher: [900, 72, 36, 36]
+            camera-store: [901, 180, 36, 36]
+            campground: [504, 144, 36, 36]
+            candy-store: [180, 288, 36, 36]
+            capital-l: [841, 288, 23, 23]
+            capital-m: [822, 288, 18, 18]
+            capital-s: [806, 288, 17, 17]
+            capital-xl: [863, 288, 25, 25]
+            capital-xs: [792, 288, 13, 13]
+            car-dealership: [864, 180, 36, 36]
+            car-wash: [828, 180, 36, 36]
+            carribean-restaurant: [36, 252, 36, 36]
+            casino: [468, 252, 36, 36]
+            castle: [180, 72, 36, 36]
+            cemetery: [468, 144, 36, 36]
+            cheese-shop: [144, 288, 36, 36]
+            chinese-restaurant: [72, 252, 36, 36]
+            church: [72, 180, 36, 36]
+            city: [756, 108, 36, 36]
+            clinic: [216, 0, 36, 36]
+            clothing-store: [756, 252, 36, 36]
+            cocktail-bar: [432, 216, 36, 36]
+            coffee-shop: [108, 252, 36, 36]
+            college-university: [864, 252, 36, 36]
+            comedy-club: [432, 252, 36, 36]
+            concert-hall: [396, 252, 36, 36]
+            convenience-store: [108, 108, 36, 36]
+            cosmetics-shop: [72, 108, 36, 36]
+            courthouse: [396, 0, 36, 36]
+            credit-union: [792, 180, 36, 36]
+            cupcake-shop: [937, 216, 36, 36]
+            daycare: [36, 108, 36, 36]
+            dentist: [252, 0, 36, 36]
+            department-store: [756, 180, 36, 36]
+            design-studio: [108, 72, 36, 36]
+            dessert: [36, 0, 36, 36]
+            dog-run: [216, 216, 36, 36]
+            donut: [252, 288, 36, 36]
+            electronics-store: [612, 180, 36, 36]
+            ev-charging-station: [720, 180, 36, 36]
+            factory: [648, 216, 36, 36]
+            farm: [432, 144, 36, 36]
+            farmers-market: [540, 180, 36, 36]
+            field: [396, 144, 36, 36]
+            financial-service: [576, 180, 36, 36]
+            fire-station: [360, 0, 36, 36]
+            fish-market: [504, 180, 36, 36]
+            fishing-spot: [648, 252, 36, 36]
+            fitness: [792, 72, 36, 36]
+            flea-market: [937, 72, 36, 36]
+            flower-shop: [937, 144, 36, 36]
+            food-court: [468, 180, 36, 36]
+            food-drink-shop: [864, 72, 36, 36]
+            football-stadium: [828, 252, 36, 36]
+            ford: [576, 0, 36, 36]
+            forest: [103, 324, 36, 36]
+            fountain: [144, 180, 36, 36]
+            fried-chicken-joint: [901, 216, 36, 36]
+            fun-fair: [612, 144, 36, 36]
+            furniture-store: [360, 180, 36, 36]
+            gaming-cafe: [864, 144, 36, 36]
+            garden: [324, 144, 36, 36]
+            garden-center: [828, 72, 36, 36]
+            gas-station: [0, 288, 36, 36]
+            gastropub: [0, 252, 36, 36]
+            gate: [684, 0, 36, 36]
+            gay-bar: [396, 216, 36, 36]
+            general-entertainment: [324, 252, 36, 36]
+            general-travel: [36, 36, 36, 36]
+            generic: [756, 288, 36, 36]
+            german-restaurant: [864, 216, 36, 36]
+            gift-shop: [828, 144, 36, 36]
+            golf-course: [0, 144, 36, 36]
+            gourmet-shop: [901, 144, 36, 36]
+            government-building: [252, 216, 36, 36]
+            grocery-store: [432, 180, 36, 36]
+            harbor-marina: [180, 216, 36, 36]
+            hardware-store: [756, 72, 36, 36]
+            hiking-trail: [720, 108, 36, 36]
+            historic-site: [792, 144, 36, 36]
+            hobby-shop: [684, 72, 36, 36]
+            hockey-field: [937, 108, 36, 36]
+            hospital: [180, 0, 36, 36]
+            hot-dog-joint: [612, 288, 36, 36]
+            hot-pot-restaurant: [216, 288, 36, 36]
+            hot-spring: [252, 72, 36, 36]
+            hotel: [0, 36, 36, 36]
+            hunting-supply: [648, 72, 36, 36]
+            ice-cream-shop: [648, 288, 36, 36]
+            information: [720, 288, 36, 36]
+            internet-cafe: [612, 72, 36, 36]
+            island: [684, 108, 36, 36]
+            jewelry-store: [576, 72, 36, 36]
+            karaoke: [0, 180, 36, 36]
+            lake: [648, 108, 36, 36]
+            landmark: [324, 0, 36, 36]
+            laundry: [540, 72, 36, 36]
+            library: [0, 0, 36, 36]
+            light-rail: [937, 0, 36, 36]
+            lighthouse: [576, 108, 36, 36]
+            liquor-store: [396, 180, 36, 36]
+            lounge: [360, 216, 36, 36]
+            mall: [504, 72, 36, 36]
+            marijuana-dispensary: [468, 72, 36, 36]
+            market: [432, 72, 36, 36]
+            medical-center: [576, 216, 36, 36]
+            military-base: [180, 144, 36, 36]
+            mine: [720, 72, 36, 36]
+            miscellaneous-shop: [360, 72, 36, 36]
+            mobile-phone-shop: [324, 72, 36, 36]
+            molecular-gastronomy: [324, 288, 36, 36]
+            mosque: [108, 0, 36, 36]
+            motorcycle-shop: [72, 72, 36, 36]
+            mountain: [540, 108, 36, 36]
+            movie-theatre: [720, 252, 36, 36]
+            moving-target: [901, 0, 36, 36]
+            museum: [756, 144, 36, 36]
+            music-store: [36, 72, 36, 36]
+            music-venue: [288, 252, 36, 36]
+            nail-salon: [0, 72, 36, 36]
+            neighborhood: [504, 108, 36, 36]
+            newsstand: [937, 36, 36, 36]
+            nightlife: [180, 252, 36, 36]
+            noodle-shop: [432, 288, 36, 36]
+            office: [144, 144, 36, 36]
+            office-supplies: [864, 36, 36, 36]
+            optical-shop: [900, 36, 36, 36]
+            other-outdoors: [468, 108, 36, 36]
+            park: [108, 180, 36, 36]
+            parking: [684, 180, 36, 36]
+            performing-arts: [252, 252, 36, 36]
+            pet-store: [828, 36, 36, 36]
+            pharmacy: [0, 108, 36, 36]
+            photography-lab: [792, 36, 36, 36]
+            picnic-spot: [720, 0, 36, 36]
+            pier: [864, 0, 36, 36]
+            pizza: [684, 288, 36, 36]
+            playground: [288, 72, 36, 36]
+            police: [288, 0, 36, 36]
+            pool: [432, 108, 36, 36]
+            pool-hall: [720, 144, 36, 36]
+            post-office: [540, 216, 36, 36]
+            power-pylon: [612, 216, 36, 36]
+            public-art: [216, 252, 36, 36]
+            racetrack: [684, 144, 36, 36]
+            ramen: [396, 288, 36, 36]
+            real-estate: [756, 36, 36, 36]
+            record-shop: [720, 36, 36, 36]
+            recycling-facility: [684, 36, 36, 36]
+            rental-car: [828, 0, 36, 36]
+            rest-area: [792, 0, 36, 36]
+            restaurant: [288, 288, 36, 36]
+            river: [396, 108, 36, 36]
+            road: [612, 0, 36, 36]
+            ruin: [648, 0, 36, 36]
+            salon-barber: [648, 36, 36, 36]
+            school: [108, 144, 36, 36]
+            ship-wreck: [108, 36, 36, 36]
+            shoe-store: [396, 72, 36, 36]
+            skate-park: [900, 108, 36, 36]
+            skating-rink: [864, 108, 36, 36]
+            ski-area: [180, 180, 36, 36]
+            smoke-shop: [612, 36, 36, 36]
+            soccer-field: [828, 108, 36, 36]
+            soccer-stadium: [792, 252, 36, 36]
+            soup-place: [828, 216, 36, 36]
+            spa-massage: [576, 36, 36, 36]
+            spiritual-center: [504, 216, 36, 36]
+            sporting-goods-shop: [540, 36, 36, 36]
+            spring: [612, 108, 36, 36]
+            stable: [324, 108, 36, 36]
+            stadium: [288, 180, 36, 36]
+            steakhouse: [72, 288, 36, 36]
+            storage-facility: [504, 36, 36, 36]
+            subway: [540, 0, 36, 36]
+            surf-shop: [144, 108, 36, 36]
+            sushi-restaurant: [36, 180, 36, 36]
+            swimming: [324, 180, 36, 36]
+            synagogue: [72, 0, 36, 36]
+            tailor-shop: [468, 36, 36, 36]
+            tanning-salon: [432, 36, 36, 36]
+            tattoo-parlor: [396, 36, 36, 36]
+            taxi: [504, 0, 36, 36]
+            tea-room: [792, 216, 36, 36]
+            tennis: [216, 180, 36, 36]
+            theme-park: [648, 144, 36, 36]
+            thrift-vintage-store: [360, 36, 36, 36]
+            toll-booth: [937, 252, 36, 36]
+            townspot-l: [52, 324, 23, 23]
+            townspot-l-rev: [940, 288, 23, 23]
+            townspot-m: [32, 324, 20, 20]
+            townspot-m-rev: [920, 288, 20, 20]
+            townspot-s: [13, 324, 18, 18]
+            townspot-s-rev: [902, 288, 18, 18]
+            townspot-xl: [75, 324, 28, 28]
+            townspot-xl-rev: [964, 288, 28, 28]
+            townspot-xs: [0, 324, 13, 13]
+            townspot-xs-rev: [889, 288, 13, 13]
+            toy-game-store: [324, 36, 36, 36]
+            track: [252, 180, 36, 36]
+            traffic-signal: [901, 252, 36, 36]
+            train-station: [468, 0, 36, 36]
+            travel-agency: [288, 36, 36, 36]
+            veterinarian: [144, 0, 36, 36]
+            video-game-store: [252, 36, 36, 36]
+            video-store: [216, 36, 36, 36]
+            view-point: [612, 252, 36, 36]
+            vineyard: [144, 216, 36, 36]
+            volcano: [288, 108, 36, 36]
+            volleyball-court: [792, 108, 36, 36]
+            well: [216, 72, 36, 36]
+            whisky-bar: [324, 216, 36, 36]
+            wine-bar: [540, 288, 36, 36]
+            wine-shop: [504, 288, 36, 36]
+            winery: [756, 216, 36, 36]
+            wings-joint: [720, 216, 36, 36]
+            zoo: [576, 144, 36, 36]
+
+sources:
+    osm:
+        type: TopoJSONTiles
+        #url: '//tileserver-dev-us-east-ext-538678355.us-east-1.elb.amazonaws.com/osm/all/{z}/{x}/{y}.topojson'
+        #url: '//vector.dev.mapzen.com /osm/all/{z}/{x}/{y}.topojson'
+        #url:  //localhost:8080//osm/all/{z}/{x}/{y}.topojson
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+
+camera:
+    type: isometric
+    axis: [0, .1] # very small building extrusion
+
+lights:
+    light1:
+        type: directional
+        direction: [1, 1, -.9]
+        diffuse: .5
+        ambient: .85
+
+styles:
+    flatlines:
+        base: lines
+        lighting: false # ignore lights
+        # putting this here should work, but doesn't
+#        draw:
+#            cap: round
+#            join: round
+    flatpolys:
+        base: polygons
+        lighting: false # ignore lights
+    dashedline:
+        base: lines
+        lighting: false # ignore lights
+        texcoords: true
+        shaders:
+            blocks:
+                global: |
+                    vec2 mirrorTile(vec2 _st, vec2 _zoom){
+                        _st *= _zoom;
+                        if (fract(_st.y * 0.5) > 0.5){
+                            _st.x = _st.x+0.5;
+                            _st.y = 1.0-_st.y;
+                        }
+                        return fract(_st);
+                    }
+                    float fillY(vec2 _st, float _pct,float _antia){
+                      return smoothstep( _pct-_antia, _pct, _st.y);
+                    }
+                    float chevron(vec2 st){
+                        st = mirrorTile(st,vec2(1.,6.));
+                        float x = st.x*2.;
+                        float a = floor(1.+sin(x*3.14));
+                        float b = floor(1.+sin((x+1.)*3.14));
+                        float f = fract(x);
+                        return fillY(st,mix(a,b,f),0.01);
+                    }
+                    float stripes(vec2 st){
+                        st = st*10.;
+                        return step(.5,1.0-smoothstep(.3,1.,abs(sin(st.y*3.1415))));
+                    }
+                    float xMargin(vec2 st,float margin){
+                        return 1.0-clamp(step(margin*.5,st.x)*step(margin*.5,1.0-st.x),0.,1.);
+                    }
+
+                    //  Function from Iñigo Quiles
+                    //  https://www.shadertoy.com/view/MsS3Wc
+                    vec3 hsb2rgb( in vec3 c ){
+                        vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
+                                                 6.0)-3.0)-1.0,
+                                         0.0,
+                                         1.0 );
+                        rgb = rgb*rgb*(3.0-2.0*rgb);
+                        return c.z * mix(vec3(1.0), rgb, c.y);
+                    }
+                color: |
+                    vec2 st = v_texcoord;
+                    vec4 foreground = vec4(0.400,0.400,0.400,1.0);
+
+                    vec3 color1 = hsb2rgb(vec3(color.r,1.,1.));
+                    vec3 color2 = hsb2rgb(vec3(color.g,1.,1.));
+
+                    // Nathaniel un-comment the following lines
+                     color = mix(v_color,foreground, chevron(st) - xMargin(st,.25) );
+                     color = mix(v_color,foreground, stripes(st) );
+                    // color = mix(v_color,foreground, clamp(stripes(st)-xMargin(st,.9),0.,1.) ) ;
+    dots:
+        mix: tools
+        blend: overlay
+        base: polygons
+        texcoords: true
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = TileCoords();
+                    st = brickTile(st,40.0);
+                    float b = circle(st,0.1);
+                    //color = vec4(0.460,0.460,0.460,1.0)*vec4(b);
+                    color *= vec4(b);
+
+    dots2:
+        mix: tools
+        base: polygons
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = TileCoords();
+                    st = brickTile(st,100.0);
+                    float b = circle(st,0.2);
+                filter: |
+                    color.rgb = mix(vec3(0.9), vec3(0.8), b);
+                    color.rgb -= grain(gl_FragCoord.xy)*0.1;
+    blueprint:
+        base: polygons
+        shaders:
+            blocks:
+                global: |
+                    float getIntensity(vec3 a){ return (a.x+a.y+a.z)/3.0; }
+                    float hash(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+                    float noise(vec2 x) {
+                        vec2 i = floor(x);
+                        vec2 f = fract(x);
+                        float a = hash(i);
+                        float b = hash(i + vec2(1.0, 0.0));
+                        float c = hash(i + vec2(0.0, 1.0));
+                        float d = hash(i + vec2(1.0, 1.0));
+                        vec2 u = f * f * (3.0 - 2.0 * f);
+                        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+                    }
+                    float fbm( in vec2 p ){
+                        float s = 0.0;
+                        float m = 0.0;
+                        float a = 0.5;
+                        for(int i=0; i<2; i++ ){
+                            s += a * noise(p);
+                            m += a;
+                            a *= 0.5;
+                            p *= 2.0;
+                        }
+                        return s/m;
+                    }
+                    bool grid(vec2 _pos, float _res){
+                        vec2 grid = fract(_pos*_res);
+                        return grid.x < _res || grid.y < _res;
+                    }
+                    vec3 BluePrint(vec2 _pos){
+                        vec2 st = _pos/u_resolution.xy-vec2(.5);
+                        vec3 background = mix(  vec3(0.,0.5,0.8),
+                                                vec3(0.,0.0,0.3),
+                                                dot(st,st) + (fbm(_pos*0.6)*0.1) );
+                        if(grid(_pos,0.01)){
+                            background += vec3(0.05);
+                        }
+                        if(grid(_pos,0.1)){
+                            background += vec3(0.02);
+                        }
+                        return background;
+                    }
+                filter: |
+                    color.rgb += BluePrint(gl_FragCoord.xy);
+    base:
+        base: polygons
+        mix: blueprint
+        lighting: false
+
+    buildings:
+        base: polygons
+        mix: blueprint
+        texcoords: true
+        lighting: false
+        shaders:
+            blocks:
+                position: |
+                    position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
+                color: |
+                    if (dot(v_normal,vec3(0.,0.,1.)) == 0.0){
+                        float lineWidth = 0.003*(u_tile_origin.z/20.0);
+                        color.rgb = 1.0-vec3(step(lineWidth,v_texcoord.x)-step(1.0-lineWidth,v_texcoord.x));
+                    }
+    buildingsLines:
+        base: lines
+        mix: blueprint
+        lighting: false
+        shaders:
+            blocks:
+                width: |
+                    width *= 0.2+min(pow(position.z*0.006,2.),.6);
+                position: |
+                    position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
+                filter: |
+                    color.rgb = mix(BluePrint(gl_FragCoord.xy),
+                                    vec3(1.),
+                                    min(max(0.001,(u_map_position.z-13.))/3.,1.0) );
+    roads:
+        base: lines
+        mix: blueprint
+        lighting: false
+        texcoords: true
+        shaders:
+            blocks:
+                color: |
+                    float lineWidth = 0.1;
+                    float pct = 1.0-(step(lineWidth,v_texcoord.x)-step(1.0-lineWidth,v_texcoord.x));
+                    color.rgb = vec3(0.14+pct*0.1);
+    tools:
+        base: polygons
+        shaders:
+            blocks:
+                global: |
+                    // GridTile
+                    //=============================
+                    varying vec3 v_pos;
+                    vec2 TileCoords(){return fract(v_pos.xy*0.0002445);}
+                    bool grid(vec2 st, float res, float press){
+                        vec2 grid = fract(st*res);
+                        return grid.x < res*press || grid.y < res*press;
+                    }
+                    float TileGrid(float res){
+                        vec2 st = TileCoords()*100.*res;
+                        float pct = 0.0;
+                        float press = 0.4+(1.0-fract(u_map_position.z))*0.1;
+                        if (grid(st,0.01,press)) pct += 0.5;
+                        if (grid(st,0.1,press)) pct += 0.1;
+                        return pct;
+                    }
+                    float TileGrid(){ return mix(TileGrid(1.),TileGrid(2.),fract(u_map_position.z)); }
+                    // Grain
+                    //=============================
+                    float random(vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
+                    float noise(vec2 x) {
+                        vec2 i = floor(x);
+                        vec2 f = fract(x);
+                        float a = random(i);
+                        float b = random(i + vec2(1.0, 0.0));
+                        float c = random(i + vec2(0.0, 1.0));
+                        float d = random(i + vec2(1.0, 1.0));
+                        vec2 u = f * f * (3.0 - 2.0 * f);
+                        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+                    }
+                    float fbm( in vec2 p ){
+                        float s = 0.0;
+                        float m = 0.0;
+                        float a = 0.5;
+                        for(int i=0; i<2; i++ ){
+                            s += a * noise(p);
+                            m += a;
+                            a *= 0.5;
+                            p *= 2.0;
+                        }
+                        return s/m;
+                    }
+                    float grain(vec2 pos){
+                        vec2 st = pos/u_resolution.xy-vec2(.5);
+                        return dot(st,st)+(fbm(pos*0.6)*0.1);
+                    }
+                    vec2 tile(vec2 _st, float _zoom){
+                      _st *= _zoom;
+                      return fract(_st);
+                    }
+
+                    vec2 brickTile(vec2 _st, float _zoom){
+                        _st *= _zoom;
+                        if (fract(_st.y * 0.5) > 0.5){
+                            _st.x += 0.5;
+                        }
+                        return fract(_st);
+                    }
+
+                    float circle(vec2 _st, float _radius){
+                      vec2 pos = vec2(0.5)-_st;
+                      return smoothstep(1.0-_radius,1.0-_radius+_radius*0.2,1.-dot(pos,pos)*3.14);
+                    }
+                position: |
+                    // GridTile
+                    v_pos = a_position.xyz * 32767.;
+    grid:
+        base: polygons
+        mix: tools
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb += vec3(0.2)*TileGrid();
+                    color.rgb -= grain(gl_FragCoord.xy)*0.5;
+
+    ground:
+        base: polygons
+        mix: tools
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb -= grain(gl_FragCoord.xy)*0.5;
+    ground2:
+        base: polygons
+        mix: tools
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb -= grain(gl_FragCoord.xy)*0.2;
+    icons:
+        base: points
+        texture: pois
+
+scene:
+    background:
+        color: *scene1
+
+layers:
+    earth:
+        data: { source: osm, layer: earth }
+        draw:
+            flatpolys:
+                order: 0
+                color: *earth1
+#            lines:
+#                order: 10
+#                width: 1px
+#                color: red
+
+    water:
+        data: { source: osm, layer: water }
+        draw:
+            #ground:
+            polygons:
+                order: 4
+                color: *water1
+        lakes:
+            filter:
+                all:
+                    - kind: [ocean, lake, water, reservoir, playa]
+                any:
+                    # limit show smaller landuse areas to higher zooms
+                    - { $zoom: { min: 4 },  area: { min: 15000000000 } }
+                    - { $zoom: { min: 5 },  area: { min: 1000000000 } }
+                    - { $zoom: { min: 6 },  area: { min: 500000000 } }
+                    - { $zoom: { min: 7 },  area: { min: 160000000 } }
+                    - { $zoom: { min: 8 },  area: { min: 40000000 } }
+                    - { $zoom: { min: 9 },  area: { min: 10000000 } }
+                    - { $zoom: { min: 10 }, area: { min: 8000000 } }
+                    - { $zoom: { min: 11 }, area: { min: 2000000 } }
+                    - { $zoom: { min: 12 }, area: { min: 500000 } }
+                    - { $zoom: { min: 13 }, area: { min: 100000 } }
+                    - { $zoom: { min: 14 }, area: { min: 50000 } }
+                    - { $zoom: { min: 15 }, area: { min: 20000 } }
+                    - { $zoom: { min: 15 }, area: { min: 2000 } }
+                    - { $zoom: { min: 16 } }
+            draw:
+                ground:
+                    color: *water1
+        other-water-areas:
+            filter: { not: { kind: [ocean, lake, water, reservoir, playa] }, $zoom: { min: 11 }, area: { min: 100 } }
+            draw:
+                ground:
+                    color: *water1
+        playas-early:
+            filter: { kind: playa, $zoom: {max:6} }
+            draw:
+                ground:
+                    visible: false
+        playas:
+            filter: { kind: playa, $zoom: {min:6} }
+            draw:
+                ground:
+                    visible: true
+                    color: *water2
+        water_boundaries-ocean:
+          filter: { boundary: yes, kind: ocean, $zoom: { min: 10 } }
+          draw:
+                lines:
+                    order: 5
+                    color: *water1_o
+                    width: [[10,1px],[12,2px]]
+                    join: round
+        water_boundaries-not-ocean:
+          filter: { boundary: yes, not: { kind: ocean }, $zoom: { min: 14 } }
+          draw:
+                lines:
+                    order: 5
+                    color: *water2_o
+                    width: [[14,1.0px],[16,1.5px],[18,2m]]
+                    join: round
+        river:
+            filter: { kind: [river,canal,stream,dam,ditch,drain], $zoom: { min: 13 } }
+            draw:
+                lines:
+                    order: 3
+                    color: *water2_o
+                    width: [[13,0.5px],[14,1.0px],[16,1.5px],[18,4m]]
+                    cap: round
+
+    roads:
+        data: { source: osm, layer: roads }
+        filter: { not: { kind: rail } }
+        draw:
+            flatlines:
+                interactive: true
+            text:
+                visible: false    # labels are enabled by each layer below
+                font:
+                    family: Helvetica
+                    weight: 500
+
+        # default outlines starting at zoom 16
+        default-outline-width:
+            filter: { $zoom: { min: 16 } }
+            draw:
+                flatlines:
+                    outline:
+                        width: function () { return 3/16 * Math.log($zoom); }
+
+        natural_earth_highways:
+            filter: { source: 'naturalearthdata.com' }
+            draw:
+                flatlines:
+                    # put highways on top of all other roads
+                    order: 8
+                    cap: round
+                    join: round
+                    color: *highway1
+                    width: [[9, 2px], [14, 3px], [16, 4px], [17, 10m]]
+                    outline:
+                        color: *highway_casing1
+                        #width: [[9, 0], [12, 1px], [16, 2px]]
+            major_road:
+                filter: { type: ['Secondary Highway','Road'] }
+                draw:
+                    flatlines:
+                        color: [[13, *major_road2], [17, *major_road1]]
+                        width: [[9, 1px], [11, 1.5px], [13, 2.5px], [16, 2.5px], [19, 8m]]
+                        outline:
+                            width: [[9, 0.0px], [10, 0.5px], [11, .5px], [16, .75px]]
+            minor_road:
+                filter: { type: 'Unknown' }
+                draw:
+                    flatlines:
+                        # order: 3
+                        color: [[12, *minor_road1], [17, *minor_road2]]
+                        width: [[12, 1.0px], [14, 1.5px], [15, 3px], [16, 5m]]
+                        outline:
+                            width: [[12, 0px], [14, .5px], [17, 1px]]
+            ferry:
+                filter: { kind: Ferry }
+                draw:
+                    flatlines:
+                        # order: 3
+                        color: *ferry1
+                        width: [[12, 1.0px], [14, 1.5px], [15, 3px], [16, 5m]]
+                        outline:
+                            width: [[12, 0px], [14, .5px], [17, 1px]]
+        highway:
+            filter: { kind: highway }
+            draw:
+                flatlines:
+                    # put highways on top of all other roads
+                    order: 8
+                    cap: [[0,butt],[15,round]]
+                    join: round
+                    color: *highway1
+                    width: [[8, 2px], [9, 2.5px], [14, 4.0px], [15, 6.0px], [16, 6.5px], [17, 20m]]
+                    outline:
+                        color: *highway_casing1
+                        width: [[9, 0.5px], [12, 1px], [16, 2px], [18, 6px]]
+            not_link:
+                filter: { not: { is_link: yes }, $zoom: {max: 15} }
+                draw:
+                    flatlines:
+                        order: function() { return 7 + feature.sort_key; }
+                        outline:
+                            # except bridges and tunnels, their outlines should also self-sort
+                            order: function() { return 7 + feature.sort_key; }
+            link:
+                filter: { is_link: yes } # on- and off-ramps, etc
+                draw:
+                    flatlines:
+                        color: *highway_link1
+                        cap: butt
+                        width: [[9, 1px], [14, 2.5px], [16, 4px], [18, 9m]]
+                        outline:
+                            color: *highway_casing1
+                            width: [[10, 1px], [14, 1px], [18, 1.5px]]
+                early_link:
+                    filter: { $zoom: {min: 13, max: 15} }
+                    draw:
+                        flatlines:
+                            # except bridges and tunnels, their outlines should also self-sort
+                            order: function() { return 7 + feature.sort_key; }
+                tunnel-link:
+                    filter: {is_tunnel: yes, $zoom: {min: 13} }
+                    draw:
+                        flatlines:
+                            color: *highway_tunnel1
+                            outline:
+                                color: *highway_tunnel_casing1
+            tunnel:
+                filter: {is_tunnel: yes, $zoom: {min: 13} }
+                draw:
+                    flatlines:
+                        order: 6
+                        color: *highway_tunnel1
+                        outline:
+                            color: *highway_tunnel_casing1
+            highway_bridge:
+                filter: {is_bridge: yes}
+                draw:
+                    flatlines:
+                        cap: butt
+
+            labels-highway-early:
+                filter: { $zoom: { min: 7, max: 13 } }
+                draw:
+                    text:
+                        priority: 2
+                        visible: *text_visible_highway_e
+                        text_source: ref
+                        font:
+                            fill: *text_fill
+                            size: 12px
+                            stroke: { color: *text_stroke, width: 4 }
+            labels-highway-late:
+                filter: { $zoom: { min: 13, max: 14 } }
+                draw:
+                    text:
+                        priority: 2
+                        visible: *text_visible_highway
+                        #text_source: ref
+                        text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
+                        font:
+                            fill: *text_fill
+                            size: 13px
+                            stroke: { color: *text_stroke, width: 4 }
+            labels-highway-late2:
+                filter: { $zoom: { min: 14, max: 15 } }
+                draw:
+                    text:
+                        priority: 2
+                        visible: *text_visible_highway
+                        font:
+                            fill: *text_fill
+                            size: 14px
+                            stroke: { color: *text_stroke, width: 4 }
+            labels-highway-late3:
+                filter: { $zoom: { min: 15, max: 18 } }
+                draw:
+                    text:
+                        priority: 2
+                        visible: *text_visible_highway
+                        font:
+                            fill: *text_fill
+                            size: 15px
+                            stroke: { color: *text_stroke, width: 4 }
+            later3:
+                filter: { $zoom: { min: 18 } }
+                draw:
+                    text:
+                        priority: 2
+                        visible: *text_visible_highway
+                        font:
+                            fill: *text_fill2
+                            size: 18px
+                            stroke: { color: *highway1, width: 4 }
+
+        major_road:
+            filter: { kind: major_road }
+            # default style
+            draw:
+                flatlines:
+                    cap: round
+                    join: round
+                    color: [[8, *major_road4], [13, major_road2], [17, *major_road1]]
+                    width: [[13, 0px], [14, 2px], [16, 2.5px], [19, 8m]]
+                    outline:
+                        color: [[0,earth1_r],[13,*major_casing1]]
+                        width: [[12, 0px], [13, .5px], [15, 1px]]
+            trunk_primary:
+                filter: { highway: [trunk, primary] }
+                draw:
+                    flatlines:
+                        color: [[8, *major_road3], [9, *major_road2b], [13, *major_road2], [14, *major_road1c], [15, *major_road1b], [17, *major_road1]]
+                        width: [[9, 1.0px], [10, 1.5px], [13, 2.5px], [14, 4.5px], [15, 5.5px], [16, 7.0px], [19, 14m]]
+                        outline:
+                            width: [[9, 0px], [10, 1px], [12, 1.25px], [14, 1.5px], [16, 2.5px], [18, 4.5px]]
+                routes:
+                    filter: { ref: true }
+                    draw:
+                        flatlines:
+                            color: [[8,*major_route2],[10,*major_route1]]
+                            width: [[9, 1.5px], [10, 2.0px], [14, 3.5px], [15, 4.5px], [16, 6.0px], [17, 12m]]
+                            outline:
+                                color: *major_casing1
+                                width: [[9, 0px], [10, 0.5px], [11, 0.75px], [12, 1px], [16, 2px], [18, 4.5px]]
+                    tunnel:
+                        filter: {is_tunnel: yes, $zoom: {min: 13} }
+                        draw:
+                            flatlines:
+                                order: 6
+                                color: *major_tunnel1
+                                outline:
+                                    color: *major_tunnel_casing1
+                    z-order:
+                        #filter: { $zoom: {min: 12} }
+                        draw:
+                            flatlines:
+                                # let roads sort themselves past zoom 14
+                                order: function() { return 8 + feature.sort_key; }
+                                # but give them all the same outline
+                                outline:
+                                    order: 23 # 15 is the starting aboveground level, plus 8
+                labels-trunk_primary-early1:
+                    filter: { $zoom: { min: 11, max: 13 } }
+                    draw:
+                        text:
+                            priority: 3
+                            visible: *text_visible_trunk_primary_e
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 11px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-trunk_primary-early2:
+                    filter: { $zoom: { min: 13, max: 15 } }
+                    draw:
+                        text:
+                            priority: 3
+                            visible: *text_visible_trunk_primary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 12px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-trunk_primary-late:
+                    filter: { $zoom: { min: 15, max: 18 } }
+                    draw:
+                        text:
+                            priority: 3
+                            visible: *text_visible_trunk_primary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 14px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-trunk_primary-late2:
+                    filter: { $zoom: { min: 18 } }
+                    draw:
+                        text:
+                            priority: 3
+                            visible: *text_visible_trunk_primary
+                            text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
+                            font:
+                                fill: *text_fill2
+                                size: 18px
+                                stroke: { color: *major_road1, width: 4 }
+            link:
+                filter: { is_link: yes } # on- and off-ramps, etc
+                draw:
+                    flatlines:
+                        color: [[8, *major_road3], [9, *major_road2b], [14, *major_road2], [15, *major_road1b], [17, *major_road1]]
+                        width: [[10, 1px], [14, 3px], [16, 4.5px], [18, 10m]]
+                        outline:
+                            color: *major_casing1
+                            width: [[10, 1px], [14, 1px], [18, 1.5px]]
+            tunnel:
+                filter: {is_tunnel: yes, $zoom: {min: 13} }
+                draw:
+                    flatlines:
+                        order: 6
+                        color: *major_tunnel1
+                        outline:
+                            color: *major_tunnel_casing1
+            secondary:
+                filter: { highway: secondary }
+                draw:
+                    flatlines:
+                        color: [[13,*major_road3], [14,*major_road2b], [15,*major_road1b], [17,*major_road1]]
+                        width: [[11, 1.0px], [12, 1.0px], [13, 2.0px], [14, 3.5px], [15, 4.5px], [16, 7.0px], [19, 16m]]
+                        outline:
+                            width: [[11, 0px], [12, .75px], [13, 1.0px], [14, 1.75px], [15, 2.0px], [16, 3.0px], [18, 4.0px]]
+                routes:
+                    filter: { ref: true, $zoom: { min: 12} }
+                    draw:
+                        flatlines:
+                            color: *minor_route
+                    tunnel:
+                        filter: {is_tunnel: yes, $zoom: {min: 13} }
+                        draw:
+                            flatlines:
+                                order: 6
+                                color: *major_tunnel1
+                                outline:
+                                    color: *major_tunnel_casing1
+                    labels-secondary-routes:
+                        filter: { $zoom: { min: 13, max: 14 } }
+                        draw:
+                            text:
+                                priority: 4
+                                visible: *text_visible_secondary_e
+                                text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                                font:
+                                    fill: *text_fill
+                                    size: 13px
+                                    stroke: { color: *text_stroke, width: 4 }
+                in_park:
+                    filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+                    draw:
+                        flatlines:
+                            #width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
+                            color: [[11,*green1_r],[12,*minor_road3],[14,*minor_road3]]
+                            outline:
+                                color: [[14,*green1_r],[15,*major_casing1]]
+                                width: [[12, 0px], [13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 1.5px], [18, 3.0px]]
+                labels-secondary:
+                    filter: { $zoom: { min: 13, max: 15 } }
+                    draw:
+                        text:
+                            priority: 4
+                            visible: *text_visible_secondary_e
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 13px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-secondary2:
+                    filter: { $zoom: { min: 15, max: 18 } }
+                    draw:
+                        text:
+                            priority: 4
+                            visible: *text_visible_secondary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 14px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-secondary3:
+                    filter: { $zoom: { min: 18 } }
+                    draw:
+                        text:
+                            priority: 4
+                            visible: *text_visible_secondary
+                            #text_source: ref
+                            text_source: function() { if( feature.ref && feature.name ) { return feature.ref + " " + feature.name; } else { return feature.name; } }
+                            font:
+                                fill: *text_fill2
+                                size: 16px
+                                stroke: { color: *major_road1, width: 4 }
+            tertiary:
+                filter: { highway: [tertiary, tertiary_link] }
+                draw:
+                    flatlines:
+                        color: [[13,*major_road2b], [14,*major_road2a], [15,*major_road1b], [17,*major_road1]]
+                        width: [[11, 0.5px], [12, .75px], [14, 2.5px], [15, 4.0px], [16, 6.5px], [17, 7.5px], [19, 14m]]
+                        outline:
+                            width: [[12, 0px], [13, 0.5px], [14, 1.0px], [15, 1.5px], [16, 2.0px], [18, 3.5px]]
+                routes:
+                    filter: { ref: true, $zoom: { min: 12} }
+                    draw:
+                        flatlines:
+                            color: *minor_route
+                    tunnel:
+                        filter: {is_tunnel: yes, $zoom: {min: 13} }
+                        draw:
+                            flatlines:
+                                order: 6
+                                color: *major_tunnel1
+                                outline:
+                                    color: *major_tunnel_casing1
+                link:
+                    filter: { is_link: yes } # on- and off-ramps, etc
+                    draw:
+                        flatlines:
+                            color: *major_road1
+                            width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
+                            outline:
+                                color: [[12,*major_casing2],[13,*major_casing1]]
+                                width: [[12, 0px], [14, .25px], [16, 1.0px], [18, 4.0px]]
+                in_park:
+                    filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+                    draw:
+                        flatlines:
+                            #width: [[11, 0.0px], [12, .5px], [14, 1.5px], [16, 2.0px], [19, 7m]]
+                            color: [[11,*green1_r],[12,*minor_road3],[14,*minor_road3]]
+                            outline:
+                                color: [[14,*green1_r],[15,*major_casing1]]
+                                width: [[12, 0px], [13, 0.5px], [14, 1.0px], [15, 1.0px], [16, 1.5px], [18, 3.0px]]
+                labels-tertiary:
+                    filter: { $zoom: { min: 14, max: 15 } }
+                    draw:
+                        text:
+                            priority: 5
+                            visible: *text_visible_tertiary_e
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 13px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-tertiary2:
+                    filter: { $zoom: { min: 15, max: 18 } }
+                    draw:
+                        text:
+                            priority: 5
+                            visible: *text_visible_tertiary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill
+                                size: 14px
+                                stroke: { color: *text_stroke, width: 4 }
+                labels-tertiary3:
+                    filter: { $zoom: { min: 18 } }
+                    draw:
+                        text:
+                            priority: 5
+                            visible: *text_visible_tertiary
+                            text_source: function() { if( feature.ref && feature.name ) { if( feature.ref.length < 6 ) { return feature.ref + " " + feature.name; } else { return feature.name; } } else { return feature.name; } }
+                            font:
+                                fill: *text_fill2
+                                size: 15px
+                                stroke: { color: *major_road1, width: 4 }
+        minor_road:
+            filter: { kind: minor_road, not: { highway: service, aeroway: [runway,taxiway] } }
+            draw:
+                flatlines:
+                    cap: round
+                    join: round
+                    color: [[11, *minor_road5], [13, *minor_road4], [15, *minor_road3]]
+                    width: [[11, 0.5px], [12, 0.75px], [13, 1.0px], [14, 1.2px], [15, 2.5px], [16, 8m]]
+                    outline:
+                        width: [[14, 0px], [15, 0.5px], [17, 1.0px], [18, 2.0px]]
+                        color: *minor_casing1
+            early:
+                filter: { $zoom: { max: 14 } }
+                draw:
+                    flatlines:
+                        order: 15
+
+            in_park:
+                filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+                draw:
+                    flatlines:
+                        width: [[11, 0.5px], [12, 1.0px], [13, 1.2px], [14, 1.75px], [15, 2.5px], [16, 8m]]
+                        color: [[11,*green1_r],[12,*green1_r],[14,*minor_road3]]
+                        outline:
+                            color: [[14,*green1_r],[18,*minor_casing1]]
+                            width: [[12, 0px], [13, 0.5px], [14, 0.75px], [17, 2.0px], [18, 4.0px]]
+            in_university:
+                filter: { landuse_kind: university }
+                draw:
+                    flatlines:
+                        color: [[11,*brown1_r],[13,*brown1_r],[14,*minor_road3]]
+                        outline:
+                            color: *brown1_r
+                            width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
+            in_hospital:
+                filter: { landuse_kind: hospital }
+                draw:
+                    flatlines:
+                        color: [[11,*red1_r],[13,*red1_r],[14,*minor_road3]]
+                        outline:
+                            color: *red1_r
+                            width: [[13, 0px], [14, 0.5px], [17, 2.0px], [18, 4.0px]]
+
+            tunnel:
+                filter: {is_tunnel: yes, $zoom: {min: 13} }
+                draw:
+                    flatlines:
+                        order: 6
+                        cap: butt
+                        color: *minor_tunnel1
+                        outline:
+                            color: *minor_tunnel_casing1
+            minor_road_bridge:
+                filter: {is_bridge: yes}
+                draw:
+                    flatlines:
+                        cap: butt
+            labels-minor_road:
+                filter: { $zoom: { min: 16, max: 18 } }
+                draw:
+                    text:
+                        priority: 6
+                        visible: *text_visible_minor_road_e
+                        text_source: name
+                        font:
+                            fill: *text_fill
+                            size: 12px
+                            stroke: { color: *text_stroke, width: 4 }
+            labels-minor_road2:
+                filter: { $zoom: { min: 18 } }
+                draw:
+                    text:
+                        priority: 6
+                        visible: *text_visible_minor_road
+                        text_source: name
+                        font:
+                            fill: *text_fill2
+                            size: 15px
+                            stroke: { color: *minor_road3, width: 4 }
+        service_road:
+            filter: { kind: minor_road, highway: service }
+            draw:
+                flatlines:
+                    # order: 3
+                    cap: round
+                    join: round
+                    color: [[0,*service_road2],[18,*service_road2]]
+                    width: [[15, 1.5px], [16, 2.0px], [18, 5m], [19, 3.5m]]
+                    outline:
+                        color: [[0,*service_road_casing1],[18,*service_road_casing2]]
+                        width: [[15, 0.5px], [17, 1.0px], [18, 1.75px]]
+            labels-service_road:
+                filter: { $zoom: { min: 17, min: 18 } }
+                draw:
+                    text:
+                        priority: 7
+                        visible: *text_visible_service_road
+                        text_source: name
+                        font:
+                            fill: *text_fill
+                            size: 12px
+                            stroke: { color: *text_stroke, width: 4 }
+            labels-service_road2:
+                filter: { $zoom: { min: 18 } }
+                draw:
+                    text:
+                        priority: 7
+                        visible: *text_visible_service_road
+                        text_source: name
+                        font:
+                            fill: *text_fill2
+                            size: 12px
+                            stroke: { color: *service_road2, width: 4 }
+        path:
+            filter: { kind: path, not: { highway: steps } }
+            draw:
+                flatlines:
+                    color: [[15,*path2],[16,*path1]]
+                    order: 6
+                    cap: butt
+                    join: round
+                    width: [[15, 1.5], [17, 3m]]
+                    outline:
+                        color: *path_casing1
+                        width: [[15, 0.0], [18, .1]]
+            bridge:
+                filter: {is_bridge: yes }
+                draw:
+                    flatlines:
+                        cap: butt
+                        width: [[15, 3.5], [17, 3m]]
+                        outline:
+                            color: [[15,*path_bridge_casing2],[16,*path_bridge_casing1]]
+                            width: [[15, 0.5px], [16, 1.0px], [18, 2px]]
+            in_park:
+                filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+                draw:
+                    flatlines:
+                        color: [[15,*green1_r],[16,*minor_road3]]
+                        outline:
+                            color: *green1_r
+                            width: [[15, 0px], [16, 0.5px], [18, 2px]]
+            in_university:
+                filter: { landuse_kind: university }
+                draw:
+                    flatlines:
+                        color: [[15,*brown1_r],[16,*minor_road3]]
+                        outline:
+                            color: *brown1_r
+                            width: [[15, 0px], [16, 0.5px], [18, 2px]]
+            in_hospital:
+                filter: { landuse_kind: hospital }
+                draw:
+                    flatlines:
+                        color: [[15,*red1_r],[16,*minor_road3]]
+                        outline:
+                            color: *red1_r
+                            width: [[15, 0px], [16, 0.5px], [18, 2px]]
+            labels-path:
+                filter: { $zoom: { min: 17 } }
+                draw:
+                    text:
+                        priority: 8
+                        visible: *text_visible_path
+                        text_source: name
+                        font:
+                            fill: *text_fill
+                            size: 12px
+                            stroke: { color: *text_stroke, width: 4 }
+        steps:
+            filter: { kind: path, highway: steps }
+            draw:
+                dashedline:
+                    order: 23
+                    cap: round
+                    join: round
+                    color: *path_steps1_b
+                    width: [[15, 0.1], [17, 0.1]]
+                    outline:
+                        color: *path_steps1
+                        width: [[15, 1.5], [18, 3m]]
+            in_park:
+                filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+                draw:
+                    dashedline:
+                        color: [[15,*green1_r],[16,*minor_road3]]
+                        outline:
+                            color: *green1_r
+            in_university:
+                filter: { landuse_kind: university }
+                draw:
+                    dashedline:
+                        color: [[15,*brown1_r],[16,*minor_road3]]
+                        outline:
+                            color: *brown1_r
+            in_hospital:
+                filter: { landuse_kind: hospital }
+                draw:
+                    dashedline:
+                        color: [[15,*red1_r],[16,*minor_road3]]
+                        outline:
+                            color: *red1_r
+            labels-steps:
+                filter: { $zoom: { min: 17 } }
+                draw:
+                    text:
+                        priority: 9
+                        visible: *text_visible_steps
+                        text_source: name
+                        font:
+                            fill: *text_fill
+                            size: 12px
+                            stroke: { color: *text_stroke, width: 4 }
+        airport-lines:
+            filter: { kind: minor_road, aeroway: [runway,taxiway] }
+            draw:
+                lines:
+                    order: 10
+                    color: *grey2
+                    cap: butt
+                    width: [[10, 1px], [11, 1.5px], [12, 2px], [13, 4px], [14, 8px], [15, 16px], [16, 32px], [17, 60m]]
+                    outline:
+                        color: [0.7,0.7,0.7]
+            not-round:
+                filter: { $zoom: { min: 17 } }
+                draw:
+                    lines:
+                        cap: butt
+            taxiway:
+                filter: { aeroway: taxiway }
+                draw:
+                    lines:
+                        order: 9
+                        color: [[13,*grey2],[15,*grey4]]
+                        width: [[13, 0.5px], [14, 1px], [15, 4px], [16, 8px], [17, 25m]]
+                        outline:
+                            color: [0.85,0.85,0.85]
+                early:
+                    filter: { $zoom: { max: 14 } }
+                    draw:
+                        lines:
+                            visible: false
+        z-order:
+            #filter: { $zoom: {min: 12} }
+            draw:
+                flatlines:
+                    # let roads sort themselves past zoom 14
+                    order: function() { return 6 + feature.sort_key; }
+                    # but give them all the same outline
+                    outline:
+                        order: 21 # 15 is the starting aboveground level, plus 6
+
+            bridges-tunnels:
+                filter: { any: [is_bridge: yes, is_tunnel: yes] }
+                draw:
+                    flatlines:
+                        cap: butt
+                        outline:
+                            # except bridges and tunnels, their outlines should also self-sort
+                            order: function() { return 6 + feature.sort_key; }
+
+    # buildings are the only layer that gets lighting
+    buildings-early:
+        data: { source: osm, layer: buildings }
+        filter:
+            any:
+                # limit show smaller landuse areas to higher zooms
+                - { $zoom: { min: 12 }, area: { min: 200000 }, name: true }
+                - { $zoom: { min: 13 }, area: { min: 100000 }, name: true }
+                - { $zoom: { min: 14 }, area: { min: 40000 }, name: true }
+                - { $zoom: { min: 15 }, area: { min: 5000 }, name: true }
+                - { $zoom: { min: 16 }, area: { min: 1000 }, name: true }
+                - { $zoom: { min: 17 }, area: { min: 500 } }
+                - { $zoom: { min: 18 } }
+#            all:
+#                - { $zoom: { max: 18 } }
+        draw:
+            #filter: { not: { location: underground } }
+            polygons:
+                order: [[0,5],[17,9]]
+                color: *building1
+                extrude: *building_e
+            outline:
+                style: lines
+                order: 10
+                color: *building2
+                width: [[14,0.1px],[16,1px],[18,1.25px]]
+                extrude: *building_e
+                tile_edges: true
+        in_park:
+            filter: { landuse_kind: [park,forest,nature_reserve,conservation,golf_course,garden] }
+            draw:
+                polygons:
+                    color: *green1_b
+        in_university:
+            filter: { landuse_kind: [university, school] }
+            draw:
+                polygons:
+                    color: *brown1_b
+        in_hospital:
+            filter: { landuse_kind: hospital }
+            draw:
+                polygons:
+                    color: *red1_b
+#        in_retail:
+#            filter: { landuse_kind: retail }
+#            draw:
+#                polygons:
+#                    color: orange
+
+    buildings-early-labels:
+        data: { source: osm, layer: buildings }
+        filter:
+            all:
+                - { $zoom: { min: 16 } }
+            any:
+                # limit show smaller landuse areas to higher zooms
+                # - { $zoom: { min: 14 }, area: { min: 40000 }, name: true }
+                # - { $zoom: { min: 15 }, area: { min: 5000 }, name: true }
+                - { $zoom: { min: 16 }, area: { min: 5000 }, name: true }
+                - { $zoom: { min: 17 }, area: { min: 3000 }, name: true }
+        draw:
+            text:
+                interactive: true
+                order: 7
+                font:
+                    fill: *text_fill
+                    family: Helvetica
+                    style: italic
+                    size: 12px
+                    stroke: { color: *building2, width: 4 }
+
+
+    boundaries:
+        data: { source: osm, layer: boundaries }
+        # country subdivisions (states, provinces)
+#        draw:
+#            flatlines:
+#                order: 6
+#                color: red
+#                width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
+        country:
+            filter:
+                any:
+                    - type: country
+                    - kind: nation
+            draw:
+                flatlines:
+                    interactive: true
+                    order: 8
+                    color: *country_boundary
+                    width: [[0, 1.5px], [9, 2.5px], [14, 3.5px], [16, 4.5px], [17, 14m]]
+            water:
+                filter: { kind: territorial, boundary: maritime }
+                draw:
+                    flatlines:
+                        order: 9
+                        color: blue
+
+        regions:
+            filter:
+                any:
+                    - type: state
+                    # territorial here is probably a hack
+                    - kind: [state, departement, region, provincial, territorial]
+            draw:
+                flatlines:
+                    interactive: true
+                    order: 7
+                    color: *region_boundary
+                    width: [[0, 1.5px], [9, 3.5px], [14, 5.5px], [16, 6.5px], [17, 16m]]
+            water:
+                filter: { kind: territorial, boundary: maritime }
+                draw:
+                    flatlines:
+                        order: 8
+                        color: blue
+            early:
+                filter: { scalerank: [3,4,5,6,7,8,9], $zoom: {max: 8} }
+                draw:
+                    visible: false
+
+#        subregions:
+#            filter: { kind: county, $zoom: { min: 10 } }
+#            draw:
+#                flatlines:
+#                    interactive: true
+#                    order: 6
+#                    color: *subregion_boundary
+#                    width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
+
+
+    places:
+        data: { source: osm, layer: places }
+        draw:
+            text:
+                visible: false    # labels are enabled by each layer below
+                font:
+                    family: Helvetica
+                    weight: 500
+
+        continent:
+            filter: { name: true, kind: [continent], $zoom: {max: 5} }
+            draw:
+                text:
+                    visible: *text_visible_continent
+                    text_source: function() { return feature.name.toUpperCase(); }
+                    font:
+                        size: 13px
+                        style: italic
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+
+        country-early:
+            filter: { name: true, population: true, kind: [country], $zoom: {min: 3, max: 6} }
+            draw:
+                text:
+                    priority: 2
+                    visible: *text_visible_admin
+                    text_source: function() { if(feature["name:en"]) { return feature["name:en"].toUpperCase(); } else { return feature["name"].toUpperCase(); } }
+                    font:
+                        size: 11px
+                        weight: 200
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+#                icons:
+#                    size: [[13, 12px], [15, 18px]]
+#                    interactive: true
+#                    sprite: *townspot_sprite
+            early-ones-z3:
+                # US, Brazil, China, Russia, Canada, Greenland, Iceland, Australia, India, Japan, Guam, Indonesia, South Africa, Egypt, Nigeria, Kenya
+                filter: { not: { name: ["United States of America","Brasil","中华人民共和国","Россия","Canada","Kalaallit Nunaat","Ísland","Australia","India","日本","Guam","Indonesia","South Africa","مصر","Nigeria","Kenya"] }, $zoom: {min: 3, max: 4} }
+                draw:
+                    text:
+                        visible: false
+            early-ones-z4:
+                filter: { name: [Nederland,Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,Crna Gora,Македонија,The Gambia,Burundi,Swaziland,الإمارات العربية المتحدة,العراق,Singapore,El Salvador,Belize,Trinidad and Tobago, Saint Lucia, Montserrat,Anguilla,República Dominicana,Bahamas,British Virgin Islands,Antigua and Barbuda,Grenada,Sint Maarten,Saint Kitts and Nevis,Cayman Islands,België - Belgique - Belgien], $zoom: {min: 4, max: 5} }
+                draw:
+                    text:
+                        visible: false
+            early-ones-z5:
+                filter: { name: [Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,El Salvador,Belize,België - Belgique - Belgien], $zoom: {min: 5, max: 6} }
+                draw:
+                    text:
+                        visible: false
+            early-ones-z6:
+                filter: { name: [Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ], $zoom: {min: 6, max: 7} }
+                draw:
+                    text:
+                        visible: false
+
+        country:
+            # South Ossetia and Abkhazia aren't countries (they are disputed areas)
+            filter: { name: true, kind: [country], $zoom: {min: 6} }
+            draw:
+                text:
+                    priority: 2
+                    visible: *text_visible_admin
+                    text_source: function() { if(feature["name:en"]) { return feature["name:en"].toUpperCase(); } else { return feature["name"].toUpperCase(); } }
+                    font:
+                        size: 14px
+                        weight: 800
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+                icons:
+                    size: [[13, 12px], [15, 18px]]
+                    interactive: true
+                    sprite: *townspot_sprite
+            early-ones-z5-z6:
+                filter: { name: [Luxembourg,Liechtenstein,San Marino,Civitatis Vaticanæ,België - Belgique - Belgien,Хуссар Ирыстон,Аҧсны - Абхазия], $zoom: {min: 5, max: 7} }
+                draw:
+                    text:
+                        visible: false
+            early-ones-z7:
+                filter: { name: [Liechtenstein,San Marino,Civitatis Vaticanæ,Хуссар Ирыстон,Аҧсны - Абхазия], $zoom: {min: 7, max: 8} }
+                draw:
+                    text:
+                        visible: false
+
+        region-early:
+            filter: { name: true, kind: [state], $zoom: {min: 4, max: 6}, not: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"] } }
+            draw:
+                text:
+                    priority: 2
+                    visible: *text_visible_admin
+                    text_source: name:short
+                    font:
+                        size: 12px
+                        weight: 400
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+
+        region:
+            filter: { name: true, kind: [state], $zoom: {min: 6, max: 9} }
+            draw:
+                text:
+                    priority: 2
+                    visible: *text_visible_admin
+                    text_source: function() { if(feature["name:short"]) { return feature["name"].toUpperCase(); } else { return "" } }
+                    font:
+                        size: 14px
+                        weight: 800
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+    #            icons:
+    #                size: [[13, 12px], [15, 18px]]
+    #                interactive: true
+    #                sprite: *townspot_sprite
+            pesky:
+                filter: { name: ["Western Cape","Eastern Cape","Northern Cape","North West","Limpopo","KwaZulu-Natal","Hamburg","Freie und Hansestadt Hamburg","Neuchâtel","Nordrhein-Westfalen","Haute-Normandie","Baden-Württemberg","Bayern","Sachsen-Anhalt","Berlin","Mecklenburg-Vorpommern","Schleswig-Holstein","Brandenburg","Niedersachsen","Saarland","Thüringen","Hessen","Sachsen"], $zoom: {min: 6, max: 8} }
+                draw:
+                    visible: false
+                    text:
+                        visible: false
+            small-ones:
+                filter: { name: ["Delaware","New Jersey","Connecticut","Rhode Island","Massachusetts","New Hampshire","Vermont"], $zoom: {min: 6, max: 8} }
+                draw:
+                    text:
+                        text_source: function() { if(feature["name:abbreviation"]) { return feature["name:abbreviation"].toUpperCase(); } else { return feature["name"].toUpperCase(); } }
+
+        populated-places:
+            draw:
+                text:
+                    offset: [0, 8px]
+
+            populated-places-natural-earth-z2-z3:
+                filter: { name: true, source: naturalearthdata.com, $zoom: {min: 2, max: 4}, scalerank: 0 }
+                draw:
+                    text:
+                        priority: 1
+                        interactive: true
+                        visible: *text_visible_populated_places
+                        font:
+                            size: 10px
+                            fill: *text_fill
+                            stroke: { color: *text_stroke, width: 4 }
+                    icons:
+                        size: [[13, 12px], [15, 18px]]
+                        interactive: true
+                        sprite: *townspot_sprite
+
+            populated-places-natural-earth-z4:
+                filter: { name: true, source: naturalearthdata.com, $zoom: {min: 4, max: 5}, scalerank: [0,1] }
+                draw:
+                    text:
+                        priority: 1
+                        interactive: true
+                        visible: *text_visible_populated_places
+                        font:
+                            size: 10px
+                            fill: *text_fill
+                            stroke: { color: *text_stroke, width: 4 }
+                    icons:
+                        size: [[13, 12px], [15, 18px]]
+                        interactive: true
+                        sprite: *townspot_sprite
+
+            populated-places-natural-earth-z5:
+                filter: { name: true, source: naturalearthdata.com, $zoom: {min: 5, max: 6}, scalerank: [0,1,2,3] }
+                draw:
+                    text:
+                        priority: 1
+                        interactive: true
+                        visible: *text_visible_populated_places
+                        font:
+                            size: 10px
+                            fill: *text_fill
+                            stroke: { color: *text_stroke, width: 4 }
+                    icons:
+                        size: [[13, 12px], [15, 18px]]
+                        interactive: true
+                        sprite: *townspot_sprite
+
+            populated-places-natural-earth-z6-z7:
+                filter: { name: true, source: naturalearthdata.com, $zoom: {min: 6, max: 8} }
+                draw:
+                    text:
+                        priority: 1
+                        interactive: true
+                        visible: *text_visible_populated_places
+                        font:
+                            size: 11px
+                            fill: *text_fill
+                            stroke: { color: *text_stroke, width: 4 }
+                    icons:
+                        size: [[13, 12px], [15, 18px]]
+                        interactive: true
+                        sprite: *townspot_sprite
+
+            populated-places-osm:
+                filter: { name: true, source: openstreetmap, not: { kind: [county, state, island, neighbourhood, suburb, quarter] }, $zoom: {min: 8} }
+                draw:
+                    text:
+                        priority: 1
+                        interactive: true
+                        visible: *text_visible_populated_places
+                        font:
+                            size: 12px
+                            fill: *text_fill
+                            stroke: { color: *text_stroke, width: 4 }
+                # add townspots from zoom 0 thru zoom 11
+                townspots:
+                    filter: { $zoom: { max: 11 } }
+                    draw:
+                        icons:
+                            size: [[13, 12px], [15, 18px]]
+                            interactive: true
+                            sprite: *townspot_sprite
+                # nix major cities under z15
+                major-places:
+                    filter: { kind: [city], $zoom: { min: 13, max: 15 } }
+                    visible: false
+                    draw:
+                        text:
+                            font:
+                                size: 14px
+                major-places:
+                    filter: { kind: [city], $zoom: { min: 15 } }
+                    visible: false
+                    draw:
+                        text:
+                            visible: false
+                            font:
+                                size: 14px
+                medium-places:
+                    filter: { kind: [town], $zoom: { max: 11 } }
+                    visible: false
+                # nix podunk burgs under z15
+                minor-places:
+                    filter: { kind: [hamlet, village], $zoom: { max: 15 } }
+                    visible: false
+
+        neighborhood:
+            filter: { name: true, kind: [neighbourhood, suburb, quarter], $zoom: { min: 14 } }
+            draw:
+                text:
+                    priority: 2
+                    visible: *text_visible_admin
+                    text_source: function() { return feature.name.toUpperCase(); }
+                    font:
+                        size: 12px
+                        weight: 600
+                        fill: *text_fill
+                        stroke: { color: *text_stroke, width: 4 }
+
+
+    pois_and_landuse_labels:
+        data: { source: osm, layer: [pois, landuse_labels] }
+        visible: *label_visible_poi_landuse
+        filter:
+            name: true
+            not: { kind: [farm, peak, tree, gate] }
+            any:
+                - area: false
+                  all:
+                      - $zoom: { min: 12 }
+                - area: true
+                  any:
+                      # show labels for smaller landuse areas at higher zooms
+                      - { $zoom: { min: 9 },  area: { min: 100000000 } }
+                      - { $zoom: { min: 10 }, area: { min: 100000000 } }
+                      - { $zoom: { min: 11 }, area: { min: 25000000 } }
+                      - { $zoom: { min: 12 }, area: { min: 5000000 } }
+                      - { $zoom: { min: 13 }, area: { min: 2000000 } }
+                      - { $zoom: { min: 14 }, area: { min: 500000 } }
+                      - { $zoom: { min: 15 }, area: { min: 100000 } }
+                      - { $zoom: { min: 15 }, area: { min: 50000 } }
+                      - { $zoom: { min: 16 }, area: { min: 20000 } }
+                      - { $zoom: { min: 18 } }
+        draw:
+            icons:
+                size: [[13, 12px], [15, 18px]]
+                interactive: true
+            text:
+                visible: false    # labels are enabled by each layer below
+                offset: [0, 19px]
+                font:
+                    family: Helvetica
+                    weight: 500
+
+        # match 1:1 correlations between data and sprite name
+        direct-match:
+            draw:
+                icons:
+                    # sprite_source: kind
+                    sprite: function() { return feature.kind }
+                    visible: *icon_visible_poi_landuse
+                    interactive: true
+
+        # add generic icon at high zoom, if direct match fails
+        generic-icons:
+            filter: { $zoom: { min: 18 } }
+            draw:
+                icons:
+                    sprite_default: generic
+                    visible: *icon_visible_poi_landuse
+                    interactive: true
+
+        # add generic icon at high zoom
+        default-label-text:
+            filter: { $zoom: { min: 18 } }
+            draw:
+                text:
+                    visible: *text_visible_poi_landuse
+                    interactive: true
+                    font:
+                        fill: *text_fill
+                        size: 12px
+                        stroke: { color: *text_stroke, width: 4 }
+        landuse-labels-early:
+            filter:
+                area: true
+                $zoom: { min: 0, max: 15 }
+            draw:
+                text:
+                    visible: *text_visible_poi_landuse
+                    interactive: true
+                    offset: [0, 14px]
+                    font:
+                        fill: *text_fill
+                        size: 12px
+                        stroke: { color: *text_stroke, width: 4 }
+            nature-reserve:
+                filter:
+                    kind: nature_reserve
+                draw:
+                    icons:
+                        sprite: forest
+                wilderness-areas-early:
+                    filter: function() { return $zoom < 10 && feature.name.includes("Wilderness") }
+                    draw:
+                        text: { visible: false }
+                        icons: { visible: false }
+                national-park:
+                    filter: function() { return feature.name.includes("Park") }
+                    draw:
+                        icons:
+                            sprite: park
+        landuse-labels:
+            filter:
+                area: true
+                $zoom: { min: 15 }
+            draw:
+                text:
+                    visible: *text_visible_poi_landuse
+                    interactive: true
+                    font:
+                        fill: *text_fill
+                        size: 12px
+                        stroke: { color: *text_stroke, width: 4 }
+        parking-labels:
+            filter:
+                kind: [parking]
+                $zoom: { min: 17 }
+            draw:
+                text:
+                    visible: *text_visible_poi_landuse
+                    interactive: true
+                    font:
+                        fill: *text_fill
+                        size: 12px
+                        stroke: { color: *text_stroke, width: 4 }
+        car-sharing:
+            filter: { kind: car_sharing, $zoom: { max: 17 } }
+            draw:
+                icons:
+                    visible: false
+        station:
+            filter: { kind: station, $zoom: { max: 13 } }
+            draw:
+                icons:
+                    visible: false
+        tram-stop:
+            filter: { kind: tram_stop, $zoom: { max: 16 } }
+            draw:
+                icons:
+                    visible: false
+        bus-stop-labels:
+            filter:
+                kind: [bus_stop, bus_station]
+                $zoom: { min: 18 }
+            draw:
+                text:
+                    visible: *text_visible_poi_landuse
+                    interactive: true
+                    font:
+                        fill: *text_fill
+                        size: 12px
+                        stroke: { color: *text_stroke, width: 4 }
+
+        # examples of different icons mapped to feature properties
+        icons:
+            adult-boutique:
+                filter: { kind: [erotic, adult_boutique] }
+                draw:   { icons: { sprite: adult-boutique } }
+            airport:
+                filter: { kind: [airport, aerodrome] }
+                draw:   { icons: { sprite: airport } }
+            animal-shelter:
+                filter: { kind: [animal_shelter, animal-shelter, animal_boarding] }
+                draw:   { icons: { sprite: animal-shelter } }
+            antique-shop:
+                filter: { kind: [antiques, antique-shop] }
+                draw:   { icons: { sprite: antique-shop } }
+            art-gallery:
+                filter: { kind: [art_gallery, art-gallery, art] }
+                draw:   { icons: { sprite: art-gallery } }
+            athletics-sports:
+                filter: { kind: [pitch, athletic_sports, recreation_ground] }
+                draw:   { icons: { sprite: athletics-sports } }
+            automotive-shop:
+                filter: { kind: [car_repair, automotive-shop, automotive, tyres] }
+                draw:   { icons: { sprite: automotive-shop } }
+            bakery:
+                filter: { kind: [bakery, pastry, chocolate] }
+                draw:   { icons: { sprite: bakery } }
+            bar:
+                filter: { kind: [pub, bar] }
+                draw:   { icons: { sprite: bar } }
+            beer-garden:
+                filter: { kind: [biergarten, beer-garden, brewery] }
+                draw:   { icons: { sprite: beer-garden } }
+            bike-shop:
+                filter: { kind: [bicycle, bicycle_rental, bike, bike_shop] }
+                draw:   { icons: { sprite: bike-shop } }
+            boat-ferry:
+                filter: { kind: [ferry_terminal, boat-ferry, ferry-boat, ferry] }
+                draw:   { icons: { sprite: boat-ferry } }
+            boat-ramp:
+                filter: { kind: [slipway, boat-ramp, boat_ramp] }
+                draw:   { icons: { sprite: boat-ramp } }
+            bookstore:
+                filter: { kind: [books, bookstore] }
+                draw:   { icons: { sprite: bookstore } }
+            bowling-alley:
+                filter: { kind: [bowling_alley, bowling-alley] }
+                draw:   { icons: { sprite: bowling-alley } }
+            bridal-shop:
+                filter: { kind: [bridal, bridal-shop] }
+                draw:   { icons: { sprite: bridal-shop } }
+            building:
+                filter: { kind: [building, auditorium, terminal, hangar, retirement_home, manor, recreation_center, apartments] }
+                draw:   { icons: { sprite: building } }
+            burger:
+                filter: { kind: [fast_food, burger] }
+                draw:   { icons: { sprite: burger } }
+            bus-station:
+                filter: { kind: [bus_stop, bus_station] }
+                draw:   { icons: { sprite: bus-station } }
+            camera-store:
+                filter: { kind: [camera, camera-store, photo] }
+                draw:   { icons: { sprite: camera-store } }
+            campground:
+                filter: { kind: [campground, camp_site, caravan_site] }
+                draw:   { icons: { sprite: campground } }
+            candy-store:
+                filter: { kind: [candy, candy-store, confectionery] }
+                draw:   { icons: { sprite: candy-store } }
+            car-dealership:
+                filter: { kind: [car, car-dealership] }
+                draw:   { icons: { sprite: car-dealership } }
+            car-wash:
+                filter: { kind: [car_wash, car-wash] }
+                draw:   { icons: { sprite: car-wash } }
+            castle:
+                filter: { kind: [castle, fort] }
+                draw:   { icons: { sprite: castle } }
+            cemetery:
+                filter: { kind: [grave_yard, cemetery] }
+                draw:   { icons: { sprite: cemetery } }
+            cheese-shop:
+                filter: { kind: [cheese, cheese-shop] }
+                draw:   { icons: { sprite: cheese-shop } }
+            clothing-store:
+                filter: { kind: [clothes, chothing-store, "clothes store", fashion] }
+                draw:   { icons: { sprite: clothing-store } }
+            coffee-shop:
+                filter: { kind: [cafe, coffee-shop] }
+                draw:   { icons: { sprite: coffee-shop } }
+            college-university:
+                filter: { kind: [university, college, college-university] }
+                draw:   { icons: { sprite: college-university } }
+            concert-hall:
+                filter: { kind: [music_venue] }
+                draw:   { icons: { sprite: concert-hall } }
+            convenience-store:
+                filter: { kind: [convenience, convenience-store, convenience_store, beverages] }
+                draw:   { icons: { sprite: convenience-store } }
+            cosmetics-shop:
+                filter: { kind: [cosmetics, cosmetics-shop, beauty] }
+                draw:   { icons: { sprite: cosmetics-shop } }
+            department-store:
+                filter: { kind: [department_store, department-store] }
+                draw:   { icons: { sprite: department-store } }
+            dog-run:
+                filter: { kind: [dog_park, dog_run, dog-run] }
+                draw:   { icons: { sprite: dog-run } }
+            electronics-store:
+                filter: { kind: [electronics, electronics-store, computer] }
+                draw:   { icons: { sprite: electronics-store } }
+            factory:
+                filter: { kind: [factory, industrial, chimney, sub_station, substation, wastewater_plant, works, water_works, plant, generator] }
+                draw:   { icons: { sprite: factory } }
+            farmers-market:
+                filter: { kind: [farmers_market, farmers-market] }
+                draw:   { icons: { sprite: farmers-market } }
+            fire-station:
+                filter: { kind: [fire_station, fire-station] }
+                draw:   { icons: { sprite: fire-station } }
+            fish-market:
+                filter: { kind: [fish, fish-market, seafood, fishmonger] }
+                draw:   { icons: { sprite: fish-market } }
+            fishing-spot:
+                filter: { kind: [fishing_spot, fishing-spot, fishing] }
+                draw:   { icons: { sprite: fishing-spot } }
+            fitness:
+                filter: { kind: [gym, fitness, fitness_center] }
+                draw:   { icons: { sprite: fitness } }
+            flea-market:
+                filter: { kind: [flea_market, flea-market] }
+                draw:   { icons: { sprite: flea-market } }
+            flower-shop:
+                filter: { kind: [florist, flower-shop] }
+                draw:   { icons: { sprite: flower-shop } }
+            forest:
+                filter: { kind: [forest, conservation] }
+                draw:   { icons: { sprite: forest } }
+            furniture-store:
+                filter: { kind: [furniture, furniture-store] }
+                draw:   { icons: { sprite: furniture-store } }
+            garden-center:
+                filter: { kind: [garden_centre, garden_center] }
+                draw:   { icons: { sprite: garden-center } }
+            gas-station:
+                filter: { kind: [fuel, gas-station] }
+                draw:   { icons: { sprite: gas-station } }
+            general-entertainment:
+                filter: { kind: [ticket, general_entertainment] }
+                draw:   { icons: { sprite: general-entertainment } }
+            generic:
+                filter: { kind: [generic, subway_entrance] }
+                draw:   { icons: { sprite: generic } }
+            gift-shop:
+                filter: { kind: [gift, gift-shop] }
+                draw:   { icons: { sprite: gift-shop } }
+            golf-course:
+                filter: { kind: [golf-course, golf_course] }
+                draw:   { icons: { sprite: golf-course } }
+            government-building:
+                filter: { kind: [townhall, public_building, embassy] }
+                draw:   { icons: { sprite: government-building } }
+            grocery-store:
+                filter: { kind: [supermarket, grocery-store, health_food, greengrocer] }
+                draw:   { icons: { sprite: grocery-store } }
+            harbor-marina:
+                filter: { kind: [marina, harbor, harbor-marina, harbor_marina, dock, mooring] }
+                draw:   { icons: { sprite: harbor-marina } }
+            hardware-store:
+                filter: { kind: [hardware, hardware-store, doityourself, paint] }
+                draw:   { icons: { sprite: hardware-store } }
+            hiking-trail:
+                filter: { kind: [trailhead, hiking_trail] }
+                draw:   { icons: { sprite: hiking-trail } }
+            hotel:
+                filter: { kind: [hotel, motel, hostel] }
+                draw:   { icons: { sprite: hotel } }
+            hunting-supply:
+                filter: { kind: [hunting, fishing] }
+                draw:   { icons: { sprite: hunting-supply } }
+            ice-cream-shop:
+                filter: { kind: [ice_cream] }
+                draw:   { icons: { sprite: ice-cream-shop } }
+            information:
+                filter: { kind: [info, information] }
+                draw:   { icons: { sprite: information } }
+            jewelry-store:
+                filter: { kind: [jewelry, jewelry_store, jewelry-store] }
+                draw:   { icons: { sprite: jewelry-store } }
+            landmark:
+                filter: { kind: [landmark, memorial, monument, wayside_shrine, tower, beacon] }
+                draw:   { icons: { sprite: landmark } }
+            laundry:
+                filter: { kind: [laundry, dry_cleaning] }
+                draw:   { icons: { sprite: laundry } }
+            light-rail:
+                filter: { kind: [light-rail, light_rail, tram_stop] }
+                draw:   { icons: { sprite: light-rail } }
+            liquor-store:
+                filter: { kind: [alcohol, liquor-store, liquor] }
+                draw:   { icons: { sprite: liquor-store } }
+            market:
+                filter: { kind: [market, variety_store, boutique, dairy, retail] }
+                draw:   { icons: { sprite: market } }
+            mine:
+                filter: { kind: [mind, quarry, mineshaft, adit] }
+                draw:   { icons: { sprite: mine } }
+            miscellaneous-shop:
+                filter: { kind: [houseware, miscellaneous-shop] }
+                draw:   { icons: { sprite: miscellaneous-shop } }
+            mobile-phone-shop:
+                filter: { kind: [mobile_phone] }
+                draw:   { icons: { sprite: mobile-phone-shop } }
+            motorcycle-shop:
+                filter: { kind: [motorcycle, motorcycle_shop, motorcycle_repair] }
+                draw:   { icons: { sprite: motorcycle-shop } }
+            mountain:
+                filter: { kind: [mountain, peak] }
+                draw:   { icons: { sprite: mountain } }
+            movie-theatre:
+                filter: { kind: [cinema, movie-theatre, movie-theater] }
+                draw:   { icons: { sprite: movie-theatre } }
+            museum:
+                filter: { kind: [museum, observatory] }
+                draw:   { icons: { sprite: museum } }
+            music-store:
+                filter: { kind: [music, music-store, musical_instrument] }
+                draw:   { icons: { sprite: music-store } }
+            newsstand:
+                filter: { kind: [kiosk, newsstand, newsagent] }
+                draw:   { icons: { sprite: newsstand } }
+            nightlife:
+                filter: { kind: [nightclub, nightlife] }
+                draw:   { icons: { sprite: nightlife } }
+            office:
+                filter: { kind: [insurance, office, company] }
+                draw:   { icons: { sprite: office } }
+            office-supplies:
+                filter: { kind: [office_supplies, office-supplies, stationery] }
+                draw:   { icons: { sprite: office-supplies } }
+            optical-shop:
+                filter: { kind: [optician, optical_shop, optical-shop] }
+                draw:   { icons: { sprite: optical-shop } }
+            performing-arts:
+                filter: { kind: [theater, theatre, performing-arts] }
+                draw:   { icons: { sprite: performing-arts } }
+            pet-store:
+                filter: { kind: [pet, pet-store, pet-service, pet_store] }
+                draw:   { icons: { sprite: pet-store } }
+            pharmacy:
+                filter: { kind: [pharmacy, chemist] }
+                draw:   { icons: { sprite: pharmacy } }
+            photography-lab:
+                filter: { kind: [photo_studio, photography_lab, photographer] }
+                draw:   { icons: { sprite: photography-lab } }
+            picnic-spot:
+                filter: { kind: [picnic_site, picnic_spot, picnic-spot] }
+                draw:   { icons: { sprite: picnic-spot } }
+            pool:
+                filter: { kind: [pool, swimming_pool, water_park] }
+                draw:   { icons: { sprite: pool } }
+            pool-hall:
+                filter: { kind: [billiards, pool-hall] }
+                draw:   { icons: { sprite: pool-hall } }
+            post-office:
+                filter: { kind: [post_office, post-office] }
+                draw:   { icons: { sprite: post-office } }
+            power-pylon:
+                filter: { kind: [tower, power-pylon, pylon] }
+                draw:   { icons: { sprite: power-pylon } }
+            real-estate:
+                filter: { kind: [estate_agent, real_estate] }
+                draw:   { icons: { sprite: real-estate } }
+            recycling-facility:
+                filter: { kind: [recycling, recycling-facility] }
+                draw:   { icons: { sprite: recycling-facility } }
+            rental-car:
+                filter: { kind: [rental-car, car_rental, car_sharing] }
+                draw:   { icons: { sprite: rental-car } }
+            rest-area:
+                filter: { kind: [rest_area, rest-area] }
+                draw:   { icons: { sprite: rest-area } }
+            restaurant:
+                filter: { kind: [restaurant, deli] }
+                draw:   { icons: { sprite: restaurant } }
+            ruin:
+                filter: { kind: [ruins, archaeological_site] }
+                draw:   { icons: { sprite: ruin } }
+            salon-barber:
+                filter: { kind: [hairdresser, salon-barber, salon, beauty_salon] }
+                draw:   { icons: { sprite: salon-barber } }
+            school:
+                filter: { kind: [school, kindergarten] }
+                draw:   { icons: { sprite: school } }
+            ship-wreck:
+                filter: { kind: [wreck] }
+                draw:   { icons: { sprite: ship-wreck } }
+            shoe-store:
+                filter: { kind: [shoes, shoe-store, shoe_store] }
+                draw:   { icons: { sprite: shoe-store } }
+            smoke-shop:
+                filter: { kind: [smoke_shop, tobacco] }
+                draw:   { icons: { sprite: smoke-shop } }
+            spa-massage:
+                filter: { kind: [spa, spa-massage, sauna, massage] }
+                draw:   { icons: { sprite: spa-massage } }
+            spiritual-center:
+                filter: { kind: [spiritual_center, spiritual-center, place_of_worship, wayside_chapel] }
+                draw:   { icons: { sprite: spiritual-center } }
+            sporting-goods-shop:
+                filter: { kind: [sporting_goods, sporting-goods-shop, sports, outdoor] }
+                draw:   { icons: { sprite: sporting-goods-shop } }
+            stable:
+                filter: { kind: [stable, horse_riding] }
+                draw:   { icons: { sprite: stable } }
+            storage-facility:
+                filter: { kind: [storage, storage-facility] }
+                draw:   { icons: { sprite: storage-facility } }
+            tailor-shop:
+                filter: { kind: [tailor, tailor-shop] }
+                draw:   { icons: { sprite: tailor-shop } }
+            tattoo-parlor:
+                filter: { kind: [tattoo, tattoo_parlor, tattoo-parlor] }
+                draw:   { icons: { sprite: tattoo-parlor } }
+            theme-park:
+                filter: { kind: [theme_park, theme-park, miniature_golf] }
+                draw:   { icons: { sprite: theme-park } }
+            thrift-vintage-store:
+                filter: { kind: [thrift, thrift-vintage-store, second_hand] }
+                draw:   { icons: { sprite: thrift-vintage-store } }
+            toll-booth:
+                filter: { kind: [toll_booth, checkpoint, border_control] }
+                draw:   { icons: { sprite: toll-booth } }
+            toy-game-store:
+                filter: { kind: [toys, toy-game-store, baby_goods] }
+                draw:   { icons: { sprite: toy-game-store } }
+            traffic-signal:
+                filter: { kind: [traffic_signals] }
+                draw:   { icons: { sprite: traffic-signal } }
+            train-station:
+                filter: { kind: [station, train-staion] }
+                draw:   { icons: { sprite: train-station } }
+            veterinarian:
+                filter: { kind: [pet_care, veterinarian, veterinary] }
+                draw:   { icons: { sprite: veterinarian } }
+            video-game-store:
+                filter: { kind: [video_games] }
+                draw:   { icons: { sprite: video-game-store } }
+            video-store:
+                filter: { kind: [video, video_store] }
+                draw:   { icons: { sprite: video-store } }
+            view-point:
+                filter: { kind: [viewpoint, view_point, view-point, vista] }
+                draw:   { icons: { sprite: view-point } }
+            well:
+                filter: { kind: [well, water_well] }
+                draw:   { icons: { sprite: well } }
+            wine-shop:
+                filter: { kind: [wine, wine-shop] }
+                draw:   { icons: { sprite: wine-shop } }
+            winery:
+                filter: { kind: [winery, wine] }
+                draw:   { icons: { sprite: winery } }
+
+#    water-labels:
+#        data: { source: osm, layer: [water] }
+#        visible: *text_visible_water_labels
+#        filter:
+#            all:
+##                - $zoom: { min: 12 }
+#                - name: true
+#                - not: { kind: [dock] }
+##            any:
+##                # show labels for smaller landuse areas at higher zooms
+##                - { $zoom: { min: 9 },  area: { min: 100000000 } }
+##                - { $zoom: { min: 10 }, area: { min: 100000000 } }
+##                - { $zoom: { min: 11 }, area: { min: 25000000 } }
+##                - { $zoom: { min: 12 }, area: { min: 5000000 } }
+##                - { $zoom: { min: 13 }, area: { min: 2000000 } }
+##                - { $zoom: { min: 14 }, area: { min: 500000 } }
+##                - { $zoom: { min: 15 }, area: { min: 100000 } }
+##                - { $zoom: { min: 15 }, area: { min: 50000 } }
+##                - { $zoom: { min: 16 }, area: { min: 20000 } }
+##                - { $zoom: { min: 18 } }
+#
+#        icons:
+#            size: [[13, 12px], [15, 18px]]
+#            interactive: true
+#            sprite: *townspot_sprite
+#
+#        # add generic text at high zoom
+#        default-label-text:
+#            draw:
+#                text:
+#                    interactive: true
+#                    font:
+#                        fill: blue
+#                        typeface: 500 12px Helvetica
+
+    landuse:
+        data: { source: osm }
+        filter:
+            any:
+                # limit show smaller landuse areas to higher zooms
+                - { $zoom: { min: 9 },  area: { min: 10000000 } }
+                - { $zoom: { min: 10 }, area: { min: 8000000 } }
+                - { $zoom: { min: 11 }, area: { min: 2000000 } }
+                - { $zoom: { min: 12 }, area: { min: 500000 } }
+                - { $zoom: { min: 13 }, area: { min: 100000 } }
+                - { $zoom: { min: 14 }, area: { min: 50000 } }
+                - { $zoom: { min: 15 }, area: { min: 20000 } }
+                - { $zoom: { min: 15 }, area: { min: 2000 } }
+                - { $zoom: { min: 16 } }
+        park:
+            filter:
+                kind: [park,'park or protected land']
+            draw:
+                polygons:
+                    order: 1
+                    color: *green1
+        conservation:
+            filter:
+                kind: conservation
+            draw:
+                polygons:
+                    order: 1
+                    color: *green8
+        cemetery:
+            filter:
+                kind: cemetery
+            draw:
+                polygons:
+                    order: 2
+                    color: *green2
+        garden:
+            filter:
+                kind: garden
+            draw:
+                polygons:
+                    order: 2
+                    color: *green2
+        forest:
+            filter:
+                kind: forest
+            draw:
+                polygons:
+                    order: 1
+                    color: *green7
+        recreation_ground:
+            filter:
+                kind: recreation_ground
+            draw:
+                polygons:
+                    order: 1
+                    color: *mystry1
+        farm:
+            filter:
+                kind: [farm, farmland]
+                $zoom: { min: 10}
+            draw:
+                polygons:
+                    order: 1
+                    color: [ [10,*green4], [11,*green5] ]
+                    visible: *green4_v
+        golf_course:
+            filter:
+                kind: golf_course
+            draw:
+                polygons:
+                    order: 2
+                    color: *green3
+        nature_reserve:
+            filter:
+                kind: nature_reserve
+            draw:
+                polygons:
+                    order: 1
+                    color: *green6
+            wilderness-areas:
+                filter: function() { return feature.name.includes("Wilderness") }
+                draw:
+                    polygons:
+                        color: *green7
+                    outline:
+                        order: 2
+                        style: lines
+                        color: *green6
+                        width: [[9,0px],[10,2px],[12,4px]]
+        stadium:
+            filter:
+                kind: stadium
+            draw:
+                polygons:
+                    order: 1
+                    color: *orange1
+        university:
+            filter:
+                kind: university
+            draw:
+                polygons:
+                    order: 2
+                    color: *brown1
+        school:
+            filter:
+                kind: school
+            draw:
+                polygons:
+                    order: 2
+                    color: *brown2
+        hospital:
+            filter:
+                kind: hospital
+            draw:
+                polygons:
+                    order: 2
+                    color: *red1
+        playground:
+            filter:
+                kind: playground
+            draw:
+                polygons:
+                    order: 2
+                    color: *brown3
+        pedestrian:
+            filter:
+                kind: pedestrian
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey1
+                    visible: *grey1_v
+        power:
+            filter: { kind: [plant, generator, substation] }
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey3
+        retail:
+            filter:
+                kind: retail
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey1
+                    visible: *grey1_v
+#        commercial:
+#            filter:
+#                kind: commercial
+#            draw:
+#                polygons:
+#                    order: 2
+#                    color: [0.149, 0.475, 0.851]
+        parking:
+            filter:
+                kind: parking
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey1
+                    visible: *grey1_v
+        railway:
+            filter:
+                kind: railway
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey3
+        place_of_worship:
+            filter:
+                kind: place_of_worship
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey1
+                    visible: *grey1_v
+        urban:
+            filter: { kind: [urban, rural, residential] }
+            draw:
+                polygons:
+                    order: 1
+                    color: *earth2
+                    visible: *earth2_v
+        zoo:
+            filter:
+                kind: zoo
+            draw:
+                polygons:
+                    order: 2
+                    color: *green2
+        industrial:
+            filter:
+                kind: industrial
+            draw:
+                polygons:
+                    order: 2
+                    color: *grey6
+        airport:
+            filter:
+                kind: aerodrome
+            draw:
+                polygons:
+                    order: 2
+                    color: *purple
+                    visible: *purple_v
+        military:
+            filter:
+                kind: military
+            draw:
+                polygons:
+                    order: 1
+                    color: *purple
+
+        man-made:
+            filter: { kind: [pier,wastewater_plant,works,bridge,tower,breakwater,water_works,groyne,dike,cutline] }
+            draw: { polygons: { order: 2, color: *grey3 } }
+            pier:
+                filter: { kind: [pier,bridge,breakwater,groyne,dike,cutline] }
+                draw: { polygons: { order: 4, color: *earth1 } }
+
+
+    landuse-not-filtered:
+        data: { source: osm, layer: landuse }
+        runway:
+            filter:
+                kind: runway
+            draw:
+                polygons:
+                    order: 10
+                    color: *grey2
+        apron:
+            filter:
+                kind: apron
+                $zoom: { min: 15}
+            draw:
+                polygons:
+                    order: 3
+                    color: *grey1
+                    visible: *grey1_v
+
+    debug:
+        data: { source: osm }
+        draw:
+            flat_lines:
+                width: 2px
+                order: 100
+                color: '#ff0000'
