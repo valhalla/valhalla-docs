@@ -1,6 +1,6 @@
 # Add Valhalla routing to a map		
 
-Valhalla is a free and open-source service that adds routing and navigation to web or mobile applications. Valhalla works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for manuevers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:		
+Valhalla is a free and open-source service that adds routing and navigation to web or mobile applications. Valhalla works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:		
 - a route line between map locations (also known as waypoints)
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
