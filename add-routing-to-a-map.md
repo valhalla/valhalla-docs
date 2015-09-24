@@ -1,6 +1,6 @@
-# Add Valhalla routing to a map		
+# Add Mapzen Turn-by-Turn routing to a map		
 
-Valhalla is a free and open-source service that adds routing and navigation to web or mobile applications. Valhalla works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:		
+Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:		
 - a route line between map locations (also known as waypoints)
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
@@ -9,14 +9,14 @@ Valhalla is a free and open-source service that adds routing and navigation to w
 
 In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Valhalla will calculate the route.
 
-To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You will need a [free API key](https://mapzen.com/developers) to use Valhalla, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection while you are working. The tutorial should take about an hour to complete.
+To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You will need a [free API key](https://mapzen.com/developers) to use Mapzen Turn-by-Turn, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection while you are working. The tutorial should take about an hour to complete.
 
 The map also uses other Mapzen technology, including the [vector tile service](https://mapzen.com/projects/vector-tiles/) and the [Tangram graphics engine](https://mapzen.com/projects/tangram) to draw the features on the map.
 
 ## Sign up for a Valhalla API key
-To use the Valhalla routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-Valhalla is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
+Mapzen Turn-by-Turn, powered by Valhalla, is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
 1. Go to https://mapzen.com/developers.
 2. Sign in with your GitHub account. If you have not done this before, you need to agree to the terms first.
@@ -221,7 +221,7 @@ Tangram uses a scene file in .yaml format to specify the what it should draw and
 
 In the code you will add, the `scene:` item sets the Tangram scene file to use for drawing and `attribution:` is what appears in the bottom corner of the map as the map attribution, overriding the default Leaflet attribution. This source code links to a scene file created by Mapzen, but you can modify the `scene:` parameter to point to a scene hosted at a different URL or a local file.
 
-Note that Tangram and the vector tile service are not required for Valhalla routing. If you prefer to use other data with Valhalla, refer to the [Leaflet documentation](http://leafletjs.com/reference.html) to learn how reference tile layers in a map.
+Note that Tangram and the vector tile service are not required for Mapzen Turn-by-Turn routing. If you prefer to use other data, refer to the [Leaflet documentation](http://leafletjs.com/reference.html) to learn how reference tile layers in a map.
 
 1. Inside the `<script>` tags, immediately after the `var map = L.map('map');` line, add the following code to use Tangram.
   ```js
@@ -288,6 +288,7 @@ In the simplest implementation, your map will not provide the ability to search 
 2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration. You will improve the formatting of the routing in later steps.
 
   ![Map showing route and directions](images/route-map-initial.png)
+	<p class='caption'>This map shows the default route and driving directions from Leaflet Routing Machine, which uses Open Source Routing Machine (OSRM) as the underlying routing engine.</p>
 
 Your `<body>` section should look like this:
 ```html
@@ -319,7 +320,7 @@ Your `<body>` section should look like this:
 
 ## Set Valhalla as the routing engine
 
-By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` to Valhalla and initialize a `formatter:` with functions for units and other conversions.
+By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` to Valhalla and initialize a `formatter:` with functions for units and other conversions.
 
 1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
   ```js
@@ -348,6 +349,7 @@ By default, the Leaflet Routing Machine plug-in uses the [Open Source Routing Ma
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
 
   ![Valhalla map showing route and directions](images/route-map-valhalla.png)
+	<p class='caption'>This map shows the default Valhalla routing engine with simplified narration and driving instructions.</p>
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
 ```html
@@ -400,6 +402,10 @@ The symbols for the basemap are set in the scene file, but the route line is har
 
   ![Valhalla map showing route and directions](images/route-map-valhalla-line-color.png)
 
+3. Click through the points in the directions list to pan and zoom the map to the location of each maneuver, including your destination.
+
+  ![Arrival at your destination](images/route-map-valhalla-destination.png)
+
 The `<body>` section should look something like this, but with your own API key for the `router`:
 ```html
 [...]
@@ -437,6 +443,6 @@ The `<body>` section should look something like this, but with your own API key 
 ```
 
 ## Walkthrough summary and next steps
-In this walkthrough, you learned the basics of making a map with Valhalla routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Valhalla supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
-You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Valhalla.
+You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Mapzen Turn-by-Turn.
