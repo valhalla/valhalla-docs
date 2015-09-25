@@ -193,7 +193,7 @@ To display a Leaflet map on a page, you need a `<div>` element with an ID value,
 
 4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.
 
-![Leaflet canvas map with controls and attribution](images/browser-controls.png)
+    ![Leaflet canvas map with controls and attribution](images/browser-controls.png)
 
 Your index.html should look something like this:
 
@@ -253,7 +253,7 @@ Note that Tangram and the vector tile service are not required for Mapzen Turn-b
 
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified.
 
-![Initial map showing Chicago area](images/browser-initial-map.png)
+    ![Initial map showing Chicago area](images/browser-initial-map.png)
 
 Your `<body>` section should look like this:
 
@@ -307,6 +307,7 @@ In the simplest implementation, your map will not provide the ability to search 
     <p class='caption'>This map shows the default route and driving directions from Leaflet Routing Machine, which uses Open Source Routing Machine (OSRM) as the underlying routing engine.</p>
 
 Your `<body>` section should look like this:
+
 ```html
 [...]
 <body>
@@ -422,7 +423,7 @@ The symbols for the basemap are set in the scene file, but the route line is har
 
 3. Click through the points in the directions list to pan and zoom the map to the location of each maneuver, including your destination.
 
-![Arrival at your destination](images/route-map-valhalla-destination.png)
+    ![Arrival at your destination](images/route-map-valhalla-destination.png)
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
 
