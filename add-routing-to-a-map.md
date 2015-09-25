@@ -1,6 +1,7 @@
-# Add Mapzen Turn-by-Turn routing to a map		
+# Add Mapzen Turn-by-Turn routing to a map
 
-Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:		
+Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:
+
 - a route line between map locations (also known as waypoints)
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
@@ -38,7 +39,7 @@ If you find links for multiple versions of the required libraries, you should do
 5. Unzip the files you downloaded and move the subfolders to your main working folder.
 6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `leaflet-x.x.x` folder to `leaflet`.
 
-	![Folder structure of tutorial files](images/folder-structure.png)
+    ![Folder structure of tutorial files](images/folder-structure.png)
 
 Note that there are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md). You can use a more sophisticated structure for your own work as you progress in your development.
 
@@ -48,17 +49,19 @@ Now that you have downloaded the required dependent files, you are ready to star
 
 1. At the root level of your working folder, create a file called index.html and open it in a text editor.
 
-	![New index.html file in folder](images/new-index-file.png)
+    ![New index.html file in folder](images/new-index-file.png)
+
 2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
-  ```html
-  <!DOCTYPE html>
-  <html>
-  <head>
-  </head>
-  <body>
-  </body>
-  </html>
-  ```
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+    </head>
+    <body>
+    </body>
+    </html>
+    ```
 
 3. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
 4. Save your edits to the index.html file.
@@ -82,7 +85,8 @@ To see your changes on a Tangram map, you need to start a local web server on yo
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
 2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`. If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
 
-  ![Start local server with Python](images/start-python-server.png)
+    ![Start local server with Python](images/start-python-server.png)
+
 3. Open your browser to `http://localhost:8000`. (Localhost is a shortcut hostname that a computer can use to refer to itself, and is not viewable by anyone else.)
 
 If the step was successful, you should see a blank index page with your title (My Routing Map) showing in the browser tab.
@@ -96,34 +100,40 @@ Because you are working with several external cascading style sheet (CSS) and Ja
 You will need to modify the path to reflect your working directory if you are not using the folder names suggested in the earlier section.
 
 1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file.
-  ```html
-  <link rel="stylesheet" href="leaflet/leaflet.css">
-  ```
+
+    ```html
+    <link rel="stylesheet" href="leaflet/leaflet.css">
+    ```
 
 2. In the `<head>` section, add reference to the Valhalla CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Valhalla.
-  ```html
-  <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css">
-  ```
+
+    ```html
+    <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css">
+    ```
 
 3. In the `<body>` section, add the Leaflet JavaScript file.
-  ```html
-  <script src="leaflet/leaflet.js"></script>
-  ```
+
+    ```html
+    <script src="leaflet/leaflet.js"></script>
+    ```
 
 4. Add the Tangram JavaScript file, which is the rendering engine you will be using to draw the map.
-  ```html
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  ```
+
+    ```html
+    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+    ```
 
 5. Add the Leaflet Routing Machine JavaScript file.
-  ```html
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  ```
+
+    ```html
+    <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
+    ```
 
 6. Add the Valhalla JavaScript file.
-  ```html
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
-  ```
+
+    ```html
+    <script src="lrm-valhalla/lrm-valhalla.js"></script>
+    ```
 
 7. Save your edits and refresh the browser.
 
@@ -150,38 +160,40 @@ At this point, your browser page is still empty. As you are working, it’s a go
 
 However, seeing a 404 error often means that the file cannot be found. You should make sure the paths in your HTML match the locations on disk before you continue further.
 
-![Terminal window error when a file cannot be found](images/terminal-404-error.png)		
+![Terminal window error when a file cannot be found](images/terminal-404-error.png)
 
 ## Add a map to the page
 To display a Leaflet map on a page, you need a `<div>` element with an ID value, as well as a size for the box containing the map. Then, you can add the code to set the map and use Tangram to render it. If you want to know more about initializing a Leaflet map, see the [Leaflet getting started documentation](http://leafletjs.com/examples/quick-start.html).
 
 1. At the bottom of the `<head>` section, add a `<style>` tag and the following size attributes to set the size of the map.
 
-  ```html
-  <style>
-    #map {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
-  </style>
-  ```
+    ```html
+    <style>
+      #map {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+    </style>
+    ```
+
 2. At the top of the `<body>` section, add the `<div>`.
 
-  ```html
-  <div id="map"></div>
-  ```
+    ```html
+    <div id="map"></div>
+    ```
 
 3. Immediately after the other `<script>` references, add the following JavaScript within a `<script>` tag to initialize Leaflet. `L.xxxxx` is a convention used with the Leaflet API. To make sure the scripts load in the proper order, this code must be placed after the dependencies.
-  ```html
-  <script>
-    var map = L.map('map');
-  </script>
-  ```
 
-4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.		
+    ```html
+    <script>
+      var map = L.map('map');
+    </script>
+    ```
 
- ![Leaflet canvas map with controls and attribution](images/browser-controls.png)		
+4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.
+
+    ![Leaflet canvas map with controls and attribution](images/browser-controls.png)
 
 Your index.html should look something like this:
 
@@ -224,24 +236,27 @@ In the code you will add, the `scene:` item sets the Tangram scene file to use f
 Note that Tangram and the vector tile service are not required for Mapzen Turn-by-Turn routing. If you prefer to use other data, refer to the [Leaflet documentation](http://leafletjs.com/reference.html) to learn how reference tile layers in a map.
 
 1. Inside the `<script>` tags, immediately after the `var map = L.map('map');` line, add the following code to use Tangram.
-  ```js
-  var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
-    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-  });
-  layer.addTo(map);
-  ```
+
+    ```js
+    var layer = Tangram.leafletLayer({
+      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
+      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    });
+    layer.addTo(map);
+    ```
 
 2. On the next line, immediately after `layer.addTo(map);`, add a line to initialize the map display. This sets the extent of the map and the zoom level. The map is centered on Chicago, Illinois, with a zoom level that allows you to see the streets and features of the city. Zoom levels are similar to map scales or resolutions, where a smaller value shows a larger area in less detail, and a larger zoom level value depicts smaller area in great detail.
-  ```js
-  map.setView([41.8758,-87.6189], 16);
-  ```
+
+    ```js
+    map.setView([41.8758,-87.6189], 16);
+    ```
 
 3. Save your edits and refresh the browser. You should see Leaflet map controls and an updated attribution, and the map should be centered at the location specified.
 
-  ![Initial map showing Chicago area](images/browser-initial-map.png)
+    ![Initial map showing Chicago area](images/browser-initial-map.png)
 
 Your `<body>` section should look like this:
+
 ```html
 [...]
 <body>
@@ -266,31 +281,33 @@ Your `<body>` section should look like this:
 If your map is not loading properly, first check the terminal window for status messages and resolve any 404 errors. You can also copy the example source code at the end of the section in case you mistyped any of the steps. If your project worked until now, ensure that your browser has WebGL support enabled (although it is unusual for it to be turned off) or turn on the developer tools in your browser to see if you can debug further. If you are still having trouble, add an issue to the [valhalla-docs GitHub repository](https://github.com/valhalla/valhalla-docs/issues) so it can be investigated.
 
 ## Add waypoints for routing
+
 So far, you have referenced the necessary files, initialized Leaflet with a map container on the  page, and added Tangram to the map. Now, you are ready to add the routing code to your page using the Leaflet Routing Machine plug-in.
 
 In the simplest implementation, your map will not provide the ability to search for places through geocoding or inputting coordinates otherwise. Therefore, you need to set the waypoints in your code. As you add functionality to your web page, you can set the initial coordinates through user interaction.
 
 1. Add `//` at the beginning of the `map.setView([41.8758,-87.6189], 16)` line to comment out that code. You no longer need to set the extent manually like this because the routing environment will be specifying it.
-  ```js
-  //map.setView([41.8758,-87.6189], 16)
-  ```
+
+    ```js
+    //map.setView([41.8758,-87.6189], 16)
+    ```
 
 2. Inside the `<script>` tag, and after the commented line, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
-  ```js
-  L.Routing.control({
-    waypoints: [
-      L.latLng(41.8758,-87.6189),
-      L.latLng(33.8128,-117.9259)
-    ]
-  }).addTo(map);
-  ```
 
-2. Save your edits and refresh the browser. You should see a map with the route displaying and a panel with narration. You will improve the formatting of the routing in later steps.
+    ```js
+    L.Routing.control({
+      waypoints: [
+        L.latLng(41.8758,-87.6189),
+        L.latLng(33.8128,-117.9259)
+      ]
+    }).addTo(map);
+    ```
 
-  ![Map showing route and directions](images/route-map-initial.png)
-	<p class='caption'>This map shows the default route and driving directions from Leaflet Routing Machine, which uses Open Source Routing Machine (OSRM) as the underlying routing engine.</p>
+    ![Map showing route and directions](images/route-map-initial.png)
+    <p class='caption'>This map shows the default route and driving directions from Leaflet Routing Machine, which uses Open Source Routing Machine (OSRM) as the underlying routing engine.</p>
 
 Your `<body>` section should look like this:
+
 ```html
 [...]
 <body>
@@ -323,35 +340,37 @@ Your `<body>` section should look like this:
 By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` to Valhalla and initialize a `formatter:` with functions for units and other conversions.
 
 1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
-  ```js
-  [...]
-  L.Routing.control({
-    waypoints: [
-      L.latLng(41.8758,-87.6189),
-      L.latLng(33.8128,-117.9259)
-    ],		
-    router: L.Routing.valhalla('your-api-key', 'your-routing-mode'),
-    formatter: new L.Routing.Valhalla.Formatter(),
-    summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
-    routeWhileDragging: false
-  }).addTo(map);
-  [...]
-  ```
+
+    ```js
+    [...]
+    L.Routing.control({
+      waypoints: [
+        L.latLng(41.8758,-87.6189),
+        L.latLng(33.8128,-117.9259)
+      ],
+      router: L.Routing.valhalla('your-api-key', 'your-routing-mode'),
+      formatter: new L.Routing.Valhalla.Formatter(),
+      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      routeWhileDragging: false
+    }).addTo(map);
+    [...]
+    ```
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. You need to replace these with your own API key and the routing mode you want to use in your map.
 3. Paste your own API key in place of `your-api-key` inside the single quotes. It should look something like: `'valhalla-xxxxxx'`. The routing will only load if you use a valid API key.
 4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
 
-  ```js
-  router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
-  ```
+    ```js
+    router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
+    ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
 
-  ![Valhalla map showing route and directions](images/route-map-valhalla.png)
-	<p class='caption'>This map shows the default Valhalla routing engine with simplified narration and driving instructions.</p>
+    ![Valhalla map showing route and directions](images/route-map-valhalla.png)
+    <p class='caption'>This map shows the default Valhalla routing engine with simplified narration and driving instructions.</p>
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
+
 ```html
 [...]
 <body>
@@ -391,22 +410,23 @@ The symbols for the basemap are set in the scene file, but the route line is har
 
 1. After the closing line of the `waypoints:` block and immediately before the `router:` block, insert the following source code:
 
-  ```js
-  lineOptions: {
-    styles: [ {color: 'white',opacity: 0.8, weight: 12},
-            {color: '#2676C6', opacity: 1, weight: 6}
-  ]},
-  ```
+    ```js
+    lineOptions: {
+      styles: [ {color: 'white',opacity: 0.8, weight: 12},
+              {color: '#2676C6', opacity: 1, weight: 6}
+    ]},
+    ```
 
 2. Save your edits and refresh the browser. The line should change to blue and look thicker than before.
 
-  ![Valhalla map showing route and directions](images/route-map-valhalla-line-color.png)
+    ![Valhalla map showing route and directions](images/route-map-valhalla-line-color.png)
 
 3. Click through the points in the directions list to pan and zoom the map to the location of each maneuver, including your destination.
 
-  ![Arrival at your destination](images/route-map-valhalla-destination.png)
+    ![Arrival at your destination](images/route-map-valhalla-destination.png)
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
+
 ```html
 [...]
 <body>
@@ -443,6 +463,7 @@ The `<body>` section should look something like this, but with your own API key 
 ```
 
 ## Walkthrough summary and next steps
+
 In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Mapzen Turn-by-Turn.
