@@ -178,6 +178,7 @@ Each maneuver includes:
 | `gate` | True if a gate is encountered on this maneuver. |
 | `ferry` | True if a ferry is encountered on this maneuver. |
 | `sign` | Contains the interchange guide information at a road junction associated with this maneuver. See below for details. |
+| `roundabout_exit_count` | The spoke to exit roundabout after entering. |
 
 For the maneuver `type`, the following are available:
 
