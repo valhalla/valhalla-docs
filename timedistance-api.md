@@ -15,7 +15,7 @@ The following time and distance limitations that are currently in place:
 
 * `one_to_many` and `many_to_one` requests have a limit of <?> locations.
 * `many_to_many` requests have a limit of <?> locations.
-* max distance between any two locations is <will these be the same as the limits on the route api reference page?>.
+* `max_distance` is the max distance between any two locations is <will these be the same as the limits on the route api reference page?>.
 
 Please also refer to the [Valhalla API Limits](https://mapzen.com/documentation/valhalla/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place.
 
@@ -23,28 +23,28 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 #### Request Actions/Methods
 
-We currently provide one time distance action, '/timedistance?' that can be requested from the Time Distance Service.  This action can compute one of three types of matrices, either "matrix_type":"one_to_many", "matrix_type":"many_to_one" or "matrix_type":"many_to_many".  
+We currently provide one time distance action, 'matrix?' that can be requested from the Time Distance Service.  This action can compute one of three types of matrices, either "matrix_type":"one_to_many", "matrix_type":"many_to_one" or "matrix_type":"many_to_many".  
 
 In the future, we may also provide a second action, '/weight?'.
 
 | Matrix Type | Description |
 | :--------- | :----------- |
 | `one_to_many` | To return a row vector of computed time and distance from the first (origin) location to each additional location provided. This means that the first element in the row vector computed time and distance will be [0,0.00]. |
-| `many_to_one` | To return a row vector of computed time and distance from each location to the last (destination) location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
-| `many_to_many` | To return a square matrix of computed time and distance from each location to every other location.  This means that the main diagonal of the square matrix will be [0,0.00] all the way through.  |
+| `many_to_one` | To return a column vector of computed time and distance from each location to the last (destination) location provided. This means that the last element in the row vector computed time and distance will be [0,0.00]. |
+| `many_to_many`| To return a square matrix of computed time and distance from each location to every other location.  This means that the main diagonal of the square matrix will be [0,0.00] all the way through.  |
 
 
 #### Input for the Time Distance API
 
-An example request takes the form of `timedistance.mapzen.com/timedistance?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations, matrix type, name and options for the costing model, and output options.  <this may change to be the mapzen.com domain depending on outcome of design discussion>
+An example request takes the form of `timedistancematrix.mapzen.com/matrix?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations, matrix type, name and options for the costing model, and output options.  <this may change to be the mapzen.com domain depending on outcome of design discussion>
 
 Here is an example time distance request using pedestrian costing:
 
 From the office, I want to know the times and distances to each restaraunt location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
-    valhalla.mapzen.com/timedistance?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many_to_many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
+    valhalla.mapzen.com/matrix?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many_to_many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
     
-<this may change to its own timedistance domain depending on outcome of design discussion.  If so, would we want to use Matrix instead for domain name?>
+<this may change to its own timedistancematrix domain depending on outcome of design discussion.  If so, would we want to use Matrix instead for domain name?>
 
 Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
