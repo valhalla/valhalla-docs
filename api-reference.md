@@ -13,12 +13,13 @@ To use the Valhalla routing service, you must first obtain a free developer API 
 
 Valhalla is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
-The following distance limitations are currently in place:
+The following limitations are currently in place:
 
-* Pedestrian routes have a limit of 250 kilometers.
-* Bicycle routes have a limit of 500 kilometers.
-* Automobile routes have a limit of 5,000 kilometers.
-* A max of 8 route locations may be provided.
+* Pedestrian routes have a limit of 50 locations and 250 kilometers.
+* Bicycle routes have a limit of 50 locations and 500 kilometers.
+* Automobile routes have a limit of 20 locations and 5,000 kilometers.
+
+The distance limit is the total "as the crow-flies" distance along a path through successive locations. 
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
