@@ -39,7 +39,7 @@ An example request takes the form of `analytics.mapzen.com/one_to_many?json={}&a
 
 Here is an example time distance matrix request using pedestrian costing:
 
-From the office, I want to know the times and distances to each restaraunt location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
+From the office, I want to know the times and distances to each restaurant location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
     analytics.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&api_key=valhalla-xxxxxx
     
