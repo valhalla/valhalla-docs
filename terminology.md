@@ -1,6 +1,6 @@
-##Valhalla repositories and terminology
+#Valhalla repositories and terminology
 
-### Repositories and dependencies
+## Repositories and dependencies
 
 The Valhalla organization is comprised of several repositories each responsible for a different function. The layout of the various projects is as follows:
 
@@ -12,11 +12,9 @@ The Valhalla organization is comprised of several repositories each responsible 
 - [Thor](https://github.com/valhalla/thor) - Library used to generate a path through the graph tile hierarchy. This path can be used as input to `odin`. Depends on `midgard`, `baldr`, `sif`, `loki` and `odin`
 - [Odin](https://github.com/valhalla/odin) - Library used to generate maneuvers and narrative based on a path. This set of directions information can be used as input to `tyr`. Depends on `midgard` and `baldr`
 - [Tyr](https://github.com/valhalla/tyr) - Service used to handle http requests for a route communicating with all of the other valhalla APIs. The service will format output from `odin` and support json (and eventually protocol buffer) output. Depends on `midgard`, `baldr`, `sif`, `mjolnir`, `loki`, `thor` and `odin`
-- [Skadi](https://github.com/valhalla/skadi) - Library used to access digital elevation model data which is useful in computing steepness of edges in the route graph or generating an elevation profile along a computed route.  Depends on `midgard` and `baldr`.
+- [Skadi](https://github.com/valhalla/skadi) - Library used to access digital elevation model data, which is useful in computing steepness of edges in the route graph or generating an elevation profile along a computed route.  Depends on `midgard` and `baldr`.
 
-(definitions are in progress)
-
-###Common Valhalla, Routing and Elevation terms
+##Common Valhalla, routing and elevation terms
 * break location - the start or end point of a route.
 * cost - fixed costs in seconds that are added to both the path cost and the estimated time.
 * costing model - set of costs for particular methods of travel, such as automobile or pedestrian.
