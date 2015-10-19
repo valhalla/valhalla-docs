@@ -1,9 +1,9 @@
 
-# Valhalla Time Distance Service API Reference
+# Valhalla Time Distance Matrix Service API Reference
 
-The time distance service is a free, open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
+The time distance matrix service is a free, open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
 
-The time distance service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
+The time distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 	
 #### API keys and Service Limits
 
@@ -13,9 +13,8 @@ Valhalla is a free, shared routing service. As such, there are limitations on re
 
 The following time and distance limitations that are currently in place:
 
-* `one_to_many` and `many_to_one` requests have a limit of <?> locations.
-* `many_to_many` requests have a limit of <?> locations.
-* `max_distance` is the max distance between any two locations is <will these be the same as the limits on the route api reference page?>.
+* 'max_locations' is currently set to 20 for `one_to_many`, `many_to_one` and 'many_to_many' requests.
+* `max_area` is the cumulative max distance between any two locations and is currently set to 5000000.0 meters.
 
 Please also refer to the [Valhalla API Limits](https://mapzen.com/documentation/valhalla/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place.
 
@@ -23,7 +22,7 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 #### Request Actions/Methods
 
-We currently provide one time distance action, 'matrix?' that can be requested from the Time Distance Service.  This action can compute one of three types of matrices, either "matrix_type":"one_to_many", "matrix_type":"many_to_one" or "matrix_type":"many_to_many".  
+We currently provide three time distance matrix actions, '/one_to_many?', '/many_to_one?' and '/many_to_many?' that can be requested from the Time Distance Matrix Service.  These actions can compute three different types of matrices, either a row matrix for a "one_to_many", a column matrix for a "many_to_one" or a square matrix for a "many_to_many".  
 
 In the future, we may also provide a second action, '/weight?'.
 
@@ -34,17 +33,16 @@ In the future, we may also provide a second action, '/weight?'.
 | `many_to_many`| To return a square matrix of computed time and distance from each location to every other location.  This means that the main diagonal of the square matrix will be [0,0.00] all the way through.  |
 
 
-#### Input for the Time Distance API
+#### Input for the Time Distance Matrix API
 
-An example request takes the form of `timedistancematrix.mapzen.com/matrix?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations, matrix type, name and options for the costing model, and output options.  <this may change to be the mapzen.com domain depending on outcome of design discussion>
+An example request takes the form of `analytics.mapzen.com/one_to_many?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations and options for the costing model.
 
-Here is an example time distance request using pedestrian costing:
+Here is an example time distance matrix request using pedestrian costing:
 
 From the office, I want to know the times and distances to each restaraunt location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
-    valhalla.mapzen.com/matrix?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"matrix_type":"many_to_many","costing":"pedestrian","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx
+    analytics.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&api_key=valhalla-xxxxxx
     
-<this may change to its own timedistancematrix domain depending on outcome of design discussion.  If so, would we want to use Matrix instead for domain name?>
 
 Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -69,11 +67,12 @@ The matrix results are returned with.
 
 | Item | Description |
 | :---- | :----------- |
-| `matrix_type` | The specified type of matrix that was requested. Values may be either `one_to_many`, `many_to_one` or `many_to_many` |
+| 'input_locations' | The specified array of lat/lngs from the input request.
 | `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
 | `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
 | `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
-| `location` | The specified lat/lon coordinates are returned from the input request. |
+| 'from_index' | The origin index into the input_locations array. |
+| 'to_index' | The destination index into the input locations array. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
 
