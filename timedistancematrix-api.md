@@ -35,13 +35,13 @@ In the future, we may also provide a second action, '/weight?'.
 
 #### Input for the Time Distance Matrix API
 
-An example request takes the form of `analytics.mapzen.com/one_to_many?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations and options for the costing model.
+An example request takes the form of `matrix.mapzen.com/one_to_many?json={}&api_key=`, where the JSON inputs inside the ``{}`` include an array of at least 2 locations and options for the costing model.
 
 Here is an example time distance matrix request using pedestrian costing:
 
 From the office, I want to know the times and distances to each restaurant location for dinner, as well as the times and distances from each restaraunt to the train station for my journey home.  This will help me determine where I want to eat.
 
-    analytics.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&api_key=valhalla-xxxxxx
+    matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&api_key=valhalla-xxxxxx
     
 
 Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
@@ -67,14 +67,15 @@ The matrix results are returned with.
 
 | Item | Description |
 | :---- | :----------- |
-| 'input_locations' | The specified array of lat/lngs from the input request.
 | `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
 | `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
 | `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
-| 'from_index' | The origin index into the input_locations array. |
-| 'to_index' | The destination index into the input locations array. |
-| `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
+| `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
+| 'to_index' | The destination index into the locations array. |
+| 'from_index' | The origin index into the locations array. |
+| 'locations' | The specified array of lat/lngs from the input request.
+| 'units' | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. | 
 
 #### Return Codes and Conditions
 
