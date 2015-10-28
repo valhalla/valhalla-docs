@@ -14,7 +14,7 @@ Valhalla is a free, shared routing service. As such, there are limitations on re
 The following time and distance limitations that are currently in place:
 
 * 'max_locations' is currently set to 20 for `one_to_many`, `many_to_one` and 'many_to_many' requests.
-* `max_area` is the cumulative max distance between any two locations and is currently set to 5000000.0 meters.
+* `max_distance` is the cumulative max distance between any two locations and is currently set to 200000.0 meters/200.0 km for all matrix types.
 
 Please also refer to the [Valhalla API Limits](https://mapzen.com/documentation/valhalla/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place.
 
