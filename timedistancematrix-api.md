@@ -72,10 +72,10 @@ The matrix results are returned with.
 | `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
-| 'to_index' | The destination index into the locations array. |
-| 'from_index' | The origin index into the locations array. |
-| 'locations' | The specified array of lat/lngs from the input request.
-| 'units' | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. | 
+| `to_index` | The destination index into the locations array. |
+| `from_index` | The origin index into the locations array. |
+| `locations` | The specified array of lat/lngs from the input request.
+| `units` | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. |
 
 #### Return Codes and Conditions
 
