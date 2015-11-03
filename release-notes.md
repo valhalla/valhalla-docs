@@ -8,6 +8,10 @@
 - **Update to roundabout instructions** - Call out roundabouts for edges marked as links (ramps, turn channels).
 - **Update bicycle costing** - Fix the road factor (for applying weights based on road classification) and lower turn cost values.
 
+## Data Producer Release Date: 2015-11-2
+
+- **Updated logic to not create shortcut edges on roundabouts** - This fixes some roundabout exit counts.
+
 ## Release Date: 2015-10-20
 
 - **Bug Fix for Pedestrian and Bicycle Routes** - Fixed a bug with setting the destination in the bi-directional Astar algorithm. Locations that snapped to a dead-end node would have failed the route and caused a timeout while searching for a valid path. Also fixed the elapsed time computation on the reverse path of bi-directional algorithm.
