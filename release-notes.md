@@ -1,6 +1,13 @@
 
 # Release Notes
 
+## Release Date: 2015-11-3
+
+- **Enhance bi-directional A* logic** - Updates to bidirectional A* algorithm to fix the route completion logic to handle cases where a long "connection" edge could lead to a sub-optimal path. Add hierarchy and shortcut logic so we can test and use bidirectional A* for driving routes. Fix the destination logic to properly handle oneways as the destination edge. Also fix U-turn detection for reverse search when hierarchy transitions occur.
+- **Change "Go" to "Head" for some instructions** - Start, exit ferry.
+- **Update to roundabout instructions** - Call out roundabouts for edges marked as links (ramps, turn channels).
+- **Update bicycle costing** - Fix the road factor (for applying weights based on road classification) and lower turn cost values.
+
 ## Release Date: 2015-10-20
 
 - **Bug Fix for Pedestrian and Bicycle Routes** - Fixed a bug with setting the destination in the bi-directional Astar algorithm. Locations that snapped to a dead-end node would have failed the route and caused a timeout while searching for a valid path. Also fixed the elapsed time computation on the reverse path of bi-directional algorithm.
