@@ -4,6 +4,7 @@
 ## Release Date: 2015-11-13
 
 - **Improved narrative for unnamed walkway, cycleway, and mountain bike trail** - A generic description will be used for the street name when a walkway, cycleway, or mountain bike trail maneuver is unnamed. For example, a turn right onto a unnamed walkway maneuver will now be: "Turn right onto walkway."
+- **Fix costing bug** - Fix a bug introduced in EdgeLabel refactor (impacted time distance matrix only).
 
 ## Release Date: 2015-11-3
 
