@@ -1,20 +1,21 @@
 
 # Valhalla Time Distance Matrix Service API Reference
 
-The time distance matrix service is a free, open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
+The time distance matrix service is an open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
 
 The time distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues). You can also send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 	
 #### API keys and Service Limits
 
-To use the Valhalla routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the Valhalla routing service, you must first obtain a developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-Valhalla is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
+Valhalla is a shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
 The following time and distance limitations that are currently in place:
 
-* 'max_locations' is currently set to 50 for `one_to_many`, `many_to_one` and 'many_to_many' requests.
-* `max_distance` is the maximum "crow-flies" distance between two locations and is currently set to 200000.0 meters (200.0 km) for all matrix types. For `one_to_many` the distance between the first location and any of the others cannot exceed the maximum. For `many_to_one` the distance between the last location and any of the others cannot exceed the maximum. Finally, for `many_to_many` the distance between any pair of locations cannot exceed the maximum.
+* `max_locations` is currently set to 50 for `one_to_many`, `many_to_one` and `many_to_many` requests.
+* `max_distance` is the maximum "crow-flies" distance between two locations and is currently set to 200,000 meters (200 km) for all matrix types. For `one_to_many` the distance between the first location and any of the others cannot exceed the maximum. For `many_to_one` the distance between the last location and any of the others cannot exceed the maximum. Finally, for `many_to_many` the distance between any pair of locations cannot exceed the maximum.
+* rate limits are currently 2 queries per second and 5000 queries per day.
 
 Please also refer to the [Valhalla API Limits](https://mapzen.com/documentation/valhalla/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place.
 
@@ -22,7 +23,7 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 #### Request Actions/Methods
 
-We currently provide three time distance matrix actions, '/one_to_many?', '/many_to_one?' and '/many_to_many?' that can be requested from the Time Distance Matrix Service.  These actions can compute three different types of matrices, either a row matrix for a "one_to_many", a column matrix for a "many_to_one" or a square matrix for a "many_to_many".  
+We currently provide three time distance matrix actions, `/one_to_many?`, `/many_to_one?` and `/many_to_many?` that can be requested from the Time Distance Matrix Service.  These actions can compute three different types of matrices, either a row matrix for a `one_to_many`, a column matrix for a `many_to_one` or a square matrix for a `many_to_many`.  
 
 In the future, we may also provide a second action, '/weight?'.
 
@@ -80,3 +81,7 @@ The matrix results are returned with.
 #### Return Codes and Conditions
 
 Please refer to the [Valhalla API HTTP Return Codes](https://mapzen.com/documentation/valhalla/api-reference/#return-codes-and-conditions).
+
+#### Test Utility
+
+Please examine our [online utility](http://valhalla.github.io/demos/matrix/) and [sample code](https://github.com/valhalla/demos/tree/gh-pages/matrix) that demonstrates integration of the Time Distance Matrix into a map and a table.
