@@ -1,1 +1,1 @@
-Time-Distance Matrix documentation
+The time distance matrix service is an open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. This page documents the inputs and outputs to the service.
