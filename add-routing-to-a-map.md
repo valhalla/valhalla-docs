@@ -41,8 +41,6 @@ If you find links for multiple versions of the required libraries, you should do
 
     ![Folder structure of tutorial files](images/folder-structure.png)
 
-Note that there are [guidelines for organizing code for Leaflet plug-ins](https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md). You can use a more sophisticated structure for your own work as you progress in your development.
-
 ## Create an index page
 
 Now that you have downloaded the required dependent files, you are ready to start building your application. If you are using the [Node.js](https://nodejs.org/) framework or are adding routing to an existing web application, you may want to use a different file organization. This example uses the simplest structure, a single index.html file.
