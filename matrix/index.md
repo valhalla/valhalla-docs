@@ -1,11 +1,7 @@
-The time-distance matrix service is an open-source web API (and c++ library) that provides a quick computation of time and distance between a set of locations. Time-distance matrix computations can be performed for any costing method or travel mode available (auto, bicycle or pedestrian).
+The Time-Distance Matrix service provides a quick computation of time and distance between a set of locations.
 
-To use the matrix, you must first obtain a developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the service, you first need to obtain a developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys. There are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
-An example request takes the form of 
+You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?` and `/many_to_many?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one` or a square matrix for a `many_to_many`.
 
-`matrix.mapzen.com/one_to_many?json={}&api_key=`
-
-where the JSON inputs inside the {} include an array of at least 2 locations and options for the costing model. A location must include a latitude and longitude in decimal degrees. External search services such as Mapzen Search can be used to find places and geocode addresses, whose coordinates can be used as input to the Time Distance service.
-
-There are currently three time-distance matrix actions, `/one_to_many?`, which returns a row matrix; `/many_to_one?`, which returns a column matrix; and `/many_to_many?`, which returns a square matrix. The service can return distance in either kilometers or miles.
+Mapzen Time-Distance Matrix is available for both commercial and non-commercial purposes. The [source code](https://github.com/valhalla) is open to view and modify, and contributions are welcomed.

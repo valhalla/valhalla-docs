@@ -24,7 +24,7 @@ If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.co
 
 You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?` and `/many_to_many?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one` or a square matrix for a `many_to_many`.  
 
-An action for '/weight?' is being considered for the future.
+An action for `/weight?` is being considered for the future.
 
 | Matrix type | Description |
 | :--------- | :----------- |
