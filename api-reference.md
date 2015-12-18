@@ -257,16 +257,28 @@ A maneuver `transit_route` includes:
 | Maneuver Transit Route Item | Description |
 | :--------- | :---------- |
 | `onestop_id` | Global transit route identifier from Transitland. |
-| `short_name` | A short name describing the transit route. For example "N". |
-| `long_name` | A long name describing the transit route. For example "Broadway Express". |
-| `headsign` | TBD |
-| `color` | TBD |
-| `text_color` | TBD |
-| `description` | TBD |
-| `operator_onestop_id` | TBD |
-| `operator_name` | TBD |
-| `operator_url` | TBD |
-| `transit_stops` | TBD |
+| `short_name` | Short name describing the transit route. For example "N". |
+| `long_name` | Long name describing the transit route. For example "Broadway Express". |
+| `headsign` | The sign on a public transport vehicle that identifies the route destination to passengers. For example "ASTORIA - DITMARS BLVD". |
+| `color` | The numeric color value associated with a transit route. The value for yellow would be "16567306". |
+| `text_color` | The numeric text color value associated with a transit route. The value for black would be "0". |
+| `description` | The description of the the transit route. For example "Trains operate from Ditmars Boulevard, Queens, to Stillwell Avenue, Brooklyn, at all times. N trains in Manhattan operate along Broadway and across the Manhattan Bridge to and from Brooklyn. Trains in Brooklyn operate along 4th Avenue, then through Borough Park to Gravesend. Trains typically operate local in Queens, and either express or local in Manhattan and Brooklyn, depending on the time. Late night trains operate via Whitehall Street, Manhattan. Late night service is local". |
+| `operator_onestop_id` | Global operator/agency identifier from Transitland. |
+| `operator_name` | Operator/agency name. For example "MTA New York City Transit". |
+| `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
+| `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
+
+A `transit_stop` includes:
+
+| Transit Stop Item | Description |
+| :--------- | :---------- |
+| `type` | TBD |
+| `onestop_id` | TBD |
+| `name` | TBD |
+| `arrival_date_time` | TBD |
+| `departure_date_time` | TBD |
+| `is_parent_stop` | TBD |
+| `assumed_schedule` | TBD |
 
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
