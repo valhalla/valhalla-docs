@@ -272,13 +272,13 @@ A `transit_stop` includes:
 
 | Transit Stop Item | Description |
 | :--------- | :---------- |
-| `type` | TBD |
-| `onestop_id` | TBD |
-| `name` | TBD |
-| `arrival_date_time` | TBD |
-| `departure_date_time` | TBD |
-| `is_parent_stop` | TBD |
-| `assumed_schedule` | TBD |
+| `type` | The type of stop (simple stop=0; station=1) |
+| `onestop_id` | Global transit stop identifier from Transitland. |
+| `name` | Name of the stop/station. For example "14 St - Union Sq". |
+| `arrival_date_time` | Arrival date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
+| `departure_date_time` | Departure date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
+| `is_parent_stop` | True if this stop is a marked as a parent stop. |
+| `assumed_schedule` | True if the times are based on an assumed schedule because the actual schedule is not known. |
 
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
