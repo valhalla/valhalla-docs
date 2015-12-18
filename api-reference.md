@@ -214,6 +214,13 @@ kRoundaboutEnter = 26;
 kRoundaboutExit = 27;
 kFerryEnter = 28;
 kFerryExit = 29;
+kTransit = 30;
+kTransitTransfer = 31;
+kTransitRemainOn = 32;
+kTransitConnectionStart = 33;
+kTransitConnectionTransfer = 34;
+kTransitConnectionDestination = 35;
+kPostTransitConnectionDestination = 36;
 ```
 
 The maneuver `sign` may contain four lists of interchange sign elements as follows:
