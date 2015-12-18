@@ -252,6 +252,22 @@ Each maneuver sign element includes:
 | `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
 
+A maneuver `transit_route` includes:
+
+| Maneuver Transit Route Item | Description |
+| :--------- | :---------- |
+| `onestop_id` | Global transit route identifier from Transitland. |
+| `short_name` | A short name describing the transit route. For example "N". |
+| `long_name` | A long name describing the transit route. For example "Broadway Express". |
+| `headsign` | TBD |
+| `color` | TBD |
+| `text_color` | TBD |
+| `description` | TBD |
+| `operator_onestop_id` | TBD |
+| `operator_name` | TBD |
+| `operator_url` | TBD |
+| `transit_stops` | TBD |
+
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
