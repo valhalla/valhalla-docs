@@ -190,6 +190,11 @@ Each maneuver includes:
 | `ferry` | True if a ferry is encountered on this maneuver. |
 | `sign` | Contains the interchange guide information at a road junction associated with this maneuver. See below for details. |
 | `roundabout_exit_count` | The spoke to exit roundabout after entering. |
+| `depart_instruction` | Written depart time instruction. Typically used with a transit maneuver, such as "Depart: 8:04 AM from 8 St - NYU". |
+| `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
+| `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
+| `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
+| `transit_route` | Contains the attributes that descibe a specific transit route. See below for details. |
 
 For the maneuver `type`, the following are available:
 
