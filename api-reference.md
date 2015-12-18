@@ -125,6 +125,16 @@ These options are available for pedestrian costing methods.
 | `driveway_factor` | A factor that modifies (mulitplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
 | `step_penalty` | A penalty in seconds added to each transition onto a path with [steps or stairs](http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps). Higher values apply larger cost penalties to avoid paths that contain flights of steps. |
 
+##### Transit costing options
+
+These options are available for transit costing methods.
+
+| Transit options | Description |
+| :-------------------------- | :----------- |
+| `use_bus` | User's propensity to use buses. Range of values from 0 (avoid buses) to 1 (totally comfortable riding on buses). Based on the `use_bus` factor, bus edges are penalized or favored when finding the best path.|
+| `use_rail` | User's propensity to use rail. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).  Based on the `use_rail` factor, rail edges are penalized or favored when finding the best path.|
+| `use_transfers` |User's propensity to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
+
 #### Other request options
 
 | Options | Description |
