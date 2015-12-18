@@ -20,7 +20,7 @@ You can also refer to the [Mapzen Turn-by-Turn documentation](https://mapzen.com
 
 If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.com). You can also set up your own instance of Valhalla, which has access to functions similar to Mapzen's services.
 
-## Request Actions/Methods
+## Matrix service actions
 
 You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?` and `/many_to_many?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one` or a square matrix for a `many_to_many`.  
 
