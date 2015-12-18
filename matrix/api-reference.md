@@ -32,7 +32,7 @@ An action for '/weight?' is being considered for the future.
 | `many_to_one` | Returns a column vector of computed time and distance from each location to the last (destination) location provided. The last element in the row vector computed time and distance is [0,0.00]. |
 | `many_to_many`| Returns a square matrix of computed time and distance from each location to every other location. The main diagonal of the square matrix is [0,0.00] all the way through.  |
 
-## Inputs for the Time-Distance Matrix service
+## Inputs of the matrix service
 
 An example request takes the form of `matrix.mapzen.com/one_to_many?json={}&api_key=`, where the `one_to_many?` represents the type of matrix and the JSON inputs inside the ``{}`` include an array of at least two locations and options for the route costing model.
 
@@ -55,17 +55,17 @@ Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentat
 
 ### Costing parameters
 
-Refer to the [Turn-by-Turn costing options documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [Costing Options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) for more on the available costing models and options.
+The Time-Distance Matrix service uses the costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
 
-#### Output
+## Outputs of the matrix service
 
-The matrix results are returned with.
+These are the results of a request to the Time-Distance Matrix serice.
 
 | Item | Description |
 | :---- | :----------- |
-| `one_to_many` | This will return a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
-| `many_to_one` | This will return a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
-| `many_to_many` | This will return a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
+| `one_to_many` | Returns a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
+| `many_to_one` | Returns a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
+| `many_to_many` | Returns a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time-distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time-distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
 | `to_index` | The destination index into the locations array. |
@@ -73,10 +73,8 @@ The matrix results are returned with.
 | `locations` | The specified array of lat/lngs from the input request.
 | `units` | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. |
 
-#### Return Codes and Conditions
+See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
 
-Please refer to the [Valhalla API HTTP Return Codes](https://mapzen.com/documentation/valhalla/api-reference/#return-codes-and-conditions).
+## Sample matrix demonstration
 
-#### Test Utility
-
-Please examine our [online utility](http://valhalla.github.io/demos/matrix/) and [sample code](https://github.com/valhalla/demos/tree/gh-pages/matrix) that demonstrates integration of the Time-Distance Matrix into a map and a table.
+If you want to see the results of the Time-Distance Matrix service, try this [sample demonstration utility](http://valhalla.github.io/demos/matrix/) and [code](https://github.com/valhalla/demos/tree/gh-pages/matrix) that shows integration of the Time-Distance Matrix results into a map and a table.
