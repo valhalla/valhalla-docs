@@ -60,6 +60,7 @@ Optionally, you can include the following location information without impacting
 * `phone` = Telephone number.
 * `url` = URL for the place or location.
 * `side_of_street` = (response only) The side of street of a `break` `location` that is determined based on the actual route when the `location` is offset from the street. The possible values are `left` and `right`.
+* `date_time` = (response only) Expected date/time for the user to be at the location using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:00".
 
 Future Valhalla development work includes adding location options and information related to time at each location. This will allow routes to specify a start time or an arrive by time at each location. There is also ongoing work to improve support for `through` locations.
 
@@ -74,6 +75,7 @@ Valhalla uses dynamic, run-time costing to generate the route path. The route re
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while and steps or stairs and alleys are slightly avoided. |
+| `multimodal` | TBD |
 
 #### Costing options
 
@@ -135,12 +137,18 @@ These options are available for transit costing methods.
 | `use_rail` | User's propensity to use rail. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).  Based on the `use_rail` factor, rail edges are penalized or favored when finding the best path.|
 | `use_transfers` |User's propensity to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
 
-#### Other request options
+#### Directions options
 
 | Options | Description |
 | :------------------ | :----------- |
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified, United States-based English (en-US) is used. Currently supported language tags: en-US. |
+
+#### Other request options
+
+| Options | Description |
+| :------------------ | :----------- |
+| `date_time` | type, value TBD |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
 
 ### Outputs of a Valhalla route
