@@ -59,7 +59,7 @@ The Time-Distance Matrix service uses the costing models available in the Mapzen
 
 ## Outputs of the matrix service
 
-These are the results of a request to the Time-Distance Matrix serice.
+These are the results of a request to the Time-Distance Matrix service.
 
 | Item | Description |
 | :---- | :----------- |
