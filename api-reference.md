@@ -75,7 +75,8 @@ Valhalla uses dynamic, run-time costing to generate the route path. The route re
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while and steps or stairs and alleys are slightly avoided. |
-| `multimodal` | TBD |
+| `transit` | Standard costing for public transportation - such as rail or bus. |
+| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above. |
 
 #### Costing options
 
@@ -148,7 +149,7 @@ These options are available for transit costing methods.
 
 | Options | Description |
 | :------------------ | :----------- |
-| `date_time` | type, value TBD |
+| `date_time` | <ul><li>type - TBD</li><li>value - TBD</li></ul> |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
 
 ### Outputs of a Valhalla route
