@@ -149,7 +149,7 @@ These options are available for transit costing methods.
 
 | Options | Description |
 | :------------------ | :----------- |
-| `date_time` | <ul><li>type<ul><li>0 - Current</li><li>1 - depart time</li><li>2 - arrive time</li></li><li>value - the time of the specified depart or arrive type in ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06"</li></ul> |
+| `date_time` | <ul><li>type<ul><li>0 - Current depart time</li><li>1 - Specified depart time</li><li>2 - Specified arrive time</li></ul></li><li>value - the time of the specified depart or arrive type in ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06"</li></ul> |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
 
 ### Outputs of a Valhalla route
