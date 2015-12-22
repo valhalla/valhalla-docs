@@ -76,7 +76,7 @@ Valhalla uses dynamic, run-time costing to generate the route path. The route re
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while and steps or stairs and alleys are slightly avoided. |
 | `transit` | Standard costing for public transportation - such as rail or bus. |
-| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above. |
+| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above. Here is an example multimodal request: `http://valhalla.dev.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"},"date_time":{"type":1,"value":"2015-12-29T08:00"}}&api_key=valhalla-xxxxxxx` Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 
 #### Costing options
 
