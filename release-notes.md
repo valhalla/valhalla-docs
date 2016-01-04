@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## Release Date: 2016-01-04
+
+- **Fixed Wrong Costing Options Applied** - Fixed a bug in which a previous requests costing options would be used as defaults for all subsequent requests.
+
 ## Release Date: 2015-11-23
 
 - **Fixed Open App for OSRM functionality** - Added OSRM functionality back to Loki to support Open App.
