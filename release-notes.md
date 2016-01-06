@@ -5,6 +5,15 @@
 
 - **Fixed Wrong Costing Options Applied** - Fixed a bug in which a previous requests costing options would be used as defaults for all subsequent requests.
 
+## Release Date: 2015-12-18
+
+- **Fix for bus access** - Data importer configuration (lua) updates to fix a bug where bus lanes were turning off access for other modes.
+
+## Release Date: 2015-12-17
+
+- **Graph Tile Data Structure update** - Updated structures within graph tiles to support transit efforts and truck routing. Removed TransitTrip, changed TransitRoute and TransitStop to indexes (rather than binary search). Added access restrictions (like height and weight restrictions) and the mode which they impact to reduce need to look-up.
+- **Data producer updates** - Updated graph tile structures and import processes.
+
 ## Release Date: 2015-11-23
 
 - **Fixed Open App for OSRM functionality** - Added OSRM functionality back to Loki to support Open App.
