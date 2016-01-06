@@ -93,6 +93,8 @@ These options are available for `auto`, `auto_shorter`, and `bus` costing method
 | `gate_cost` | A cost applied when a [gate](http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dgate) is encountered. This cost is added to the estimated time / elapsed time. The default gate cost is 30 seconds. |
 | `toll_booth_cost` | A cost applied when a [toll booth](http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dtoll_booth) is encountered. This cost is added to the estimated and elapsed times. The default cost is 15 seconds. |
 | `toll_booth_penalty` | A penalty applied to the cost when a [toll booth](http://wiki.openstreetmap.org/wiki/Tag:barrier%3Dtoll_booth) is encountered. This penalty can be used to create paths that avoid toll roads. The default toll booth penalty is 0. |
+| `ferry_cost` | A cost applied when entering a ferry. This cost is added to the estimated and elapsed times. The default cost is 300 seconds (5 minutes). |
+| `use_ferry` | This value indicates the willingness to take ferries. This is range of values between 0 and 1. Values near 0 attempt to avoid ferries and values near 1 will favor ferries. The default value is 0.5. Note that sometimes ferries are required to complete a route so values of 0 are not guaranteed to avoid ferries entirely. |
 | `country_crossing_cost` | A cost applied when encountering an international border. This cost is added to the estimated and elapsed times. The default cost is 600 seconds. |
 | `country_crossing_penalty` | A penalty applied for a country crossing. This penalty can be used to create paths that avoid spanning country boundaries. The default penalty is 0. |
 
@@ -104,7 +106,9 @@ The default bicycle costing is tuned toward road bicycles with a slight preferen
 *	Bicyclists vary in their tolerance for riding on roads. Most novice bicyclists, and even other bicyclists, prefer cycleways and dedicated cycling paths and would rather avoid all but the quietest neighborhood roads. Other cyclists may be experienced riding on roads and prefer to take roadways because they often provide the fastest way to get between two places. The bicycle costing model accounts for this with a `use_roads` factor to indicate a cyclist's tolerance for riding on roads.
 *	Bicyclists vary in their fitness level and experience level, and many want to avoid hilly roads, and especially roads with very steep uphill or even downhill sections. Even if the fastest path is over a mountain, many cyclists prefer a flatter path that avoids the climb and descent up and over the mountain.
 
-These options are available for bicycle costing methods.
+The following options described above for autos also apply to bicycle costing methods: `maneuver_penalty`, `gate_cost`, `gate_penalty`, `country_crossing_cost`, and `country_costing_penalty`.
+
+These additional options are available for bicycle costing methods.
 
 | Bicycle options | Description |
 | :-------------------------- | :----------- |
