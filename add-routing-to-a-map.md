@@ -1,6 +1,6 @@
 # Add Mapzen Turn-by-Turn routing to a map
 
-Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring the Valhalla routing engine. The map you create will provide:
+Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring Mapzen Turn-by-Turn. The map you create will provide:
 
 - a route line between map locations (also known as waypoints)
 - a text narrative of maneuvers to perform on the route
@@ -14,28 +14,28 @@ To complete the tutorial, you should have some familiarity with HTML and JavaScr
 
 The map also uses other Mapzen technology, including the [vector tile service](https://mapzen.com/projects/vector-tiles/) and the [Tangram graphics engine](https://mapzen.com/projects/tangram) to draw the features on the map.
 
-## Sign up for a Valhalla API key
-To use the routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+## Sign up for a Mapzen Turn-by-Turn API key
+To use the routing service, you must first obtain a developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-Mapzen Turn-by-Turn, powered by Valhalla, is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
+Mapzen Turn-by-Turn is a shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
 1. Go to https://mapzen.com/developers.
 2. Sign in with your GitHub account. If you have not done this before, you need to agree to the terms first.
-3. Create a new key for Valhalla, and optionally, give it a project name so you can remember the purpose of the key.
+3. Create a new key, and optionally, give it a project name so you can remember the purpose of the key.
 4. Keep the web page open so you can copy the key into the source code later.
 
 ## Download and install the dependencies
 
-When you request a route from Valhalla, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display Valhalla routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Valhalla plug-ins for routing.
+When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
 
-To set up your development environment for this walkthrough, you need to download Leaflet and the Leaflet Routing Machine and Valhalla plug-ins. There are several ways you can obtain these files, including through a package manager, such as [npm](https://www.npmjs.com/). If you want to use other methods, see the documentation for those products.
+To set up your development environment for this walkthrough, you need to download Leaflet and the Leaflet Routing Machine and Mapzen Turn-by-Turn plug-ins. There are several ways you can obtain these files, including through a package manager, such as [npm](https://www.npmjs.com/). If you want to use other methods, see the documentation for those products.
 
 If you find links for multiple versions of the required libraries, you should download the latest stable release for these files.
 
 1. Create a new folder on your machine named `routing-tutorial`. You will use this folder as your working directory where you can store the downloaded files.
 2. Download Leaflet from http://leafletjs.com/download.html.
-3. Download Leaflet Routing Machine from http://www.liedman.net/leaflet-routing-machine/download/.
-4. Download LRM-Valhalla from http://mapzen.com/resources/lrm-valhalla.zip.
+3. Download Leaflet Routing Machine from https://github.com/perliedman/leaflet-routing-machine/releases.
+4. Download LRM-Mapzen from http://mapzen.com/resources/lrm-mapzen-0.1.2.zip.
 5. Unzip the files you downloaded and move the subfolders to your main working folder.
 6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `leaflet-x.x.x` folder to `leaflet`.
 
