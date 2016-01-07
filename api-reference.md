@@ -129,12 +129,18 @@ These options are available for pedestrian costing methods.
 | `driveway_factor` | A factor that modifies (mulitplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
 | `step_penalty` | A penalty in seconds added to each transition onto a path with [steps or stairs](http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps). Higher values apply larger cost penalties to avoid paths that contain flights of steps. |
 
-#### Other request options
+#### Directions options
 
 | Options | Description |
 | :------------------ | :----------- |
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified, United States-based English (en-US) is used. Currently supported language tags: en-US. |
+| `narrative` |  Flag to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. |
+
+#### Other request options
+
+| Options | Description |
+| :------------------ | :----------- |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
 
 ### Outputs of a Valhalla route
