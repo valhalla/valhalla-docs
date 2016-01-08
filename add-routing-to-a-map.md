@@ -37,7 +37,7 @@ If you find links for multiple versions of the required libraries, you should do
 3. Download Leaflet Routing Machine from https://github.com/perliedman/leaflet-routing-machine/releases.
 4. Download LRM-Mapzen from http://mapzen.com/resources/lrm-mapzen-0.1.2.zip.
 5. Unzip the files you downloaded and move the subfolders to your main working folder.
-6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `leaflet-x.x.x` folder to `leaflet`.
+6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `lrm-mapzen-0.1.2` folder to `lrm-mapzen`.
 
     ![Folder structure of tutorial files](images/folder-structure.png)
 
@@ -103,10 +103,10 @@ You will need to modify the path to reflect your working directory if you are no
     <link rel="stylesheet" href="leaflet/leaflet.css">
     ```
 
-2. In the `<head>` section, add reference to the Valhalla CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Valhalla.
+2. In the `<head>` section, add reference to the Valhalla CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn
 
     ```html
-    <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css">
+    <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
     ```
 
 3. In the `<body>` section, add the Leaflet JavaScript file.
@@ -124,13 +124,13 @@ You will need to modify the path to reflect your working directory if you are no
 5. Add the Leaflet Routing Machine JavaScript file.
 
     ```html
-    <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
+    <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     ```
 
 6. Add the Valhalla JavaScript file.
 
     ```html
-    <script src="lrm-valhalla/lrm-valhalla.js"></script>
+    <script src="lrm-mapzen/lrm-mapzen.js"></script>
     ```
 
 7. Save your edits and refresh the browser.
@@ -140,16 +140,16 @@ After adding these, your index.html file should look something like this. Note t
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css">
+  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
 </head>
 <body>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
 </body>
 </html>
 ```
