@@ -1,14 +1,14 @@
 #Elevation service API reference
 
-Mapzen's elevation service is a free, open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and naivgation data, including computing the steepness of edges or generating an elevation profile along a route. This page documents the inputs and outputs to the service.
+Mapzen's elevation service is an open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and naivgation data, including computing the steepness of edges or generating an elevation profile along a route. This page documents the inputs and outputs to the service.
 
 The elevation service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in [Skadi GitHub repository](https://github.com/valhalla/skadi/issues). If you find a unique use for the elevation service, let the developers know at [routing@mapzen.com](mailto:routing@mapzen.com)! 
 
 ##API keys and service limits
 
-To use Mapzen's elevation service, you must first obtain a free, Elevation Service developer API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use Mapzen's elevation service, you must first obtain an Elevation Service API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-This is a free, shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area. 
+This is a shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area. 
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
