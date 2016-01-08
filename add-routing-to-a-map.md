@@ -103,7 +103,7 @@ You will need to modify the path to reflect your working directory if you are no
     <link rel="stylesheet" href="leaflet/leaflet.css">
     ```
 
-2. In the `<head>` section, add reference to the Mapzen CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn
+2. In the `<head>` section, add reference to the Mapzen CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn.
 
     ```html
     <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
@@ -198,7 +198,6 @@ Your index.html should look something like this:
 ```html
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
@@ -265,12 +264,13 @@ Your `<body>` section should look like this:
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
+  var map = L.map('map');
   var layer = Tangram.leafletLayer({
     scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
   });
   layer.addTo(map);
-    map.setView([41.8758,-87.6189], 16)
+  map.setView([41.8758,-87.6189], 16)
   </script>
 </body>
 [...]
@@ -315,19 +315,19 @@ Your `<body>` section should look like this:
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
-    var map = L.map('map');
-    var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-    });
-    layer.addTo(map);
-    //map.setView([41.8758,-87.6189], 16)
-    L.Routing.control({
-      waypoints: [
-        L.latLng(41.8758,-87.6189),
-        L.latLng(33.8128,-117.9259)
-      ]
-    }).addTo(map);
+  var map = L.map('map');
+  var layer = Tangram.leafletLayer({
+    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+  });
+  layer.addTo(map);
+  //map.setView([41.8758,-87.6189], 16)
+  L.Routing.control({
+    waypoints: [
+      L.latLng(41.8758,-87.6189),
+      L.latLng(33.8128,-117.9259)
+    ]
+  }).addTo(map);
   </script>
 </body>
 [...]
