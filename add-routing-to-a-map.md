@@ -8,7 +8,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 - functionality to drag the route start and endpoints to get a different path
 - the ability change the mode of transportation, such as automobile or pedestrian
 
-In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Valhalla will calculate the route.
+In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
 To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You will need a [free API key](https://mapzen.com/developers) to use Mapzen Turn-by-Turn, which requires a GitHub account for authorization. You can use any text editor and operating system, but must maintain an Internet connection while you are working. The tutorial should take about an hour to complete.
 
@@ -93,7 +93,7 @@ If the step was successful, you should see a blank index page with your title (M
 
 ## Add references to CSS and JavaScript files
 
-Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Valhalla. You will need to add these into the <head> and <body> sections of the index.html.
+Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Mapzen Turn-by-Turn. You will need to add these into the <head> and <body> sections of the index.html.
 
 You will need to modify the path to reflect your working directory if you are not using the folder names suggested in the earlier section.
 
@@ -103,7 +103,7 @@ You will need to modify the path to reflect your working directory if you are no
     <link rel="stylesheet" href="leaflet/leaflet.css">
     ```
 
-2. In the `<head>` section, add reference to the Valhalla CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn
+2. In the `<head>` section, add reference to the Mapzen CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn
 
     ```html
     <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
@@ -127,7 +127,7 @@ You will need to modify the path to reflect your working directory if you are no
     <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     ```
 
-6. Add the Valhalla JavaScript file.
+6. Add the Mapzen JavaScript file.
 
     ```html
     <script src="lrm-mapzen/lrm-mapzen.js"></script>
@@ -276,7 +276,7 @@ Your `<body>` section should look like this:
 [...]
 ```
 
-If your map is not loading properly, first check the terminal window for status messages and resolve any 404 errors. You can also copy the example source code at the end of the section in case you mistyped any of the steps. If your project worked until now, ensure that your browser has WebGL support enabled (although it is unusual for it to be turned off) or turn on the developer tools in your browser to see if you can debug further. If you are still having trouble, add an issue to the [valhalla-docs GitHub repository](https://github.com/valhalla/valhalla-docs/issues) so it can be investigated.
+If your map is not loading properly, first check the terminal window for status messages and resolve any 404 errors. You can also copy the example source code at the end of the section in case you mistyped any of the steps. If your project worked until now, ensure that your browser has WebGL support enabled (although it is unusual for it to be turned off) or turn on the developer tools in your browser to see if you can debug further. If you are still having trouble, add an issue to the [documentation GitHub repository](https://github.com/valhalla/valhalla-docs/issues) so it can be investigated.
 
 ## Add waypoints for routing
 
@@ -333,11 +333,11 @@ Your `<body>` section should look like this:
 [...]
 ```
 
-## Set Valhalla as the routing engine
+## Set Mapzen Turn-by-Turn as the routing engine
 
-By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` to Valhalla and initialize a `formatter:` with functions for units and other conversions.
+By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Mapzen Turn-by-Turn as the routing engine. To use a different engine, you need to set the `router:` to Mapzen and initialize a `formatter:` with functions for units and other conversions.
 
-1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Mapzen. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Mapzen Turn-by-Turn. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
 
     ```js
     [...]
@@ -346,8 +346,8 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'your-routing-mode'),
-      formatter: new L.Routing.Valhalla.Mapzen(),
+      router: L.Routing.mapzen('valhalla-xxxxxx', 'your-routing-mode',
+      formatter: new L.Routing.Mapzen.Formatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -364,8 +364,8 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
 
-    ![Valhalla map showing route and directions](images/route-map-valhalla.png)
-    <p class='caption'>This map shows the default Valhalla routing engine with simplified narration and driving instructions.</p>
+    ![Map showing Mapzen Turn-by-Turn route and directions](images/route-map-valhalla.png)
+    <p class='caption'>This map shows the Mapzen Turn-by-Turn routing engine with simplified narration and driving instructions.</p>
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
 
@@ -391,7 +391,7 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(33.8128,-117.9259)
       ],
       router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Valhalla.Mapzen(),
+      formatter: new L.Routing.Mapzen.Formatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -400,7 +400,7 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 ```
 
-Valhalla also provides the ability to specify additional waypoints through which your route should pass, such as visiting family in Kansas and Arizona and bobbing your head at Grand Canyon National Park. Currently, you can drag the start and end points (and add waypoints in between) to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, although this can be slow and costly to make many queries. You can read more about the options available for `L.Routing.control` in the [Leaflet Routing Machine API documentation](http://www.liedman.net/leaflet-routing-machine/api/).
+Mapzen Turn-by-Turn also provides the ability to specify additional waypoints through which your route should pass, such as visiting family in Kansas and Arizona and bobbing your head at Grand Canyon National Park. Currently, you can drag the start and end points (and add waypoints in between) to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, although this can be slow and costly to make many queries. You can read more about the options available for `L.Routing.control` in the [Leaflet Routing Machine API documentation](http://www.liedman.net/leaflet-routing-machine/api/).
 
 ## Change the route line color
 
@@ -417,7 +417,7 @@ The symbols for the basemap are set in the scene file, but the route line may be
 
 2. Save your edits and refresh the browser. The line should change to blue and look thicker than before.
 
-    ![Valhalla map showing route and directions](images/route-map-valhalla-line-color.png)
+    ![Map showing updated route line color](images/route-map-valhalla-line-color.png)
 
 3. Click through the points in the directions list to pan and zoom the map to the location of each maneuver, including your destination.
 
@@ -464,4 +464,4 @@ The `<body>` section should look something like this, but with your own API key 
 
 In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
-You can review the [documentation](https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md) to learn more about routing with Mapzen Turn-by-Turn.
+You can review the [documentation](https://mapzen.com/documentation/turn-by-turn/) to learn more about routing with Mapzen Turn-by-Turn.
