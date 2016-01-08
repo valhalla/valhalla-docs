@@ -118,7 +118,7 @@ You will need to modify the path to reflect your working directory if you are no
 4. Add the Tangram JavaScript file, which is the rendering engine you will be using to draw the map.
 
     ```html
-    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
     ```
 
 5. Add the Leaflet Routing Machine JavaScript file.
@@ -147,7 +147,7 @@ After adding these, your index.html file should look something like this. Note t
 </head>
 <body>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
 </body>
@@ -213,7 +213,7 @@ Your index.html should look something like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -260,7 +260,7 @@ Your `<body>` section should look like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -311,7 +311,7 @@ Your `<body>` section should look like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -374,7 +374,7 @@ The `<body>` section should look something like this, but with your own API key 
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -430,7 +430,7 @@ The `<body>` section should look something like this, but with your own API key 
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
