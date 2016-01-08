@@ -337,7 +337,7 @@ Your `<body>` section should look like this:
 
 By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machine (OSRM)](http://project-osrm.org/) to perform the routing queries, so you need to substitute Valhalla as the routing engine. To use a different engine, you need to set the `router:` to Valhalla and initialize a `formatter:` with functions for units and other conversions.
 
-1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Valhalla. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+1. Replace the code within the `L.Routing.control` block with the following code to change the routing engine to Mapzen. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
 
     ```js
     [...]
@@ -346,8 +346,8 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.valhalla('your-api-key', 'your-routing-mode'),
-      formatter: new L.Routing.Valhalla.Formatter(),
+      router: L.Routing.mapzen('valhalla-xxxxxx', 'your-routing-mode'),
+      formatter: new L.Routing.Valhalla.Mapzen(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -355,11 +355,11 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
     ```
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. You need to replace these with your own API key and the routing mode you want to use in your map.
-3. Paste your own API key in place of `your-api-key` inside the single quotes. It should look something like: `'valhalla-xxxxxx'`. The routing will only load if you use a valid API key.
+3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
 4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
 
     ```js
-    router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
+    router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
     ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
@@ -390,8 +390,8 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Valhalla.Formatter(),
+      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+      formatter: new L.Routing.Mapzen.Formatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
