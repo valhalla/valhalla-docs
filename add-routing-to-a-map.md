@@ -354,7 +354,7 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
     [...]
     ```
 
-2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. You need to replace these with your own API key and the routing mode you want to use in your map.
+2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. 
 3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
 4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
 
