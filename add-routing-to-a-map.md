@@ -198,10 +198,11 @@ Your index.html should look something like this:
 ```html
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="lrm-valhalla/leaflet.routing.valhalla.css">
+  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
   <style>
   #map {
     height: 100%;
@@ -214,8 +215,8 @@ Your index.html should look something like this:
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
   </script>
@@ -261,15 +262,14 @@ Your `<body>` section should look like this:
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
-    var map = L.map('map');
-    var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
-      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-    });
-    layer.addTo(map);
+  var layer = Tangram.leafletLayer({
+    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+  });
+  layer.addTo(map);
     map.setView([41.8758,-87.6189], 16)
   </script>
 </body>
@@ -312,12 +312,12 @@ Your `<body>` section should look like this:
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -375,12 +375,12 @@ The `<body>` section should look something like this, but with your own API key 
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
@@ -391,7 +391,7 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(33.8128,-117.9259)
       ],
       router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Mapzen.Formatter(),
+      formatter: new L.Routing.Valhalla.Mapzen(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -404,7 +404,7 @@ Valhalla also provides the ability to specify additional waypoints through which
 
 ## Change the route line color
 
-The symbols for the basemap are set in the scene file, but the route line is hard to distinguish from the road line in your map. You can use `L.routing.control` to update the color of the route line.
+The symbols for the basemap are set in the scene file, but the route line may be hard distinguish from the roads in your map. You can use `L.routing.control` to update the color of the route line.
 
 1. After the closing line of the `waypoints:` block and immediately before the `router:` block, insert the following source code:
 
@@ -431,16 +431,16 @@ The `<body>` section should look something like this, but with your own API key 
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/leaflet-routing-machine.js"></script>
-  <script src="lrm-valhalla/lrm-valhalla.js"></script>
+  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/valhalla/valhalla-docs/master/examples/skin-and-bones-scene.yaml',
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
-    //map.setView([41.8758,-87.6189], 16)
+    //map.setView([41.8758,-87.6189], 16);
     L.Routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
@@ -448,10 +448,10 @@ The `<body>` section should look something like this, but with your own API key 
       ],
       lineOptions: {
         styles: [ {color: 'white',opacity: 0.8, weight: 12},
-                  {color: '#2676C6', opacity: 1, weight: 6}
-      ]},
-      router: L.Routing.valhalla('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Valhalla.Formatter(),
+          {color: '#2676C6', opacity: 1, weight: 6}
+        ]},
+      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+      formatter: new L.Routing.Mapzen.Formatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
