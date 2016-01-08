@@ -270,7 +270,7 @@ Your `<body>` section should look like this:
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
   });
   layer.addTo(map);
-  map.setView([41.8758,-87.6189], 16)
+  map.setView([41.8758,-87.6189], 16);
   </script>
 </body>
 [...]
@@ -287,7 +287,7 @@ In the simplest implementation, your map will not provide the ability to search 
 1. Add `//` at the beginning of the `map.setView([41.8758,-87.6189], 16)` line to comment out that code. You no longer need to set the extent manually like this because the routing environment will be specifying it.
 
     ```js
-    //map.setView([41.8758,-87.6189], 16)
+    //map.setView([41.8758,-87.6189], 16);
     ```
 
 2. Inside the `<script>` tag, and after the commented line, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
@@ -321,7 +321,7 @@ Your `<body>` section should look like this:
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
   });
   layer.addTo(map);
-  //map.setView([41.8758,-87.6189], 16)
+  //map.setView([41.8758,-87.6189], 16);
   L.Routing.control({
     waypoints: [
       L.latLng(41.8758,-87.6189),
@@ -384,7 +384,7 @@ The `<body>` section should look something like this, but with your own API key 
       attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
     });
     layer.addTo(map);
-    //map.setView([41.8758,-87.6189], 16)
+    //map.setView([41.8758,-87.6189], 16);
     L.Routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
@@ -404,7 +404,7 @@ Mapzen Turn-by-Turn also provides the ability to specify additional waypoints th
 
 ## Change the route line color
 
-The symbols for the basemap are set in the scene file, but the route line may be hard distinguish from the roads in your map. You can use `L.routing.control` to update the color of the route line.
+The symbols for the basemap are set in the scene file, but the route line may be hard to distinguish from the roads in your map. You can use `L.routing.control` to update the color of the route line.
 
 1. After the closing line of the `waypoints:` block and immediately before the `router:` block, insert the following source code:
 
