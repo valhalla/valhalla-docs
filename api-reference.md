@@ -27,9 +27,11 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 The route request takes the form of `valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location information, name and options for the costing model, and output options. Here is an example request:
 
-`valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxx`
+`valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"}}&id=my_work_route&api_key=valhalla-xxxxxx`
 
 This request provides automobile routing between the Detroit, Michigan area and Buffalo, New York, with an optional street name parameter to improve navigation at the start and end points. It attempts to avoid routing north through Canada by adding a penalty for crossing international borders. The resulting route is displayed in miles.
+
+There is now an option to name your route request.  You can do this by appending the following to your request `&id=`.
 
 Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -142,8 +144,11 @@ These options are available for pedestrian costing methods.
 | Options | Description |
 | :------------------ | :----------- |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
+| `id` | Name your route request. If `id` is specified, the naming will be sent thru to the response. |
 
 ### Outputs of a Valhalla route
+
+If a route has been named in the request using the optional `&id=` input, then the name will be returned as a string `id` on the JSON object.
 
 The route results are returned as a `trip`. This is a JSON object that contains details about the trip, including locations, a summary with basic information about the entire trip, and a list of `legs`.
 

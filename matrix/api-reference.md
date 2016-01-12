@@ -38,7 +38,9 @@ An example request takes the form of `matrix.mapzen.com/one_to_many?json={}&api_
 
 For example, while at your office, you want to know the times and distances to walk to several restaurants where you could have dinner, as well as the times and distances from each restaurant to the train station for your commute home. This will help you determine where to eat. The API request for this uses `many_to_many` and `pedestrian` costing.
 
-    matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&api_key=matrix-xxxxxx
+    matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+
+There is now an option to name your matrix request.  You can do this by appending the following to your request `&id=`.
 
 Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -57,7 +59,15 @@ Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentat
 
 The Time-Distance Matrix service uses the costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
 
+### Other request options
+
+| Options | Description |
+| :------------------ | :----------- |
+| `id` | Name your matrix request. If `id` is specified, the naming will be sent thru to the response. |
+
 ## Outputs of the matrix service
+
+If a matrix request has been named using the optional `&id=` input, then the name will be returned as a string `id`.
 
 These are the results of a request to the Time-Distance Matrix service.
 
