@@ -31,7 +31,7 @@ The route request takes the form of `valhalla.mapzen.com/route?json={}&api_key=`
 
 This request provides automobile routing between the Detroit, Michigan area and Buffalo, New York, with an optional street name parameter to improve navigation at the start and end points. It attempts to avoid routing north through Canada by adding a penalty for crossing international borders. The resulting route is displayed in miles.
 
-There is now an option to name your route request.  You can do this by appending the following to your request `&id=`.
+There is an option to name your route request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
 Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 

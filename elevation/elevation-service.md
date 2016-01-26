@@ -18,7 +18,7 @@ The elevation service currently has a single action, `/height?`, that can be req
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. 
 
-There is now an option to name your elevation request.  You can do this by appending the following to your request `&id=`.
+There is an option to name your elevation request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
 Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
