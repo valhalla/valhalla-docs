@@ -4,7 +4,7 @@
 ## Release Date: 2016-01-26
 
 - **Added capability to disable narrative production** - Added the `narrative` boolean option to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default.
-- **Added capability to name a request** - The `name` is returned with the response so a user could match to the corresponding request.
+- **Added capability to mark a request with an id** - The `id` is returned with the response so a user could match to the corresponding request.
 
 ## Release Date: 2016-01-04
 
