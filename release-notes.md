@@ -3,7 +3,7 @@
 
 ## Release Date: 2016-01-26
 
-- **Added capability to disable narrative production** - Added the `narrative` boolean option to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. The possbile values for the `narrative` option are: false and true
+- **Added capability to disable narrative production** - Added the `narrative` boolean option to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. The possible values for the `narrative` option are: false and true
 - **Added capability to mark a request with an id** - The `id` is returned with the response so a user could match to the corresponding request.
 - **Added some logging enhancements, specifically [ANALYTICS] logging** - We want to focus more on what our data is telling us by logging specific stats in Logstash.
 
