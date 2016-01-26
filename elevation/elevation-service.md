@@ -16,7 +16,11 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of two or more locations within a JSON array, while an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en) stores multiple locations within a single string. If you include a `range` parameter and set it to `true`, both the height and cumulative distance are returned for each point. 
 
-An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. 
+
+There is an option to name your elevation request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
+
+Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ###Use a shape list for input locations
 
@@ -31,7 +35,7 @@ These parameters are available for `shape`.
 
 Here is an example of a profile request using `shape`:
 
-    elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&api_key=elevation-xxxxxx
+    elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville&api_key=elevation-xxxxxx
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the `range` and `height` (as `range_height` in the response) for each point.
 
@@ -63,7 +67,16 @@ The `range` is optional and assumed to be `false` if omitted.
 | :--------- | :----------- |
 | `range` | `true` or `false`. Defaults to `false`.|
 
+###Other request options
+
+| Options | Description |
+| :------------------ | :----------- |
+| `id` | Name your elevation request. If `id` is specified, the naming will be sent thru to the response. |
+
+
 ##Outputs of the elevation service
+
+If an elevation request has been named using the optional `&id=` input, then the name will be returned as a string `id`.
 
 The profile results are returned with the form of shape (shape points or encoded polylines) that was supplied in the request, along with a 2D array representing the x and y of each input point in the elevation profile.
 
