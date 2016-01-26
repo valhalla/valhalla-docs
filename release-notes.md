@@ -8,7 +8,7 @@
 
 ## Release Date: 2016-01-18
 
-- **Data producer updates** - Data importer configuration (lua) updates to fix a bug where buses were not allowed on restricted lanes.  Ferry surface issue (Changed the default surface to be compacted.).
+- **Data producer updates** - Data importer configuration (lua) updates to fix a bug where buses were not allowed on restricted lanes.  Ferry surface issue (Changed the default surface to be compacted for footways.).
 
 ## Release Date: 2016-01-04
 
