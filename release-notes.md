@@ -7,6 +7,10 @@
 - **Added capability to mark a request with an id** - The `id` is returned with the response so a user could match to the corresponding request.
 - **Added some logging enhancements, specifically [ANALYTICS] logging** - We want to focus more on what our data is telling us by logging specific stats in Logstash.
 
+## Release Date: 2016-01-18
+
+- **Data producer updates** - Data importer configuration (lua) updates to fix a bug where buses were not allowed on restricted lanes.  Fixed surface issue (change the default surface to be "compacted" for footways).
+
 ## Release Date: 2016-01-04
 
 - **Fixed Wrong Costing Options Applied** - Fixed a bug in which a previous requests costing options would be used as defaults for all subsequent requests.
@@ -14,6 +18,10 @@
 ## Release Date: 2015-12-18
 
 - **Fix for bus access** - Data importer configuration (lua) updates to fix a bug where bus lanes were turning off access for other modes.
+
+- **Fix for extra emergency data** - Data importer configuration (lua) updates to fix a bug where we were saving hospitals in the data.
+
+- **Bicycle costing update** - Updated kTCSlight and kTCFavorable so that cycleways are favored by default vs roads.
 
 ## Release Date: 2015-12-17
 
