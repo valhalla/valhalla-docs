@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## Release Date: 2016-02-01
+
+- **Data producer updates** - Reduce speed on unpaved/rough roads. Add statistics for hgv (truck) restrictions.
+
 ## Release Date: 2016-01-26
 
 - **Added capability to disable narrative production** - Added the `narrative` boolean option to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. The possible values for the `narrative` option are: false and true
