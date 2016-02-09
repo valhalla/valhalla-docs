@@ -1,17 +1,17 @@
 
-# Valhalla routing service API reference
+# Mapzen Turn-by-Turn routing service API reference
 
-Valhalla is a free, open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
+Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
 
-The Valhalla routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub (use the [Thor repository](https://github.com/valhalla/thor) for comments about route paths or [Odin repository](https://github.com/valhalla/odin) for narration). You can also send a message to routing@mapzen.com.
+The routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub (use the [Thor repository](https://github.com/valhalla/thor) for comments about route paths or [Odin repository](https://github.com/valhalla/odin) for narration). You can also send a message to routing@mapzen.com.
 
-The default logic for the OpenStreetMap tags, keys, and values that Valhalla uses when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
+The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
-#### API keys and service limits
+## API keys and service limits
 
-To use the Valhalla routing service, you must first obtain a free developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the Mapzen Turn-by-Turn routing service, you must first obtain an developer API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-Valhalla is a free, shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
+Mapzen Turn-by-Turn is shared routing service. As such, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
 The following limitations are currently in place:
 
@@ -19,11 +19,11 @@ The following limitations are currently in place:
 * Bicycle routes have a limit of 50 locations and 500 kilometers.
 * Automobile routes have a limit of 20 locations and 5,000 kilometers.
 
-The distance limit is the total "as the crow-flies" distance along a path through successive locations. 
+The distance limit is the total "as the crow-flies" distance along a path through successive locations.
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
-### Inputs of a Valhalla route
+## Inputs of a route
 
 The route request takes the form of `valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location information, name and options for the costing model, and output options. Here is an example request:
 
@@ -33,15 +33,15 @@ This request provides automobile routing between the Detroit, Michigan area and 
 
 There is an option to name your route request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
-Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-#### Locations
+### Locations
 
 You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified, with a maximum of eight locations currently supported.
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Valhalla is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Pelias](https://github.com/pelias) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input to Valhalla.  
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search) or [Nominatum](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input.  
 
-To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path. 
+To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path.
 
 | Location parameters | Description |
 | :--------- | :----------- |
@@ -63,11 +63,11 @@ Optionally, you can include the following location information without impacting
 * `url` = URL for the place or location.
 * `side_of_street` = (response only) The side of street of a `break` `location` that is determined based on the actual route when the `location` is offset from the street. The possible values are `left` and `right`.
 
-Future Valhalla development work includes adding location options and information related to time at each location. This will allow routes to specify a start time or an arrive by time at each location. There is also ongoing work to improve support for `through` locations.
+Future development work includes adding location options and information related to time at each location. This will allow routes to specify a start time or an arrive by time at each location. There is also ongoing work to improve support for `through` locations.
 
-#### Costing models
+### Costing models
 
-Valhalla uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.
+Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.
 
 | Costing model | Description |
 | :----------------- | :----------- |
@@ -114,8 +114,8 @@ These additional options are available for bicycle costing methods.
 
 | Bicycle options | Description |
 | :-------------------------- | :----------- |
-| `bicycle_type` | The type of bicycle. <ul><li>`Road`: a road-style bicycle with narrow tires that is generally lightweight and designed for speed on paved sufaces.</li><li>`Hybrid` or `City`: a bicycle made mostly for city riding or casual riding on roads and paths with good surfaces.</li><li>`Cross`: a cyclo-cross bicycle, which is similar to a road bicycle but with wider tires suitable to rougher surfaces.</li><li>`Mountain`: a mountain bicycle suitable for most surfaces but generally heavier and slower on paved surfaces.</li><ul> |
-| `cycling_speed` | Cycling speed is the average travel speed along smooth, flat roads. This is meant to be the speed a rider can comfortably maintain over the desired distance of the route. It can be modified (in the costing method) by surface type in conjuction with bicycle type and (Coming Soon) by hilliness of the road section. When no speed is specifically provided, the default speed is determined by the bicycle type and are as follows: Road = 25 KPH (15.5 MPH), Cross = 20 KPH (13 MPH), Hybrid/City = 18 KPH (11.5 MPH), and Mountain = 16 KPH (10 MPH). |
+| `bicycle_type` | The type of bicycle. <ul><li>`Road`: a road-style bicycle with narrow tires that is generally lightweight and designed for speed on paved surfaces. </li><li>`Hybrid` or `City`: a bicycle made mostly for city riding or casual riding on roads and paths with good surfaces.</li><li>`Cross`: a cyclo-cross bicycle, which is similar to a road bicycle but with wider tires suitable to rougher surfaces.</li><li>`Mountain`: a mountain bicycle suitable for most surfaces but generally heavier and slower on paved surfaces.</li><ul> |
+| `cycling_speed` | Cycling speed is the average travel speed along smooth, flat roads. This is meant to be the speed a rider can comfortably maintain over the desired distance of the route. It can be modified (in the costing method) by surface type in conjunction with bicycle type and (Coming Soon) by hilliness of the road section. When no speed is specifically provided, the default speed is determined by the bicycle type and are as follows: Road = 25 KPH (15.5 MPH), Cross = 20 KPH (13 MPH), Hybrid/City = 18 KPH (11.5 MPH), and Mountain = 16 KPH (10 MPH). |
 | `use_roads` | A cyclist's propensity to use roads alongside other vehicles. This is a range of values from 0 to 1, where 0 attempts to avoid roads and stay on cycleways and paths, and 1 indicates the rider is more comfortable riding on roads. Based on the `use_roads` factor, roads with certain classifications and higher speeds are penalized in an attempt to avoid them when finding the best path. |
 | `use_hills` | A cyclist's desire to tackle hills in their routes. This is a range of values from 0 to 1, where 0 attempts to avoid hills and steep grades even if it means a longer (time and distance) path, while 1 indicates the rider does not fear hills and steeper grades. Based on the `use_hills` factor, penalties are applied to roads based on elevation change and grade. These penalties help the path avoid hilly roads in favor of flatter roads or less steep grades where available. Note that it is not always possible to find alternate paths to avoid hills (for example when route locations are in mountainous areas). |
 
@@ -131,7 +131,7 @@ These options are available for pedestrian costing methods.
 | `driveway_factor` | A factor that modifies (mulitplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
 | `step_penalty` | A penalty in seconds added to each transition onto a path with [steps or stairs](http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps). Higher values apply larger cost penalties to avoid paths that contain flights of steps. |
 
-#### Directions options
+### Directions options
 
 | Options | Description |
 | :------------------ | :----------- |
@@ -139,14 +139,14 @@ These options are available for pedestrian costing methods.
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified, United States-based English (en-US) is used. Currently supported language tags: en-US. |
 | `narrative` |  Flag to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. |
 
-#### Other request options
+### Other request options
 
 | Options | Description |
 | :------------------ | :----------- |
-| `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
+| `out_format` | Output format. If no `out_format` is specified, JSON is returned. Future work includes PBF (protocol buffer) support. |
 | `id` | Name your route request. If `id` is specified, the naming will be sent thru to the response. |
 
-### Outputs of a Valhalla route
+## Outputs of a route
 
 If a route has been named in the request using the optional `&id=` input, then the name will be returned as a string `id` on the JSON object.
 
@@ -168,11 +168,11 @@ The summary JSON object includes:
 | `time` | Estimated elapsed time to complete the trip. |
 | `length` | Distance traveled for the entire trip. Units are either miles or kilometers based on the input units specified. |
 
-#### Trip legs and maneuvers
+### Trip legs and maneuvers
 
 A `trip` contains one or more `legs`. For *n* number of `break` locations, there are *n-1* legs. `Through` locations do not create separate legs.
 
-Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array.
+Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](decoding.md).
 
 Each maneuver includes:
 
@@ -249,9 +249,9 @@ Continuing with the earlier routing example from the Detroit, Michigan area, a m
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
-#### Return Codes and Conditions
+### Return codes and conditions
 
-The following is a table of error conditions that may occur for a particular request. In general, Valhalla follows the http specification. That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
+The following is a table of error conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
 
 | Code | Body | Description |
 | :--------- | :---------- | :---------- |
