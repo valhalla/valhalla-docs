@@ -23,7 +23,7 @@ polyline.decode = function(str, precision) {
         byte = null,
         latitude_change,
         longitude_change,
-        factor = Math.pow(10, precision || 5);
+        factor = Math.pow(10, precision || 6);
 
     // Coordinates have variable length when encoded, so just keep
     // track of whether we've hit the end of the string. In each
