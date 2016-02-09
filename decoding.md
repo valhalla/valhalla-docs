@@ -1,14 +1,14 @@
-### Decoding Route Shape
+# Decode a route shape
 
-Mapzen Turn-by-Turn uses Google Polyline Encoding to store a series of latitude, longitude coordinates as a single string. A description is found here: [polyline encoding](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
+Mapzen Turn-by-Turn uses the Google Maps encoded polyline format to store a series of latitude, longitude coordinates as a single string. Polyline encoding greatly reduces the size of the route response, especially for longer routes. A description is found here: [polyline encoding](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
 
-Note that Mapzen Turn-by-Turn uses 6 digits of decimal precision rather than 5 as referenced in the Google Polyline Encoding document. Polyline encoding greatly reduces the size of the route response, especially for longer routes. 
+Note that Mapzen Turn-by-Turn uses six digits of decimal precision, rather than five as referenced in the Google algorithms documentation.
 
-Below we show example algorithms to decode the string to create a list or latitude,longitude coordinates.
+Below are some sample algorithms to decode the string to create a list of latitude,longitude coordinates.
 
-#### Javascript
+## JavaScript
 
-Sample Javascript code to decode the polyline is attached below.
+Here is an example of decoding in JavaScript.
 
 ```
 // This is adapted from the implementation in Project-OSRM
@@ -64,9 +64,9 @@ polyline.decode = function(str, precision) {
 
 ```
 
-#### C++ 11
+## C++ 11
 
-An example C++ decoding method is attached below.
+Here is an example of decoding in C++.
 
 ```
 #include <vector>
