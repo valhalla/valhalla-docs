@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## Release Date: 2016-02-19
+
+- **Data producer updates** - Reduce stop impact when all edges are links (ramps or turn channels). Update opposing edge logic to reject edges that do no have proper access (forward access == reverse access on opposing edge and vice-versa). Update ReclassifyLinks for cases where a single edge (often a service road) intersects a ramp improperly causing the ramp to reclassified when it should not be. Updated maximum OSM node Id (now exceeds 4000000000). Move lua from conf repository into mjolnir.
+
 ## Release Date: 2016-02-01
 
 - **Data producer updates** - Reduce speed on unpaved/rough roads. Add statistics for hgv (truck) restrictions.
