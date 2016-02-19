@@ -195,6 +195,7 @@ Each maneuver includes:
 | `ferry` | True if a ferry is encountered on this maneuver. |
 | `sign` | Contains the interchange guide information at a road junction associated with this maneuver. See below for details. |
 | `roundabout_exit_count` | The spoke to exit roundabout after entering. |
+| `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
 
 For the maneuver `type`, the following are available:
 
