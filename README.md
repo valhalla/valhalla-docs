@@ -3,7 +3,7 @@ This repository contains most of the documentation for the Valhalla routing proj
 
 Documentation available within the valhalla-docs repository includes:
 
-- [Introduction](https://github.com/valhalla/valhalla-docs/valhalla-intro.md) - This is the early history of Valhalla and the Mapzen Turn-by-Turn service based on it. Introduces the core team and describes overall objectives of the project and some insight on why we chose the name Valhalla.
+- [Introduction](./valhalla-intro.md) - This is the early history of Valhalla and the Mapzen Turn-by-Turn service based on it. Introduces the core team and describes overall objectives of the project and some insight on why we chose the name Valhalla.
 - [Terminology](https://github.com/valhalla/valhalla-docs/terminology.md) - Contains commonly used terms and definitions within Valhalla. Also lists the various repositories.
 - [Route API Reference](https://github.com/valhalla/valhalla-docs/api-reference.md) - The structure of API requests and responses to a Valhalla routing service is described here. This shows the JSON inputs and describes the JSON responses to form routes and directions.
 -  [Matrix API Reference](https://github.com/valhalla/valhalla-docs/matrix/api-reference.md) - The structure of API requests and responses to a Valhalla time distance matrix service is described here. This shows the JSON inputs and describes the JSON responses to retrieve times and distances between locations.
