@@ -14,8 +14,8 @@ Documentation available within the valhalla-docs repository includes:
 
 Technical descriptions available in other Valhalla repositories includes:
 
-- [Why Tiles?](../../mjolnir/docs/why_tiles.md) - Some of the objectives and reasons for designing a tiled, routing data set are included here.
-- [OSM Connectivity Map](../mjolnir/docs/connectivity.md) - Discusses creation of a "Connectivity Map" of OSM that uses Valhalla routing tiles to providesa first order of approximation of connectivity between locations.
-- [Use of Administrative Data in Valhalla](../mjolnir/docs/admins.md) - Discusses the importance of administrative information to routing and some of the ways that Valhalla uses adminstrative information.
-- [Dynamic Costing](../sif/docs/dynamic_costing.md) - Describes the basics of the dynamic, run-time path costing provided within the sif repository.
-- [Elevation Influenced Bicycle Routing](../sif/docs/elevation_costing.md) - Discusses how elevation is factored into bicycle costing to allow features such as "avoid hills".
+- [Why Tiles?](../mjolnir/tree/master/docs/why_tiles.md) - Some of the objectives and reasons for designing a tiled, routing data set are included here.
+- [OSM Connectivity Map](../mjolnir/tree/master/docs/connectivity.md) - Discusses creation of a "Connectivity Map" of OSM that uses Valhalla routing tiles to providesa first order of approximation of connectivity between locations.
+- [Use of Administrative Data in Valhalla](../mjolnir/tree/master/docs/admins.md) - Discusses the importance of administrative information to routing and some of the ways that Valhalla uses adminstrative information.
+- [Dynamic Costing](../sif/tree/master/docs/dynamic_costing.md) - Describes the basics of the dynamic, run-time path costing provided within the sif repository.
+- [Elevation Influenced Bicycle Routing](../sif/tree/master/docs/elevation_costing.md) - Discusses how elevation is factored into bicycle costing to allow features such as "avoid hills".
