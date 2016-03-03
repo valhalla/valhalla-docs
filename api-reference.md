@@ -76,7 +76,7 @@ Valhalla uses dynamic, run-time costing to generate the route path. The route re
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while and steps or stairs and alleys are slightly avoided. |
 | `transit` | Standard costing for public transportation - such as rail or bus. |
-| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above. Here is an example multimodal request: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"},"date_time":{"type":1,"value":"2015-12-29T08:00"}}&api_key=valhalla-xxxxxxx` Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
+| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.<ul><li>Here is an example multimodal request at a particular date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"},"date_time":{"type":1,"value":"2015-12-29T08:00"}}&api_key=valhalla-xxxxxxx`</li><li>Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"},"date_time":{"type":0}}&api_key=valhalla-xxxxxxx`</li><ul>Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 
 #### Costing options
 
@@ -134,9 +134,9 @@ These options are available for transit costing methods.
 
 | Transit options | Description |
 | :-------------------------- | :----------- |
-| `use_bus` | User's propensity to use buses. Range of values from 0 (avoid buses) to 1 (totally comfortable riding on buses). Based on the `use_bus` factor, bus edges are penalized or favored when finding the best path.|
+| `use_bus` | User's desire to use buses. Range of values from 0 (avoid buses) to 1 (totally comfortable riding on buses). Based on the `use_bus` factor, bus edges are penalized or favored when finding the best path.|
 | `use_rail` | User's propensity to use rail. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).  Based on the `use_rail` factor, rail edges are penalized or favored when finding the best path.|
-| `use_transfers` |User's propensity to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
+| `use_transfers` |User's tendency to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
 
 #### Directions options
 
@@ -149,7 +149,7 @@ These options are available for transit costing methods.
 
 | Options | Description |
 | :------------------ | :----------- |
-| `date_time` | <ul><li>`type`<ul><li>0 - Current depart time</li><li>1 - Specified depart time</li><li>2 - Specified arrive time</li></ul></li><li>`value` - the time of the specified depart or arrive type in ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06"</li></ul> |
+| `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current depart time</li><li>1 - Specified depart time</li></ul></li><li>`value` - the time of the specified depart in ISO 8601 format (YYYY-MM-DDThh:mm). For example "2016-07-03T08:06"</li></ul> |
 | `out_format` | Output format. If no `out_format` is specified, json is returned. Future work includes pbf (protocol buffer) support. |
 
 ### Outputs of a Valhalla route
