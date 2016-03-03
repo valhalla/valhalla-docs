@@ -1,8 +1,8 @@
-#Valhalla repositories and terminology
+# Valhalla repositories and terminology
 
 ## Repositories and dependencies
 
-The Valhalla organization is comprised of several repositories each responsible for a different function. The layout of the various projects is as follows:
+The Valhalla GitHub organization is comprised of several repositories each responsible for a different function. The layout of the various projects is as follows:
 
 - [Midgard](https://github.com/valhalla/midgard) - Basic geographic and geometric algorithms for use in the various other projects
 - [Baldr](https://github.com/valhalla/baldr) - The base data structures for accessing and caching tiled route data. Depends on `midgard`
@@ -14,7 +14,8 @@ The Valhalla organization is comprised of several repositories each responsible 
 - [Tyr](https://github.com/valhalla/tyr) - Service used to handle http requests for a route communicating with all of the other valhalla APIs. The service will format output from `odin` and support json (and eventually protocol buffer) output. Depends on `midgard`, `baldr`, `sif`, `mjolnir`, `loki`, `thor` and `odin`
 - [Skadi](https://github.com/valhalla/skadi) - Library used to access digital elevation model data, which is useful in computing steepness of edges in the route graph or generating an elevation profile along a computed route.  Depends on `midgard` and `baldr`.
 
-##Common Valhalla, routing and elevation terms
+##Common Mapzen Turn-by-Turn routing and elevation terms
+
 * break location - the start or end point of a route.
 * cost - fixed costs in seconds that are added to both the path cost and the estimated time.
 * costing model - set of costs for particular methods of travel, such as automobile or pedestrian.

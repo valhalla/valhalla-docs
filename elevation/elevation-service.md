@@ -1,14 +1,14 @@
 #Elevation service API reference
 
-Mapzen's elevation service is a free, open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and naivgation data, including computing the steepness of edges or generating an elevation profile along a route. This page documents the inputs and outputs to the service.
+Mapzen's elevation service is an open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and navigation data, including computing the steepness of edges or generating an elevation profile along a route. This page documents the inputs and outputs to the service.
 
 The elevation service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in [Skadi GitHub repository](https://github.com/valhalla/skadi/issues). If you find a unique use for the elevation service, let the developers know at [routing@mapzen.com](mailto:routing@mapzen.com)! 
 
 ##API keys and service limits
 
-To use Mapzen's elevation service, you must first obtain a free, Elevation Service developer API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use Mapzen's elevation service, you must first obtain an Elevation Service API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
-This is a free, shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area. 
+This is a shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area. 
 
 Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
 
@@ -16,7 +16,11 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of two or more locations within a JSON array, while an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en) stores multiple locations within a single string. If you include a `range` parameter and set it to `true`, both the height and cumulative distance are returned for each point. 
 
-An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter. 
+
+There is an option to name your elevation request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
+
+Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ###Use a shape list for input locations
 
@@ -31,7 +35,7 @@ These parameters are available for `shape`.
 
 Here is an example of a profile request using `shape`:
 
-    elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&api_key=elevation-xxxxxx
+    elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville&api_key=elevation-xxxxxx
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the `range` and `height` (as `range_height` in the response) for each point.
 
@@ -63,7 +67,16 @@ The `range` is optional and assumed to be `false` if omitted.
 | :--------- | :----------- |
 | `range` | `true` or `false`. Defaults to `false`.|
 
+###Other request options
+
+| Options | Description |
+| :------------------ | :----------- |
+| `id` | Name your elevation request. If `id` is specified, the naming will be sent thru to the response. |
+
+
 ##Outputs of the elevation service
+
+If an elevation request has been named using the optional `&id=` input, then the name will be returned as a string `id`.
 
 The profile results are returned with the form of shape (shape points or encoded polylines) that was supplied in the request, along with a 2D array representing the x and y of each input point in the elevation profile.
 

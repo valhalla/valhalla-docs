@@ -1,6 +1,46 @@
 
 # Release Notes
 
+## Release Date: 2016-02-22
+
+- **Use bidirectional A* for automobile routes** - Switch to bidirectional A* for all but bus routes and short routes (where origin and destination are less than 10km apart). This improves performance and has less failure cases for longer routes. Some data import adjustments were made (02-19) to fix some issues encountered with arterial and highway hierarchies. Also only use a maximum of 2 passes for bidirecdtional A* to reduce "long time to fail" cases.
+- **Added verbal multi-cue guidance** - This combines verbal instructions when 2 successive maneuvers occur in a short amount of time (e.g., Turn right onto MainStreet. Then Turn left onto 1st Avenue).
+
+## Release Date: 2016-02-19
+
+- **Data producer updates** - Reduce stop impact when all edges are links (ramps or turn channels). Update opposing edge logic to reject edges that do no have proper access (forward access == reverse access on opposing edge and vice-versa). Update ReclassifyLinks for cases where a single edge (often a service road) intersects a ramp improperly causing the ramp to reclassified when it should not be. Updated maximum OSM node Id (now exceeds 4000000000). Move lua from conf repository into mjolnir.
+
+## Release Date: 2016-02-01
+
+- **Data producer updates** - Reduce speed on unpaved/rough roads. Add statistics for hgv (truck) restrictions.
+
+## Release Date: 2016-01-26
+
+- **Added capability to disable narrative production** - Added the `narrative` boolean option to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. The possible values for the `narrative` option are: false and true
+- **Added capability to mark a request with an id** - The `id` is returned with the response so a user could match to the corresponding request.
+- **Added some logging enhancements, specifically [ANALYTICS] logging** - We want to focus more on what our data is telling us by logging specific stats in Logstash.
+
+## Release Date: 2016-01-18
+
+- **Data producer updates** - Data importer configuration (lua) updates to fix a bug where buses were not allowed on restricted lanes.  Fixed surface issue (change the default surface to be "compacted" for footways).
+
+## Release Date: 2016-01-04
+
+- **Fixed Wrong Costing Options Applied** - Fixed a bug in which a previous requests costing options would be used as defaults for all subsequent requests.
+
+## Release Date: 2015-12-18
+
+- **Fix for bus access** - Data importer configuration (lua) updates to fix a bug where bus lanes were turning off access for other modes.
+
+- **Fix for extra emergency data** - Data importer configuration (lua) updates to fix a bug where we were saving hospitals in the data.
+
+- **Bicycle costing update** - Updated kTCSlight and kTCFavorable so that cycleways are favored by default vs roads.
+
+## Release Date: 2015-12-17
+
+- **Graph Tile Data Structure update** - Updated structures within graph tiles to support transit efforts and truck routing. Removed TransitTrip, changed TransitRoute and TransitStop to indexes (rather than binary search). Added access restrictions (like height and weight restrictions) and the mode which they impact to reduce need to look-up.
+- **Data producer updates** - Updated graph tile structures and import processes.
+
 ## Release Date: 2015-11-23
 
 - **Fixed Open App for OSRM functionality** - Added OSRM functionality back to Loki to support Open App.
