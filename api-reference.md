@@ -139,9 +139,9 @@ These options are available for transit costing when the multimodal costing mode
 
 | Transit options | Description |
 | :-------------------------- | :----------- |
-| `use_bus` | User's desire to use buses. Range of values from 0 (avoid buses) to 1 (totally comfortable riding on buses). Based on the `use_bus` factor, bus edges are penalized or favored when finding the best path.|
-| `use_rail` | User's propensity to use rail. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).  Based on the `use_rail` factor, rail edges are penalized or favored when finding the best path.|
-| `use_transfers` |User's tendency to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
+| `use_bus` | User's desire to use buses. Range of values from 0 (avoid buses) to 1 (totally comfortable riding on buses).|
+| `use_rail` | User's desire to use rail/subway/metro. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).|
+| `use_transfers` |User's desire to favor transfers  Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
 
 For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=valhalla-xxxxxxx`
 
