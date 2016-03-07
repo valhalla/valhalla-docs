@@ -143,7 +143,8 @@ These options are available for transit costing when the multimodal costing mode
 | `use_rail` | User's propensity to use rail. Range of values from 0 (avoid rail) to 1 (totally comfortable riding on rail).  Based on the `use_rail` factor, rail edges are penalized or favored when finding the best path.|
 | `use_transfers` |User's tendency to use/allow transfers  Range of values from 0 (avoid transfers) to 1 (totally comfortable with transfers).  Based on the `use_transfers` factor, transfers are penalized or favored when finding the best path.|
 
-For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=valhalla-xxxxxxx`  Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=valhalla-xxxxxxx`
+Note that you must append your own [Valhalla API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 #### Directions options
 
