@@ -12,6 +12,11 @@ Documentation available within the valhalla-docs repository includes:
 - [Add Routing to a Map](./add-routing-to-a-map.md) - A tutorial showing how to add Mapzen Turn-by-Turn (powered by Valhalla) to web based maps using the Leaflet Routing Machine with Mapzen plugins.
 - [Decoding Shape](./decoding.md) - Describes how to decode the route path's shape (returned as an encoded polyline). Contains sample code in several languages.
 
+Data source listing and attribution information can be found here:
+
+- [Data sources](../mjolnir/docs/data_sources.md) - A listing of data sources used within Valhalla routing tiles.
+- [Attribtion requirements](../mjolnir/docs/attribution.md).
+
 Technical descriptions available in other Valhalla repositories includes:
 
 - [Why Tiles?](../mjolnir/docs/why_tiles.md) - Some of the objectives and reasons for designing a tiled, routing data set are included here.
