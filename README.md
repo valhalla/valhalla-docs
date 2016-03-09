@@ -14,8 +14,8 @@ Documentation available within the valhalla-docs repository includes:
 
 Data source listing and attribution information can be found here:
 
-- [Data sources](../mjolnir/docs/data_sources.md) - A listing of data sources used within Valhalla routing tiles.
-- [Attribution requirements](../mjolnir/docs/attribution.md).
+- [Data sources](../../../mjolnir/blob/master/docs/data_sources.md) - A listing of data sources used within Valhalla routing tiles.
+- [Attribution requirements](../../../mjolnir/blob/master/docs/attribution.md).
 
 Technical descriptions available in other Valhalla repositories includes:
 
