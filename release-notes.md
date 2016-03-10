@@ -2,6 +2,7 @@
 # Release Notes
 
 ## Release Date: 2016-03-07
+
 - **Updated all APIs to honor the DNT (Do not track) if set in the header.  This will avoid logging locations.
 
 ## Release Date: 2016-02-22
