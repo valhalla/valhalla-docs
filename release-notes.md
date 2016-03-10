@@ -4,6 +4,7 @@
 ## Release Date: 2016-03-07
 
 - **Updated all APIs to honor the DNT (Do not track) if set in the header** -  This will avoid logging locations.
+- **Reduce 'Merge maneuver' verbal alert instructions** -  Only create a verbal alert instruction for a 'Merge maneuver' if the previous maneuver is > 1.5 km.
 
 ## Release Date: 2016-02-22
 
