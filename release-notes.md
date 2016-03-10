@@ -1,6 +1,9 @@
 
 # Release Notes
 
+## Release Date: 2016-03-07
+- **Updated all APIs to honor the DNT (Do not track) if set in the header.  This will avoid logging locations.
+
 ## Release Date: 2016-02-22
 
 - **Use bidirectional A* for automobile routes** - Switch to bidirectional A* for all but bus routes and short routes (where origin and destination are less than 10km apart). This improves performance and has less failure cases for longer routes. Some data import adjustments were made (02-19) to fix some issues encountered with arterial and highway hierarchies. Also only use a maximum of 2 passes for bidirecdtional A* to reduce "long time to fail" cases.
