@@ -295,6 +295,7 @@ A maneuver `transit_route` includes:
 | `operator_onestop_id` | Global operator/agency identifier from Transitland. |
 | `operator_name` | Operator/agency name. For example "MTA New York City Transit". |
 | `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
+| `type` | Transit route type.<ul><li>Tram or light rail = 0</li><li>Metro or subway = 1</li><li>Rail = 2</li><li>Bus = 3</li><li>Ferry = 4</li><li>Cable car = 5</li><li>Gondola = 6</li><li>Funicular = 7</li><ul>|
 | `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
 
 A `transit_stop` includes:
