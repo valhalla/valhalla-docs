@@ -136,7 +136,7 @@ These options are available for pedestrian costing methods.
 | Options | Description |
 | :------------------ | :----------- |
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
-| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified, United States-based English (en-US) is used. Currently supported language tags: en-US. |
+| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags: en-US. |
 | `narrative` |  Flag to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. |
 
 ### Other request options
@@ -159,6 +159,7 @@ Basic trip information includes:
 | `status` | Status code. |
 | `status_message ` | Status message. |
 | `units` | The specified units of length are returned, either kilometers or miles. |
+| `language` | The language of the narration instructions. If the user specified a language in the directions options and the specified language was supported - this returned value will be equal to the specified value. Otherwise, this value will be the default (en-US) language. |
 | `locations` | Location information is returned in the same form as it is entered with additional fields to indicate the side of the street. |
 
 The summary JSON object includes:
