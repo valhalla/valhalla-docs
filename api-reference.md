@@ -293,7 +293,7 @@ A maneuver `transit_route` includes:
 | `text_color` | The numeric text color value associated with a transit route. The value for black would be "0". |
 | `description` | The description of the the transit route. For example "Trains operate from Ditmars Boulevard, Queens, to Stillwell Avenue, Brooklyn, at all times. N trains in Manhattan operate along Broadway and across the Manhattan Bridge to and from Brooklyn. Trains in Brooklyn operate along 4th Avenue, then through Borough Park to Gravesend. Trains typically operate local in Queens, and either express or local in Manhattan and Brooklyn, depending on the time. Late night trains operate via Whitehall Street, Manhattan. Late night service is local". |
 | `operator_onestop_id` | Global operator/agency identifier from Transitland. |
-| `operator_name` | Operator/agency name. For example "MTA New York City Transit". |
+| `operator_name` | Operator/agency name. For example "BART", "King County Marine Divison", etc.  Short name is used over long name. |
 | `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
 | `type` | Transit route type.<ul><li>Tram or light rail = 0</li><li>Metro or subway = 1</li><li>Rail = 2</li><li>Bus = 3</li><li>Ferry = 4</li><li>Cable car = 5</li><li>Gondola = 6</li><li>Funicular = 7</li><ul>|
 | `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
