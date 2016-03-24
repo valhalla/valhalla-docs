@@ -224,6 +224,8 @@ Each maneuver includes:
 | `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
 | `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
+| `travel_mode` | Travel mode.<ul><li>"drive"</li><li>"pedestrian"</li><li>"bicycle"</li><li>"transit"</li></ul>|
+| `travel_type` | Travel type.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
 
 
 For the maneuver `type`, the following are available:
@@ -296,7 +298,6 @@ A maneuver `transit_info` includes:
 | `operator_onestop_id` | Global operator/agency identifier from Transitland. |
 | `operator_name` | Operator/agency name. For example "BART", "King County Marine Divison", etc.  Short name is used over long name. |
 | `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
-| `type` | Transit route type.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li><ul>|
 | `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
 
 A `transit_stop` includes:
