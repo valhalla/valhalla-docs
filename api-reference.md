@@ -222,7 +222,7 @@ Each maneuver includes:
 | `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
 | `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
 | `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
-| `transit_route` | Contains the attributes that descibe a specific transit route. See below for details. |
+| `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
 
 
@@ -282,7 +282,7 @@ Each maneuver sign element includes:
 | `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
 
-A maneuver `transit_route` includes:
+A maneuver `transit_info` includes:
 
 | Maneuver Transit Route Item | Description |
 | :--------- | :---------- |
@@ -296,7 +296,7 @@ A maneuver `transit_route` includes:
 | `operator_onestop_id` | Global operator/agency identifier from Transitland. |
 | `operator_name` | Operator/agency name. For example "BART", "King County Marine Divison", etc.  Short name is used over long name. |
 | `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
-| `type` | Transit route type.<ul><li>Tram or light rail = 0</li><li>Metro or subway = 1</li><li>Rail = 2</li><li>Bus = 3</li><li>Ferry = 4</li><li>Cable car = 5</li><li>Gondola = 6</li><li>Funicular = 7</li><ul>|
+| `type` | Transit route type.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li><ul>|
 | `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
 
 A `transit_stop` includes:
