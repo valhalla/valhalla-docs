@@ -14,7 +14,7 @@
 
 ## Release Date: 2016-03-07
 
-- **Updated all APIs to honor the DNT (Do not track) if set in the header** -  This will avoid logging locations.
+- **Updated all APIs to honor the optional DNT (Do not track) http header** -  This will avoid logging locations.
 - **Reduce 'Merge maneuver' verbal alert instructions** -  Only create a verbal alert instruction for a 'Merge maneuver' if the previous maneuver is > 1.5 km.
 - **Updated transit defaults.  Tweaked transit costing logic to obtain better routes.** -  use_rail = 0.6, use_transfers = 0.3, transfer_cost = 15.0 and transfer_penalty = 300.0.  Updated the TransferCostFactor to use the transfer_factor correctly.  TransitionCost for pedestrian costing bumped up from 20.0f to 30.0f when predecessor edge is a transit connection.
 - **Initial Guidance Globalization** -  Partial framework for Guidance Globalization. Started reading some guidance phrases from en-US.json file.
