@@ -28,7 +28,7 @@ Mapzen Turn-by-Turn is a shared routing service. As such, there are limitations 
 
 When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
 
-To set up your development environment for this walkthrough, you need to download Leaflet and the Leaflet Routing Machine and Mapzen Turn-by-Turn plug-ins. There are several ways you can obtain these files, including through a package manager, such as [npm](https://www.npmjs.com/). If you want to use other methods, see the documentation for those products.
+To set up your development environment for this walkthrough, you need to download Leaflet and the Leaflet Routing Machine and Mapzen Turn-by-Turn plug-ins.
 
 If you find links for multiple versions of the required libraries, you should download the latest stable release for these files.
 
@@ -43,7 +43,7 @@ If you find links for multiple versions of the required libraries, you should do
 
 ## Create an index page
 
-Now that you have downloaded the required dependent files, you are ready to start building your application. If you are using the [Node.js](https://nodejs.org/) framework or are adding routing to an existing web application, you may want to use a different file organization. This example uses the simplest structure, a single index.html file.
+Now that you have downloaded the required dependent files, you are ready to start building your application. This example uses the simplest structure, a single index.html file.
 
 1. At the root level of your working folder, create a file called index.html and open it in a text editor.
 
