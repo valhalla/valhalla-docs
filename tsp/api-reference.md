@@ -36,7 +36,7 @@ Here is an example of a Travelling Salesperson scenario:
 
 Given a list of cities and the distances/times between each pair, a salesperson wants to visit each city one time taking the most optimized route and end at his/her destination (either return to origin or a different destination). 
 
-    matrix.mapzen.com/optimized?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=valhalla-t_16n1c&api_key=matrix-xxxxxx
+    matrix.mapzen.com/optimized?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=matrix-xxxxxx
 
 There is an option to name your optimized request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
