@@ -4,6 +4,7 @@
 ## Release Date: 2016-04-12
 
 - **Guidance Globalization** -  Added logic to use tagged language files that contain the guidance phrases. The initial versions of en-US, de-DE, and cs-CZ have been deployed.
+- **Updated ferry defaults** -  Bumped up use_ferry to 0.65 so that we don't penalize ferries as much.
 
 ## Release Date: 2016-03-31
 - **Data producer updates** - Do not generate shortcuts across a node which is a fork. This caused missing fork maneuvers on longer routes.  GetNames update ("Broadway fix").  Fixed an issue with looking up a name in the ref map and not the name map.  Also, removed duplicate names.  Private = false was unsetting destination only flags for parking aisles.         
