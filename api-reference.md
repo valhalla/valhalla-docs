@@ -136,7 +136,7 @@ These options are available for pedestrian costing methods.
 | Options | Description |
 | :------------------ | :----------- |
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
-| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags: en-US. |
+| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags: en-US, de-DE, cs-CZ. |
 | `narrative` |  Flag to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. |
 
 ### Other request options
