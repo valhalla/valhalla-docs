@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## Release Date: 2016-04-28
+
+- **Data producer updates** - Transit refactor.  Moved transit to hierarchy level 3.  This creates smaller "road only" tiles.   
+
 ## Release Date: 2016-04-12
 
 - **Guidance Globalization** -  Added logic to use tagged language files that contain the guidance phrases. The initial versions of en-US, de-DE, and cs-CZ have been deployed.
