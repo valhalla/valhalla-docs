@@ -3,7 +3,9 @@
 
 ## Release Date: 2016-04-28
 
-- **Data producer updates** - Transit refactor.  Moved transit to hierarchy level 3.  This creates smaller "road only" tiles.   
+- **Tile Format Updates** - Separated the transit graph from the "road only" graph into different tiles but retained their interconnectivity. Transit tiles are now hierarchy level 3.
+- **Tile Format Updates** - Reduced the size of graph edge shape data by 5% through the use of varint encoding (LEB128)
+- **Tile Format Updates** - Aligned `EdgeInfo` structures to proper byte boundaries so as to maintain compatibility for systems who don't support reading from unaligned addresses.
 
 ## Release Date: 2016-04-12
 
