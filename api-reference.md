@@ -62,6 +62,7 @@ Optionally, you can include the following location information without impacting
 * `phone` = Telephone number.
 * `url` = URL for the place or location.
 * `side_of_street` = (response only) The side of street of a `break` `location` that is determined based on the actual route when the `location` is offset from the street. The possible values are `left` and `right`.
+* `date_time` = (response only) Expected date/time for the user to be at the location using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:00".
 
 Future development work includes adding location options and information related to time at each location. This will allow routes to specify a start time or an arrive by time at each location. There is also ongoing work to improve support for `through` locations.
 
@@ -75,6 +76,7 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `auto_shorter` | Alternate costing for driving that provides a short path (though not guaranteed to be shortest distance) that obeys driving rules for access and turn restrictions. |
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
+| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.  Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxxx`  Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
 
 #### Costing options
@@ -128,10 +130,24 @@ These options are available for pedestrian costing methods.
 | `walking_speed` | Walking speed in kilometers per hour. Defaults to 5.1 km/hr (3.1 miles/hour). |
 | `walkway_factor` | A factor that modifies the cost when encountering roads or paths that do not allow vehicles and are set aside for pedestrian use. Pedestrian routes generally attempt to favor using these [walkways and sidewalks](http://wiki.openstreetmap.org/wiki/Sidewalks). The default walkway_factor is 0.9, indicating a slight preference. |
 | `alley_factor` | A factor that modifies (multiplies) the cost when [alleys](http://wiki.openstreetmap.org/wiki/Tag:service%3Dalley) are encountered. Pedestrian routes generally want to avoid alleys or narrow service roads between buildings. The default alley_factor is 2.0. |
-| `driveway_factor` | A factor that modifies (mulitplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
+| `driveway_factor` | A factor that modifies (multiplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
 | `step_penalty` | A penalty in seconds added to each transition onto a path with [steps or stairs](http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps). Higher values apply larger cost penalties to avoid paths that contain flights of steps. |
 
-### Directions options
+##### Transit costing options
+
+These options are available for transit costing when the multimodal costing model is used.
+
+| Transit options | Description |
+| :-------------------------- | :----------- |
+| `use_bus` | User's desire to use buses.  Range of values from 0 (try to avoid buses) to 1 (strong preference for riding buses).|
+| `use_rail` | User's desire to use rail/subway/metro.  Range of values from 0 (try to avoid rail) to 1 (strong preference for riding rail).|
+| `use_transfers` |User's desire to favor transfers.  Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
+
+For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=valhalla-xxxxxxx`
+
+Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+
+#### Directions options
 
 | Options | Description |
 | :------------------ | :----------- |
@@ -139,12 +155,18 @@ These options are available for pedestrian costing methods.
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags: cs-CZ, de-DE, en-US, it-IT. |
 | `narrative` |  Flag to allow users to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. |
 
-### Other request options
+#### Other request options
 
 | Options | Description |
 | :------------------ | :----------- |
+| `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. Not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time is specified in ISO 8601 format (YYYY-MM-DDThh:mm). For example "2016-07-03T08:06"</li></ul> |
 | `out_format` | Output format. If no `out_format` is specified, JSON is returned. Future work includes PBF (protocol buffer) support. |
 | `id` | Name your route request. If `id` is specified, the naming will be sent thru to the response. |
+
+This is an example of a transit route departing on 2016-03-29 at 08:00.
+`http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","date_time":{"type":1,"value":"2016-03-29T08:00"}}&api_key=valhalla-xxxxxxx`
+
+Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ## Outputs of a route
 
@@ -182,8 +204,8 @@ Each maneuver includes:
 | `type` | Type of maneuver. See below for a list. |
 | `instruction` | Written maneuver instruction. Describes the maneuver, such as "Turn right onto Main Street". |
 | `verbal_transition_alert_instruction` | Text suitable for use as a verbal alert in a navigation application. The transition alert instruction will prepare the user for the forthcoming transition. For example: "Turn right onto North Prince Street". |
-| `verbal_pre_transition_instruction` | Text suitable for use as a verbal message immediately prior to the maneuver transition. For example "Turn right onto North Prince Street, US 222". |
-| `verbal_post_transition_instruction` | Text suitable for use as a verbal message immediately after the maneuver transition. For example "Continue on US 222 for 3.9 miles". |
+| `verbal_pre_transition_instruction` | Text suitable for use as a verbal message immediately prior to the maneuver transition. For example "Turn right onto North Prince Street, U.S. 2 22". |
+| `verbal_post_transition_instruction` | Text suitable for use as a verbal message immediately after the maneuver transition. For example "Continue on U.S. 2 22 for 3.9 miles". |
 | `street_names` | List of street names that are consistent along the entire maneuver. |
 | `begin_street_names` | When present, these are the street names at the beginning of the maneuver (if they are different than the names that are consistent along the entire maneuver). |
 | `time` | Estimated time along the maneuver in seconds. |
@@ -196,7 +218,15 @@ Each maneuver includes:
 | `ferry` | True if a ferry is encountered on this maneuver. |
 | `sign` | Contains the interchange guide information at a road junction associated with this maneuver. See below for details. |
 | `roundabout_exit_count` | The spoke to exit roundabout after entering. |
+| `depart_instruction` | Written depart time instruction. Typically used with a transit maneuver, such as "Depart: 8:04 AM from 8 St - NYU". |
+| `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
+| `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
+| `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
+| `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
+| `travel_mode` | Travel mode.<ul><li>"drive"</li><li>"pedestrian"</li><li>"bicycle"</li><li>"transit"</li></ul>|
+| `travel_type` | Travel type for drive.<ul><li>"car"</li></ul>Travel type for pedestrian.<ul><li>"foot"</li></ul>Travel type for bicycle.<ul><li>"road"</li></ul>Travel type for transit.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
+
 
 For the maneuver `type`, the following are available:
 
@@ -231,6 +261,13 @@ kRoundaboutEnter = 26;
 kRoundaboutExit = 27;
 kFerryEnter = 28;
 kFerryExit = 29;
+kTransit = 30;
+kTransitTransfer = 31;
+kTransitRemainOn = 32;
+kTransitConnectionStart = 33;
+kTransitConnectionTransfer = 34;
+kTransitConnectionDestination = 35;
+kPostTransitConnectionDestination = 36;
 ```
 
 The maneuver `sign` may contain four lists of interchange sign elements as follows:
@@ -246,6 +283,34 @@ Each maneuver sign element includes:
 | :------------------ | :---------- |
 | `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
+
+A maneuver `transit_info` includes:
+
+| Maneuver Transit Route Item | Description |
+| :--------- | :---------- |
+| `onestop_id` | Global transit route identifier from Transitland. |
+| `short_name` | Short name describing the transit route. For example "N". |
+| `long_name` | Long name describing the transit route. For example "Broadway Express". |
+| `headsign` | The sign on a public transport vehicle that identifies the route destination to passengers. For example "ASTORIA - DITMARS BLVD". |
+| `color` | The numeric color value associated with a transit route. The value for yellow would be "16567306". |
+| `text_color` | The numeric text color value associated with a transit route. The value for black would be "0". |
+| `description` | The description of the the transit route. For example "Trains operate from Ditmars Boulevard, Queens, to Stillwell Avenue, Brooklyn, at all times. N trains in Manhattan operate along Broadway and across the Manhattan Bridge to and from Brooklyn. Trains in Brooklyn operate along 4th Avenue, then through Borough Park to Gravesend. Trains typically operate local in Queens, and either express or local in Manhattan and Brooklyn, depending on the time. Late night trains operate via Whitehall Street, Manhattan. Late night service is local". |
+| `operator_onestop_id` | Global operator/agency identifier from Transitland. |
+| `operator_name` | Operator/agency name. For example "BART", "King County Marine Divison", etc.  Short name is used over long name. |
+| `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
+| `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
+
+A `transit_stop` includes:
+
+| Transit Stop Item | Description |
+| :--------- | :---------- |
+| `type` | The type of stop (simple stop=0; station=1) |
+| `onestop_id` | Global transit stop identifier from Transitland. |
+| `name` | Name of the stop/station. For example "14 St - Union Sq". |
+| `arrival_date_time` | Arrival date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
+| `departure_date_time` | Departure date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
+| `is_parent_stop` | True if this stop is a marked as a parent stop. |
+| `assumed_schedule` | True if the times are based on an assumed schedule because the actual schedule is not known. |
 
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
