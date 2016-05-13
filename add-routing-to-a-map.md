@@ -6,7 +6,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
 - functionality to drag the route start and endpoints to get a different path
-- the ability change the mode of transportation, such as automobile or pedestrian
+- the ability change the mode of transportation, such as auto, bicycle, pedestrian or multimodal
 
 In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
@@ -35,9 +35,9 @@ If you find links for multiple versions of the required libraries, you should do
 1. Create a new folder on your machine named `routing-tutorial`. You will use this folder as your working directory where you can store the downloaded files.
 2. Download Leaflet from http://leafletjs.com/download.html.
 3. Download Leaflet Routing Machine from https://github.com/perliedman/leaflet-routing-machine/releases.
-4. Download LRM-Mapzen from http://mapzen.com/resources/lrm-mapzen-0.1.2.zip.
+4. Download LRM-Mapzen from  https://mapzen.com/resources/lrm-mapzen.zip.
 5. Unzip the files you downloaded and move the subfolders to your main working folder.
-6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `lrm-mapzen-0.1.2` folder to `lrm-mapzen`.
+6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `lrm-mapzen-1.0.0` folder to `lrm-mapzen`.
 
     ![Folder structure of tutorial files](images/folder-structure.png)
 
@@ -118,7 +118,7 @@ You will need to modify the path to reflect your working directory if you are no
 4. Add the Tangram JavaScript file, which is the rendering engine you will be using to draw the map.
 
     ```html
-    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
     ```
 
 5. Add the Leaflet Routing Machine JavaScript file.
@@ -147,7 +147,7 @@ After adding these, your index.html file should look something like this. Note t
 </head>
 <body>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
 </body>
@@ -213,7 +213,7 @@ Your index.html should look something like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -260,7 +260,7 @@ Your `<body>` section should look like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -311,7 +311,7 @@ Your `<body>` section should look like this:
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -346,9 +346,9 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'your-routing-mode',
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'your-routing-mode'}),
       formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
     [...]
@@ -356,10 +356,10 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. 
 3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
-4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
+4. Change the options object with costing/transportation mode {costing:`your-routing-mode`} to {costing:`auto`} to perform routing by automobile, again maintaining the single quotes.
 
     ```js
-    router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+    router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
     ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
@@ -374,7 +374,7 @@ The `<body>` section should look something like this, but with your own API key 
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -390,9 +390,9 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
       formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
   </script>
@@ -430,7 +430,7 @@ The `<body>` section should look something like this, but with your own API key 
 <body>
   <div id="map"></div>
   <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
   <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
@@ -450,9 +450,9 @@ The `<body>` section should look something like this, but with your own API key 
         styles: [ {color: 'white',opacity: 0.8, weight: 12},
           {color: '#2676C6', opacity: 1, weight: 6}
         ]},
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
       formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
   </script>
@@ -462,6 +462,6 @@ The `<body>` section should look something like this, but with your own API key 
 
 ## Walkthrough summary and next steps
 
-In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the costing/transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://mapzen.com/documentation/turn-by-turn/) to learn more about routing with Mapzen Turn-by-Turn.
