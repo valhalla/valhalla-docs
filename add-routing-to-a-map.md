@@ -365,9 +365,9 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
@@ -383,7 +383,7 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(33.8128,-117.9259)
       ],
       router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
-      formatter: new L.Routing.Mapzen.Formatter(),
+      formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -421,9 +421,9 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
@@ -440,10 +440,10 @@ The `<body>` section should look something like this, but with your own API key 
       ],
       lineOptions: {
         styles: [ {color: 'white',opacity: 0.8, weight: 12},
-          {color: '#2676C6', opacity: 1, weight: 6}
-        ]},
+                {color: '#2676C6', opacity: 1, weight: 6}
+      ]},
       router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
-      formatter: new L.Routing.Mapzen.Formatter(),
+      formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -454,6 +454,6 @@ The `<body>` section should look something like this, but with your own API key 
 
 ## Walkthrough summary and next steps
 
-In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the costing/transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://mapzen.com/documentation/turn-by-turn/) to learn more about routing with Mapzen Turn-by-Turn.
