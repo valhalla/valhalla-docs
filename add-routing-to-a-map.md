@@ -37,9 +37,7 @@ When you request a route from Mapzen Turn-by-Turn, you are sending and receiving
 
 Now that you have downloaded the required dependent files, you are ready to start building your application. This example uses the simplest structure, a single index.html file.
 
-1. At the root level of your working folder, create a file called index.html and open it in a text editor.
-
-    ![New index.html file in folder](images/new-index-file.png)
+1. At the root level of your `routing-tutorial` folder, create a file called `index.html` and open it in a text editor.
 
 2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
 
@@ -454,6 +452,6 @@ The `<body>` section should look something like this, but with your own API key 
 
 ## Walkthrough summary and next steps
 
-In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the costing mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://mapzen.com/documentation/turn-by-turn/) to learn more about routing with Mapzen Turn-by-Turn.
