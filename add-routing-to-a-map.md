@@ -24,22 +24,14 @@ Mapzen Turn-by-Turn is a shared routing service. As such, there are limitations 
 3. Create a new key, and optionally, give it a project name so you can remember the purpose of the key.
 4. Keep the web page open so you can copy the key into the source code later.
 
-## Download and install the dependencies
-
-When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
-
-1. Create a new folder on your machine named `routing-tutorial`. You will use this folder as your working directory where you can store the downloaded files.
-4. Download LRM-Mapzen from https://mapzen.com/resources/lrm-mapzen.zip.
-5. Unzip the files you downloaded and move the subfolders to your main working folder.
-6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `lrm-mapzen-1.0.0` folder to `lrm-mapzen`.
-
 ## Create an index page
 
-Now that you have downloaded the required dependent files, you are ready to start building your application. This example uses the simplest structure, a single index.html file.
+You are ready to start building your map. You will need to use a text editor to update the HTML.
 
-1. At the root level of your `routing-tutorial` folder, create a file called `index.html` and open it in a text editor.
+Suggested text editor applications include [Atom - OS X, Windows, Linux](https://atom.io/); [Notepad++ - Windows](https://notepad-plus-plus.org/); [TextWrangler - OS X](http://www.barebones.com/products/textwrangler/); and  [Sublime - OS X, Windows, Linux; free trial](http://www.sublimetext.com/). While you can use the apps installed with your operating system, such as Notepad or TextEdit, they do not provide the helpful indentations, code coloring and autocomplete, or text alignment options found in the other editors. For TextEdit, you must go to the Format menu and click Make Plain Text to use the plain-text version of the file. Do not use an app that applies rich formatting, such as Word or Wordpad.
 
-2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
+1. Start your text editor with a blank document and copy and paste the following HTML. (Note: If the text editor you are using requires you to name and save a document at the time when it is first created, call the file `index.html`.)
+3. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
 
     ```html
     <!DOCTYPE html>
@@ -51,8 +43,8 @@ Now that you have downloaded the required dependent files, you are ready to star
     </html>
     ```
 
-3. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
-4. Save your edits to the index.html file.
+4. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
+5. Name your the document `index.html` (where the file name is `index` and the type is `.html`) and save it.
 
 You HTML should look like this:
 ```html
@@ -68,7 +60,7 @@ You HTML should look like this:
 
 ## Start a server to get the project running locally
 
-To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
+You will be using the [Tangram graphics engine](https://mapzen.com/projects/tangram) to draw the features on the map. To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
 
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
 2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`. If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
@@ -83,9 +75,11 @@ If the step was successful, you should see a blank index page with your title (M
 
 ## Add references to CSS and JavaScript files
 
-Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Mapzen Turn-by-Turn. You will need to add these into the <head> and <body> sections of the index.html.
+When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
 
-You will need to modify the path to reflect your working directory if you are not using the folder names suggested in the earlier section.
+Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Mapzen Turn-by-Turn. You will need to add these into the `<head>` and `<body>` sections of the index.html.
+
+You are linking to these CSS and JS files from a remote website, rather than from a file on your machine. You can also find these files on the web or install them through a package manager if you prefer to download a local copy.
 
 1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file.
 
@@ -93,10 +87,10 @@ You will need to modify the path to reflect your working directory if you are no
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
     ```
 
-2. In the `<head>` section, add reference to the Mapzen CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn.
+2. In the `<head>` section, add a reference to the Mapzen CSS file.
 
     ```html
-    <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+    <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
     ```
 
 3. In the `<body>` section, add the Leaflet JavaScript file.
@@ -120,7 +114,7 @@ You will need to modify the path to reflect your working directory if you are no
 6. Add the Mapzen JavaScript file.
 
     ```html
-    <script src="lrm-mapzen/lrm-mapzen.js"></script>
+    <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
     ```
 
 7. Save your edits and refresh the browser.
@@ -133,13 +127,13 @@ After adding these, your index.html file should look something like this. Note t
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
-  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
 </head>
 <body>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
 </body>
 </html>
 ```
@@ -191,7 +185,7 @@ Your index.html should look something like this:
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
-  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
   <style>
     #map {
       height: 100%;
@@ -205,7 +199,7 @@ Your index.html should look something like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
   </script>
@@ -252,7 +246,7 @@ Your `<body>` section should look like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -303,7 +297,7 @@ Your `<body>` section should look like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -366,7 +360,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -422,7 +416,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
