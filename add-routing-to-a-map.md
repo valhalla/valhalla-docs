@@ -6,7 +6,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
 - functionality to drag the route start and endpoints to get a different path
-- the ability change the mode of transportation, such as auto, bicycle, pedestrian, or multimodal
+- the ability change the mode of transportation, such as automobile, bicycle, pedestrian, or multimodal
 
 In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
@@ -140,7 +140,7 @@ After adding these, your index.html file should look something like this. Note t
 
 At this point, your browser page is still empty. As you are working, it’s a good idea to save your edits and periodically reload the browser page. This helps you identify problems quicker and trace them back to your most recent changes. You should also monitor the terminal window for status messages. If your code is working properly, you should see a message of 200 in the terminal window, as 200 is the HTTP response code for successful requests.
 
-However, seeing a 404 error often means that the file cannot be found. You should make sure the paths in your HTML match the locations on disk before you continue further.
+However, seeing a 404 error often means that the file cannot be found. You should make sure the paths in your HTML are correct before you continue further.
 
 ![Terminal window error when a file cannot be found](images/terminal-404-error.png)
 
