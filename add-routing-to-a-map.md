@@ -251,18 +251,18 @@ Your `<body>` section should look like this:
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
-  var map = L.map('map');
-  var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-  });
-  layer.addTo(map);
-  map.setView([41.8758,-87.6189], 16);
+    var map = L.map('map');
+    var layer = Tangram.leafletLayer({
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    });
+    layer.addTo(map);
+    map.setView([41.8758,-87.6189], 16);
   </script>
 </body>
 [...]
@@ -302,24 +302,24 @@ Your `<body>` section should look like this:
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
   <script src="lrm-mapzen/lrm-mapzen.js"></script>
   <script>
-  var map = L.map('map');
-  var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-  });
-  layer.addTo(map);
-  //map.setView([41.8758,-87.6189], 16);
-  L.Routing.control({
-    waypoints: [
-      L.latLng(41.8758,-87.6189),
-      L.latLng(33.8128,-117.9259)
-    ]
-  }).addTo(map);
+    var map = L.map('map');
+    var layer = Tangram.leafletLayer({
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    });
+    layer.addTo(map);
+    //map.setView([41.8758,-87.6189], 16);
+    L.Routing.control({
+      waypoints: [
+        L.latLng(41.8758,-87.6189),
+        L.latLng(33.8128,-117.9259)
+      ]
+    }).addTo(map);
   </script>
 </body>
 [...]
@@ -339,7 +339,7 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(33.8128,-117.9259)
       ],
       router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'your-routing-mode'}),
-      formatter: new L.Routing.Mapzen.Formatter(),
+      formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -348,7 +348,7 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
 3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
-4. Change the options object with costing/transportation mode {costing:`your-routing-mode`} to {costing:`auto`} to perform routing by automobile, again maintaining the single quotes.
+4. Change the options object for the transportation mode {costing:`your-routing-mode`} to {costing:`auto`} to perform routing by automobile, again maintaining the single quotes.
 
     ```js
     router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
