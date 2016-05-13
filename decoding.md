@@ -10,7 +10,7 @@ Below are some sample algorithms to decode the string to create a list of latitu
 
 Here is an example of decoding in JavaScript.
 
-```
+``` javascript
 // This is adapted from the implementation in Project-OSRM
 // https://github.com/DennisOSRM/Project-OSRM-Web/blob/master/WebContent/routing/OSRM.RoutingGeometry.js
 polyline.decode = function(str, precision) {
@@ -66,9 +66,9 @@ polyline.decode = function(str, precision) {
 
 ## C++ 11
 
-Here is an example of decoding in C++.
+Here is an example of decoding in C++11
 
-```
+``` c++
 #include <vector>
 
 constexpr double kPolylinePrecision = 1E6;
@@ -116,4 +116,46 @@ std::vector<PointLL> decode(const std::string& encoded) {
   }
   return shape;
 }
+```
+
+## Python
+
+Here is an example of decoding in Python
+
+``` python
+#!/usr/bin/env python
+
+import sys
+
+#six degrees of precision in valhalla
+inv = 1.0 / 1e6;
+
+#decode an encoded string
+def decode(encoded):
+  decoded = []
+  previous = [0,0]
+  i = 0
+  #for each byte
+  while i < len(encoded):
+    #for each coord (lat, lon)
+    ll = [0,0]
+    for j in [0, 1]:
+      shift = 0
+      byte = 0x20
+      #keep decoding bytes until you have this coord
+      while byte >= 0x20:
+        byte = ord(encoded[i]) - 63
+        i += 1
+        ll[j] |= (byte & 0x1f) << shift
+        shift += 5
+      #get the final value adding the previous offset and remember it for the next
+      ll[j] = previous[j] + (~(ll[j] >> 1) if ll[j] & 1 else (ll[j] >> 1))
+      previous[j] = ll[j]
+    #scale by the precision and chop off long coords also flip the positions so
+    #its the far more standard lon,lat instead of lat,lon
+    decoded.append([float('%.6f' % (ll[1] * inv)), float('%.6f' % (ll[0] * inv))])
+  #hand back the list of coordinates
+  return decoded
+
+print decode(sys.argv[1])
 ```
