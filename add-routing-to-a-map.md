@@ -6,7 +6,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
 - functionality to drag the route start and endpoints to get a different path
-- the ability change the mode of transportation, such as auto, bicycle, pedestrian or multimodal
+- the ability change the mode of transportation, such as auto, bicycle, pedestrian, or multimodal
 
 In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
