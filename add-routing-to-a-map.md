@@ -6,7 +6,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 - a text narrative of maneuvers to perform on the route
 - distances along your route and estimated travel times
 - functionality to drag the route start and endpoints to get a different path
-- the ability change the mode of transportation, such as automobile or pedestrian
+- the ability change the mode of transportation, such as automobile, bicycle, pedestrian, or multimodal
 
 In this walkthrough, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
@@ -24,31 +24,13 @@ Mapzen Turn-by-Turn is a shared routing service. As such, there are limitations 
 3. Create a new key, and optionally, give it a project name so you can remember the purpose of the key.
 4. Keep the web page open so you can copy the key into the source code later.
 
-## Download and install the dependencies
-
-When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
-
-To set up your development environment for this walkthrough, you need to download Leaflet and the Leaflet Routing Machine and Mapzen Turn-by-Turn plug-ins.
-
-If you find links for multiple versions of the required libraries, you should download the latest stable release for these files.
-
-1. Create a new folder on your machine named `routing-tutorial`. You will use this folder as your working directory where you can store the downloaded files.
-2. Download Leaflet from http://leafletjs.com/download.html.
-3. Download Leaflet Routing Machine from https://github.com/perliedman/leaflet-routing-machine/releases.
-4. Download LRM-Mapzen from http://mapzen.com/resources/lrm-mapzen-0.1.2.zip.
-5. Unzip the files you downloaded and move the subfolders to your main working folder.
-6. For simplicity, rename the subfolders inside your `routing-tutorial` folder to remove the release numbers. For example, rename the `lrm-mapzen-0.1.2` folder to `lrm-mapzen`.
-
-    ![Folder structure of tutorial files](images/folder-structure.png)
-
 ## Create an index page
 
-Now that you have downloaded the required dependent files, you are ready to start building your application. This example uses the simplest structure, a single index.html file.
+You are ready to start building your map. You will need to use a text editor to update the HTML.
 
-1. At the root level of your working folder, create a file called index.html and open it in a text editor.
+Suggested text editor applications include [Atom - OS X, Windows, Linux](https://atom.io/); [Notepad++ - Windows](https://notepad-plus-plus.org/); [TextWrangler - OS X](http://www.barebones.com/products/textwrangler/); and  [Sublime - OS X, Windows, Linux; free trial](http://www.sublimetext.com/). While you can use the apps installed with your operating system, such as Notepad or TextEdit, they do not provide the helpful indentations, code coloring and autocomplete, or text alignment options found in the other editors. For TextEdit, you must go to the Format menu and click Make Plain Text to use the plain-text version of the file. Do not use an app that applies rich formatting, such as Word or Wordpad.
 
-    ![New index.html file in folder](images/new-index-file.png)
-
+1. Start your text editor with a blank document and copy and paste the following HTML. (Note: If the text editor you are using requires you to name and save a document at the time when it is first created, call the file `index.html`.)
 2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
 
     ```html
@@ -62,7 +44,7 @@ Now that you have downloaded the required dependent files, you are ready to star
     ```
 
 3. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
-4. Save your edits to the index.html file.
+4. Name your the document `index.html` (where the file name is `index` and the type is `.html`) and save it.
 
 You HTML should look like this:
 ```html
@@ -78,7 +60,7 @@ You HTML should look like this:
 
 ## Start a server to get the project running locally
 
-To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
+You will be using the [Tangram graphics engine](https://mapzen.com/projects/tangram) to draw the features on the map. To see your changes on a Tangram map, you need to start a local web server on your machine. You need a web server because some scripts could be blocked by your browser’s security settings.
 
 1. Open a terminal window in the path of your working folder. For example, if your files are in your documents folder, you can type `cd documents/routing-tutorial` (where `cd` means to change the active directory) to navigate to your working folder.
 2. At the prompt, type `python -m SimpleHTTPServer` to start a web server using Python. You should receive a message similar to this in the terminal: `Serving HTTP on 0.0.0.0 port 8000 ...`. If you are having problems, you can instead try the command `python -m http.server 8000` (for use with Python 3).
@@ -93,44 +75,46 @@ If the step was successful, you should see a blank index page with your title (M
 
 ## Add references to CSS and JavaScript files
 
-Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Mapzen Turn-by-Turn. You will need to add these into the <head> and <body> sections of the index.html.
+When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The Leaflet JavaScript library, which provides tools for zooming, displaying attributions, and drawing symbols, is one way you can display routes on web and mobile maps. Leaflet is extensible, and developers have built additional tools for Leaflet maps, including the [Leaflet Routing Machine (LRM)](http://www.liedman.net/leaflet-routing-machine/) and Mapzen plug-ins for routing.
 
-You will need to modify the path to reflect your working directory if you are not using the folder names suggested in the earlier section.
+Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. These include style sheets and JavaScript files for Leaflet, Leaflet Routing Machine, and Mapzen Turn-by-Turn. You will need to add these into the `<head>` and `<body>` sections of the index.html.
+
+You are linking to these CSS and JS files from a remote website, rather than from a file on your machine. You can also find these files on the web or install them through a package manager if you prefer to download a local copy.
 
 1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file.
 
     ```html
-    <link rel="stylesheet" href="leaflet/leaflet.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
     ```
 
-2. In the `<head>` section, add reference to the Mapzen CSS file. This file can be used instead of the Leaflet Routing Machine CSS file because it contains all the LRM icons, as well as additional ones for Mapzen Turn-by-Turn.
+2. In the `<head>` section, add a reference to the Mapzen CSS file.
 
     ```html
-    <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+    <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
     ```
 
 3. In the `<body>` section, add the Leaflet JavaScript file.
 
     ```html
-    <script src="leaflet/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     ```
 
 4. Add the Tangram JavaScript file, which is the rendering engine you will be using to draw the map.
 
     ```html
-    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+    <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
     ```
 
 5. Add the Leaflet Routing Machine JavaScript file.
 
     ```html
-    <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
     ```
 
 6. Add the Mapzen JavaScript file.
 
     ```html
-    <script src="lrm-mapzen/lrm-mapzen.js"></script>
+    <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
     ```
 
 7. Save your edits and refresh the browser.
@@ -142,21 +126,21 @@ After adding these, your index.html file should look something like this. Note t
 <html>
 <head>
   <title>My Routing Map</title>
-  <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
 </head>
 <body>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
 </body>
 </html>
 ```
 
 At this point, your browser page is still empty. As you are working, it’s a good idea to save your edits and periodically reload the browser page. This helps you identify problems quicker and trace them back to your most recent changes. You should also monitor the terminal window for status messages. If your code is working properly, you should see a message of 200 in the terminal window, as 200 is the HTTP response code for successful requests.
 
-However, seeing a 404 error often means that the file cannot be found. You should make sure the paths in your HTML match the locations on disk before you continue further.
+However, seeing a 404 error often means that the file cannot be found. You should make sure the paths in your HTML are correct before you continue further.
 
 ![Terminal window error when a file cannot be found](images/terminal-404-error.png)
 
@@ -200,22 +184,22 @@ Your index.html should look something like this:
 <html>
 <head>
   <title>My Routing Map</title>
-  <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="lrm-mapzen/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
+  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
   <style>
-  #map {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
   </script>
@@ -259,18 +243,18 @@ Your `<body>` section should look like this:
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
-  var map = L.map('map');
-  var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-  });
-  layer.addTo(map);
-  map.setView([41.8758,-87.6189], 16);
+    var map = L.map('map');
+    var layer = Tangram.leafletLayer({
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    });
+    layer.addTo(map);
+    map.setView([41.8758,-87.6189], 16);
   </script>
 </body>
 [...]
@@ -310,24 +294,24 @@ Your `<body>` section should look like this:
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
-  var map = L.map('map');
-  var layer = Tangram.leafletLayer({
-    scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
-  });
-  layer.addTo(map);
-  //map.setView([41.8758,-87.6189], 16);
-  L.Routing.control({
-    waypoints: [
-      L.latLng(41.8758,-87.6189),
-      L.latLng(33.8128,-117.9259)
-    ]
-  }).addTo(map);
+    var map = L.map('map');
+    var layer = Tangram.leafletLayer({
+      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
+      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    });
+    layer.addTo(map);
+    //map.setView([41.8758,-87.6189], 16);
+    L.Routing.control({
+      waypoints: [
+        L.latLng(41.8758,-87.6189),
+        L.latLng(33.8128,-117.9259)
+      ]
+    }).addTo(map);
   </script>
 </body>
 [...]
@@ -346,20 +330,20 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'your-routing-mode',
-      formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'your-routing-mode'}),
+      formatter: new L.Routing.mapzenFormatter(),
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
     [...]
     ```
 
-2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard. 
+2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
 3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
-4. Change `your-routing-mode` to `auto` to perform routing by automobile, again maintaining the single quotes.
+4. Change the options object for the transportation mode {costing:`your-routing-mode`} to {costing:`auto`} to perform routing by automobile, again maintaining the single quotes.
 
     ```js
-    router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
+    router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
     ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
@@ -373,10 +357,10 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -390,9 +374,9 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+      formatter: new L.Routing.mapzenFormatter(),
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
   </script>
@@ -429,10 +413,10 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 <body>
   <div id="map"></div>
-  <script src="leaflet/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-  <script src="leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-  <script src="lrm-mapzen/lrm-mapzen.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
+  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -448,11 +432,11 @@ The `<body>` section should look something like this, but with your own API key 
       ],
       lineOptions: {
         styles: [ {color: 'white',opacity: 0.8, weight: 12},
-          {color: '#2676C6', opacity: 1, weight: 6}
-        ]},
-      router: L.Routing.mapzen('valhalla-xxxxxx', 'auto'),
-      formatter: new L.Routing.Mapzen.Formatter(),
-      summaryTemplate:'<div class="start">{name}</div><div class="info {transitmode}">{distance}, {time}</div>',
+                {color: '#2676C6', opacity: 1, weight: 6}
+      ]},
+      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+      formatter: new L.Routing.mapzenFormatter(),
+      summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
   </script>
@@ -462,6 +446,6 @@ The `<body>` section should look something like this, but with your own API key 
 
 ## Walkthrough summary and next steps
 
-In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the transportation mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
+In this walkthrough, you learned the basics of making a map with Mapzen Turn-by-Turn routing. You can now take what you have learned and add more functionality to your map and embed it in your own projects. For example, you may want to add code to allow the user to pick routing locations with a button, change the costing mode used for routing, or set other options. Each of the routing modes Mapzen Turn-by-Turn supports has many options that can be used to influence the output route and estimated time. For example, automobile routing allows you to set penalties and costs to avoid toll roads or crossing international borders, and bicycle routing allows you to specify the category of bicycle so you are routed on appropriate paths for your equipment.
 
 You can review the [documentation](https://mapzen.com/documentation/turn-by-turn/) to learn more about routing with Mapzen Turn-by-Turn.
