@@ -31,7 +31,7 @@ You are ready to start building your map. You will need to use a text editor to 
 Suggested text editor applications include [Atom - OS X, Windows, Linux](https://atom.io/); [Notepad++ - Windows](https://notepad-plus-plus.org/); [TextWrangler - OS X](http://www.barebones.com/products/textwrangler/); and  [Sublime - OS X, Windows, Linux; free trial](http://www.sublimetext.com/). While you can use the apps installed with your operating system, such as Notepad or TextEdit, they do not provide the helpful indentations, code coloring and autocomplete, or text alignment options found in the other editors. For TextEdit, you must go to the Format menu and click Make Plain Text to use the plain-text version of the file. Do not use an app that applies rich formatting, such as Word or Wordpad.
 
 1. Start your text editor with a blank document and copy and paste the following HTML. (Note: If the text editor you are using requires you to name and save a document at the time when it is first created, call the file `index.html`.)
-3. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
+2. Add the basic HTML tags, including `<!DOCTYPE HTML>`, `<html>`, `<head>`, and `<body>`. Your HTML might look like this:
 
     ```html
     <!DOCTYPE html>
@@ -43,8 +43,8 @@ Suggested text editor applications include [Atom - OS X, Windows, Linux](https:/
     </html>
     ```
 
-4. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
-5. Name your the document `index.html` (where the file name is `index` and the type is `.html`) and save it.
+3. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
+4. Name your the document `index.html` (where the file name is `index` and the type is `.html`) and save it.
 
 You HTML should look like this:
 ```html
