@@ -81,7 +81,7 @@ Because you are working with several external cascading style sheet (CSS) and Ja
 
 You are linking to these CSS and JS files from a remote website, rather than from a file on your machine. You can also find these files on the web or install them through a package manager if you prefer to download a local copy.
 
-1. In index.html, in the `<head>` section, add a reference to your Leaflet CSS file.
+1. In index.html, in the `<head>` section, add a reference to the Leaflet CSS file.
 
     ```html
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
