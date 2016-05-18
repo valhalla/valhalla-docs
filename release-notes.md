@@ -3,6 +3,7 @@
 
 ## Release Date: 2016-05-18
 
+- **Bidirectional A* Improvements** - Fixed an issue where if both origin and destination locations where on not-thru roads that meet at a common node the path ended up taking a long detour. Not all cases were fixed though - next release should fix. Trying to address the termination criteria for when the best connection point of the 2 paths is optimal. Turns out that the initial case where both opposing edges are settled is not guaranteed to be the least cost path. For now we are setting a threshold and extending the search while still tracking best connections. Fixed the opposing edge when a hierarchy transition occurs.
 - **Guidance Globalization** -  Fixed decimal distance to be locale based..
 - **Guidance Improvements**
 	- Fixed roundabout spoke count issue by fixing the drive_on_right attribute.
@@ -12,6 +13,7 @@
 		- Internal intersection edges
 		- 'T' intersections
 		- Intersecting forward edges
+- **Data Producer Updates** - Fix the restrictions on a shortcut edge to be the same as the last directed edge of the shortcut (rather than the first one).
 
 ## Release Date: 2016-04-28
 
