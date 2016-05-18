@@ -1,6 +1,18 @@
 
 # Release Notes
 
+## Release Date: 2016-05-18
+
+- **Guidance Globalization** -  Fixed decimal distance to be locale based..
+- **Guidance Improvements**
+	- Fixed roundabout spoke count issue by fixing the drive_on_right attribute.
+	- Simplified narative by combining unnamed straight maneuvers
+	- Added logic to confirm maneuver type assignment to avoid invalid guidance
+	- Fixed turn maneuvers by improving logic for the following:
+		- Internal intersection edges
+		- 'T' intersections
+		- Intersecting forward edges
+
 ## Release Date: 2016-04-28
 
 - **Tile Format Updates** - Separated the transit graph from the "road only" graph into different tiles but retained their interconnectivity. Transit tiles are now hierarchy level 3.
