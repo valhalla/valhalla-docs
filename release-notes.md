@@ -1,3 +1,7 @@
+## Release Date: 2016-06-08
+
+ * **Bug Fix** - Fixed a bug where edge indexing created many small tiles where no edges actually intersected. This allowed impossible routes to be considered for path finding instead of rejecting them earlier.
+
 ## Release Date: 2016-05-19
 
  * **Bug Fix** - Fixed a bug where routes fail within small, disconnected "islands" due to the threshold logic in prior release. Also better logic for not-thru roads.
