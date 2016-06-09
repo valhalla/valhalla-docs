@@ -1,6 +1,13 @@
 ## Release Date: 2016-06-08
 
  * **Bug Fix** - Fixed a bug where edge indexing created many small tiles where no edges actually intersected. This allowed impossible routes to be considered for path finding instead of rejecting them earlier.
+ * **Guidance Improvements**
+  * Fixed invalid u-turn direction
+  * Updated to properly call out jughandle routes
+  * Enhanced signless interchange maneuvers to help guide users
+ * **Data Producer Updates**
+  * Updated the speed assignment for ramp to be a percentage of the original road class speed assignment
+  * Updated stop impact logic for turn channel onto ramp
 
 ## Release Date: 2016-05-19
 
