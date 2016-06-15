@@ -15,9 +15,6 @@ The following limitations are currently in place.
 * `max_locations` is  50 for `optimized_route` requests.
 * `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for optimized routes. This is identical to the `many_to_many` matrix, where the distance between any pair of locations cannot exceed the maximum.
 * rate limits are two queries per second and 5,000 queries per day.
-* Are all locations reachable?  We make sure that we check the return from the `many_to_many` CostMatrix to see that all locations can be reached. If one or more cannot be reached, it returns an error and lists the location number that cannot be reached.  Currently, we only list one location at this time, even if more than one have an issue.
-  ** This is an example which it returns: `400::Location at index 3 is unreachable`
-   https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=matrix-xxxxxx
 
 You can also refer to the [Mapzen Turn-by-Turn documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place for the Mapzen Turn-by-Turn service.
 
@@ -77,6 +74,12 @@ These are the results of a request to the Optimized Route service.
 | `optimized_route` | Returns an optimized route path from point 'a' to point 'n'.  Given a list of locations, an optimized route with stops at each intermediate location exactly one time, always starting at the first location in the list and ending at the last location.|
 | `locations` | The specified array of lat/lngs from the input request.  The first and last locations in the array will remain the same as the input request.  The intermediate locations may be returned reordered in the response.
 | `units` | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. |
+
+
+## Error checking
+* Are all locations reachable?  We make sure that we check the return from the `many_to_many` CostMatrix to see that all locations can be reached. If one or more cannot be reached, it returns an error and lists the location number that cannot be reached.  Currently, we only list one location at this time, even if more than one have an issue.
+  * This is an example which it returns: `400::Location at index 3 is unreachable`
+   https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=matrix-xxxxxx
 
 See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
 
