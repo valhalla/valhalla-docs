@@ -1,6 +1,6 @@
 # Time-Distance Matrix service API reference
 
-The Time-Distance Matrix service provides a quick computation of time and distance between a set of locations.
+The Time-Distance Matrix service provides a quick computation of time and distance between a set of locations and returns them to you in the resulting matrix table.
 
 The Time-Distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
