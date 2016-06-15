@@ -6,15 +6,18 @@ You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To rep
 
 ## API keys and service limits
 
-To use the Optimized Route service, you must first obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the Optimized Route service, you must first obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.  However, if you already have a `matrix` api key, you are good to go.  We are hosting the new `optimized_route` service on our matrix instances (https://matrix.mapzen.com/).
 
 As a shared service, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
 
 The following limitations are currently in place.
 
 * `max_locations` is  50 for `optimized_route` requests.
-* `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for optimized routes. This is identical to `many_to_many` matrix, where the distance between any pair of locations cannot exceed the maximum.
+* `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for optimized routes. This is identical to the `many_to_many` matrix, where the distance between any pair of locations cannot exceed the maximum.
 * rate limits are two queries per second and 5,000 queries per day.
+* Are all locations reachable?  We make sure that we check the return from the `many_to_many` CostMatrix to see that all locations can be reached. If one or more cannot be reached, it returns an error and lists the location number that cannot be reached.  Currently, we only list one location at this time, even if more than one have an issue.
+  ** This is an example which it returns: `400::Location at index 3 is unreachable`
+   https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=matrix-xxxxxx
 
 You can also refer to the [Mapzen Turn-by-Turn documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place for the Mapzen Turn-by-Turn service.
 
@@ -36,7 +39,7 @@ Here is an example of an Optimized Route scenario:
 
 Given a list of cities and the distances/times between each pair, a salesperson wants to visit each city one time taking the most optimized route and end at his/her destination (either return to origin or a different destination). 
 
-    matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=matrix-xxxxxx
+    https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=matrix-xxxxxx
 
 There is an option to name your optimized request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
