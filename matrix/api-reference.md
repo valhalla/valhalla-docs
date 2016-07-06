@@ -57,7 +57,7 @@ Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentat
 
 ### Costing parameters
 
-The Time-Distance Matrix service uses the costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+The Time-Distance Matrix service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service.  The **multimodal costing is not supported** for the Time-Distance Matrix service at this time.  Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
 
 ### Other request options
 
