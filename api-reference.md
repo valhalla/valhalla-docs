@@ -18,6 +18,7 @@ The following limitations are currently in place:
 * Pedestrian routes have a limit of 50 locations and 250 kilometers.
 * Bicycle routes have a limit of 50 locations and 500 kilometers.
 * Automobile routes have a limit of 20 locations and 5,000 kilometers.
+* Multimodal routes have a limit of 50 locations and 500 kilometers.
 
 The distance limit is the total "as the crow-flies" distance along a path through successive locations.
 
