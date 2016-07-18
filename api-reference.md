@@ -38,7 +38,7 @@ Note that you must append your own [API key](https://mapzen.com/developers) to t
 
 ### Locations
 
-You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified, with a maximum of eight locations currently supported.
+You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.  See above for the `service limits` for locations and distance limits.
 
 A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search) or [Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input.  
 
