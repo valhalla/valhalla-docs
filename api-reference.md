@@ -312,6 +312,8 @@ A `transit_stop` includes:
 | `departure_date_time` | Departure date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
 | `is_parent_stop` | True if this stop is a marked as a parent stop. |
 | `assumed_schedule` | True if the times are based on an assumed schedule because the actual schedule is not known. |
+| `lat` | Latitude of the transit stop in degrees. |
+| `lon` | Longitude of the transit stop in degrees. |
 
 Continuing with the earlier routing example from the Detroit, Michigan area, a maneuver such as this one may be returned with that request: `{"begin_shape_index":0,"length":0.109,"end_shape_index":1,"instruction":"Go south on Appleton.","street_names":["Appleton"],"type":1,"time":0}`
 
