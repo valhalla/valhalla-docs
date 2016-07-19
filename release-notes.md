@@ -1,3 +1,12 @@
+## Release Date: 2016-07-19
+
+ * **Guidance Improvements**
+  * Added French narrative
+  * Added capability to have narrative language aliases - For example: German `de-DE` has an alias of `de`
+  * **Transit Stop Update** - Return latitude and longitude for each transit stop
+* **Data Producer Updates**
+  * TBD
+
 ## Release Date: 2016-06-08
 
  * **Bug Fix** - Fixed a bug where edge indexing created many small tiles where no edges actually intersected. This allowed impossible routes to be considered for path finding instead of rejecting them earlier.
