@@ -3,8 +3,8 @@
  * **Guidance Improvements**
   * Added French narrative
   * Added capability to have narrative language aliases - For example: German `de-DE` has an alias of `de`
-  * **Transit Stop Update** - Return latitude and longitude for each transit stop
-* **Data Producer Updates**
+ * **Transit Stop Update** - Return latitude and longitude for each transit stop
+ * **Data Producer Updates**
   * TBD
 
 ## Release Date: 2016-06-08
