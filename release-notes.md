@@ -31,9 +31,9 @@
   * Simplified narative by combining unnamed straight maneuvers
   * Added logic to confirm maneuver type assignment to avoid invalid guidance
   * Fixed turn maneuvers by improving logic for the following:
-   * Internal intersection edges
-   * 'T' intersections
-   * Intersecting forward edges
+    * Internal intersection edges
+    * 'T' intersections
+    * Intersecting forward edges
  * **Data Producer Updates** - Fix the restrictions on a shortcut edge to be the same as the last directed edge of the shortcut (rather than the first one).
 
 ## Release Date: 2016-04-28
