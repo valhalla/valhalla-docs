@@ -5,7 +5,9 @@
   * Added capability to have narrative language aliases - For example: German `de-DE` has an alias of `de`
  * **Transit Stop Update** - Return latitude and longitude for each transit stop
  * **Data Producer Updates**
-  * TBD
+  * Added logic to use lanes:forward, lanes:backward, speed:forward, and speed:backward based on direction of the directed edge.
+  * Added support for no_entry, no_exit, and no_turn restrictions.
+  * Added logic to support country specific access. Based on country tables found here: http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Access-Restrictions
 
 ## Release Date: 2016-06-08
 
