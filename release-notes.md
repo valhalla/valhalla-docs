@@ -6,6 +6,7 @@
  * **Transit Stop Update** - Return latitude and longitude for each transit stop
  * **Data Producer Updates**
   * Added logic to use lanes:forward, lanes:backward, speed:forward, and speed:backward based on direction of the directed edge.
+  * Added support for no_entry, no_exit, and no_turn restrictions.
 
 ## Release Date: 2016-06-08
 
