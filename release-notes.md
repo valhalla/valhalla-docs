@@ -3,6 +3,8 @@
  * **Service additions**
   * Latitude, longitude bounding boxes of the route and each maneuver have been added to the route results.
   * Added an initial isochrone capability. This includes methods to create an "isotile" - a 2-D gridded data set with time to reach each lat,lon grid from an origin location. This isoltile is then used to create contours at specified times. Interior contours are optionally removed and the remaining outer contours are generalized and converted to GeoJSON polygons. An initial version supporting multimodal route types has also been added.
+ * **Data Producer Updates**
+  * Fixed tranist scheduling issue where false schedules were getting added.   
 
 ## Release Date: 2016-07-19
 
