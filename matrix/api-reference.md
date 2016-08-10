@@ -72,7 +72,7 @@ When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, loca
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using type
+You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using `type` or anything else in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
 
 ### Source & Target parameters
 
