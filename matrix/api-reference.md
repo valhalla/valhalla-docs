@@ -4,6 +4,10 @@ The Time-Distance Matrix service provides a quick computation of time and distan
 
 The Time-Distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
+## NEW Matrix service action
+
+You can request any of the three types of Time-Distance Matrices by calling one action, the `/sources_to_targets` action.  This action takes a `sources` and `targets` parameter instead of the `locations` parameter. If you would like to make a one-to-many request, then simply insert your origin location lat/lng into the sources array and the rest of your destination locations in the targets array.  If you would like to make a many-to-one request, then simply insert all of your origin location lat/lngs into the sources array and your destination location lat/lng in the targets array.  Finally, if you would like to make a many-to-many request, then simply insert all of your origin location lat/lngs into the sources array and add them again to your targets array.
+
 ## API keys and service limits
 
 To use the Time-Distance Matrix service, you must first obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
@@ -12,7 +16,7 @@ As a shared service, there are limitations on requests, maximum distances, and n
 
 The following limitations are currently in place.
 
-* `max_locations` is  50 for `one_to_many`, `many_to_one`, and `many_to_many` requests.
+* `max_locations` is  50 for `one_to_many`, `many_to_one`, `many_to_many` and `sources_to_targets` requests.
 * `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for all matrix types. For `one_to_many`, the distance between the first location and any of the others cannot exceed the maximum. For `many_to_one`, the distance between the last location and any of the others cannot exceed the maximum. Finally, for `many_to_many`, the distance between any pair of locations cannot exceed the maximum.
 * rate limits are two queries per second and 5,000 queries per day.
 
@@ -22,7 +26,7 @@ If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.co
 
 ## Matrix service actions
 
-You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?` and `/many_to_many?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one` or a square matrix for a `many_to_many`.  
+You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?`, `/many_to_many?` or `/sources_to_targets?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one`, a square matrix for a `many_to_many` or any of the three matrices using `sources_to_targets`.  
 
 An action for `/weight?` is being considered for the future.
 
@@ -31,6 +35,7 @@ An action for `/weight?` is being considered for the future.
 | `one_to_many` | Returns a row vector of computed time and distance from the first (origin) location to each additional location provided. The first element in the row vector computed time and distance is [0,0.00]. |
 | `many_to_one` | Returns a column vector of computed time and distance from each location to the last (destination) location provided. The last element in the row vector computed time and distance is [0,0.00]. |
 | `many_to_many`| Returns a square matrix of computed time and distance from each location to every other location. The main diagonal of the square matrix is [0,0.00] all the way through.  |
+| `sources_to_targets`| Can return a row, column or square matrix of computed time and distance, depending on your input for the sources and targets parameters.  |
 
 ## Inputs of the matrix service
 
@@ -40,20 +45,45 @@ For example, while at your office, you want to know the times and distances to w
 
     matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
 
+These are similar examples as above, but using `sources_to_targets`.
+
+| one-to-many using /sources_to_targets? |
+
+    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+
+| many-to-one using /sources_to_targets? |
+
+    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+
+| many-to-many using /sources_to_targets? |
+
+    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+
 There is an option to name your matrix request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
 Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-### Location parameters
+### Location or (Source & Target) parameters
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/documentation/search/) can be used to find places and geocode addresses, whose coordinates can be used as input to the Time-Distance Matrix service.
+When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/documentation/search/) can be used to find places and geocode addresses, whose coordinates can be used as input to the Time-Distance Matrix service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.
+You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using type
+
+### Source & Target parameters
+
+When using the `sources_to_targets` action, you specify sources & targets as ordered lists of one or more locations within a JSON array, depending on the type of matrix result you are expecting.  See the `API keys and service limits` section above for the locations and distance limits.
+
+A source & target must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search) or [Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input.  
+
+| Source & Target parameters | Description |
+| :--------- | :----------- |
+| `lat` | Latitude of the source/target in degrees. |
+| `lon` | Longitude of the source/target in degrees. |
 
 ### Costing parameters
 
@@ -76,6 +106,7 @@ These are the results of a request to the Time-Distance Matrix service.
 | `one_to_many` | Returns a row vector (1 x n) of computed time and distance from the first (origin) location to each additional location. |
 | `many_to_one` | Returns a column vector (n X 1) of computed time and distance from each location provided to the last (destination) location. |
 | `many_to_many` | Returns a square matrix (n x n) of an array of computed time and distance from each location to every other location. |
+| `sources_to_targets` | Can return any of the 3 matrices of computed time and distance above, depending on your input for the sources and targets parameters. |
 | `distance` | The computed distance between each set of points. Distance will always be 0.00 for the first element of the time-distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`. |
 | `time` | The computed time between each set of points. Time will always be 0 for the first element of the time-distance array for `one_to_many`, the last element in a `many_to_one`, and the first and last elements of a `many_to_many`.  |
 | `to_index` | The destination index into the locations array. |
@@ -87,4 +118,4 @@ See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-re
 
 ## Sample matrix demonstration
 
-If you want to see the results of the Time-Distance Matrix service, try this [sample demonstration utility](http://valhalla.github.io/demos/matrix/) and [code](https://github.com/valhalla/demos/tree/gh-pages/matrix) that shows integration of the Time-Distance Matrix results into a map and a table.
+If you want to see the results of the Time-Distance Matrix service, try this [sample demonstration utility](http://valhalla.github.io/demos/matrix/) and [code](https://github.com/valhalla/demos/tree/gh-pages/matrix) that shows integration of the Time-Distance Matrix results into a map and a table.  Please note that this demo is not using the `sources_to_targets` action call.
