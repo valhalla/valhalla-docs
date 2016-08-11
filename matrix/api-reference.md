@@ -16,7 +16,7 @@ As a shared service, there are limitations on requests, maximum distances, and n
 
 The following limitations are currently in place.
 
-* `max_locations` is  50 for `one_to_many`, `many_to_one`, `many_to_many` and `sources_to_targets` requests.
+* `max_locations` is  50 for `one_to_many`, `many_to_one`, `many_to_many` and `sources_to_targets` requests.  For `sources_to_targets`, we check to make sure both sources and targets do not exceed 50 locations.
 * `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for all matrix types. For `one_to_many`, the distance between the first location and any of the others cannot exceed the maximum. For `many_to_one`, the distance between the last location and any of the others cannot exceed the maximum. Finally, for `many_to_many`, the distance between any pair of locations cannot exceed the maximum.
 * rate limits are two queries per second and 5,000 queries per day.
 
