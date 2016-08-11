@@ -63,7 +63,7 @@ There is an option to name your matrix request.  You can do this by appending th
 
 Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
-### Location or (Source & Target) parameters
+### Location parameters
 
 When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/documentation/search/) can be used to find places and geocode addresses, whose coordinates can be used as input to the Time-Distance Matrix service.
 
@@ -72,7 +72,7 @@ When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, loca
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using `type` or anything else in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
+You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using `type` in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
 
 ### Source & Target parameters
 
