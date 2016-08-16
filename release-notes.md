@@ -1,3 +1,7 @@
+## Release Date: 2016-08-TBD
+
+* **Guidance Improvements** - Added Spanish Narrative
+
 ## Release Date: 2016-08-08
 
  * **Service additions**
