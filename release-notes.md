@@ -1,6 +1,8 @@
-## Release Date: 2016-08-TBD
+## Release Date: 2016-08-22
 
-* **Guidance Improvements** - Added Spanish Narrative
+* **Guidance Improvements**
+  * Added Spanish narrative
+  * Updated the start and end edge heading calculation to be based on road class and edge use
 
 ## Release Date: 2016-08-08
 
