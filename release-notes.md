@@ -3,6 +3,8 @@
 * **Guidance Improvements**
   * Added Spanish narrative
   * Updated the start and end edge heading calculation to be based on road class and edge use
+* **New Sources to Targets**
+  * Added a new Matrix Service action that allows you to request any of the 3 types of time-distance matrices by calling 1 action.  This action takes a sources and targets parameter instead of the locations parameter.  Please see the updated Time-Distance Matrix Service API reference for more details.
 
 ## Release Date: 2016-08-08
 
