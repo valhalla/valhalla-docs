@@ -14,7 +14,8 @@ of non-separated bicycle lanes on high speed roads.
 * **Service Additions**
   * Add support for multi-modal isochrones.
   * Added base code to allow reverse isochrones (path from anywhere to a single destination).
-  * Add support for source to target matrix (in addition to one_to_many, many_to_one, and many_to_many).
+* **New Sources to Targets**
+  * Added a new Matrix Service action that allows you to request any of the 3 types of time-distance matrices by calling 1 action.  This action takes a sources and targets parameter instead of the locations parameter.  Please see the updated Time-Distance Matrix Service API reference for more details.
 
 ## Release Date: 2016-08-08
 
