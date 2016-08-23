@@ -3,6 +3,17 @@
 * **Guidance Improvements**
   * Added Spanish narrative
   * Updated the start and end edge heading calculation to be based on road class and edge use
+* **Bicycle Routing Improvements**
+  * Prevent getting off a higher class road for a small detour only to get back onto the road immediately. 
+  * Redo the speed penalties and road class factors - they were doubly penalizing many roads with very high values. 
+  * Simplify the computation of weighting factor for roads that do not have cycle lanes. Apply speed penalty to slightly reduce favoring
+of non-separated bicycle lanes on high speed roads.
+* **Routing Improvements**
+  * Remove avoidance of U-turn for pedestrian routes. This improves use with map-matching since pedestrian routes can make U-turns.
+  * Allow U-turns at dead-ends for driving (and bicycling) routes.
+* **Service Additions**
+  * Add support for multi-modal isochrones.
+  * Added base code to allow reverse isochrones (path from anywhere to a single destination).
 * **New Sources to Targets**
   * Added a new Matrix Service action that allows you to request any of the 3 types of time-distance matrices by calling 1 action.  This action takes a sources and targets parameter instead of the locations parameter.  Please see the updated Time-Distance Matrix Service API reference for more details.
 
