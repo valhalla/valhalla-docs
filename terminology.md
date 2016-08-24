@@ -1,20 +1,4 @@
-# Valhalla repositories and terminology
-
-## Repositories and dependencies
-
-The Valhalla GitHub organization is comprised of several repositories each responsible for a different function. The layout of the various projects is as follows:
-
-- [Midgard](https://github.com/valhalla/midgard) - Basic geographic and geometric algorithms for use in the various other projects
-- [Baldr](https://github.com/valhalla/baldr) - The base data structures for accessing and caching tiled route data. Depends on `midgard`
-- [Sif](https://github.com/valhalla/sif) - Library used in costing of graph nodes and edges. This can be used as input to `loki` and `thor`. Depends on `midgard` and `baldr`
-- [Mjolnir](https://github.com/valhalla/mjolnir) - Tools for turning open data into graph tiles. Depends on `midgard` and `baldr`
-- [Loki](https://github.com/valhalla/loki) - Library used to search graph tiles and correlate input locations to an entity within a tile. This correlated entity (edge or vertex) can be used as input to `thor`. Depends on `midgard`, `baldr`, `sif` and `mjolnir`
-- [Thor](https://github.com/valhalla/thor) - Library used to generate a path through the graph tile hierarchy. This path can be used as input to `odin`. Depends on `midgard`, `baldr`, `sif`, `loki` and `odin`
-- [Odin](https://github.com/valhalla/odin) - Library used to generate maneuvers and narrative based on a path. This set of directions information can be used as input to `tyr`. Depends on `midgard` and `baldr`
-- [Tyr](https://github.com/valhalla/tyr) - Service used to handle http requests for a route communicating with all of the other valhalla APIs. The service will format output from `odin` and support json (and eventually protocol buffer) output. Depends on `midgard`, `baldr`, `sif`, `mjolnir`, `loki`, `thor` and `odin`
-- [Skadi](https://github.com/valhalla/skadi) - Library used to access digital elevation model data, which is useful in computing steepness of edges in the route graph or generating an elevation profile along a computed route.  Depends on `midgard` and `baldr`.
-
-##Common Mapzen Turn-by-Turn routing and elevation terms
+# Common Mapzen Mobility terms
 
 * break location - the start or end point of a route.
 * cost - fixed costs in seconds that are added to both the path cost and the estimated time.
@@ -34,4 +18,4 @@ The Valhalla GitHub organization is comprised of several repositories each respo
 * time - the number of seconds estimated to complete a maneuver or trip, including any additional costs.
 * trip - results of an entire route, including locations, legs, and maneuvers.
 * height - with respect to elevation, the height above or below sea level at a specific location (lat,lng).
-* height with range - computing the range (cumulative distance) and height for a series of lat,lng pairs of a line or shape.  This is very useful for charting/graphing.
+* height with range - computing the range (cumulative distance) and height for a series of lat,lng pairs of a line or shape.
