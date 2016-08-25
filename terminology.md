@@ -1,9 +1,5 @@
 # Mobility glossary
 
-
-
-## Routing & Elevation Terms
-
 * __break location__ - the start or end point of a route.
 * __cost__ - fixed costs in seconds that are added to both the path cost and the estimated time.
 * __costing model__ - set of costs for particular methods of travel, such as automobile or pedestrian.
@@ -23,8 +19,3 @@
 * __trip__ - results of an entire route, including locations, legs, and maneuvers.
 * __height__ - with respect to elevation, the height above or below sea level at a specific location (lat,lng).
 * __height with range__ - computing the range (cumulative distance) and height for a series of lat,lng pairs of a line or shape.  This is very useful for charting/graphing.
-
-
-## Optimized Route Terms
-
-## Time-distance Matrix Terms
