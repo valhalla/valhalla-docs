@@ -8,7 +8,7 @@
 * __graph__ - a set of edges connected by nodes used for building a route
 * __location__ - a latitude, longitude coordinate pair, specified in decimal degrees that determines the routing and order of navigation.
 * __maneuver__ - an operation to be performed during navigation, such as a turn, and the expected duration of the movement.
-* narration - textual guidance describing the maneuver to be performed, such as a turn, distance to travel, and expected time.
+* __narration__ - textual guidance describing the maneuver to be performed, such as a turn, distance to travel, and expected time.
 * __path__ - the sequence of edges forming a route
 * __penalty__ - fixed costs in seconds that are only added to the path cost. Penalties can influence the route path determination but do not add to the estimated time along the path.
 * __route__ - sequence of edges and maneuvers forming the best travel path between locations given the available road network, costs, influence factors, and other inputs.
