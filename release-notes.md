@@ -1,3 +1,8 @@
+## Release Date: 2016-08-30
+
+* **Pedestrian Routing Improvement**
+  * Fixes for trivial pedestrian routes
+
 ## Release Date: 2016-08-22
 
 * **Guidance Improvements**
