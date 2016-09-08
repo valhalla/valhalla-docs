@@ -90,7 +90,7 @@ You are linking to these CSS and JS files from a remote website, rather than fro
 2. In the `<head>` section, add a reference to the Mapzen CSS file.
 
     ```html
-    <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
+    <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
     ```
 
 3. In the `<body>` section, add the Leaflet JavaScript file.
@@ -114,7 +114,7 @@ You are linking to these CSS and JS files from a remote website, rather than fro
 6. Add the Mapzen JavaScript file.
 
     ```html
-    <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+    <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
     ```
 
 7. Save your edits and refresh the browser.
@@ -127,13 +127,13 @@ After adding these, your index.html file should look something like this. Note t
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
-  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
 </head>
 <body>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
 </body>
 </html>
 ```
@@ -185,7 +185,7 @@ Your index.html should look something like this:
 <head>
   <title>My Routing Map</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
-  <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
+  <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
   <style>
     #map {
       height: 100%;
@@ -199,7 +199,7 @@ Your index.html should look something like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
   </script>
@@ -246,7 +246,7 @@ Your `<body>` section should look like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -297,7 +297,7 @@ Your `<body>` section should look like this:
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -360,7 +360,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
@@ -416,7 +416,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
   <script>
     var map = L.map('map');
     var layer = Tangram.leafletLayer({
