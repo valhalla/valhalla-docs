@@ -4,10 +4,6 @@ The Time-Distance Matrix service provides a quick computation of time and distan
 
 The Time-Distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
-## NEW Matrix service action
-
-You can request any of the three types of Time-Distance Matrices by calling one action, the `/sources_to_targets` action.  This action takes a `sources` and `targets` parameter instead of the `locations` parameter. If you would like to make a one-to-many request, then simply insert your origin location lat/lng into the sources array and the rest of your destination locations in the targets array.  If you would like to make a many-to-one request, then simply insert all of your origin location lat/lngs into the sources array and your destination location lat/lng in the targets array.  Finally, if you would like to make a many-to-many request, then simply insert all of your origin location lat/lngs into the sources array and add them again to your targets array.
-
 ## API keys and service limits
 
 To use the Time-Distance Matrix service, you must first obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
@@ -27,6 +23,8 @@ If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.co
 ## Matrix service actions
 
 You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?`, `/many_to_many?` or `/sources_to_targets?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one`, a square matrix for a `many_to_many` or any of the three matrices using `sources_to_targets`.  
+
+The `/sources_to_targets` action takes a `sources` and `targets` parameter instead of the `locations` parameter. To make a one-to-many request, insert your origin location lat/lng into the sources array and the rest of your destination locations in the targets array. To make a many-to-one request, then insert all of your origin location lat/lngs into the sources array and your destination location lat/lng in the targets array.  Finally, for a many-to-many request, insert all of your origin location lat/lngs into the sources array and add them again to your targets array.
 
 An action for `/weight?` is being considered for the future.
 
