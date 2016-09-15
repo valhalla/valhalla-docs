@@ -330,7 +330,7 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'your-routing-mode'}),
+      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'your-routing-mode'}),
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
@@ -374,7 +374,7 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'auto'}),
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
