@@ -6,7 +6,7 @@ The elevation service is in active development. You can follow the [Mapzen blog]
 
 ##API keys and service limits
 
-To use Mapzen's elevation service, you must first obtain an Elevation Service API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use Mapzen's elevation service, you must first obtain a Mapzen API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
 This is a shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area.
 
