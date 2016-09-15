@@ -29,7 +29,7 @@ For example, while at your office, you want to know where you can reach within a
 
 There is an option to name your isochrone request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
-Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ### Location parameters
 
