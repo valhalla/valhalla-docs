@@ -28,7 +28,7 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 The route request takes the form of `valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location information, name and options for the costing model, and output options. Here is an example request:
 
-`valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"},"id":"my_work_route"}&api_key=valhalla-xxxxxx`
+`valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"},"id":"my_work_route"}&api_key=mapzen-xxxxxx`
 
 This request provides automobile routing between the Detroit, Michigan area and Buffalo, New York, with an optional street name parameter to improve navigation at the start and end points. It attempts to avoid routing north through Canada by adding a penalty for crossing international borders. The resulting route is displayed in miles.
 
@@ -77,7 +77,7 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `auto_shorter` | Alternate costing for driving that provides a short path (though not guaranteed to be shortest distance) that obeys driving rules for access and turn restrictions. |
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
-| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.  Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=valhalla-xxxxxxx`  Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
+| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.  Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
 
 #### Costing options
@@ -144,9 +144,9 @@ These options are available for transit costing when the multimodal costing mode
 | `use_rail` | User's desire to use rail/subway/metro.  Range of values from 0 (try to avoid rail) to 1 (strong preference for riding rail).|
 | `use_transfers` |User's desire to favor transfers.  Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
 
-For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=valhalla-xxxxxxx`
+For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=mapzen-xxxxxxx`
 
-Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 #### Directions options
 
@@ -165,9 +165,9 @@ Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.
 | `id` | Name your route request. If `id` is specified, the naming will be sent thru to the response. |
 
 This is an example of a transit route departing on 2016-03-29 at 08:00.
-`http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","date_time":{"type":1,"value":"2016-03-29T08:00"}}&api_key=valhalla-xxxxxxx`
+`http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","date_time":{"type":1,"value":"2016-03-29T08:00"}}&api_key=mapzen-xxxxxxx`
 
-Note that you must append your own [Mapzen Turn-by-Turn API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ## Outputs of a route
 

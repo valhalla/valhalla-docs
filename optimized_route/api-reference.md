@@ -22,7 +22,7 @@ If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.co
 
 ## Optimized Route service action
 
-You can request the following action from the Optimized Route service: `/optimized_route?`. Since an optimized route is really an extension of the `many_to_many` matrix, the first step is to compute a cost matrix by sending a `many_to_many` matrix request.  Then, we send our resulting cost matrix (resulting time or distance) to the optimizer which will return our optimized path. 
+You can request the following action from the Optimized Route service: `/optimized_route?`. Since an optimized route is really an extension of the `many_to_many` matrix, the first step is to compute a cost matrix by sending a `many_to_many` matrix request.  Then, we send our resulting cost matrix (resulting time or distance) to the optimizer which will return our optimized path.
 
 | Optimized type | Description |
 | :--------- | :----------- |
@@ -34,13 +34,13 @@ An example request takes the form of `matrix.mapzen.com/optimized_route?json={}&
 
 Here is an example of an Optimized Route scenario:
 
-Given a list of cities and the distances/times between each pair, a salesperson wants to visit each city one time taking the most optimized route and end at his/her destination (either return to origin or a different destination). 
+Given a list of cities and the distances/times between each pair, a salesperson wants to visit each city one time taking the most optimized route and end at his/her destination (either return to origin or a different destination).
 
-    https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=matrix-xxxxxx
+    https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.042072,"lon":-76.306572},{"lat":39.992115,"lon":-76.781559},{"lat":39.984519,"lon":-76.6956},{"lat":39.996586,"lon":-76.769028},{"lat":39.984322,"lon":-76.706672}],"costing":"auto","units":"mi"}&api_key=mapzen-xxxxxx
 
 There is an option to name your optimized request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
-Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
 ### Location parameters
 
@@ -79,7 +79,7 @@ These are the results of a request to the Optimized Route service.
 ## Error checking
 * Are all locations reachable?  We make sure that we check the return from the `many_to_many` CostMatrix to see that all locations can be reached. If one or more cannot be reached, it returns an error and lists the location number that cannot be reached.  Currently, we only list one location at this time, even if more than one have an issue.
   * This is an example which it returns: `400::Location at index 3 is unreachable`
-   https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=matrix-xxxxxx
+   https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=mapzen-xxxxxx
 
 See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
 

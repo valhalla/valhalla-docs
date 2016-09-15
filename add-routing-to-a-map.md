@@ -330,7 +330,7 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'your-routing-mode'}),
+      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'your-routing-mode'}),
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
@@ -339,11 +339,11 @@ By default, the Leaflet Routing Machine plug-in uses [Open Source Routing Machin
     ```
 
 2. Go back to the https://mapzen.com/developers page and copy your API key to the clipboard.
-3. Paste your own API key in place of `valhalla-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
+3. Paste your own API key in place of `mapzen-xxxxxx` inside the single quotes. The routing will only load if you use a valid API key.
 4. Change the options object for the transportation mode {costing:`your-routing-mode`} to {costing:`auto`} to perform routing by automobile, again maintaining the single quotes.
 
     ```js
-    router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+    router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'auto'}),
     ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and updated icons and summary text in the narration box. The maneuver instructions are simpler and more concise.
@@ -374,7 +374,7 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'auto'}),
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
@@ -434,7 +434,7 @@ The `<body>` section should look something like this, but with your own API key 
         styles: [ {color: 'white',opacity: 0.8, weight: 12},
                 {color: '#2676C6', opacity: 1, weight: 6}
       ]},
-      router: L.Routing.mapzen('valhalla-xxxxxx', {costing:'auto'}),
+      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'auto'}),
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
