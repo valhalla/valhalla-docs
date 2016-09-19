@@ -1,3 +1,8 @@
+## Release Date: 2016-09-19
+
+* **Guidance Improvement**
+  * Added pirate narrative language
+
 ## Release Date: 2016-08-30
 
 * **Pedestrian Routing Improvement**
