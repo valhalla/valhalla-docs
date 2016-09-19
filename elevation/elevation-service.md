@@ -47,7 +47,7 @@ Without the `range`, the result looks something like this, with only a `height`:
 
 ###Use an encoded polyline for input locations
 
-The `encoded_polyline` parameter is a string of a polyline-encoded shape and has the following parameters.
+The `encoded_polyline` parameter is a string of a polyline-encoded, with six degrees of precision, shape and has the following parameters.
 
 | Encoded polyline parameters | Description |
 | :--------- | :----------- |
@@ -83,7 +83,7 @@ The profile results are returned with the form of shape (shape points or encoded
 | Item | Description |
 | :---- | :----------- |
 | `shape` | The specified shape coordinates from the input request. |
-| `encoded_polyline` | The specified encoded polyline coordinates from the input request. |
+| `encoded_polyline` | The specified encoded polyline, with six degrees of precision, coordinates from the input request. |
 | `range_height` | The 2D array of range (x) and height (y) per input latitude, longitude coordinate. |
 | `x coordinate` | The range or distance along the input locations. It is the cumulative distance along the previous latitiude, longitude coordinates up to the current coordinate. The x-value for the first coordinate in the shape will always be 0. |
 | `y coordinate` | The height or elevation of the associated latitude, longitude pair. The height is returned as `null` if no height data exists for a given location. |
