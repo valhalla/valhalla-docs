@@ -2,6 +2,7 @@
 
 * **Guidance Improvement**
   * Added pirate narrative language
+  * Added the ability to include or exclude stops, routes, and operators in multimodal routing.
 
 ## Release Date: 2016-08-30
 
