@@ -2,8 +2,10 @@
 
 * **Guidance Improvement**
   * Added pirate narrative language
-* **Routing Improvements**
+* **Routing Improvement**
   * Added the ability to include or exclude stops, routes, and operators in multimodal routing.
+* **Service Improvement**
+  * JSONify Error Response
 
 ## Release Date: 2016-08-30
 
