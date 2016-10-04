@@ -50,22 +50,24 @@ The Isochrone service uses the `auto`, `bicycle`, `pedestrian` and `multimodal` 
 
 | Parameter | Description |
 | :------------------ | :----------- |
-| `id` | Name your isochrone request. If `id` is specified, the naming will be sent thru to the response. |
-| `contours` | This is a JSON array of contour objects that specify the time and color to use for each isochrone contour. The number of contours requested must not exceed the `max_contours` allowed.
+| `id` | Name your isochrone request. If `id` is specified, the naming will be sent through to the response. |
+| `contours` | This is a JSON array of contour objects that specify the time and color to use for each isochrone contour. The number of contours requested must not exceed the `max_contours` allowed. |
+| `rings_only` | Boolean value (defaulted to `true`) that, when `true`, will only return polygonal contours dropping the linestring contours. |
+| `denoise` | A floating point value from `0` to `1` (defaulted to `1`) which can be used to remove smaller contours. A value of `1` will only return the largest contour. A value of `0.5` will drop any contours that are less than half the area of the largest contour in the set of contours for that same time value (see below). |
 
 #####Isochrone Contours
 A list of contours or isochrone polygons to generate from the specified locations. Each isochrone contour contains the following:
 
 | Parameter | Description |
 | :------------------ | :----------- |
-| `time` | This is the time in minutes for the contour. The value must not exceed the `max_time` allowed.
-| `color` | This is the color to use for the output of the contour polygon. If no color is specified, the isochrone service will assign a default color to the output.
+| `time` | This is the time in minutes for the contour. The value must not exceed the `max_time` allowed. |
+| `color` | This is the color to use for the output of the contour polygon. If no color is specified, the isochrone service will assign a default color to the output. |
 
 ## Outputs of the Isochrone service
 
 The isochrone contours are returned as GeoJSON. GeoJSON can easily be integrated into mapping applications. You can learn more about GeoJSON and its specification [here](http://geojson.org/).
 
-TODO - explain the feature output: Polygons.
+At present the GeoJSON will contain polygon and linestring features. By default only polygons will be returned however you can disable this using the `rings_only` parameter as described above. In addition to the geometry the properties of each feature will include styling information that most javascript based GeoJSON renderers will respect (especially leaflet). At present the opacity portion of the style is not controllable via the API.
 
 If an isochrone request has been named using the optional `&id=` input, then the name will be returned as a name property for the feature collection within the GeoJSON response.
 
