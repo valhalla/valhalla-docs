@@ -323,11 +323,11 @@ Continuing with the earlier routing example from the Detroit, Michigan area, a m
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
-### Return codes and conditions
+### HTTP Status codes and conditions
 
-The following is a table of error conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
+The following is a table of HTTP status error code conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
 
-| Code | Body | Description |
+| Status Code | Status | Description |
 | :--------- | :---------- | :---------- |
 | 200 | *your_trip_json* | A happy bit of json describing your `trip` result |
 | 400 | Failed to parse json request | You need a valid json request |
@@ -350,3 +350,120 @@ The following is a table of error conditions that may occur for a particular req
 | 500 | Could not build directions for TripPath | Had a problem using the trip path to create TripDirections |
 | 500 | Failed to parse TripDirections | Had a problem using the trip directions to serialize a json response |
 | 501 | Not implemented | Not Implemented |
+
+### Internal Error codes and conditions
+
+The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the valhalla service projects.
+
+#####loki project 1xx
+#####odin project 2xx
+#####skadi project 3xx
+#####thor project 4xx
+#####tyr project 5xx
+
+| Error Code | Error |
+| :--------- | :---------- |
+|100 | Failed to parse json request |
+|101 | Try a POST or GET request instead |
+|102 | The config actions for Loki are incorrectly loaded |
+|103 | Missing max_locations configuration |
+|104 | Missing max_distance configuration |
+|105 | Path action not supported |
+|106 | Try any of |
+|107 | Not Implemented |
+| | |
+|110 | Insufficiently specified required parameter 'locations' |
+|111 | Insufficiently specified required parameter 'time' |
+|112 | Insufficiently specified required parameter 'locations' or 'sources & targets' |
+|113 | Insufficiently specified required parameter 'contours' |
+|114 | Insufficiently specified required parameter 'shape' or 'encoded_polyline' |
+| | |
+|120 | Insufficient number of locations provided |
+|121 | Insufficient number of sources provided |
+|122 | Insufficient number of targets provided |
+|123 | Insufficient shape provided |
+|124 | No edge/node costing provided |
+|125 | No costing method found |
+|126 | No shape provided |
+| | |
+|130 | Failed to parse location |
+|131 | Failed to parse source |
+|132 | Failed to parse target |
+| | |
+|140 | Action does not support multimodal costing |
+|141 | Arrive by for multimodal not implemented yet |
+|142 | Arrive by not implemented for isochrones |
+| | |
+|150 | Exceeded max locations |
+|151 | Exceeded max time |
+|152 | Exceeded max contours |
+|153 | Too many shape points |
+|154 | Path distance exceeds the max distance limit |
+|155 | Outside the valid walking distance at the beginning or end of a multimodal route |
+|156 | Outside the valid walking distance between stops of a multimodal route |
+| | |
+|160 | Date and time required for origin for date_type of depart at |
+|161 | Date and time required for destination for date_type of arrive by |
+|162 | Date and time is invalid.  Format is YYYY-MM-DDTHH:MM |
+|163 | Invalid date_type |
+| | |
+|170 | No suitable edges near location |
+| | |
+|199 | Unknown |
+| | |
+|200 | Failed to parse intermediate request format |
+|201 | Failed to parse TripPath |
+|2| | |
+|210 | Trip path does not have any nodes |
+|211 | Trip path has only one node |
+|212 | Trip must have at least 2 locations |
+|213 | Error - No shape or invalid node count |
+| | |
+|220 | Turn degree out of range for cardinal direction |
+| | |
+|230 | Invalid TripDirections_Maneuver_Type in method FormTurnInstruction |
+|231 | Invalid TripDirections_Maneuver_Type in method FormRelativeTwoDirection |
+|232 | Invalid TripDirections_Maneuver_Type in method FormRelativeThreeDirection |
+| | |
+|299 | Unknown |
+| | |
+|300 | Failed to parse json request |
+|301 | Try a POST or GET request instead |
+|302 | The config actions for Skadi are incorrectly loaded |
+|303 | Path action not supported |
+|304 | Try any of |
+|305 | Not Implemented |
+| | |
+|310 | No shape provided |
+|311 | Insufficient shape provided |
+|312 | Insufficiently specified required parameter 'shape' or 'encoded_polyline' |
+|313 | 'resample_distance' must be >=  |
+|314 | Too many shape points |
+| | |
+|399 | Unknown |
+| | |
+|400 | Unknown action |
+|401 | Failed to parse intermediate request format |
+| | |
+|410 | Insufficiently specified required parameter 'locations' |
+|411 | Insufficiently specified required parameter 'shape' |
+|412 | No costing method found |
+| | |
+|420 | Failed to parse correlated location |
+|421 | Failed to parse location |
+|422 | Failed to parse source |
+|423 | Failed to parse target |
+|424 | Failed to parse shape |
+| | |
+|430 | Exceeded max iterations in CostMatrix::SourceToTarget |
+| | |
+|440 | Cannot reach destination - too far from a transit stop |
+|441 | Location is unreachable |
+|442 | No path could be found for input |
+| | |
+|499 | Unknown |
+| | |
+|500 | Failed to parse intermediate request format |
+|501 | Failed to parse TripDirections |
+| | |
+|599 | Unknown |
