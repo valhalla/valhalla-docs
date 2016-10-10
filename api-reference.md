@@ -355,11 +355,11 @@ The following is a table of HTTP status error code conditions that may occur for
 
 The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the valhalla service projects.
 
-#####loki project 1xx
-#####odin project 2xx
-#####skadi project 3xx
-#####thor project 4xx
-#####tyr project 5xx
+####loki project 1xx
+####odin project 2xx
+####skadi project 3xx
+####thor project 4xx
+####tyr project 5xx
 
 | Error Code | Error |
 | :--------- | :---------- |
@@ -413,7 +413,7 @@ The following is a table of Valhalla exception internal error code conditions th
 | | |
 |200 | Failed to parse intermediate request format |
 |201 | Failed to parse TripPath |
-|2| | |
+|| | |
 |210 | Trip path does not have any nodes |
 |211 | Trip path has only one node |
 |212 | Trip must have at least 2 locations |
