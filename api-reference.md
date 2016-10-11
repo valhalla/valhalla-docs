@@ -407,7 +407,8 @@ The following is a table of Valhalla exception internal error code conditions th
 |162 | Date and time is invalid.  Format is YYYY-MM-DDTHH:MM |
 |163 | Invalid date_type |
 | | |
-|170 | No suitable edges near location |
+|170 | Locations are in unconnected regions. Go check/edit the map at osm.org |
+|171 | No suitable edges near location |
 | | |
 |199 | Unknown |
 | | |
