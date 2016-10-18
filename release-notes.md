@@ -7,6 +7,8 @@
   * See documentation https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md#internal-error-codes-and-conditions
 * **Time-Distance Matrix Improvement**
   * Added a costmatrix performance fix for one_to_many matrix requests
+* **Memory Mapped Tar Archive - Tile Extract Support**
+  * Added the ability to load a tar archive of the routing graph tiles. This improves performance under heavy load and reduces the memory requirement while allowing multiple processes to share cache resources.
 
 ## Release Date: 2016-09-19
 
