@@ -2,6 +2,10 @@
 
 * **Guidance Improvement**
   * Added the Hindi (hi-IN) narrative language
+* **Service Additions**
+  * Added internal valhalla error codes utility in baldr and modified all services to make use of and return as JSON response
+* **Time-Distance Matrix Improvement**
+  * Added a costmatrix performance fix for one_to_many matrix requests
 
 ## Release Date: 2016-09-19
 
