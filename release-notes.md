@@ -4,6 +4,7 @@
   * Added the Hindi (hi-IN) narrative language
 * **Service Additions**
   * Added internal valhalla error codes utility in baldr and modified all services to make use of and return as JSON response
+  * See documentation https://github.com/valhalla/valhalla-docs/blob/master/api-reference.md#internal-error-codes-and-conditions
 * **Time-Distance Matrix Improvement**
   * Added a costmatrix performance fix for one_to_many matrix requests
 
