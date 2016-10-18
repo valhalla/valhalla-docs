@@ -1,4 +1,4 @@
-## Release Date: 2016-TBD
+## Release Date: 2016-10-17
 
 * **Guidance Improvement**
   * Added the Hindi (hi-IN) narrative language
