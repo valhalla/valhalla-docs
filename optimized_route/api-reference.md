@@ -85,4 +85,4 @@ See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-re
 
 ## Sample Optimized Route demonstration
 
-If you want to see the results of the Optimized Route service, please try out the sample demonstration utility: [Optimized Route Test Utility](https://mapzen.com/documentation/optimized_route)
+If you want to see the results of the Optimized Route service, please try out the sample demonstration utility: [Optimized Route Test Utility](http://valhalla.github.io/demos/optimized_route/index.html#loc=13,40.748600,-73.969000)
