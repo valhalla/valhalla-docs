@@ -76,7 +76,6 @@ If an isochrone request has been named using the optional `&id=` input, then the
 Several other options are being considered as future service enhancements. These include:
 * The ability to use distance rather than time for each unit.
 * Optionally specify whether to generate outer contours only or contours with interior holes (regions that cannot be accessed within the specified time). Add options to control the minimum size of interior holes.
-* Being able to generate multi-modal isochrones.
 * Allowing multiple locations in order to compute the region reachable from any of the locations within a specified time.
 * Generation of contours using "reverse" access logic to see the region that can reach a specific location within the specified time.
 * Return of the iso-grid data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location. Adding distance to the iso-grid data would improve its use for large time-distance one to many matrix requests.
