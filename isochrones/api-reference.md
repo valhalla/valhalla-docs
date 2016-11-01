@@ -50,6 +50,7 @@ The Isochrone service uses the `auto`, `bicycle`, `pedestrian` and `multimodal` 
 
 | Parameter | Description |
 | :------------------ | :----------- |
+| `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. Not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time is specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival.  For example "2016-07-03T08:06"</li></ul> |
 | `id` | Name your isochrone request. If `id` is specified, the naming will be sent through to the response. |
 | `contours` | This is a JSON array of contour objects that specify the time and color to use for each isochrone contour. The number of contours requested must not exceed the `max_contours` allowed. |
 | `rings_only` | Boolean value (defaulted to `true`) that, when `true`, will only return polygonal contours dropping the linestring contours. |
