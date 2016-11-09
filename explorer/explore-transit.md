@@ -1,10 +1,10 @@
 # Explore transit data
 
-Mobility Explorer highlights the connections between transit datasets. The transit data is from Transitland, a community-edited, open transit data aggregation project that Mapzen sponsors.
+Mobility Explorer helps you understand transportation networks around the world. You can query and visualize the combination of transit data from Transitland, a community-edited, open transit data aggregation project that Mapzen sponsors, and Mapzen Mobility services, which provide routing and navigation tools for walking, bicycling, driving, and taking multimodal options.
 
-It starts with a default map extent, and you can search for a place to view the fixed-route transit routes and stops.
+Mobility Explorer highlights the connections between transit datasets, including among different transportation modes and operators. Search for a place or browse the map, and use the buttons to ask questions about fixed-route transit options in the area. For example, you can find a transit stop and see all the routes, available modes of transit, and transit agencies or operators that serve it. You can combine this information with Mapzen Mobility tools to see the area served by the stop to find out where you can travel from it within a certain amount of time.
 
-Mobility Explorer adds a user interface to help you ask questions about the Transitland data. Each time you click buttons on Mobility Explorer, you are sending a query to the Transitland API. You can view the API request and the resulting response from the server. 
+Each time you click buttons on Mobility Explorer, you are sending a query to the Transitland or Mapzen Mobility APIs. You can see the raw API request in your browser's address bar and resulting JSON response from the server by clicking the `View request` links. If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs.
 
 ## Explore transit routes
 
