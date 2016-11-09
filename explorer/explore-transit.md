@@ -1,14 +1,18 @@
 # Explore transit data
 
-Mobility Explorer starts with a default view of transit data.
+Mobility Explorer highlights the connections between transit datasets. The transit data is from Transitland, a community-edited, open transit data aggregation project that Mapzen sponsors.
+
+It starts with a default map extent, and you can search for a place to view the fixed-route transit routes and stops.
+
+Mobility Explorer adds a user interface to help you ask questions about the Transitland data. Each time you click buttons on Mobility Explorer, you are sending a query to the Transitland API. You can view the API request and the resulting response from the server. 
 
 ## Explore transit routes
 
 1. Search for a place in the box on the map or pan and zoom to find your area of interest.
 2. Click `Show routes` to display routes on the map. The map updates to show transit route lines.
 3. Hover over a line on the map to get a preview of more information about it.
-4. Choose whether to display the lines by the type of transportation mode, such as bus or metro (subway), or the agency that operates the route.
-5. To filter the map by a single route or operator, click it on the map or in the drop-down list.
+4. To filter the map by a single route or operator, click it on the map or in the drop-down list.
+5. Choose whether to display the lines by the type of transportation mode, such as bus or metro (subway), or the agency that operates the route.
 6. Check `Show stops served by route` to view the transit stops along the route.
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
 7. Click `Show route stop patterns` and a value to view the each unique combination of shape lines for trips and stops along this route.
@@ -27,7 +31,7 @@ Mobility Explorer starts with a default view of transit data.
 ## Explore operators
 
 1. Search for a place in the box on the map or pan and zoom to find your area of interest.
-2. Click `Show operators` to display the areas served by transit operators on the map. These polygons are created by connecting a line for the minimum bounding area of the extent of the routes and stops for that operator.
+2. Click `Show operators` to display the areas served by transit operators on the map. These polygons are created by connecting a line representing the minimum bounding area of the extent of the routes and stops for that operator.
 3. Hover over a polygon on the map to get a preview of more information about it.
 4. To filter the map by a single operator, click it on the map or in the drop-down list. Because the polygons may overlap in areas with multiple operators, it may be easier to choose the operator by name from the list.
 5. From the details panel, you can see which routes and stops are served by this operator. Viewing the routes and stops takes you to a query for `Show routes` or `Show stops`, respectively. You can click your browser's Back button to return to your operators query.
