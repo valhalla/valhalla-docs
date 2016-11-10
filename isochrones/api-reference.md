@@ -1,4 +1,4 @@
-# Isochrones Service API reference
+# Isochrone service API reference
 
 The Isochrone service provides a computation of areas that are reachable within specified time periods from a location or set of locations. Alternatively, isochrones can provide an estimation of the areas that can reach specific locations within specified time periods. This is generally valid for pedestrian routes, but for automobile and bicycle routes more work is needed. Isochrones are usful for visualizing service regions for specific locations on a map. To facilitate visualization, the Isochrone service returns the reachable regions as polygons or lines in GeoJSON. GeoJSON is readily ingested and drawn by many mapping applications and easily integrated into Web maps.
 
@@ -6,13 +6,13 @@ The Isochrone service is in active development. You can follow the [Mapzen blog]
 
 ## API keys and service limits
 
-To use the Isochrone service, you must first obtain an API key from Mapzen. The isochrone service is part of Mapzen's matrix service. Sign in at https://mapzen.com/developers to create and manage your API keys.
+To use the Isochrone service, you must first obtain an API key from Mapzen. The Isochrone service is part of Mapzen's matrix service. Sign in at https://mapzen.com/developers to create and manage your API keys.
 
 As a shared service, there are limitations on requests, maximum time and number of isochrone contours, and numbers of locations. This prevents individual users from degrading the overall system performance.
 
 The following limitations are currently in place.
 
-* `max_locations` is  1. A call to the isochrone service supports a single location only at this time. To support isochrones about multiple locations, an application must make multiple requests.
+* `max_locations` is  1. A call to the Isochrone service supports a single location only at this time. To support isochrones about multiple locations, an application must make multiple requests.
 * `max_time` is the maximum time from the location to compute isochrone contours. This is limited to 2 hours.
 * `max_contours` is the maximum number of icochrone contours allowed in a single request. This is limited to 4 contours.
 * Rate limits are two queries per second and 5,000 queries per day.
@@ -75,6 +75,7 @@ If an isochrone request has been named using the optional `&id=` input, then the
 ###Future Work
 
 Several other options are being considered as future service enhancements. These include:
+
 * The ability to use distance rather than time for each unit.
 * Optionally specify whether to generate outer contours only or contours with interior holes (regions that cannot be accessed within the specified time). Add options to control the minimum size of interior holes.
 * Allowing multiple locations in order to compute the region reachable from any of the locations within a specified time.
