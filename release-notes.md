@@ -12,6 +12,9 @@
 * **Issues Fixed**
   * Fixed an issue with pedestrian routes where a short u-turn was taken to avoid the "crossing" penalty.
   * Fixed bicycle routing due to high penalty to enter an access=destination area. Changed to a smaller, length based factor to try to avoid long regions where access = destination. Added a driveway penalty to avoid taking driveways (which are often marked as access=destination).
+  * Fixed regression where service did not adhere to the list of allowed actions in the Loki configuration
+* **Graph Correlation**
+  * External contributions from Navitia have lead to greatly reduced per-location graph correlation. Average correlation time is now less than 1ms down from 4-9ms.
 
 ## Release Date: 2016-10-17
 
