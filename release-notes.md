@@ -1,5 +1,10 @@
 ## Release Date: 2016-11-14 Valhalla 2.0
 
+* **Tile Redesign**
+  * Updated the graph tiles to store edges only on the hierarchy level they belong to. Prior to this, the highways were stored on all levels, they now exist only on the highway hierarchy. Similar changes were made for arterial level roads. This leads to about a 20% reduction in tile size. 
+  * The tile redesign required changes to the path generation algorithms. They must now transition freely beteeen levels, even for pedestrian and bicycle routes. To offset the extra transitions, the main algorithms were changed to expand nodes at each level that has directed edges, rather than adding the transition edges to the priority queue/adjacency list. This change helps performance. The hierarchy limits that are used to speed the computation of driving routes by utilizing the highway hierarchy were adjusted to work with the new path algorithms.
+  * Some changes to costing were also required, for example pedestrian and bicycle routes skip shortcut edges.
+  * Many tile data structures were altered to explicitly size different fields and make room for "spare" fields that will allow future growth. In addition, the tile itself has extra "spare" records that can be appended to the end of the tile and referenced from the tile header. This also will allow future growth without breaking backward compatibility.
 * **Guidance Improvement**
   * Refactored trip path to use an enumerated `Use` for edge and an enumerated `NodeType` for node
   * Fixed some wording in the Hindi narrative file
