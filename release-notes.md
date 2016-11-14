@@ -1,3 +1,10 @@
+## Release Date: 2016-11-14 Valhalla 2.0
+
+* **Guidance Improvement**
+  * Refactored trip path to use an enumerated `Use` for edge and an enumerated `NodeType` for node
+  * Fixed some wording in the Hindi narrative file
+  * Fixed missing turn maneuver by updating the forward intersecting edge logic
+
 ## Release Date: 2016-10-17
 
 * **Guidance Improvement**
