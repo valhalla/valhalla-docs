@@ -1,4 +1,4 @@
-## Release Date: 2016-11-14 Valhalla 2.0
+## Release Date: 2016-11-15 Valhalla 2.0
 
 * **Tile Redesign**
   * Updated the graph tiles to store edges only on the hierarchy level they belong to. Prior to this, the highways were stored on all levels, they now exist only on the highway hierarchy. Similar changes were made for arterial level roads. This leads to about a 20% reduction in tile size. 
