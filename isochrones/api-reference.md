@@ -4,8 +4,6 @@ An isochrone is a line that connects points of equal travel time about a given l
 
 Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
-The Mapzen Isochrone service requires an API key to use and has certain service limits. Learn more about getting started in the [Mapzen developer overview documentation](https://mapzen.com/documentation/overview/#mapzen-isochrone).
-
 ## Inputs of the Isochrone service
 
 A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the route costing model.
@@ -17,7 +15,7 @@ For example, if you want to know where you can travel within a 15-minute walk fr
 
 There is an option to name your isochrone request by appending `&id=`. The `id` is returned with the response so you can match it to your corresponding request.
 
-When using the Mapzen Isochrone service, there are limits on the number of requests, locations, and other parameters. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-isochrone) for more on rate limits. Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+The Mapzen Isochrone service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-isochrone) for more on API keys and rate limits.
 
 ### Location parameters
 
