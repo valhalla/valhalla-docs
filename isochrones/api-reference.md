@@ -1,6 +1,6 @@
 # Isochrones Service API reference
 
-The Isochrone service provides a computation of areas that are reachable within specified time periods from a location or set of locations. Alternatively, isochrones can provide an estimation of the areas that can reach specific locations within specified time periods. This is generally valid for pedestrian routes, but for automobile and bicycle routes more work is needed. Isochrones are usful for visualizing service regions for specific locations on a map. To facilitate visualization, the Isochrone service returns the reachable regions as polygons or lines in GeoJSON. GeoJSON is readily ingested and drawn by many mapping applications and easily integrated into Web maps.
+The Isochrone service provides a computation of areas that are reachable within specified time periods from a location or set of locations. Alternatively, isochrones can provide an estimation of the areas that can reach specific locations within specified time periods. This is generally valid for pedestrian routes, but for automobile and bicycle routes more work is needed. Isochrones are usful for visualizing service regions for specific locations on a map. To facilitate visualization, the Isochrone service returns the reachable regions as lines or polygons in GeoJSON. GeoJSON is readily ingested and drawn by many mapping applications and easily integrated into Web maps.
 
 The Isochrone service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
@@ -53,8 +53,9 @@ The Isochrone service uses the `auto`, `bicycle`, `pedestrian` and `multimodal` 
 | `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. Not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time is specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival.  For example "2016-07-03T08:06"</li></ul> |
 | `id` | Name your isochrone request. If `id` is specified, the naming will be sent through to the response. |
 | `contours` | This is a JSON array of contour objects that specify the time and color to use for each isochrone contour. The number of contours requested must not exceed the `max_contours` allowed. |
-| `rings_only` | Boolean value (defaulted to `true`) that, when `true`, will only return polygonal contours dropping the linestring contours. |
+| `polygon` | Boolean value (defaulted to `false`) that, when `true`, will only return polygonal contours dropping the linestring contours. **Note** polygonal output is simply equivalent returning any contour that is a ring as a polygon. For proper rendering (with opacity) more work is needed to turn demote some rings to inners of other rings and to remove potential self intersections. |
 | `denoise` | A floating point value from `0` to `1` (defaulted to `1`) which can be used to remove smaller contours. A value of `1` will only return the largest contour. A value of `0.5` will drop any contours that are less than half the area of the largest contour in the set of contours for that same time value (see below). |
+| `generalize` | A floating point value in meters used a the tolerance for Douglas Peucker generalization. **Note** generalization of contours can lead to self intersections as well as intersections of adjacent contours. |
 
 #####Isochrone Contours
 A list of contours or isochrone polygons to generate from the specified locations. Each isochrone contour contains the following:
@@ -68,18 +69,28 @@ A list of contours or isochrone polygons to generate from the specified location
 
 The isochrone contours are returned as GeoJSON. GeoJSON can easily be integrated into mapping applications. You can learn more about GeoJSON and its specification [here](http://geojson.org/).
 
-At present the GeoJSON will contain polygon and linestring features. By default only polygons will be returned however you can disable this using the `rings_only` parameter as described above. In addition to the geometry the properties of each feature will include styling information that most javascript based GeoJSON renderers will respect (especially leaflet). At present the opacity portion of the style is not controllable via the API.
+At present the GeoJSON will contain linestring or polygon features. By default only linestrings will be returned however you can get polygons using the `polygon` parameter as described above. In addition to the geometry the properties of each feature will include styling information that most javascript based GeoJSON renderers will respect (especially leaflet). At present the opacity portion of the style is not controllable via the API.
 
 If an isochrone request has been named using the optional `&id=` input, then the name will be returned as a name property for the feature collection within the GeoJSON response.
 
-###Future Work
+## Rendering Isochrones
+
+By far the most common rendering of isochrones has to be raster based. This presents a bit of a problem in that you don't have much control over what appears in the raster (each pixel) or you've got to convert the raster to something you can display in the style you'd like to display it. So although internally we do indeed compute isochrones using a raster datatype we currently only return vectorized data.
+
+As mentioned above we currently support linestring and polygon primative types. Rendering linestring data is quite straight forward and can be seen in our demo linked below. This is the prefered method for now as there are quite a few caveats one must deal with when rendering isochrones as polygons.
+
+Rendering polygons is tricky business. When working with isochrones its generally useful to see them in the presence of a map. So to be able to see the map one must render the polygons as semi-transparent (unless you've got a vector based map, ie tangram, then you could render the map over the isochrone polygons). Because isochrones are actually contours, the polygons returned will be necessarily, nested. This nesting causes overlapping transparent polygons, which leaves you with portions of the map that have blended colors from two different isochrones and even worse varying amounts of transparency. To solve this we need a couple of things. We need the geometry of the polygons to be free of degeneracies, we'll say self intersection is a degeneracy and we need holes in polygons to be represented as such. These two gaurantees are currently not implemented, we're working on it.
+
+Consider your use-case and use your best judgement to determine if rendering isochrones as linestrings or polygons is right for you!
+
+## Future Work
 
 Several other options are being considered as future service enhancements. These include:
 * The ability to use distance rather than time for each unit.
 * Optionally specify whether to generate outer contours only or contours with interior holes (regions that cannot be accessed within the specified time). Add options to control the minimum size of interior holes.
 * Allowing multiple locations in order to compute the region reachable from any of the locations within a specified time.
 * Generation of contours using "reverse" access logic to see the region that can reach a specific location within the specified time.
-* Return of the iso-grid data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location. Adding distance to the iso-grid data would improve its use for large time-distance one to many matrix requests.
+* Return of the raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location. Adding distance to the raster cells would improve its use for large time-distance one to many matrix requests. The raster itself can be quite large so in terms of formats we may want to offset encode it and return the dimensions or write it to a binary 2 channel image format (useful for textures).
 
 If you have comments or requests for any of these options (and others) please let us know.
 
@@ -87,4 +98,4 @@ See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-re
 
 ## Sample Isochrone Demonstration
 
-If you want to see the results of the Isochrone service, a quick and easy way is using [geojson.io](geojson.io.). Instructions TBD.
+If you want to see the results of the Isochrone service, a quick and easy way is using the [demo](https://valhalla.github.io/demos/isochrone/). Instructions TBD.
