@@ -39,21 +39,21 @@ Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` cost
 | `date_time` | The local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. This is not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival. For example, "2016-07-03T08:06"</li></ul> |
 | `id` | Name of the isochrone request. If `id` is specified, the name is returned with the response. |
 | `contours` | A JSON array of contour objects with the time in minutes and color to use for each isochrone contour. <ul><li>`time` - The time in minutes for the contour.<li>`color` - The color for the output of the contour. Specify it as a [Hex value](http://www.w3schools.com/colors/colors_hexadecimal.asp), but without the `#`, such as `"color":"ff0000"` for red. If no color is specified, the isochrone service will assign a default color to the output.</li></ul>  |
-| `polygon` | A Boolean value to determine whether to return polygons or lines (as LineStrings) as the contours. The default is `false`, which returns LineStrings; when `true`, polygons are returned. Note: When `polygon` is `true`, any contour that forms a ring is returned as a polygon. |
-| `denoise` | A floating point value from `0` to `1` (default of `1`) which can be used to remove smaller contours. A value of `1` will only return the largest contour. A value of `0.5` drops any contours that are less than half the area of the largest contour in the set of contours for that same time value. |
+| `polygon` | A Boolean value to determine whether to return geojson polygons or linestrings as the contours. The default is `false`, which returns lines; when `true`, polygons are returned. Note: When `polygon` is `true`, any contour that forms a ring is returned as a polygon. |
+| `denoise` | A floating point value from `0` to `1` (default of `1`) which can be used to remove smaller contours. A value of `1` will only return the largest contour for a given time value. A value of `0.5` drops any contours that are less than half the area of the largest contour in the set of contours for that same time value. |
 | `generalize` | A floating point value in meters used as the tolerance for [Douglas-Peucker](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm) generalization. Note: Generalization of contours can lead to self-intersections, as well as intersections of adjacent contours. |
 
 ## Outputs of the Isochrone service
 
 In the service response, the isochrone contours are returned as GeoJSON, which can be integrated into mapping applications. You can learn more about GeoJSON and its specification at http://geojson.org/.
 
-The contours are calculated using rasters and are returned as either polygon or line (LinesStrings) vector features, depending on your input setting for the `polygon` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
+The contours are calculated using rasters and are returned as either polygon or line features, depending on your input setting for the `polygon` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
 
 See the [HTTP return codes](turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
 
 ### Draw isochrones on a map
 
-Most JavaScript-based GeoJSON renderers, including [Leaflet](http://leafletjs.com/), can use the isochrone styling information directly from the response. At present, you cannot control the opacity through the API, though.
+Most JavaScript-based GeoJSON renderers, including [Leaflet](http://leafletjs.com/), can use the isochrone styling information directly from the response. At present, you cannot control the opacity through the API.
 
 When making a map, drawing the isochrone contours as lines is more straightforward than polygons, and, therefore, currently is the default and recommended method. When deciding between the output as lines and polygons, consider your use case and the additional styling considerations involved with polygons. For example, fills should be rendered as semi-transparent over the other map layers so they are visible, although you may have more flexibility when using a vector-based map. In addition, polygons from multiple contour levels do not have overlapping areas cut out or removed. In other words, the outer contours include the areas of any inner contours, causing the colors and transparencies to blend when multiple contour polygons are drawn at the same time.
 
@@ -61,7 +61,7 @@ Mapzen is working on improving the polygon isochrone output and rendering capabi
 
 ## Isochrone demonstration in Mobility Explorer
 
-Mapzen's [Mobility Explorer](https://mapzen.com/mobility/explorer) helps you understand transportation networks around the world, and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
+Mapzen's [Mobility Explorer](https://mapzen.com/mobility/explorer) helps you understand transportation networks around the world and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
 
 You can review the [documentation](explorer/overview.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
 
@@ -71,8 +71,9 @@ The Isochrone service is in active development. You can follow the [Mapzen blog]
 
 Several other options are being considered as future service enhancements. These include:
 
-* using distance rather than time for each unit.
-* generating outer contours or contours with interior holes for regions that cannot be accessed within the specified time, including with options to control the minimum size of interior holes.
-* allowing multiple locations to compute the region reachable from any of the locations within a specified time.
-* generating contours with reverse access logic to see the region that can reach a specific location within the specified time.
-* returning raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location, including improvements with one-to-many requests to the Mapzen Time-Distance Matrix service.
+* Using distance rather than time for each unit.
+* Generating outer contours or contours with interior holes for regions that cannot be accessed within the specified time, including with options to control the minimum size of interior holes.
+* Removing self intersections from polygonal contours.
+* Allowing multiple locations to compute the region reachable from any of the locations within a specified time.
+* Generating contours with reverse access logic to see the region that can reach a specific location within the specified time.
+* Returning raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location, including improvements with one-to-many requests to the Mapzen Time-Distance Matrix service.
