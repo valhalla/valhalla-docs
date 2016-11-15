@@ -2,7 +2,7 @@
 
 An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. The Mapzen Isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map. You can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to see a demonstration of the Isochrone service.
 
-Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
+Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
 The Mapzen Isochrone service requires an API key to use and has certain service limits. Learn more about getting started in the [Mapzen developer overview documentation](https://mapzen.com/documentation/overview/#mapzen-isochrone).
 
@@ -10,7 +10,7 @@ The Mapzen Isochrone service requires an API key to use and has certain service 
 
 A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the route costing model.
 
-For example, you want to know where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
+For example, if you want to know where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
 
     matrix.mapzen.com/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
