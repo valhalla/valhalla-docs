@@ -4,7 +4,7 @@ Mobility Explorer highlights the connections between transit datasets, including
 
 Each time you click buttons or navigate the map on Mobility Explorer, you are sending a query to the [Transitland](https://transit.land/documentation/datastore/api-endpoints.html) or [Mapzen Mobility](index.md) APIs. You can see the raw API request in your browser's address bar and resulting JSON response from the server by clicking the `View request` links. If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs.
 
-Start exploring by searching for a place or address in the box on the map or by panning and zooming to your area of interest. Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window.
+Start exploring by searching for a place or address in the box on the map or by panning and zooming to your area of interest. Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
 Hover over a point, line, or polygon on the map to get a preview of its name and other information, and click it for full details. As you move the map, you need to redo the search to get updated information.
 
