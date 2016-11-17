@@ -11,5 +11,5 @@ The analysis comes from the [Mapzen Isochrone](isochrones/api-reference.md) serv
 3. Choose a mode of transportation. For example, click `walking` to see how far you can walk within intervals of 15 to 60 minutes. If you are generating isochrones for transit, you need to set the date and time of your departure.
   The map updates with isochrone areas drawn around the point.
 4. Move the point around the map to calculate isochrones from that location.
-5. To see the JSON that is being returned from the Mapzen Isochrone API, click the link to see the request.
+5. You can click the `See the Mapzen Mobility API request for these results` to view the raw API request in your browser’s address bar and resulting JSON response from the server
 6. Click the clear button on the search box to remove the pin and any isochrones from the map.
