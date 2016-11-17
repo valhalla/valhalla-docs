@@ -80,3 +80,7 @@ Several other options are being considered as future service enhancements. These
 * Allowing multiple locations to compute the region reachable from any of the locations within a specified time.
 * Generating contours with reverse access logic to see the region that can reach a specific location within the specified time.
 * Returning raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location, including improvements with one-to-many requests to the Mapzen Time-Distance Matrix service.
+
+## Data credits
+
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).

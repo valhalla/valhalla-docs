@@ -1,6 +1,6 @@
 # Generate isochrones
 
-By calculating isochrones in Mobility Explorer, you can view where you can travel from a point, such as a transit stop, within a certain amount of time. You can specify the mode of transportation, such as walking, biking, driving, or taking transit, and see a series of rings to represent where you can reach within various increments of time, ranging from 15 to 60 minutes.
+By calculating isochrones in [Mobility Explorer](https://mapzen.com/mobility/explorer), you can view where you can travel from a point, such as a transit stop, within a certain amount of time. You can specify the mode of transportation, such as walking, biking, driving, or taking transit, and see a series of rings to represent where you can reach within various increments of time, ranging from 15 to 60 minutes.
 
 This is an example of isochrones showing the travel times by driving from a location in Melbourne, as depicted in Mobility Explorer.
 
@@ -17,3 +17,7 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 4. Move the point around the map to calculate isochrones from that location.
 5. You can click `See the Mapzen Mobility API request for these results` to view the raw API request in your browser’s address bar and resulting JSON response from the server
 6. Click the clear button on the search box to remove the pin and any isochrones from the map.
+
+## Data credits
+
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
