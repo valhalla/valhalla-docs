@@ -4,6 +4,10 @@ An isochrone is a line that connects points of equal travel time about a given l
 
 Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
+This is an example of isochrones showing the travel times by driving from a location in Melbourne, as depicted in Mobility Explorer.
+
+![Isochrones for travel times by driving in Melbourne from Mobility Explorer](./images/melbourne_explorer.png)
+
 ## Inputs of the Isochrone service
 
 A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the route costing model.
