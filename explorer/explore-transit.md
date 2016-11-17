@@ -12,6 +12,9 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 
 2. Click `Show routes` to display routes on the map. The map updates to show transit route lines.
 4. To filter the map by a single route or operator, click it on the map or in the drop-down list.
+
+  ![Routes by operator](/images/mobility-explorer-routes-by-operator.png)
+
 5. Choose whether to display the lines by the type of transportation mode, such as bus or metro (subway), or the agency that operates the route.
 6. Check `Show stops served by route` to view the transit stops along the route.
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a [RouteStopPattern](https://transit.land/documentation/datastore/routes-and-route-stop-patterns.html) in the Transitland API.
@@ -21,6 +24,9 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 ## Explore transit stops and travel times from them
 
 2. Click `Show stops` to display transit stops on the map. The map updates to show points representing transit stops.
+
+  ![Transit stops within an area](/images/mobility-explorer-stops.png)
+
 4. Click a point to get full details.
 5. From the details panel, you can see which routes and operators serve that stop. Clicking the links for the individual routes or all routes serving the stop takes you to a query on the routes under `Show routes`.
   With a stop selected, you can view where you can travel from there within a certain amount of time.
