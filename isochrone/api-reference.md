@@ -6,7 +6,7 @@ Isochrone maps share some of the same concepts and terminology with familiar top
 
 This is an example of isochrones showing the travel times by driving from a location in Melbourne, as depicted in Mobility Explorer.
 
-![Isochrones for travel times by driving in Melbourne from Mobility Explorer](./images/melbourne_explorer.png)
+![Isochrones for travel times by driving in Melbourne from Mobility Explorer](/images/melbourne_explorer.png)
 
 ## Inputs of the Isochrone service
 
