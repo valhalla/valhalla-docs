@@ -10,7 +10,7 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 ## Inputs of the Isochrone service
 
-A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the route costing model.
+A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models).
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
@@ -48,7 +48,7 @@ Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` cost
 
 ## Outputs of the Isochrone service
 
-In the service response, the isochrone contours are returned as GeoJSON, which can be integrated into mapping applications. You can learn more about GeoJSON and its specification at http://geojson.org/.
+In the service response, the isochrone contours are returned as [GeoJSON](http://geojson.org/), which can be integrated into mapping applications.
 
 The contours are calculated using rasters and are returned as either polygon or line features, depending on your input setting for the `polygon` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
 
