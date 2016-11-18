@@ -177,7 +177,7 @@ The route results are returned as a `trip`. This is a JSON object that contains 
 
 Basic trip information includes:
 
-| Trip Item | Description |
+| Trip item | Description |
 | :---- | :----------- |
 | `status` | Status code. |
 | `status_message ` | Status message. |
@@ -187,7 +187,7 @@ Basic trip information includes:
 
 The summary JSON object includes:
 
-| Summary Item | Description |
+| Summary item | Description |
 | :---- | :----------- |
 | `time` | Estimated elapsed time to complete the trip. |
 | `length` | Distance traveled for the entire trip. Units are either miles or kilometers based on the input units specified. |
@@ -204,7 +204,7 @@ Each leg of the trip includes a summary, which is comprised of the same informat
 
 Each maneuver includes:
 
-| Maneuver Item | Description |
+| Maneuver item | Description |
 | :--------- | :---------- |
 | `type` | Type of maneuver. See below for a list. |
 | `instruction` | Written maneuver instruction. Describes the maneuver, such as "Turn right onto Main Street". |
@@ -284,14 +284,14 @@ The maneuver `sign` may contain four lists of interchange sign elements as follo
 
 Each maneuver sign element includes:
 
-| Maneuver Sign Element Item | Description |
+| Maneuver sign element item | Description |
 | :------------------ | :---------- |
 | `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
 
 A maneuver `transit_info` includes:
 
-| Maneuver Transit Route Item | Description |
+| Maneuver transit route item | Description |
 | :--------- | :---------- |
 | `onestop_id` | Global transit route identifier from Transitland. |
 | `short_name` | Short name describing the transit route. For example "N". |
@@ -307,7 +307,7 @@ A maneuver `transit_info` includes:
 
 A `transit_stop` includes:
 
-| Transit stopitem | Description |
+| Transit stop item | Description |
 | :--------- | :---------- |
 | `type` | The type of stop (simple stop=0; station=1) |
 | `onestop_id` | Global transit stop identifier from Transitland. |
@@ -361,7 +361,7 @@ The following is a table of Valhalla exception internal error code conditions th
 ####thor project 4xx
 ####tyr project 5xx
 
-| Error Code | Error |
+| Error code | Error |
 | :--------- | :---------- |
 |100 | Failed to parse json request |
 |101 | Try a POST or GET request instead |
