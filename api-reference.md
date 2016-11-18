@@ -400,7 +400,7 @@ The codes correspond to code returned from a particular [Valhalla project](https
 |170 | Locations are in unconnected regions. Go check/edit the map at osm.org |
 |171 | No suitable edges near location |
 |199 | Unknown |
-|**2xx** | ** Odin project codes** |
+|**2xx** | **Odin project codes** |
 |200 | Failed to parse intermediate request format |
 |201 | Failed to parse TripPath |
 |210 | Trip path does not have any nodes |
