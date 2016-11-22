@@ -1,3 +1,9 @@
+## Release Date: 2016-11-? Valhalla 2.0.1
+
+* **Issues Fixed**
+  * Fixed tile incompatiblity between 64 and 32bit architectures
+  * Fixed missing edges within tile edge search indexes
+
 ## Release Date: 2016-11-15 Valhalla 2.0
 
 * **Tile Redesign**
