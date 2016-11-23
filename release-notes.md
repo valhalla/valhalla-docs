@@ -1,5 +1,6 @@
 ## Release Date: 2016-11-? Valhalla 2.0.1
-
+* **Routing Improvement**
+  * Preliminary support for multi-way restrictions
 * **Issues Fixed**
   * Fixed tile incompatiblity between 64 and 32bit architectures
   * Fixed missing edges within tile edge search indexes
