@@ -3,7 +3,7 @@
 * **Issues Fixed**
   * Fixed tile incompatiblity between 64 and 32bit architectures
   * Fixed missing edges within tile edge search indexes
-  * Fixed an issue where transit isochrone was cut off if we took transit that was greater than the max_seconds.
+  * Fixed an issue where transit isochrone was cut off if we took transit that was greater than the max_seconds and other transit lines or buses were then not considered.
 
 ## Release Date: 2016-11-15 Valhalla 2.0
 
