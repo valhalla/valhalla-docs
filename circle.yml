@@ -8,7 +8,7 @@ test:
 
 deployment:
   release:
-    branch: "migurski/add-to-docs-pipeline"
+    branch: "master"
     commands:
       - pip install 'Circle-Tickler == 1.0.1'
       - tickle-circle mapzen mapzen-docs-generator master $CIRCLE_TOKEN
