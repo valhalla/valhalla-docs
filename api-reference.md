@@ -1,4 +1,3 @@
-
 # Mapzen Turn-by-Turn routing service API reference
 
 Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
@@ -140,10 +139,11 @@ These options are available for transit costing when the multimodal costing mode
 
 | Transit options | Description |
 | :-------------------------- | :----------- |
-| `use_bus` | User's desire to use buses.  Range of values from 0 (try to avoid buses) to 1 (strong preference for riding buses).|
-| `use_rail` | User's desire to use rail/subway/metro.  Range of values from 0 (try to avoid rail) to 1 (strong preference for riding rail).|
-| `use_transfers` |User's desire to favor transfers.  Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
-
+| `use_bus` | User's desire to use buses. Range of values from 0 (try to avoid buses) to 1 (strong preference for riding buses).|
+| `use_rail` | User's desire to use rail/subway/metro. Range of values from 0 (try to avoid rail) to 1 (strong preference for riding rail).|
+| `use_transfers` |User's desire to favor transfers. Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
+| `transit_start_end_max_distance` | A pedestrian option that can be added to the request to extend the defaults (2145 meters or approximately 1.5 miles). This is the maximum walking distance at the beginning or end of a route.|
+| `transit_transfer_max_distance` | A pedestrian option that can be added to the request to extend the defaults (800 meters or 0.5 miles). This is the maximum walking distance between transfers.|
 For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=mapzen-xxxxxxx`
 
 Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
@@ -177,7 +177,7 @@ The route results are returned as a `trip`. This is a JSON object that contains 
 
 Basic trip information includes:
 
-| Trip Item | Description |
+| Trip item | Description |
 | :---- | :----------- |
 | `status` | Status code. |
 | `status_message ` | Status message. |
@@ -187,7 +187,7 @@ Basic trip information includes:
 
 The summary JSON object includes:
 
-| Summary Item | Description |
+| Summary item | Description |
 | :---- | :----------- |
 | `time` | Estimated elapsed time to complete the trip. |
 | `length` | Distance traveled for the entire trip. Units are either miles or kilometers based on the input units specified. |
@@ -204,7 +204,7 @@ Each leg of the trip includes a summary, which is comprised of the same informat
 
 Each maneuver includes:
 
-| Maneuver Item | Description |
+| Maneuver item | Description |
 | :--------- | :---------- |
 | `type` | Type of maneuver. See below for a list. |
 | `instruction` | Written maneuver instruction. Describes the maneuver, such as "Turn right onto Main Street". |
@@ -284,14 +284,14 @@ The maneuver `sign` may contain four lists of interchange sign elements as follo
 
 Each maneuver sign element includes:
 
-| Maneuver Sign Element Item | Description |
+| Maneuver sign element item | Description |
 | :------------------ | :---------- |
 | `text` | Interchange sign text. <ul><li>exit number example: 91B.</li><li>exit branch example: I 95 North.</li><li>exit toward example: New York.</li><li>exit name example: Gettysburg Pike.</li><ul> |
 | `consecutive_count` | The frequency of this sign element within a set a consecutive signs. This item is optional. |
 
 A maneuver `transit_info` includes:
 
-| Maneuver Transit Route Item | Description |
+| Maneuver transit route item | Description |
 | :--------- | :---------- |
 | `onestop_id` | Global transit route identifier from Transitland. |
 | `short_name` | Short name describing the transit route. For example "N". |
@@ -301,19 +301,19 @@ A maneuver `transit_info` includes:
 | `text_color` | The numeric text color value associated with a transit route. The value for black would be "0". |
 | `description` | The description of the the transit route. For example "Trains operate from Ditmars Boulevard, Queens, to Stillwell Avenue, Brooklyn, at all times. N trains in Manhattan operate along Broadway and across the Manhattan Bridge to and from Brooklyn. Trains in Brooklyn operate along 4th Avenue, then through Borough Park to Gravesend. Trains typically operate local in Queens, and either express or local in Manhattan and Brooklyn, depending on the time. Late night trains operate via Whitehall Street, Manhattan. Late night service is local". |
 | `operator_onestop_id` | Global operator/agency identifier from Transitland. |
-| `operator_name` | Operator/agency name. For example "BART", "King County Marine Divison", etc.  Short name is used over long name. |
-| `operator_url` | Operator/agency URL. For example "http://web.mta.info/". |
+| `operator_name` | Operator/agency name. For example, "BART", "King County Marine Division", and so on.  Short name is used over long name. |
+| `operator_url` | Operator/agency URL. For example, "http://web.mta.info/". |
 | `transit_stops` | A list of the stops/stations associated with a specific transit route. See below for details. |
 
 A `transit_stop` includes:
 
-| Transit Stop Item | Description |
+| Transit stop item | Description |
 | :--------- | :---------- |
-| `type` | The type of stop (simple stop=0; station=1) |
+| `type` | Type of stop (simple stop=0; station=1). |
 | `onestop_id` | Global transit stop identifier from Transitland. |
-| `name` | Name of the stop/station. For example "14 St - Union Sq". |
-| `arrival_date_time` | Arrival date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
-| `departure_date_time` | Departure date/time using the ISO 8601 format (YYYY-MM-DDThh:mm). For example "2015-12-29T08:06". |
+| `name` | Name of the stop or station. For example "14 St - Union Sq". |
+| `arrival_date_time` | Arrival date and time using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DDThh:mm). For example, "2015-12-29T08:06". |
+| `departure_date_time` | Departure date and time using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (YYYY-MM-DDThh:mm). For example, "2015-12-29T08:06". |
 | `is_parent_stop` | True if this stop is a marked as a parent stop. |
 | `assumed_schedule` | True if the times are based on an assumed schedule because the actual schedule is not known. |
 | `lat` | Latitude of the transit stop in degrees. |
@@ -351,18 +351,15 @@ The following is a table of HTTP status error code conditions that may occur for
 | 500 | Failed to parse TripDirections | Had a problem using the trip directions to serialize a json response |
 | 501 | Not implemented | Not Implemented |
 
-### Internal Error codes and conditions
+### Internal error codes and conditions
 
-The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the valhalla service projects.
+The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects. 
 
-####loki project 1xx
-####odin project 2xx
-####skadi project 3xx
-####thor project 4xx
-####tyr project 5xx
+The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla#organization).
 
-| Error Code | Error |
+| Error code | Error |
 | :--------- | :---------- |
+|**1xx**| **Loki project codes** |
 |100 | Failed to parse json request |
 |101 | Try a POST or GET request instead |
 |102 | The config actions for Loki are incorrectly loaded |
@@ -371,13 +368,11 @@ The following is a table of Valhalla exception internal error code conditions th
 |105 | Path action not supported |
 |106 | Try any of |
 |107 | Not Implemented |
-| | |
 |110 | Insufficiently specified required parameter 'locations' |
 |111 | Insufficiently specified required parameter 'time' |
 |112 | Insufficiently specified required parameter 'locations' or 'sources & targets' |
 |113 | Insufficiently specified required parameter 'contours' |
 |114 | Insufficiently specified required parameter 'shape' or 'encoded_polyline' |
-| | |
 |120 | Insufficient number of locations provided |
 |121 | Insufficient number of sources provided |
 |122 | Insufficient number of targets provided |
@@ -385,15 +380,12 @@ The following is a table of Valhalla exception internal error code conditions th
 |124 | No edge/node costing provided |
 |125 | No costing method found |
 |126 | No shape provided |
-| | |
 |130 | Failed to parse location |
 |131 | Failed to parse source |
 |132 | Failed to parse target |
-| | |
 |140 | Action does not support multimodal costing |
 |141 | Arrive by for multimodal not implemented yet |
 |142 | Arrive by not implemented for isochrones |
-| | |
 |150 | Exceeded max locations |
 |151 | Exceeded max time |
 |152 | Exceeded max contours |
@@ -401,70 +393,55 @@ The following is a table of Valhalla exception internal error code conditions th
 |154 | Path distance exceeds the max distance limit |
 |155 | Outside the valid walking distance at the beginning or end of a multimodal route |
 |156 | Outside the valid walking distance between stops of a multimodal route |
-| | |
 |160 | Date and time required for origin for date_type of depart at |
 |161 | Date and time required for destination for date_type of arrive by |
 |162 | Date and time is invalid.  Format is YYYY-MM-DDTHH:MM |
 |163 | Invalid date_type |
-| | |
 |170 | Locations are in unconnected regions. Go check/edit the map at osm.org |
 |171 | No suitable edges near location |
-| | |
 |199 | Unknown |
-| | |
+|**2xx** | **Odin project codes** |
 |200 | Failed to parse intermediate request format |
 |201 | Failed to parse TripPath |
-|| | |
 |210 | Trip path does not have any nodes |
 |211 | Trip path has only one node |
 |212 | Trip must have at least 2 locations |
 |213 | Error - No shape or invalid node count |
-| | |
 |220 | Turn degree out of range for cardinal direction |
-| | |
 |230 | Invalid TripDirections_Maneuver_Type in method FormTurnInstruction |
 |231 | Invalid TripDirections_Maneuver_Type in method FormRelativeTwoDirection |
 |232 | Invalid TripDirections_Maneuver_Type in method FormRelativeThreeDirection |
-| | |
 |299 | Unknown |
-| | |
+|**3xx** | **Skadi project codes** |
 |300 | Failed to parse json request |
 |301 | Try a POST or GET request instead |
 |302 | The config actions for Skadi are incorrectly loaded |
 |303 | Path action not supported |
 |304 | Try any of |
 |305 | Not Implemented |
-| | |
 |310 | No shape provided |
 |311 | Insufficient shape provided |
 |312 | Insufficiently specified required parameter 'shape' or 'encoded_polyline' |
 |313 | 'resample_distance' must be >=  |
 |314 | Too many shape points |
-| | |
 |399 | Unknown |
-| | |
+|**4xx** | **Thor project codes** |
 |400 | Unknown action |
 |401 | Failed to parse intermediate request format |
-| | |
 |410 | Insufficiently specified required parameter 'locations' |
 |411 | Insufficiently specified required parameter 'shape' |
 |412 | No costing method found |
-| | |
 |420 | Failed to parse correlated location |
 |421 | Failed to parse location |
 |422 | Failed to parse source |
 |423 | Failed to parse target |
 |424 | Failed to parse shape |
-| | |
 |430 | Exceeded max iterations in CostMatrix::SourceToTarget |
-| | |
 |440 | Cannot reach destination - too far from a transit stop |
 |441 | Location is unreachable |
 |442 | No path could be found for input |
-| | |
 |499 | Unknown |
-| | |
+|**5xx** | **Tyr project codes** |
 |500 | Failed to parse intermediate request format |
 |501 | Failed to parse TripDirections |
-| | |
 |599 | Unknown |
