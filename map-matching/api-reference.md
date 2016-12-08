@@ -21,9 +21,6 @@ The map-matching service is in active development. You can follow the [Mapzen bl
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
-## API keys and service limits
-
-TBD
 
 ## Inputs to map-matching
 
