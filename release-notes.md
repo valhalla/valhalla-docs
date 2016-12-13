@@ -1,3 +1,7 @@
+## Release Date: 2016-12-13 Valhalla 2.0.2
+* **Routing Improvement**
+  * Added HOV costing.
+
 ## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
   * Preliminary support for multi-way restrictions
