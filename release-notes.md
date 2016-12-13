@@ -2,6 +2,7 @@
 * **Routing Improvement**
   * Added HOV costing model.
   * Speed limit updates.   Added logic to save average speed separately from speed limits.  
+  * Added transit include and exclude logic to multimodal isochrone.
 
 ## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
