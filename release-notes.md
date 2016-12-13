@@ -1,6 +1,7 @@
 ## Release Date: 2016-12-13 Valhalla 2.0.2
 * **Routing Improvement**
   * Added HOV costing model.
+  * Speed limit updates.   Added logic to save average speed separately from speed limits.  
 
 ## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
