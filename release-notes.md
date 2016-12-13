@@ -1,8 +1,13 @@
 ## Release Date: 2016-12-13 Valhalla 2.0.2
 * **Routing Improvement**
+  * Added support for multi-way restrictions to matrix and isochrones.
   * Added HOV costing model.
   * Speed limit updates.   Added logic to save average speed separately from speed limits.  
   * Added transit include and exclude logic to multimodal isochrone.
+  * Fix some edge cases for trivial (single edge) paths.
+  * Better treatment of destination access only when using bidirectional A*.
+* **Performance Improvement**
+  * Improved performance of the path algorithms by making many access methods inline.
 
 ## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
