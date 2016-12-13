@@ -1,4 +1,4 @@
-## Release Date: 2016-11-? Valhalla 2.0.1
+## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
   * Preliminary support for multi-way restrictions
 * **Issues Fixed**
