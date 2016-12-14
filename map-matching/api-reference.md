@@ -90,15 +90,15 @@ Each `edge` includes:
 | `traversability` | TODO. |
 | `use` | TODO. |
 | `toll` | True if the edge has any toll. |
-| `unpaved` | TODO. |
-| `tunnel` | TODO. |
-| `bridge` | TODO. |
-| `roundabout` | TODO. |
-| `internal_intersection` | TODO. |
-| `drive_on_right` | TODO. |
+| `unpaved` | True if the edge is unpaved or rough pavement. |
+| `tunnel` | True if the edge is a tunnel. |
+| `bridge` | True if the edge is a bridge. |
+| `roundabout` | True if the edge is a roundabout. |
+| `internal_intersection` | True if the edge is an internal intersection. |
+| `drive_on_right` | True if the drive on the right side of the street flag is endabled. |
 | `surface` | TODO. |
-| `sign` | TODO. |
-| `travel_mode` | TODO. |
+| `sign` | Contains the interchange guide information associated with this edge. See below for details. |
+| `travel_mode` | Travel mode.<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
 | `vehicle_type` | TODO. |
 | `pedestrian_type` | TODO. |
 | `bicycle_type` | TODO. |
