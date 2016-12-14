@@ -99,10 +99,10 @@ Each `edge` includes:
 | `surface` | TODO. |
 | `sign` | Contains the interchange guide information associated with this edge. See below for details. |
 | `travel_mode` | Travel mode.<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
-| `vehicle_type` | TODO. |
-| `pedestrian_type` | TODO. |
-| `bicycle_type` | TODO. |
-| `transit_type` | TODO. |
+| `vehicle_type` | Vehicle type.<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
+| `pedestrian_type` | Pedestrian type.<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul>. |
+| `bicycle_type` | Bicycle type.<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
+| `transit_type` | Transit type. <ul><li>`tram`</li><li>`metro`</li><li>"rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
 | `id` | TODO. |
 | `way_id` | TODO. |
 | `weighted_grade` | TODO. |
