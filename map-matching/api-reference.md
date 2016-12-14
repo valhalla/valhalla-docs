@@ -56,7 +56,7 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 
 ## Outputs of trace_route
 
-The outputs of the trace_route action is the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
+The outputs of the trace_route action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
 
 ## Outputs of trace_attributes
 
