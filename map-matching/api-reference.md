@@ -59,4 +59,96 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 The outputs of the trace_route action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
 
 ## Outputs of trace_attributes
+The `trace_attributes` results contains a list edges and optionally, the following items: osm_changeset, list of admins, shape, and units.
+
+| Result Item | Description |
+| :--------- | :---------- |
+| `edges` | TODO. |
+| `osm_changeset` | TODO. |
+| `admins` | TODO. |
+| `shape` | TODO. |
+| `units` | TODO. |
+
+Each `edge` includes:
+
+| Edge Item | Description |
+| :--------- | :---------- |
+| `names` | TODO. |
+| `length` | TODO. |
+| `speed` | TODO. |
+| `road_class` | TODO. |
+| `begin_heading` | TODO. |
+| `end_heading` | TODO. |
+| `begin_shape_index` | TODO. |
+| `end_shape_index` | TODO. |
+| `traversability` | TODO. |
+| `use` | TODO. |
+| `toll` | TODO. |
+| `unpaved` | TODO. |
+| `tunnel` | TODO. |
+| `bridge` | TODO. |
+| `roundabout` | TODO. |
+| `internal_intersection` | TODO. |
+| `drive_on_right` | TODO. |
+| `surface` | TODO. |
+| `sign` | TODO. |
+| `travel_mode` | TODO. |
+| `vehicle_type` | TODO. |
+| `pedestrian_type` | TODO. |
+| `bicycle_type` | TODO. |
+| `transit_type` | TODO. |
+| `id` | TODO. |
+| `way_id` | TODO. |
+| `weighted_grade` | TODO. |
+| `max_upward_grade` | TODO. |
+| `max_downward_grade` | TODO. |
+| `lane_count` | TODO. |
+| `cycle_lane` | TODO. |
+| `bicycle_network` | TODO. |
+| `sidewalk` | TODO. |
+| `density` | TODO. |
+| `speed_limit` | TODO. |
+| `truck_speed` | TODO. |
+| `truck_route` | TODO. |
+| `end_node` | TODO. |
+
+Each `sign` includes:
+
+| Sign Item | Description |
+| :--------- | :---------- |
+| `exit_number` | TODO. |
+| `exit_branch` | TODO. |
+| `exit_toward` | TODO. |
+| `exit_name` | TODO. |
+
+Each `end_node` includes:
+
+| Node Item | Description |
+| :--------- | :---------- |
+| `intersecting_edges` | TODO. |
+| `elapsed_time` | TODO. |
+| `admin_index` | TODO. |
+| `type` | TODO. |
+| `fork` | TODO. |
+| `time_zone` | TODO. |
+
+Each `intersecting_edge` includes:
+
+| Intersecting Edge Item | Description |
+| :--------- | :---------- |
+| `begin_heading` | TODO. |
+| `prev_name_consistency` | TODO. |
+| `curr_name_consistency` | TODO. |
+| `driveability` | TODO. |
+| `cyclability` | TODO. |
+| `walkability` | TODO. |
+
+Each `admin` includes:
+
+| Admin Item | Description |
+| :--------- | :---------- |
+| `country_code` | TODO. |
+| `country_text` | TODO. |
+| `state_code` | TODO. |
+| `state_text` | TODO. |
 
