@@ -144,6 +144,7 @@ These options are available for transit costing when the multimodal costing mode
 | `use_transfers` |User's desire to favor transfers. Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
 | `transit_start_end_max_distance` | A pedestrian option that can be added to the request to extend the defaults (2145 meters or approximately 1.5 miles). This is the maximum walking distance at the beginning or end of a route.|
 | `transit_transfer_max_distance` | A pedestrian option that can be added to the request to extend the defaults (800 meters or 0.5 miles). This is the maximum walking distance between transfers.|
+
 For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h)  `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=mapzen-xxxxxxx`
 
 Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
@@ -353,7 +354,7 @@ The following is a table of HTTP status error code conditions that may occur for
 
 ### Internal error codes and conditions
 
-The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects. 
+The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects.
 
 The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla#organization).
 
