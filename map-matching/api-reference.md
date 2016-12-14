@@ -69,7 +69,7 @@ The `trace_attributes` results contains a list edges and optionally, the followi
 
 | Result Item | Description |
 | :--------- | :---------- |
-| `edges` | TODO. |
+| `edges` | List of edges associated with input shape. |
 | `osm_changeset` | TODO. |
 | `admins` | TODO. |
 | `shape` | TODO. |
@@ -79,17 +79,17 @@ Each `edge` includes:
 
 | Edge Item | Description |
 | :--------- | :---------- |
-| `names` | TODO. |
-| `length` | TODO. |
-| `speed` | TODO. |
+| `names` | List of names. |
+| `length` | Edge length in the units specified. The default is kilometers. |
+| `speed` | Edge speed in the units specified. The default is kph. |
 | `road_class` | TODO. |
-| `begin_heading` | TODO. |
-| `end_heading` | TODO. |
-| `begin_shape_index` | TODO. |
-| `end_shape_index` | TODO. |
+| `begin_heading` | The direction at the beginning of an edge. The units are degrees from north in a clockwise direction. |
+| `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
+| `begin_shape_index` | Index into the list of shape points for the start of the edge. |
+| `end_shape_index` | Index into the list of shape points for the end of the edge. |
 | `traversability` | TODO. |
 | `use` | TODO. |
-| `toll` | TODO. |
+| `toll` | True if the edge has any toll. |
 | `unpaved` | TODO. |
 | `tunnel` | TODO. |
 | `bridge` | TODO. |
