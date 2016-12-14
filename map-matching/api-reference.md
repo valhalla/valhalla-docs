@@ -102,21 +102,21 @@ Each `edge` includes:
 | `vehicle_type` | Vehicle type.<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
 | `pedestrian_type` | Pedestrian type.<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul>. |
 | `bicycle_type` | Bicycle type.<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
-| `transit_type` | Transit type. <ul><li>`tram`</li><li>`metro`</li><li>"rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
-| `id` | TODO. |
-| `way_id` | TODO. |
-| `weighted_grade` | TODO. |
-| `max_upward_grade` | TODO. |
-| `max_downward_grade` | TODO. |
-| `lane_count` | TODO. |
-| `cycle_lane` | TODO. |
-| `bicycle_network` | TODO. |
+| `transit_type` | Transit type. <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
+| `id` | Identifier of an edge within the tiled, hierarchical graph. |
+| `way_id` | Way identifier of the base data. |
+| `weighted_grade` | The weighted grade factor. |
+| `max_upward_grade` | The maximum upward slope. |
+| `max_downward_grade` | The maximum downward slope. |
+| `lane_count` | The number of lanes for this edge. |
+| `cycle_lane` | The type (if any) of bicycle lane along this edge. |
+| `bicycle_network` | The bike network for this edge. |
 | `sidewalk` | TODO. |
-| `density` | TODO. |
-| `speed_limit` | TODO. |
-| `truck_speed` | TODO. |
-| `truck_route` | TODO. |
-| `end_node` | TODO. |
+| `density` | The relative density along the edge. |
+| `speed_limit` | Edge speed limit in the units specified. The default is kph. |
+| `truck_speed` | Edge truck speed in the units specified. The default is kph. |
+| `truck_route` | True if edge is part of a truck network/route. |
+| `end_node` | The node at the end of this edge. |
 
 Each `sign` includes:
 
