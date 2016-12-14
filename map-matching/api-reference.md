@@ -54,6 +54,12 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it). |
 | `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
 
+#### Attribute filters
+
+| Attribute Key | Description |
+| :------------------ | :----------- |
+TODO
+
 ## Outputs of trace_route
 
 The outputs of the trace_route action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
