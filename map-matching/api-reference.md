@@ -188,7 +188,7 @@ Each `edge` may include:
 | `speed_limit` | Edge speed limit in the units specified. The default is kph. |
 | `truck_speed` | Edge truck speed in the units specified. The default is kph. |
 | `truck_route` | True if edge is part of a truck network/route. |
-| `end_node` | The node at the end of this edge. |
+| `end_node` | The node at the end of this edge. See below for details. |
 
 Each `sign` may include:
 
@@ -203,7 +203,7 @@ Each `end_node` may include:
 
 | Node Item | Description |
 | :--------- | :---------- |
-| `intersecting_edges` | TODO. |
+| `intersecting_edges` | List of intersecting edges at this node. See below for details. |
 | `elapsed_time` | TODO. |
 | `admin_index` | TODO. |
 | `type` | TODO. |
@@ -214,9 +214,9 @@ Each `intersecting_edge` may include:
 
 | Intersecting Edge Item | Description |
 | :--------- | :---------- |
-| `begin_heading` | TODO. |
-| `prev_name_consistency` | TODO. |
+| `begin_heading` | The direction at the beginning of this intersecting edge. The units are degrees from north in a clockwise direction. |
 | `curr_name_consistency` | TODO. |
+| `next_name_consistency` | TODO. |
 | `driveability` | TODO. |
 | `cyclability` | TODO. |
 | `walkability` | TODO. |
