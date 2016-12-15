@@ -139,7 +139,7 @@ The `trace_attributes` results contains a list edges and optionally, the followi
 | `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
 | `units` | The specified units with the request - `kilometers` or `miles`. |
 
-Each `edge` includes:
+Each `edge` may include:
 
 | Edge Item | Description |
 | :--------- | :---------- |
@@ -162,11 +162,11 @@ Each `edge` includes:
 | `drive_on_right` | True if the drive on the right side of the street flag is endabled. |
 | `surface` | TODO. |
 | `sign` | Contains the interchange guide information associated with this edge. See below for details. |
-| `travel_mode` | Travel mode.<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
-| `vehicle_type` | Vehicle type.<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
-| `pedestrian_type` | Pedestrian type.<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul>. |
-| `bicycle_type` | Bicycle type.<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
-| `transit_type` | Transit type. <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
+| `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
+| `vehicle_type` | Vehicle type values:<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
+| `pedestrian_type` | Pedestrian type values:<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul>. |
+| `bicycle_type` | Bicycle type values:<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
+| `transit_type` | Transit type values: <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
 | `id` | Identifier of an edge within the tiled, hierarchical graph. |
 | `way_id` | Way identifier of the base data. |
 | `weighted_grade` | The weighted grade factor. |
@@ -182,7 +182,7 @@ Each `edge` includes:
 | `truck_route` | True if edge is part of a truck network/route. |
 | `end_node` | The node at the end of this edge. |
 
-Each `sign` includes:
+Each `sign` may include:
 
 | Sign Item | Description |
 | :--------- | :---------- |
@@ -191,7 +191,7 @@ Each `sign` includes:
 | `exit_toward` | TODO. |
 | `exit_name` | TODO. |
 
-Each `end_node` includes:
+Each `end_node` may include:
 
 | Node Item | Description |
 | :--------- | :---------- |
@@ -202,7 +202,7 @@ Each `end_node` includes:
 | `fork` | TODO. |
 | `time_zone` | TODO. |
 
-Each `intersecting_edge` includes:
+Each `intersecting_edge` may include:
 
 | Intersecting Edge Item | Description |
 | :--------- | :---------- |
@@ -213,7 +213,7 @@ Each `intersecting_edge` includes:
 | `cyclability` | TODO. |
 | `walkability` | TODO. |
 
-Each `admin` includes:
+Each `admin` may include:
 
 | Admin Item | Description |
 | :--------- | :---------- |
