@@ -133,7 +133,7 @@ The `trace_attributes` results contains a list edges and optionally, the followi
 
 | Result Item | Description |
 | :--------- | :---------- |
-| `edges` | List of edges associated with input shape. |
+| `edges` | List of edges associated with input shape. See below for details. |
 | `osm_changeset` | Base data version identifier. |
 | `admins` | List of the administrative codes and names. |
 | `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
