@@ -151,8 +151,8 @@ Each `edge` may include:
 | `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
 | `begin_shape_index` | Index into the list of shape points for the start of the edge. |
 | `end_shape_index` | Index into the list of shape points for the end of the edge. |
-| `traversability` | TODO. |
-| `use` | TODO. |
+| `traversability` | Traversability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `use` | Use values: <ul><li>`tram`</li><li>`road`</li><li>`ramp`</li><li>`turn_channel`</li><li>`track`</li><li>`driveway`</li><li>`alley`</li><li>`parking_aisle`</li><li>`emergency_access`</li><li>`drive_through`</li><li>`culdesac`</li><li>`cycleway`</li><li>`mountain_bike`</li><li>`sidewalk`</li><li>`footway`</li><li>`steps`</li><li>`other`</li><li>`rail-ferry`</li><li>`ferry`</li><li>`rail`</li><li>`bus`</li><li>`rail_connection`</li><li>`bus_connnection`</li><li>`transit_connection`</li></ul> |
 | `toll` | True if the edge has any toll. |
 | `unpaved` | True if the edge is unpaved or rough pavement. |
 | `tunnel` | True if the edge is a tunnel. |
@@ -164,7 +164,7 @@ Each `edge` may include:
 | `sign` | Contains the interchange guide information associated with this edge. See below for details. |
 | `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
 | `vehicle_type` | Vehicle type values:<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
-| `pedestrian_type` | Pedestrian type values:<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul>. |
+| `pedestrian_type` | Pedestrian type values:<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul> |
 | `bicycle_type` | Bicycle type values:<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
 | `transit_type` | Transit type values: <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
 | `id` | Identifier of an edge within the tiled, hierarchical graph. |
