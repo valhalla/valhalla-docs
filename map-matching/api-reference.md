@@ -59,7 +59,68 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 TODO filter description.
 Below is a list of filter keys - please find [descriptions](#outputs-of-trace_attributes) below.
 ```
-TODO list
+// Edge Filter Keys
+edge.names
+edge.length
+edge.speed
+edge.road_class
+edge.begin_heading
+edge.end_heading
+edge.begin_shape_index
+edge.end_shape_index
+edge.traversability
+edge.use
+edge.toll
+edge.unpaved
+edge.tunnel
+edge.bridge
+edge.roundabout
+edge.internal_intersection
+edge.drive_on_right
+edge.surface
+edge.sign.exit_number
+edge.sign.exit_branch
+edge.sign.exit_toward
+edge.sign.exit_name
+edge.travel_mode
+edge.vehicle_type
+edge.pedestrian_type
+edge.bicycle_type
+edge.transit_type
+edge.id
+edge.way_id
+edge.weighted_grade
+edge.max_upward_grade
+edge.max_downward_grade
+edge.lane_count
+edge.cycle_lane
+edge.bicycle_network
+edge.sidewalk
+edge.density
+edge.speed_limit
+edge.truck_speed
+edge.truck_route
+
+// Node Filter Keys
+node.intersecting_edge.begin_heading
+node.intersecting_edge.prev_name_consistency
+node.intersecting_edge.curr_name_consistency
+node.intersecting_edge.driveability
+node.intersecting_edge.cyclability
+node.intersecting_edge.walkability
+node.elapsed_time
+node.admin_index
+node.type
+node.fork
+node.time_zone
+
+// Other Filter Keys
+osm_changeset
+shape
+admin.country_code
+admin.country_text
+admin.state_code
+admin.state_text
 ```
 
 ## Outputs of trace_route
