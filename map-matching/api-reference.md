@@ -160,7 +160,7 @@ Each `edge` may include:
 | `roundabout` | True if the edge is a roundabout. |
 | `internal_intersection` | True if the edge is an internal intersection. |
 | `drive_on_right` | True if the drive on the right side of the street flag is endabled. |
-| `surface` | TODO. |
+| `surface` | Surface values: <ul><li>`paved_smooth`</li><li>`paved`</li><li>`paved_rough`</li><li>`compacted`</li><li>`dirt`</li><li>`gravel`</li><li>`path`</li><li>`impassable`</li></ul> |
 | `sign` | Contains the interchange guide information associated with this edge. See below for details. |
 | `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
 | `vehicle_type` | Vehicle type values:<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
