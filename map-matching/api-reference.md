@@ -186,10 +186,10 @@ Each `sign` may include:
 
 | Sign Item | Description |
 | :--------- | :---------- |
-| `exit_number` | TODO. |
-| `exit_branch` | TODO. |
-| `exit_toward` | TODO. |
-| `exit_name` | TODO. |
+| `exit_number` | List of exit number elements. If an exit number element exists, it is typically just one value. Element example: `91B` |
+| `exit_branch` | List of exit branch elements. The exit branch element is the subsequent road name or route number after the sign. Element example: `I 95 North` |
+| `exit_toward` | List of exit toward elements. The exit toward element is the location where the road ahead goes - the location is typically a control city, but may also be a future road name or route number. Element example: `New York` |
+| `exit_name` | List of exit name elements. The exit name element is the interchange identifier - typically not used in the US. Element example: `Gettysburg Pike` |
 
 Each `end_node` may include:
 
