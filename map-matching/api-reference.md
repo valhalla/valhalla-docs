@@ -146,7 +146,7 @@ Each `edge` may include:
 | `names` | List of names. |
 | `length` | Edge length in the units specified. The default is kilometers. |
 | `speed` | Edge speed in the units specified. The default is kph. |
-| `road_class` | TODO. |
+| `road_class` | Road class values:<ul><li>`motorway`</li><li>`trunk`</li><li>`primary`</li><li>`secondary`</li><li>`tertiary`</li><li>`unclassified`</li><li>`residential`</li><li>`service_other`</li></ul> |
 | `begin_heading` | The direction at the beginning of an edge. The units are degrees from north in a clockwise direction. |
 | `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
 | `begin_shape_index` | Index into the list of shape points for the start of the edge. |
