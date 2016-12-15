@@ -134,10 +134,10 @@ The `trace_attributes` results contains a list edges and optionally, the followi
 | Result Item | Description |
 | :--------- | :---------- |
 | `edges` | List of edges associated with input shape. |
-| `osm_changeset` | TODO. |
-| `admins` | TODO. |
-| `shape` | TODO. |
-| `units` | TODO. |
+| `osm_changeset` | Base data version identifier. |
+| `admins` | List of the administrative codes and names. |
+| `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
+| `units` | The specified units with the request - `kilometers` or `miles`. |
 
 Each `edge` includes:
 
