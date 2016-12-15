@@ -175,7 +175,7 @@ Each `edge` may include:
 | `lane_count` | The number of lanes for this edge. |
 | `cycle_lane` | The type (if any) of bicycle lane along this edge. |
 | `bicycle_network` | The bike network for this edge. |
-| `sidewalk` | TODO. |
+| `sidewalk` | Sidewalk values:<ul><li>`left`</li><li>`right`</li><li>`both`</li></ul> |
 | `density` | The relative density along the edge. |
 | `speed_limit` | Edge speed limit in the units specified. The default is kph. |
 | `truck_speed` | Edge truck speed in the units specified. The default is kph. |
