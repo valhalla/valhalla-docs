@@ -25,7 +25,7 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 ## Inputs to map-matching
 
 Example request:
-http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"only"}}
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 
 shape_match is an optional input parameter. It allows some control of the matching algorithm based on the type of input. If the input shape is from a prior Valhalla route request, the shape_match parameter can be set to "walk" which indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. A shape_match set to walk indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. The default option is "walk_or_snap", This will try edge walking and if this does not succeed it will fall-back and use map-matching.
 
@@ -56,7 +56,15 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 
 #### Attribute filters
 
-TODO filter description.
+The trace_attribues api allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
+
+Example to include attribute filters:
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+
+Example to exclude attribute filters:
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
+
+If no filters are used then we enable and return all attributes in the the trace_attributes response.
 
 Below is a list of filter keys - please find [descriptions](#outputs-of-trace_attributes) below.
 ```
