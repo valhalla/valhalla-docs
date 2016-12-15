@@ -56,9 +56,11 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 
 #### Attribute filters
 
-| Attribute Key | Description |
-| :------------------ | :----------- |
-TODO
+TODO filter description.
+Below is a list of filter keys - please find [descriptions](#outputs-of-trace_attributes) below.
+```
+TODO list
+```
 
 ## Outputs of trace_route
 
