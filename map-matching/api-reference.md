@@ -112,8 +112,8 @@ edge.truck_route
 
 // Node Filter Keys
 node.intersecting_edge.begin_heading
-node.intersecting_edge.prev_name_consistency
-node.intersecting_edge.curr_name_consistency
+node.intersecting_edge.from_edge_name_consistency
+node.intersecting_edge.to_edge_name_consistency
 node.intersecting_edge.driveability
 node.intersecting_edge.cyclability
 node.intersecting_edge.walkability
@@ -215,8 +215,8 @@ Each `intersecting_edge` may include:
 | Intersecting Edge Item | Description |
 | :--------- | :---------- |
 | `begin_heading` | The direction at the beginning of this intersecting edge. The units are degrees from north in a clockwise direction. |
-| `curr_name_consistency` | TODO. |
-| `next_name_consistency` | TODO. |
+| `from_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `from edge`. |
+| `to_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `to edge`. |
 | `driveability` | TODO. |
 | `cyclability` | TODO. |
 | `walkability` | TODO. |
