@@ -218,9 +218,9 @@ Each `intersecting_edge` may include:
 | `begin_heading` | The direction at the beginning of this intersecting edge. The units are degrees from north in a clockwise direction. |
 | `from_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `from edge`. |
 | `to_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `to edge`. |
-| `driveability` | TODO. |
-| `cyclability` | TODO. |
-| `walkability` | TODO. |
+| `driveability` | Driveability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `cyclability` | Cyclability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `walkability` | Walkability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
 
 Each `admin` may include:
 
