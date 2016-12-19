@@ -226,8 +226,8 @@ Each `admin` may include:
 
 | Admin Item | Description |
 | :--------- | :---------- |
-| `country_code` | TODO. |
-| `country_text` | TODO. |
-| `state_code` | TODO. |
-| `state_text` | TODO. |
+| `country_code` | Country [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code. |
+| `country_text` | Country name. |
+| `state_code` | State code. |
+| `state_text` | State name. |
 
