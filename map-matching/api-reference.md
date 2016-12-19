@@ -205,11 +205,11 @@ Each `end_node` may include:
 | Node Item | Description |
 | :--------- | :---------- |
 | `intersecting_edges` | List of intersecting edges at this node. See below for details. |
-| `elapsed_time` | TODO. |
-| `admin_index` | TODO. |
-| `type` | TODO. |
-| `fork` | TODO. |
-| `time_zone` | TODO. |
+| `elapsed_time` | Elapsed time of the path to arrive at this node. |
+| `admin_index` | Index into the admin list. |
+| `type` | Node tye values: <ul><li>`street_intersection`</li><li>`gate`</li><li>`bollard`</li><li>`toll_booth`</li><li>`multi_use_transit_stop`</li><li>`bike_share`</li><li>`parking`</li><li>`motor_way_junction`</li><li>`border_control`</li></ul> |
+| `fork` | True if this node is a fork. |
+| `time_zone` | Time zone string for this node. |
 
 Each `intersecting_edge` may include:
 
