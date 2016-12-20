@@ -160,7 +160,7 @@ Each `edge` may include:
 | `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
 | `begin_shape_index` | Index into the list of shape points for the start of the edge. |
 | `end_shape_index` | Index into the list of shape points for the end of the edge. |
-| `traversability` | Traversability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `traversability` | Traversability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
 | `use` | Use values: <ul><li>`tram`</li><li>`road`</li><li>`ramp`</li><li>`turn_channel`</li><li>`track`</li><li>`driveway`</li><li>`alley`</li><li>`parking_aisle`</li><li>`emergency_access`</li><li>`drive_through`</li><li>`culdesac`</li><li>`cycleway`</li><li>`mountain_bike`</li><li>`sidewalk`</li><li>`footway`</li><li>`steps`</li><li>`other`</li><li>`rail-ferry`</li><li>`ferry`</li><li>`rail`</li><li>`bus`</li><li>`rail_connection`</li><li>`bus_connnection`</li><li>`transit_connection`</li></ul> |
 | `toll` | True if the edge has any toll. |
 | `unpaved` | True if the edge is unpaved or rough pavement. |
@@ -218,9 +218,9 @@ Each `intersecting_edge` may include:
 | `begin_heading` | The direction at the beginning of this intersecting edge. The units are degrees from north in a clockwise direction. |
 | `from_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `from edge`. |
 | `to_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `to edge`. |
-| `driveability` | Driveability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
-| `cyclability` | Cyclability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
-| `walkability` | Walkability values:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `driveability` | Driveability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `cyclability` | Cyclability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `walkability` | Walkability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
 
 Each `admin` may include:
 
