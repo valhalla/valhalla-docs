@@ -1,8 +1,12 @@
 ## Release Date: 2017-01-04 Valhalla 2.0.3
+* ** Service Improvement**
+  * Added support for interrupting requests. If the connection is closed, route computation and map-matching can be interrupted prior to completion.
 * **Routing Improvement**
   * Ignore name inconsistency when entering a link to avoid double penalizing.
 * **Data Producer Updates**
   * Fixed consistent name assignment for ramps and turn lanes which improved guidance.
+  * Added a flag to directed edges indicating if the edge has names. This can potentially be used in costing methods.
+  * Allow future use of spare GraphId bits within DirectedEdge.
   
 ## Release Date: 2016-12-13 Valhalla 2.0.2
 * **Routing Improvement**
