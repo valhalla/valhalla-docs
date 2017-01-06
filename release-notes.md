@@ -1,4 +1,4 @@
-## Release Date: 2017-01-13 Valhalla 2.0.3
+## Release Date: 2017-01-04 Valhalla 2.0.3
 * **Routing Improvement**
   * Ignore name inconsistency when entering a link to avoid double penalizing.
 * **Data Producer Updates**
