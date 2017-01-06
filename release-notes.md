@@ -1,3 +1,9 @@
+## Release Date: 2017-01-13 Valhalla 2.0.3
+* **Routing Improvement**
+  * Ignore name inconsistency when entering a link to avoid double penalizing.
+* **Data Producer Updates**
+  * Fixed consistent name assignment for ramps and turn lanes which improved guidance.
+  
 ## Release Date: 2016-12-13 Valhalla 2.0.2
 * **Routing Improvement**
   * Added support for multi-way restrictions to matrix and isochrones.
