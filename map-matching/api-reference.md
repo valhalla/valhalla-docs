@@ -24,10 +24,11 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 
 ## Inputs to map-matching
 
-Example request:
-http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"only"}}
+Example request: 
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 
-shape_match is an optional input parameter. It allows some control of the matching algorithm based on the type of input. If the input shape is from a prior Valhalla route request, the shape_match parameter can be set to "walk" which indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. A shape_match set to walk indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. The default option is "walk_or_snap", This will try edge walking and if this does not succeed it will fall-back and use map-matching.
+
+`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. If the input shape is from a prior Valhalla route request, the `shape_match` parameter can be set to **"edge_walk"** which indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. A `shape_match` set to **"map_snap"** indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. The default option is **"walk_or_snap"**, This will try edge walking and if this does not succeed it will fall-back and use map-matching.
 
 Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -54,9 +55,179 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it). |
 | `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
 
+#### Attribute filters
+
+The trace_attribues api allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
+
+Example to include attribute filters:
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+
+Example to exclude attribute filters:
+http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
+
+If no filters are used then we enable and return all attributes in the the trace_attributes response.
+
+Below is a list of filter keys - please find [descriptions](#outputs-of-trace_attributes) below.
+```
+// Edge Filter Keys
+edge.names
+edge.length
+edge.speed
+edge.road_class
+edge.begin_heading
+edge.end_heading
+edge.begin_shape_index
+edge.end_shape_index
+edge.traversability
+edge.use
+edge.toll
+edge.unpaved
+edge.tunnel
+edge.bridge
+edge.roundabout
+edge.internal_intersection
+edge.drive_on_right
+edge.surface
+edge.sign.exit_number
+edge.sign.exit_branch
+edge.sign.exit_toward
+edge.sign.exit_name
+edge.travel_mode
+edge.vehicle_type
+edge.pedestrian_type
+edge.bicycle_type
+edge.transit_type
+edge.id
+edge.way_id
+edge.weighted_grade
+edge.max_upward_grade
+edge.max_downward_grade
+edge.lane_count
+edge.cycle_lane
+edge.bicycle_network
+edge.sidewalk
+edge.density
+edge.speed_limit
+edge.truck_speed
+edge.truck_route
+
+// Node Filter Keys
+node.intersecting_edge.begin_heading
+node.intersecting_edge.from_edge_name_consistency
+node.intersecting_edge.to_edge_name_consistency
+node.intersecting_edge.driveability
+node.intersecting_edge.cyclability
+node.intersecting_edge.walkability
+node.elapsed_time
+node.admin_index
+node.type
+node.fork
+node.time_zone
+
+// Other Filter Keys
+osm_changeset
+shape
+admin.country_code
+admin.country_text
+admin.state_code
+admin.state_text
+```
+
 ## Outputs of trace_route
 
-TODO - link to turn-by-turn API doc
+The outputs of the trace_route action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
 
 ## Outputs of trace_attributes
+The `trace_attributes` results contains a list edges and optionally, the following items: osm_changeset, list of admins, shape, and units.
+
+| Result Item | Description |
+| :--------- | :---------- |
+| `edges` | List of edges associated with input shape. See below for details. |
+| `osm_changeset` | Base data version identifier. |
+| `admins` | List of the administrative codes and names. |
+| `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
+| `units` | The specified units with the request - `kilometers` or `miles`. |
+
+Each `edge` may include:
+
+| Edge Item | Description |
+| :--------- | :---------- |
+| `names` | List of names. |
+| `length` | Edge length in the units specified. The default is kilometers. |
+| `speed` | Edge speed in the units specified. The default is kph. |
+| `road_class` | Road class values:<ul><li>`motorway`</li><li>`trunk`</li><li>`primary`</li><li>`secondary`</li><li>`tertiary`</li><li>`unclassified`</li><li>`residential`</li><li>`service_other`</li></ul> |
+| `begin_heading` | The direction at the beginning of an edge. The units are degrees from north in a clockwise direction. |
+| `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
+| `begin_shape_index` | Index into the list of shape points for the start of the edge. |
+| `end_shape_index` | Index into the list of shape points for the end of the edge. |
+| `traversability` | Traversability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `use` | Use values: <ul><li>`tram`</li><li>`road`</li><li>`ramp`</li><li>`turn_channel`</li><li>`track`</li><li>`driveway`</li><li>`alley`</li><li>`parking_aisle`</li><li>`emergency_access`</li><li>`drive_through`</li><li>`culdesac`</li><li>`cycleway`</li><li>`mountain_bike`</li><li>`sidewalk`</li><li>`footway`</li><li>`steps`</li><li>`other`</li><li>`rail-ferry`</li><li>`ferry`</li><li>`rail`</li><li>`bus`</li><li>`rail_connection`</li><li>`bus_connnection`</li><li>`transit_connection`</li></ul> |
+| `toll` | True if the edge has any toll. |
+| `unpaved` | True if the edge is unpaved or rough pavement. |
+| `tunnel` | True if the edge is a tunnel. |
+| `bridge` | True if the edge is a bridge. |
+| `roundabout` | True if the edge is a roundabout. |
+| `internal_intersection` | True if the edge is an internal intersection. |
+| `drive_on_right` | True if the drive on the right side of the street flag is endabled. |
+| `surface` | Surface values: <ul><li>`paved_smooth`</li><li>`paved`</li><li>`paved_rough`</li><li>`compacted`</li><li>`dirt`</li><li>`gravel`</li><li>`path`</li><li>`impassable`</li></ul> |
+| `sign` | Contains the interchange guide information associated with this edge. See below for details. |
+| `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
+| `vehicle_type` | Vehicle type values:<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
+| `pedestrian_type` | Pedestrian type values:<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul> |
+| `bicycle_type` | Bicycle type values:<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
+| `transit_type` | Transit type values: <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
+| `id` | Identifier of an edge within the tiled, hierarchical graph. |
+| `way_id` | Way identifier of the base data. |
+| `weighted_grade` | The weighted grade factor. |
+| `max_upward_grade` | The maximum upward slope. |
+| `max_downward_grade` | The maximum downward slope. |
+| `lane_count` | The number of lanes for this edge. |
+| `cycle_lane` | The type (if any) of bicycle lane along this edge. |
+| `bicycle_network` | The bike network for this edge. |
+| `sidewalk` | Sidewalk values:<ul><li>`left`</li><li>`right`</li><li>`both`</li></ul> |
+| `density` | The relative density along the edge. |
+| `speed_limit` | Edge speed limit in the units specified. The default is kph. |
+| `truck_speed` | Edge truck speed in the units specified. The default is kph. |
+| `truck_route` | True if edge is part of a truck network/route. |
+| `end_node` | The node at the end of this edge. See below for details. |
+
+Each `sign` may include:
+
+| Sign Item | Description |
+| :--------- | :---------- |
+| `exit_number` | List of exit number elements. If an exit number element exists, it is typically just one value. Element example: `91B` |
+| `exit_branch` | List of exit branch elements. The exit branch element is the subsequent road name or route number after the sign. Element example: `I 95 North` |
+| `exit_toward` | List of exit toward elements. The exit toward element is the location where the road ahead goes - the location is typically a control city, but may also be a future road name or route number. Element example: `New York` |
+| `exit_name` | List of exit name elements. The exit name element is the interchange identifier - typically not used in the US. Element example: `Gettysburg Pike` |
+
+Each `end_node` may include:
+
+| Node Item | Description |
+| :--------- | :---------- |
+| `intersecting_edges` | List of intersecting edges at this node. See below for details. |
+| `elapsed_time` | Elapsed time of the path to arrive at this node. |
+| `admin_index` | Index into the admin list. |
+| `type` | Node type values: <ul><li>`street_intersection`</li><li>`gate`</li><li>`bollard`</li><li>`toll_booth`</li><li>`multi_use_transit_stop`</li><li>`bike_share`</li><li>`parking`</li><li>`motor_way_junction`</li><li>`border_control`</li></ul> |
+| `fork` | True if this node is a fork. |
+| `time_zone` | Time zone string for this node. |
+
+Each `intersecting_edge` may include:
+
+| Intersecting Edge Item | Description |
+| :--------- | :---------- |
+| `begin_heading` | The direction at the beginning of this intersecting edge. The units are degrees from north in a clockwise direction. |
+| `from_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `from edge`. |
+| `to_edge_name_consistency` | True if this intersecting edge at the end node has consistent names with the path `to edge`. |
+| `driveability` | Driveability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `cyclability` | Cyclability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+| `walkability` | Walkability values, if available:<ul><li>`forward`</li><li>`backward`</li><li>`both`</li></ul> |
+
+Each `admin` may include:
+
+| Admin Item | Description |
+| :--------- | :---------- |
+| `country_code` | Country [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code. |
+| `country_text` | Country name. |
+| `state_code` | State code. |
+| `state_text` | State name. |
 

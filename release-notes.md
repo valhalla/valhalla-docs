@@ -1,4 +1,25 @@
-## Release Date: 2016-11-? Valhalla 2.0.1
+## Release Date: 2017-01-04 Valhalla 2.0.3
+* ** Service Improvement**
+  * Added support for interrupting requests. If the connection is closed, route computation and map-matching can be interrupted prior to completion.
+* **Routing Improvement**
+  * Ignore name inconsistency when entering a link to avoid double penalizing.
+* **Data Producer Updates**
+  * Fixed consistent name assignment for ramps and turn lanes which improved guidance.
+  * Added a flag to directed edges indicating if the edge has names. This can potentially be used in costing methods.
+  * Allow future use of spare GraphId bits within DirectedEdge.
+  
+## Release Date: 2016-12-13 Valhalla 2.0.2
+* **Routing Improvement**
+  * Added support for multi-way restrictions to matrix and isochrones.
+  * Added HOV costing model.
+  * Speed limit updates.   Added logic to save average speed separately from speed limits.  
+  * Added transit include and exclude logic to multimodal isochrone.
+  * Fix some edge cases for trivial (single edge) paths.
+  * Better treatment of destination access only when using bidirectional A*.
+* **Performance Improvement**
+  * Improved performance of the path algorithms by making many access methods inline.
+
+## Release Date: 2016-11-28 Valhalla 2.0.1
 * **Routing Improvement**
   * Preliminary support for multi-way restrictions
 * **Issues Fixed**
