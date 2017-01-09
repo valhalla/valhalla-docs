@@ -1,5 +1,5 @@
 ## Release Date: 2017-01-04 Valhalla 2.0.3
-* ** Service Improvement**
+* **Service Improvement**
   * Added support for interrupting requests. If the connection is closed, route computation and map-matching can be interrupted prior to completion.
 * **Routing Improvement**
   * Ignore name inconsistency when entering a link to avoid double penalizing.
