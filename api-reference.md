@@ -123,16 +123,12 @@ These options are available for transit costing when the multimodal costing mode
 
 | Transit options | Description |
 | :-------------------------- | :----------- |
-| `use_bus` | User's desire to use buses. Range of values from 0 (try to avoid buses) to 1 (strong preference for riding buses).|
+| `use_bus` | User's desire to use buses. Range of values from 0 (try to avoid buses) to 1 (strong preference for riding buses). For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h): [/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=mapzen-xxxxxxx](https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}) |
 | `use_rail` | User's desire to use rail/subway/metro. Range of values from 0 (try to avoid rail) to 1 (strong preference for riding rail).|
 | `use_transfers` |User's desire to favor transfers. Range of values from 0 (try to avoid transfers) to 1 (totally comfortable with transfers).|
 | `transit_start_end_max_distance` | A pedestrian option that can be added to the request to extend the defaults (2145 meters or approximately 1.5 miles). This is the maximum walking distance at the beginning or end of a route.|
 | `transit_transfer_max_distance` | A pedestrian option that can be added to the request to extend the defaults (800 meters or 0.5 miles). This is the maximum walking distance between transfers.|
 | `filters` | A way to filter for one or more `stops`, `routes`, or `operators`. Filters must contain a list of [Onestop IDs](https://transit.land/documentation/onestop-id-scheme/), which is a unique identifier for Transitland data, and an `action`. <ul><li>`ids`: any number of Onestop IDs (such as o-9q9-bart)</li><li>`action`: either `exclude` to exclude all of the `ids` listed in the filter or `include` to include only the `ids` listed in the filter</li></ul>
-
-For example, this is a route favoring buses, but also this person walks at a slower speed (4.1km/h):
-
-> [/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=mapzen-xxxxxxx](https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}})
 
 ###### Filter transit data
 
