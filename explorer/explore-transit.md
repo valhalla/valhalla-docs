@@ -26,10 +26,8 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 ## Explore transit stops and travel times from them
 
 1. Click `Show stops` to display transit stops on the map. The map updates to show points representing transit stops.
-
   Here is an example of transit stops in New York City.
   ![Transit stops within an area](/images/mobility-explorer-stops.png)
-
 2. Click a point to get full details.
 3. From the details panel, you can see which routes and operators serve that stop. Clicking the links for the individual routes or all routes serving the stop takes you to a query on the routes under `Show routes`.
 4. To view where you can travel within a certain amount of time from the stop location, click the link to view [isochrones](isochrones.md). This takes you to a query under `Generate isochrones`, where you first need to choose a mode of transportation. For example, click `walking` to see how far you can walk within intervals of 15 to 60 minutes. If you choose to travel by transit, you need to set the date and time of your departure.
