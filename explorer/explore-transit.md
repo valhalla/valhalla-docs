@@ -12,11 +12,8 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 
 1. Click `Show routes` to display routes on the map. The map updates to show transit route lines.
 2. To filter the map by a single route or operator, click it on the map or in the drop-down list.
-
   This is an example of all the routes operated by Metropolitan Transportation Authority in the New York City area.
-
   ![Routes by operator](/images/mobility-explorer-routes-by-operator.png)
-
 3. Choose whether to display the lines by the type of transportation mode, such as bus or metro (subway), or the agency that operates the route.
 4. Check `Show stops served by route` to view the transit stops along the route.
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a [RouteStopPattern](https://transit.land/documentation/datastore/routes-and-route-stop-patterns.html) in the Transitland API.
@@ -26,14 +23,11 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 ## Explore transit stops and travel times from them
 
 1. Click `Show stops` to display transit stops on the map. The map updates to show points representing transit stops.
-
   Here is an example of transit stops in New York City.
   ![Transit stops within an area](/images/mobility-explorer-stops.png)
-
 2. Click a point to get full details.
 3. From the details panel, you can see which routes and operators serve that stop. Clicking the links for the individual routes or all routes serving the stop takes you to a query on the routes under `Show routes`.
-  With a stop selected, you can view where you can travel from there within a certain amount of time.
-4. To view the distances you can travel from the stop location, click a mode of transportation. For example, click `walking` to see how far you can walk within intervals of 15 to 60 minutes. If you choose to travel by transit, you need to set the date and time of your departure.
+4. To view where you can travel within a certain amount of time from the stop location, click the link to view [isochrones](isochrones.md). This takes you to a query under `Generate isochrones` with transit automatically set as the mode of transportation. You can use the current time for your departure, or enter a different date and time. To choose a different mode, click it in the list, such as clicking `walking` to see how far you can walk within intervals of 15 to 60 minutes. 
 
 ## Explore operators
 
