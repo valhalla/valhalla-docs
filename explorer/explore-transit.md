@@ -12,11 +12,8 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 
 1. Click `Show routes` to display routes on the map. The map updates to show transit route lines.
 2. To filter the map by a single route or operator, click it on the map or in the drop-down list.
-
   This is an example of all the routes operated by Metropolitan Transportation Authority in the New York City area.
-
   ![Routes by operator](/images/mobility-explorer-routes-by-operator.png)
-
 3. Choose whether to display the lines by the type of transportation mode, such as bus or metro (subway), or the agency that operates the route.
 4. Check `Show stops served by route` to view the transit stops along the route.
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a [RouteStopPattern](https://transit.land/documentation/datastore/routes-and-route-stop-patterns.html) in the Transitland API.
