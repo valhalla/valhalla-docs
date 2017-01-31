@@ -1,6 +1,9 @@
 ## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
   * Italian phrases were updated
+* **Routing Improvement**
+  * Fixed an issue where date and time was returning an invalid ISO8601 time format for date_time values in positive UTC. + sign was missing.
+  * Fixed an encoding issue that was discovered for tranist_fetcher.  We were not encoding onestop_ids or route_ids.  Also, added exclude_geometry=true for route API calls.
   
 ## Release Date: 2017-01-04 Valhalla 2.0.3
 * **Service Improvement**
