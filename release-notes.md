@@ -1,3 +1,7 @@
+## Release Date: 2017-01-30 Valhalla 2.0.6
+* **Guidance Improvement**
+  * Italian phrases were updated
+  
 ## Release Date: 2017-01-04 Valhalla 2.0.3
 * **Service Improvement**
   * Added support for interrupting requests. If the connection is closed, route computation and map-matching can be interrupted prior to completion.
