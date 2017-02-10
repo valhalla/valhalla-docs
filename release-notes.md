@@ -1,4 +1,13 @@
-## Release Date: 2017-01-30 Valhalla 2.0.6
+## Release Date: 2017-02-XX Valhalla 2.0.X
+* **Guidance Improvement**
+  * Improved Itailian narrative by handling articulated prepositions
+  * Properly calling out turn channel maneuver
+* **Routing Improvement**
+  * Improved path determination by increasing stop impact for link to link transitions at intersections
+* **Data Producer Updates**
+  * Process node:ref and way:junction_ref as a semicolon separated list for exit numbers
+  
+  ## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
   * Italian phrases were updated
 * **Routing Improvement**
