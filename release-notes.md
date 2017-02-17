@@ -20,6 +20,8 @@
   * Transit:  Added URL encoding for one stop ids that contain diacriticals.  Also, added include_geometry=false for route requests. 
 * **Optimized Routing Update**
   * Added an original index to the location object in the optimized route response
+* **Trace Route Improvement**
+  * Updated find_start_node to fix "GraphTile NodeInfo index out of bounds" error
   
 ## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
