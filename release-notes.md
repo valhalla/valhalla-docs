@@ -8,7 +8,7 @@
   * Process node:ref and way:junction_ref as a semicolon separated list for exit numbers
   * Removed duplicated interchange sign information when ways are split into edges
   
-  ## Release Date: 2017-01-30 Valhalla 2.0.6
+## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
   * Italian phrases were updated
 * **Routing Improvement**
