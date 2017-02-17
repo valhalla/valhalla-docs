@@ -1,4 +1,4 @@
-## Release Date: 2017-02-XX Valhalla 2.0.X
+## Release Date: 2017-02-21 Valhalla 2.0.8
 * **Guidance Improvement**
   * Improved Itailian narrative by handling articulated prepositions
   * Properly calling out turn channel maneuver
