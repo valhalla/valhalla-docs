@@ -13,6 +13,11 @@
   * Removed duplicated interchange sign information when ways are split into edges
   * Use a sequence within HierarchyBuilder to lower memory requirements for planet / large data imports.
   * Add connecting OSM wayId to a transit stop within NodeInfo.
+  * Lua update:  removed ways that were being added to the routing graph.
+  * Transit:  Fixed an issue where add_service_day and remove_service_day was not using the tile creation date, but the service start date for transit.
+  * Transit:  Added acceptance test logic.
+  * Transit:  Added fallback option if the associated wayid is not found.  Use distance approximator to find the closest edge.
+  * Transit:  Added URL encoding for one stop ids that contain diacriticals.  Also, added include_geometry=false for route requests. 
 * **Optimized Routing Update**
   * Added an original index to the location object in the optimized route response
   
