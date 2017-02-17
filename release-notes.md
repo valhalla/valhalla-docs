@@ -4,6 +4,10 @@
   * Properly calling out turn channel maneuver
 * **Routing Improvement**
   * Improved path determination by increasing stop impact for link to link transitions at intersections
+  * Fixed through location handling, now includes cost at throughs and properly uses heading
+  * Added ability to adjust location heading tolearnce
+* **Traffic Updates**
+  * Fixed segment matching json to properly return non-string values where apropriate
 * **Data Producer Updates**
   * Process node:ref and way:junction_ref as a semicolon separated list for exit numbers
   * Removed duplicated interchange sign information when ways are split into edges
