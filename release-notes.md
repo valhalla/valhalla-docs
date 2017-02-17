@@ -9,7 +9,7 @@
   * Removed duplicated interchange sign information when ways are split into edges
   * Use a sequence within HierarchyBuilder to lower memory requirements for planet / large data imports.
   * Add connecting OSM wayId to a transit stop within NodeInfo.
-* **Optimized Routing Update **
+* **Optimized Routing Update**
   * Added an original index to the location object in the optimized route response
   
 ## Release Date: 2017-01-30 Valhalla 2.0.6
