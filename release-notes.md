@@ -7,6 +7,8 @@
 * **Data Producer Updates**
   * Process node:ref and way:junction_ref as a semicolon separated list for exit numbers
   * Removed duplicated interchange sign information when ways are split into edges
+  * Use a sequence within HierarchyBuilder to lower memory requirements for planet / large data imports.
+  * Add connecting OSM wayId to a transit stop within NodeInfo.
 * **Optimized Routing Update **
   * Added an original index to the location object in the optimized route response
   
