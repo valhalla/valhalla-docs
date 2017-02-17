@@ -1,6 +1,6 @@
 ## Release Date: 2017-02-21 Valhalla 2.0.8
 * **Guidance Improvement**
-  * Improved Itailian narrative by handling articulated prepositions
+  * Improved Italian narrative by handling articulated prepositions
   * Properly calling out turn channel maneuver
 * **Routing Improvement**
   * Improved path determination by increasing stop impact for link to link transitions at intersections
