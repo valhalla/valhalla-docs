@@ -7,6 +7,8 @@
 * **Data Producer Updates**
   * Process node:ref and way:junction_ref as a semicolon separated list for exit numbers
   * Removed duplicated interchange sign information when ways are split into edges
+* **Optimized Routing Update **
+  * Added an original index to the location object in the optimized route response
   
 ## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
