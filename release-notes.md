@@ -1,6 +1,8 @@
-## Release Date: 2017-XX-XX Valhalla 2.X.X
+## Release Date: 2017-02-22 Valhalla 2.1.0
 * **Guidance Improvement**
   * Added ca-ES (Catalan) and sl-SI (Slovenia) narrative language files
+* **Routing  Improvement**
+  * Fix through location reverse ordering bug (introduced in 2.0.9) in output of route responses for depart_at routes
 
 ## Release Date: 2017-02-21 Valhalla 2.0.9
 * **Guidance Improvement**
