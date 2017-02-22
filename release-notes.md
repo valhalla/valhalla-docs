@@ -3,8 +3,11 @@
   * Added ca-ES (Catalan) and sl-SI (Slovenian) narrative language files
 * **Routing  Improvement**
   * Fix through location reverse ordering bug (introduced in 2.0.9) in output of route responses for depart_at routes
+  * Fix edge_walking method to handle cases where more than 1 initial edge is found
 * **Data Producer Updates**
   * Improved transit by processing frequency based schedules. 
+  * Updated graph validation to more aggressively check graph consistency on level 0 and level 1 
+  * Fix the EdgeInfo hash to not create duplicate edge info records when creating hierarchies
   
 ## Release Date: 2017-02-21 Valhalla 2.0.9
 * **Guidance Improvement**
@@ -13,7 +16,7 @@
 * **Routing Improvement**
   * Improved path determination by increasing stop impact for link to link transitions at intersections
   * Fixed through location handling, now includes cost at throughs and properly uses heading
-  * Added ability to adjust location heading tolearnce
+  * Added ability to adjust location heading tolerance
 * **Traffic Updates**
   * Fixed segment matching json to properly return non-string values where apropriate
 * **Data Producer Updates**
