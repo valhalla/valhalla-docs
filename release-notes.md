@@ -3,7 +3,9 @@
   * Added ca-ES (Catalan) and sl-SI (Slovenian) narrative language files
 * **Routing  Improvement**
   * Fix through location reverse ordering bug (introduced in 2.0.9) in output of route responses for depart_at routes
-
+* **Data Producer Updates**
+  * Improved transit by processing frequency based schedules. 
+  
 ## Release Date: 2017-02-21 Valhalla 2.0.9
 * **Guidance Improvement**
   * Improved Italian narrative by handling articulated prepositions
