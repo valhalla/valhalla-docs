@@ -1,3 +1,7 @@
+## Release Date: 2017-XX-XX Valhalla 2.1.X
+* **Guidance Improvement**
+  * Corrections to Slovenian narrative language file
+
 ## Release Date: 2017-02-22 Valhalla 2.1.0
 * **Guidance Improvement**
   * Added ca-ES (Catalan) and sl-SI (Slovenian) narrative language files
