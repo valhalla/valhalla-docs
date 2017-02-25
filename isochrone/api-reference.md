@@ -70,7 +70,7 @@ You can review the [documentation](explorer/overview.md) and get started with Mo
 
 ## Future work on the isochrone service
 
-The Isochrone service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Thor GitHub repository](https://github.com/valhalla/thor/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
+The Isochrone service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Valhalla GitHub repository](https://github.com/valhalla/valhalla/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
 
 Several other options are being considered as future service enhancements. These include:
 
