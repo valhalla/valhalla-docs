@@ -1,6 +1,9 @@
-## Release Date: 2017-XX-XX Valhalla 2.1.X
+## Release Date: 2017-03-09 Valhalla 2.1.2
 * **Guidance Improvement**
   * Corrections to Slovenian narrative language file
+  **Routing Improvements**
+  * Increased the pedestrian search radius from 25 to 50 within the meili configuration to reduce U-turns with map-matching
+  * Added a max avoid location limit
 
 ## Release Date: 2017-02-22 Valhalla 2.1.0
 * **Guidance Improvement**
