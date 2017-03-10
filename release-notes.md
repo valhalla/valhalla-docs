@@ -1,4 +1,4 @@
-## Release Date: 2017-03-09 Valhalla 2.1.2
+## Release Date: 2017-03-10 Valhalla 2.1.3
 * **Guidance Improvement**
   * Corrections to Slovenian narrative language file
   **Routing Improvements**
