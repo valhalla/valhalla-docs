@@ -14,7 +14,7 @@ Limits may be increased in the future, but you can contact routing@mapzen.com if
 
 ##Inputs of the elevation service
 
-The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of two or more locations within a JSON array, while an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?hl=en) stores multiple locations within a single string. If you include a `range` parameter and set it to `true`, both the height and cumulative distance are returned for each point.
+The elevation service currently has a single action, `/height?`, that can be requested. The `height` provides the elevation at a set of input locations, which are specified as either a `shape` or an `encoded_polyline`. The shape option uses an ordered list of one or more locations within a JSON array, while an encoded polyline stores multiple locations within a single string. If you include a `range` parameter and set it to `true`, both the height and cumulative distance are returned for each point.
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter.
 
@@ -48,6 +48,8 @@ Without the `range`, the result looks something like this, with only a `height`:
 ###Use an encoded polyline for input locations
 
 The `encoded_polyline` parameter is a string of a polyline-encoded, with six degrees of precision, shape and has the following parameters.
+
+You can find more information and [code samples for how to decode an encoded polyline](https://mapzen.com/documentation/mobility/decoding/) in the Mapzen Mobility documentation. 
 
 | Encoded polyline parameters | Description |
 | :--------- | :----------- |
