@@ -7,7 +7,7 @@
   * Segment matcher completely re-written to handle many complex issues when matching traces to OTSs
 * **Service Improvement**
   * Bug Fix - relaxed rapidjson parsing to allow numeric type coercion
-  **Routing Improvements**
+* **Routing Improvements**
   * Level the forward and reverse paths in bidirectional A * to account for distance approximation differences.
   * Add logic for Use==kPath to bicycle costing so that paths are favored (as are footways).
   
