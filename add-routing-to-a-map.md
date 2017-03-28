@@ -33,6 +33,8 @@ You are ready to start building your map.
     </html>
     ```
 
+    These form the basic structure of an HTML document. `<!DOCTYPE html>` goes at the top of every HTML page and indicates that it is written for HTML5, and the `<html>` tags tell your browser that the content is HTML. The `<head>` tag contains the title for the page and other metadata about the page, while the `<body>` is where you add the code and the rest of the content on your page. There are many [web tutorials](http://www.w3schools.com/html/default.asp) available to help you experiment with and learn more about HTML documents and the tags in them.
+
 3. In the `<head>` tag, add a title, such as `<title>My Routing Map</title>`.
 4. On the next line, add a metadata tag so you can properly display diacritics and characters from different languages.
 
@@ -60,9 +62,9 @@ Your HTML should look like this:
 
 ## Add references to CSS and JavaScript files
 
-When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route.
+A cascading style sheet (CSS) is used to style a webpage, including layout and fonts, and JavaScript adds functionality to the page. In your `index.html` file, you need to list the CSS and JavaScript files needed to build your page.
 
-The [Leaflet JavaScript library](http://leafletjs.com/) provides tools for building an interactive map for web and mobile devices. Leaflet is extensible, and developers have built additional tools for Leaflet maps.
+When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The [Leaflet JavaScript library](http://leafletjs.com/) provides tools for building an interactive map for web and mobile devices. Leaflet is extensible, and developers have built additional tools for Leaflet maps.
 
 Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. You will need to add these into the `<head>` and `<body>` sections of the index.html. In addition, you will reference the [mapzen.js library](https://www.mapzen.com/documentation/mapzen-js/), which simplifies the process of using Mapzen's maps within Leaflet. Mapzen.js contains all the Leaflet functionality, as well as additional tools for working with Mapzen maps.
 
@@ -86,13 +88,13 @@ You are linking to these CSS and JS files from a remote website, rather than fro
     <script src="https://mapzen.com/js/mapzen.js"></script>
     ```
 
-5. In the `<body>` section, add the Leaflet Routing Machine JavaScript file.
+5. In the `<body>` section, add the Leaflet Routing Machine JavaScript file. This is a plug-in to Leaflet to add routing functionality.
 
     ```html
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
     ```
 
-6. In the `<body>` section, add the Mapzen routing JavaScript file.
+6. In the `<body>` section, add the Mapzen routing JavaScript file, which extends the Leaflet Routing Machine to support Mapzen Turn-by-Turn.
 
     ```html
     <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
@@ -119,11 +121,11 @@ After adding these, your index.html file should look something like this. Note t
 </html>
 ```
 
-At this point, your browser page is still empty. As you are working, it’s a good idea to save your edits and periodically reload the browser page. This helps you identify problems quicker and trace them back to your most recent changes. If you open the developer tools console in your browser are see a 404 error, it often means that the file cannot be found. You should make sure the paths in your HTML are correct before you continue further.
+At this point, your browser page is still empty. As you are working, it’s a good idea to save your edits and periodically reload the browser page. This helps you identify problems quicker and trace them back to your most recent changes. If you open the developer tools console in your browser and see a 404 error, it often means that the file cannot be found. You should make sure the paths in your HTML are correct before you continue further.
 
 ## Add a map to the page
 
-To display a Leaflet map on a page, you need a `<div>` element with an ID value, as well as a size for the box containing the map. If you want to know more about initializing a map, see the [mapzen.js documentation](https://mapzen.com/documentation/mapzen-js/get-started/).
+To display a map on a page, you need a `<div>` element with an ID value, as well as a size for the box containing the map. If you want to know more about initializing a map, see the [mapzen.js documentation](https://mapzen.com/documentation/mapzen-js/get-started/).
 
 1. At the bottom of the `<head>` section, add a `<style>` tag and the following size attributes to set the size of the map.
 
@@ -151,8 +153,7 @@ To display a Leaflet map on a page, you need a `<div>` element with an ID value,
 
     var map = L.Mapzen.map("map", {
       center: [41.8758,-87.6189],
-      zoom: 16,
-      scene: L.Mapzen.BasemapStyles.BubbleWrap
+      zoom: 16
     });
   </script>
   ```
@@ -162,8 +163,6 @@ To display a Leaflet map on a page, you need a `<div>` element with an ID value,
 The `center: [41.8758,-87.6189]` parameter sets the center point of the map, in decimal degrees, in Chicago, Illinois.
 
 The next line sets the `zoom` level, which is like a map scale or resolution, where a smaller value shows a larger area in less detail, and a larger zoom level value depicts smaller area in great detail.
-
-The `scene: L.Mapzen.BasemapStyles.BubbleWrap` line sets the style used for the map. In this case, it is Mapzen's all-purpose stylesheet called BubbleWrap. You can modify the `scene:` parameter to point to a scene hosted at a different URL or a local file.
 
 4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.
 
@@ -179,12 +178,11 @@ Your `<body>` section should look like this:
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
   <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    L.Mapzen.apiKey = "mapzen-ir7AVus"; // paste your actual API key here
+    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
 
     var map = L.Mapzen.map("map", {
       center: [41.8758,-87.6189],
-      zoom: 16,
-      scene: L.Mapzen.BasemapStyles.BubbleWrap
+      zoom: 16
     });
   </script>
 </body>
@@ -195,7 +193,7 @@ If your map is not loading properly, first check the browser console for status 
 
 ## Add waypoints for routing
 
-So far, you have referenced the necessary files, initialized Leaflet with a map container on the  page, and added Tangram to the map. Now, you are ready to add the routing code to your page using the Leaflet Routing Machine plug-in.
+So far, you have referenced the necessary files and initialized a map on the page. Now, you are ready to add the routing code to your page.
 
 In the simplest implementation, your map will not provide the ability to search for places through geocoding or inputting coordinates otherwise. Therefore, you need to set the waypoints in your code. As you add functionality to your web page, you can set the initial coordinates through user interaction.
 
@@ -205,7 +203,7 @@ In the simplest implementation, your map will not provide the ability to search 
     //center: [41.8758,-87.6189],
     ```
 
-2. Inside the `<script>` tag, and after the commented line, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
+2. Inside the `<script>` tag, but after the closing `});` you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
 
     ```js
     L.Routing.control({
@@ -238,24 +236,23 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 <body>
   <div id="map"></div>
-  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-  <script src="https://mapzen.com/tangram/0.7.0/tangram.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.0.0/leaflet-routing-machine.min.js"></script>
-  <script src="https://unpkg.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
+  <script src="https://mapzen.com/js/mapzen.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
+  <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    var map = L.map('map');
-    var layer = Tangram.leafletLayer({
-      scene: 'https://raw.githubusercontent.com/tangrams/cinnabar-style/gh-pages/cinnabar-style.yaml',
-      attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | <a href="http://www.openstreetmap.org/about" target="_blank">&copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
+
+    var map = L.Mapzen.map("map", {
+      // center: [41.8758,-87.6189],
+      zoom: 16
     });
-    layer.addTo(map);
-    //map.setView([41.8758,-87.6189], 16);
+
     L.Routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen('mapzen-xxxxxx', {costing:'auto'}),
+      router: L.Routing.mapzen("your-mapzen-api-key", {costing:"your-routing-mode"}), //paste your actual API key here and update the costing to "auto"
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
@@ -291,19 +288,32 @@ The symbols for the map are defined in the basemap, but the route line may be ha
 The `<body>` section should look something like this, but with your own API key for the `router`:
 
 ```html
-[...]
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Routing Map</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
+  <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.css">
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+  </style>
+</head>
 <body>
   <div id="map"></div>
   <script src="https://mapzen.com/js/mapzen.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
   <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    L.Mapzen.apiKey = 'your-mapzen-api-key'; // paste your actual API key here
+    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
 
-    var map = L.Mapzen.map('map', {
-      //center: [41.8758,-87.6189],
-      zoom: 16,
-      scene: L.Mapzen.BasemapStyles.BubbleWrap
+    var map = L.Mapzen.map("map", {
+      // center: [41.8758,-87.6189],
+      zoom: 16
     });
 
     L.Routing.control({
@@ -312,17 +322,17 @@ The `<body>` section should look something like this, but with your own API key 
         L.latLng(33.8128,-117.9259)
       ],
       lineOptions: {
-        styles: [ {color: 'white',opacity: 0.8, weight: 12},
-                {color: '#2676C6', opacity: 1, weight: 6}
+        styles: [ {color: "white",opacity: 0.8, weight: 12},
+                {color: "#2676C6", opacity: 1, weight: 6}
       ]},
-      router: L.Routing.mapzen('your-mapzen-api-key', {costing:'auto'}),
+      router: L.Routing.mapzen("your-mapzen-api-key", {costing:"auto"}), // paste your actual API key here
       formatter: new L.Routing.mapzenFormatter(),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
   </script>
 </body>
-[...]
+</html>
 ```
 
 ## Tutorial summary and next steps
