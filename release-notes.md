@@ -5,7 +5,8 @@
   * Transit: Remove the dependency on using level 2 tiles for transit builder
 * **Traffic Updates**
   * Segment matcher completely re-written to handle many complex issues when matching traces to OTSs
-
+* **Service Improvement**
+  * Bug Fix - relaxed rapidjson parsing to allow numeric type coercion
 ## Release Date: 2017-03-10 Valhalla 2.1.3
 * **Guidance Improvement**
   * Corrections to Slovenian narrative language file
