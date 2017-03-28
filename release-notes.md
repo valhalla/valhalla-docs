@@ -3,6 +3,8 @@
   * Increased service limits for trace
 * **Data Producer Updates**
   * Transit: Remove the dependency on using level 2 tiles for transit builder
+* **Traffic Updates**
+  * Segment matcher completely re-written to handle many complex issues when matching traces to OTSs
 
 ## Release Date: 2017-03-10 Valhalla 2.1.3
 * **Guidance Improvement**
