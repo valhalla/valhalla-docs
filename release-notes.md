@@ -1,4 +1,4 @@
-## Release Date: 2017-03-28 Valhalla 2.1.7
+## Release Date: 2017-03-29 Valhalla 2.1.7
 * **Map-Matching Release**
   * Increased service limits for trace
 * **Data Producer Updates**
