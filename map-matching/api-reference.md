@@ -21,6 +21,29 @@ The map-matching service is in active development. You can follow the [Mapzen bl
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
 
+## Improving Map-Matching Results
+
+* GPS accuracy is within TBD meters
+* Trace point density is within the range of one per second and one per 10 seconds
+* Each trace represents one continuous path
+* Corresponding match with the OpenStreetMap network
+* NOTE: Traces in urban areas will have a negative effect on GPS accuracy
+
+If you do not meet the above criteria, we do have a few trace_options that you may want to try and update to improve your results.
+* `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* `gps_accuracy` - GPS accuracy in meters.
+* `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement.  The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance will decrease the higher the `search_radius`.
+
+Example request:  <TODO: next checkin><add url here> "trace_options":{"turn_penalty_factor":500, "search_radius":55}
+
+
+## Map-Matching Limitations
+
+* `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
+* `max_distance` - The maximum input shape distance is 200000.0 meters.
+* `max_shape` - The maximum number of input shape points is 16000.
+
+
 ## Map-Matching Service Actions:
 
 Our map-matching service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
@@ -46,21 +69,6 @@ https://valhalla.mapzen.com/trace_attributes?api_key=
 ```
 {"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
 ```
-
-## Improving Map-Matching Results
-
-* GPS accuracy is within TBD meters
-* Trace point density is within the range of one per second and one per 10 seconds
-* Each trace represents one continuous path
-* Corresponding match with the OpenStreetMap network
-* NOTE: Traces in urban areas will have a negative effect on GPS accuracy
-
-If you do not meet the above criteria, we do have a few trace_options that you may want to try and update to improve your results.
-* `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
-* `gps_accuracy` - GPS accuracy in meters.
-* `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement.  The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance will decrease the higher the `search_radius`.
-
-Example request:  <TODO: next checkin><add url here> "trace_options":{"turn_penalty_factor":500, "search_radius":55}
 
 ## Inputs to map-matching
 
