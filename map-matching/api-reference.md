@@ -5,10 +5,10 @@ Mapzen map-matching service is powered by the Valhalla engine. Valhalla is an op
 
 There are two separate map-matching service calls that perform different operations on an input set of latitude,longitude coordinates.
 
-The first action is called trace_route. The trace_route action takes a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
+The first action is called trace_route. The trace_route action takes the mode and a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
 * Sharing a recorded route. Turn a recorded GPS trace into a route, complete with shape snapped to the road network and a set of guidance directions. An example is turning a GPS traces from a bike route into a set of narrative instructions.
 
-The second action is called trace_attributes. The trace_attributes action takes a GPS trace or latitude, longitude positions from a portion of an existing route and returns detailed attribution along the portion of the route. This includes details for each section of road along the path as well as any intersections along the path. Sample use cases include:
+The second action is called trace_attributes. The trace_attributes action takes the mode and a GPS trace or latitude, longitude positions from a portion of an existing route and returns detailed attribution along the portion of the route. This includes details for each section of road along the path as well as any intersections along the path. Sample use cases include:
 * Just-in-time information for navigation. Returning full details along an entire route can create a very large payload. Regular route responses from Valhalla include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high. An alternate approach is to request detailed information “just-in-time” for portions of the upcoming route.
 * Speed limits.  Speed limits along a path are a good example of just-in-time information that can be used for navigation. A single maneuver in a route (US-1 for example) may have many different speed limits along the full length of the maneuver. The trace_attributes action allows speed limits along each road segment to be determined and associated to portions of a maneuver.
 * Obtaining way Ids. Another use case is to turn a GPS trace into a set of way Ids that match the trace. The trace_attributes action enables this.
@@ -21,13 +21,53 @@ The map-matching service is in active development. You can follow the [Mapzen bl
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
 
+## Map-Matching Service Actions:
+
+Our map-matching service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
+
+`trace_route`: <TODO: next checkin>
+
+Sample request url format as a POST
+
+`trace_attribute`: <TODO: next checkin>
+
+Sample request url format as a POST
+
+
+### Use Cases
+
+1) Front-end UI - In calling our services from a front-end ui, it would be more efficient to run a Valhalla trace_route first.  Then using the resulting shape, pass that into the trace_attributes request as the encoded_polyline input.
+2) trace_route - <TODO: next checkin>
+3) trace_attributes - <TODO: next checkin>
+
+
+## Improving Map-Matching Results
+
+* GPS accuracy is within TBD meters
+* Trace point density is within the range of one per second and one per 10 seconds
+* Each trace represents one continuous path
+* Corresponding match with the OpenStreetMap network
+* NOTE: Traces in urban areas will have a negative effect on GPS accuracy
+
+If you do not meet the above criteria, we do have a few trace_options that you may want to try and update to improve your results.
+* `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* `gps_accuracy` - GPS accuracy in meters.
+* `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement.  The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance will decrease the higher the `search_radius`.
+
+Example request:  <TODO: next checkin><add url here> "trace_options":{"turn_penalty_factor":500, "search_radius":55}
+
 ## Inputs to map-matching
 
 Example request: 
 http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 
+`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. 
 
-`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. If the input shape is from a prior Valhalla route request, the `shape_match` parameter can be set to **"edge_walk"** which indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. A `shape_match` set to **"map_snap"** indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. The default option is **"walk_or_snap"**, This will try edge walking and if this does not succeed it will fall-back and use map-matching.
+| `shape_match` type | Description |
+| :--------- | :----------- |
+| `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. |
+| `map_snap` | Indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
+| `walk_or_snap` | Also the default options. This will try edge walking and if this does not succeed it will fall-back and use map-matching. |
 
 Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -38,12 +78,12 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 
 | Costing model | Description |
 | :----------------- | :----------- |
-| `auto` | Standard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. `Auto` provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks. |
+| `auto` | Standard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. `Auto` provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks.  Here is an example auto route request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"auto","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `auto_shorter` | Alternate costing for driving that provides a short path (though not guaranteed to be shortest distance) that obeys driving rules for access and turn restrictions. |
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
-| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.  Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
+| `multimodal` | We do NOT support `multimodal` for map-matching since it would be difficult to get favorable gps traces. |
 
 
 #### Directions options
@@ -53,6 +93,7 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it). |
 | `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
+
 
 #### Attribute filters
 
