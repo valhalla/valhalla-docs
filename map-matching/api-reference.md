@@ -30,7 +30,8 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 * NOTE: Traces in urban areas will have a negative effect on GPS accuracy
 
 
-## Criteria for accurate map-match results
+## Criteria For Accurate Map-Match Results
+
 * `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
 * `gps_accuracy` - GPS accuracy in meters.
 * `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement.  The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance will decrease the higher the `search_radius`.
