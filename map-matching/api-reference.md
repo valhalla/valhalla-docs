@@ -216,7 +216,7 @@ Each `edge` may include:
 | `bridge` | True if the edge is a bridge. |
 | `roundabout` | True if the edge is a roundabout. |
 | `internal_intersection` | True if the edge is an internal intersection. |
-| `drive_on_right` | True if the drive on the right side of the street flag is endabled. |
+| `drive_on_right` | True if the drive on the right side of the street flag is enabled. |
 | `surface` | Surface values: <ul><li>`paved_smooth`</li><li>`paved`</li><li>`paved_rough`</li><li>`compacted`</li><li>`dirt`</li><li>`gravel`</li><li>`path`</li><li>`impassable`</li></ul> |
 | `sign` | Contains the interchange guide information associated with this edge. See below for details. |
 | `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
