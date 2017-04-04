@@ -400,6 +400,8 @@ The codes correspond to code returned from a particular [Valhalla project](https
 |154 | Path distance exceeds the max distance limit |
 |155 | Outside the valid walking distance at the beginning or end of a multimodal route |
 |156 | Outside the valid walking distance between stops of a multimodal route |
+|157 | Exceeded max avoid locations |
+|158 | Input trace option is out of bounds |
 |160 | Date and time required for origin for date_type of depart at |
 |161 | Date and time required for destination for date_type of arrive by |
 |162 | Date and time is invalid.  Format is YYYY-MM-DDTHH:MM |
@@ -447,6 +449,9 @@ The codes correspond to code returned from a particular [Valhalla project](https
 |440 | Cannot reach destination - too far from a transit stop |
 |441 | Location is unreachable |
 |442 | No path could be found for input |
+|443 | Exact route match algorithm failed to find path |
+|444 | Map Match algorithm failed to find path |
+|445 | Shape match algorithm specification in api request is incorrect. Please see documentation for valid shape_match input. |
 |499 | Unknown |
 |**5xx** | **Tyr project codes** |
 |500 | Failed to parse intermediate request format |

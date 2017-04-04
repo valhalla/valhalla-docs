@@ -1,14 +1,14 @@
 
-# Mapzen Map-Matching service API reference
+# Mapzen Map Matching Service API reference
 
-Mapzen map-matching service is powered by the Valhalla engine. Valhalla is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the map-matching service.
+Mapzen Map Matching Service is powered by the Valhalla engine. Valhalla is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the Map Matching Service.
 
-There are two separate map-matching service calls that perform different operations on an input set of latitude,longitude coordinates.
+There are two separate Map Matching Service calls that perform different operations on an input set of latitude,longitude coordinates.
 
-The first action is called trace_route. The trace_route action takes a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
+The first action is called trace_route. The trace_route action takes the mode and a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
 * Sharing a recorded route. Turn a recorded GPS trace into a route, complete with shape snapped to the road network and a set of guidance directions. An example is turning a GPS traces from a bike route into a set of narrative instructions.
 
-The second action is called trace_attributes. The trace_attributes action takes a GPS trace or latitude, longitude positions from a portion of an existing route and returns detailed attribution along the portion of the route. This includes details for each section of road along the path as well as any intersections along the path. Sample use cases include:
+The second action is called trace_attributes. The trace_attributes action takes the mode and a GPS trace or latitude, longitude positions from a portion of an existing route and returns detailed attribution along the portion of the route. This includes details for each section of road along the path as well as any intersections along the path. Sample use cases include:
 * Just-in-time information for navigation. Returning full details along an entire route can create a very large payload. Regular route responses from Valhalla include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high. An alternate approach is to request detailed information “just-in-time” for portions of the upcoming route.
 * Speed limits.  Speed limits along a path are a good example of just-in-time information that can be used for navigation. A single maneuver in a route (US-1 for example) may have many different speed limits along the full length of the maneuver. The trace_attributes action allows speed limits along each road segment to be determined and associated to portions of a maneuver.
 * Obtaining way Ids. Another use case is to turn a GPS trace into a set of way Ids that match the trace. The trace_attributes action enables this.
@@ -16,18 +16,54 @@ The second action is called trace_attributes. The trace_attributes action takes 
 
 Note that the attributes that are returned are Valhalla routing attributes, not the base OSM tags or base data. Valhalla imports OSM tags and “normalizes” many of them to a standard set of values used for routing. Users interested in the base OSM tags along a path would need to take the OSM way IDs (returned as attributes along the path) and query OSM via a process like overpass to get the actual base data.
 
-The map-matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
+The Map Matching Service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
+## Map Matching Service Actions:
 
-## Inputs to map-matching
+Our Map Matching Service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
+
+*map-matching action 1*  `trace_route`
+
+*URL*
+
+https://valhalla.mapzen.com/trace_route?api_key=
+
+*POST Body*
+```
+{"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
+```
+
+*map-matching action 2*  `trace_attributes`
+
+*URL*
+
+https://valhalla.mapzen.com/trace_attributes?api_key=
+
+*POST Body*
+```
+{"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
+```
+
+## Inputs to the Map Matching Service
 
 Example request: 
-http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+*URL*
+https://valhalla.mapzen.com/trace_attributes?api_key=
 
+*POST Body*
+```
+{"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+```
 
-`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. If the input shape is from a prior Valhalla route request, the `shape_match` parameter can be set to **"edge_walk"** which indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. A `shape_match` set to **"map_snap"** indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. The default option is **"walk_or_snap"**, This will try edge walking and if this does not succeed it will fall-back and use map-matching.
+`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. 
+
+| `shape_match` type | Description |
+| :--------- | :----------- |
+| `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. |
+| `map_snap` | Indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
+| `walk_or_snap` | Also the default options. This will try edge walking and if this does not succeed it will fall-back and use map-matching. |
 
 Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
 
@@ -38,12 +74,12 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 
 | Costing model | Description |
 | :----------------- | :----------- |
-| `auto` | Standard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. `Auto` provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks. |
+| `auto` | Standard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. `Auto` provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks.  Here is an example auto route request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"auto","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `auto_shorter` | Alternate costing for driving that provides a short path (though not guaranteed to be shortest distance) that obeys driving rules for access and turn restrictions. |
 | `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
-| `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above.  Here is an example multimodal request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
+| `multimodal` | We do NOT support `multimodal` for map-matching since it would be difficult to get favorable gps traces. |
 
 
 #### Directions options
@@ -54,15 +90,28 @@ Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. T
 | `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it). |
 | `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
 
+
 #### Attribute filters
 
 The trace_attribues api allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
 
 Example to include attribute filters:
-http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+*URL*
+https://valhalla.mapzen.com/trace_attributes?api_key=
+
+*POST Body*
+```
+{"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
+```
 
 Example to exclude attribute filters:
-http://localhost:8002/trace_attributes?json={"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
+*URL*
+https://valhalla.mapzen.com/trace_attributes?api_key=
+
+*POST Body*
+```
+{"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
+```
 
 If no filters are used then we enable and return all attributes in the the trace_attributes response.
 
@@ -229,4 +278,34 @@ Each `admin` may include:
 | `country_text` | Country name. |
 | `state_code` | State code. |
 | `state_text` | State name. |
+
+## Criteria For More Accurate Map-Match Results
+
+* GPS accuracy is "good" meaning that there are few obstructions affecting GPS signals, which can be difficult in urban areas.
+* Trace point density is within the approximate range of one per second and one per 10 seconds. The greater the range between them, the more chance of inaccurate results.
+* Each trace represents one continuous path
+* Corresponding match with the OpenStreetMap network
+* NOTE: Traces in urban areas will have a negative effect on GPS accuracy
+
+## Improving Map Matching Results
+
+* `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* `gps_accuracy` - GPS accuracy in meters.
+* `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement.  The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance will decrease the higher the `search_radius`.
+
+*URL*
+
+https://valhalla.mapzen.com/trace_route?api_key=
+
+*POST Body*
+```
+{"encoded_polyline":"{gmagAp~_nhF[_AZqAjAaB`AkB\\cAZeAPcAHiAKiCQaAUeAe@cA]qAQsACqAF}AIsAg@{@s@i@sAw@i@uANyAPsAv@cAZ_ALqA_@cA_Ai@q@w@[uAm@}AaAqAs@s@m@u@c@oA]mAMiAIkAYqBRyATsANsBKyBAiA?iAFsALuAPsAXaBGgCg@oBKiBf@iBGiBg@oBHqA?{Ai@cA@oAbAgAj@g@j@k@n@q@p@e@n@k@d@}@\\cAFgAIoBg@m@y@[_ASu@K{AHgBP{@@w@Jy@L}@JsAMoAe@kAq@kAk@gAg@y@a@m@g@q@mAo@e@gAc@sAA_AI_BFu@LiALaALaAHoAFiAF{A@yABkAKmAKcAMiBU}AYu@MaBUqBu@{As@iAaAaA_Ao@aAi@s@q@{@{@a@sAi@oAGeAD}@[YiAmA[u@BgBXaBHgAQ}@]s@S]x@_BbC}@lAw@dAs@dAk@dAm@z@s@n@y@p@{@`Ao@z@_@z@u@jA_Af@aANiAAcBPsAl@s@X}@T{@PoAPeAl@{@t@_AbAgAjBk@r@e@~AY~@U~@YhAi@lAo@t@kBb@u@NyAX{@k@MoAi@{@eAx@aArAmBt@_ALgAPiAXkAf@w@j@u@p@_A^aA\\aA`@eAt@eATcAGcAG}@AeAX_Aj@q@r@aAp@wAt@sARk@xA?pBAvAu@Ps@_Bk@i@y@\\s@f@o@j@u@f@{@RwAb@mAZaARkATqANyAImAK}@C_AFqADiAC_AUs@[}Ao@eBm@q@_@_Bg@iAm@kAaAc@s@c@w@y@{AWcAc@{Am@c@yBF{@AkAYmA_@uBD{@B{@Gu@ScBIu@NaB^_B`@sAC{Ac@}A]yAg@aBHuAJ_BAaAEgAA_AAy@@eBX_AFw@JcB^s@VuA`AuAl@kBl@_AFeAJcAB{ABwAj@o@l@q@b@u@Z{AXmAaAm@o@oAwAsAcAsAu@u@cAe@iAy@eAk@iAc@gAOgAWgBe@wAo@}Ai@sBY{@u@s@y@Y{@[aA]s@oB\\eCPoARwAXgBV{Ab@sAf@oAb@kAFsA?kACeADeA^aABeAO_Be@gB]}@eAaB_AoAw@aAm@o@q@cBp@eBz@a@fAi@|@o@LiBAyAIoAu@qBkAuAiAa@gAa@cB_@eAQm@c@o@{ANaBf@{@h@_BV}@XcBz@?{@s@o@y@u@}@mAaBw@qCm@mG}@uJLoBVkBVaBh@iB`@gBXgBZ_BZaBNgACwASyAUqAGuBGsBTcBRiB^eCTmBTaBNoAVaB@kAMiBZcAd@eAf@q@z@mAVgB[gAq@aAk@s@UkAG{B_@sAW}ASoBMwBSuB]gBq@eBs@eBaAuAaAeAo@{@i@}@e@{@g@{@m@m@y@_@y@[aBk@a@cBFsB[iAaAGoA`@IcC^yA`@}AVkBNwBBmBR_Cr@{CrAyD|@mCf@kBXeB\\eBl@aCf@cBc@sBg@qAUkBe@sBw@eBi@uA{@gAyAc@qAk@[wB@gARqANgAPiAJsAAeAa@mBKmB@uBBwB@oBZoBJkCJkANaCY}Ac@aBa@iBc@iBu@qBu@sBu@sB_AiBcA}AiAqAaAqAeAaA}@]iANgAj@}@dAcAhAeAfAyAfAo@`@k@f@o@f@s@d@o@f@k@h@o@`@s@V_Br@wAv@{An@uAt@qAj@wAl@iAv@gA~@qAbA{A`AcBz@o@^{A`AmAhAo@b@sAxA_@z@]x@a@t@qAxAk@j@qAfAm@b@m@b@kAfAuA~@eAhAcAbAiAr@qA|@gAdAcA`A{@bA_AhAgA|@mAr@qA|@mAlA","shape_match":"map_snap","costing":"pedestrian","trace_options":{"turn_penalty_factor":500},"directions_options":{"units":"miles"}}
+```
+
+## Map Matching Service Limitations
+
+* `max_distance` - The maximum input shape distance is 200 kilometers when using the `map_snap` shape match and 1,000 kilometers when using the `edge_wlk` shape match.
+* `max_shape` - The maximum number of input shape points is 16,000.
+* `max_gps_accuracy` - The maximum input gps accuracy is 100 meters.
+* `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
 
