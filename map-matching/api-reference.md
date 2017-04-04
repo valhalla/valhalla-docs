@@ -21,16 +21,16 @@ The map-matching service is in active development. You can follow the [Mapzen bl
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
 
-## Improving Map-Matching Results
+## Criteria For More Accurate Map-Match Results
 
-* GPS accuracy is within TBD meters
-* Trace point density is within the range of one per second and one per 10 seconds
+* GPS accuracy is "good" meaning that there are few obstructions affecting GPS signals, which can be difficult in urban areas.
+* Trace point density is within the range of one per second and one per approximately 10 seconds.  The greater the range between them, the more chance of inaccurate results.
 * Each trace represents one continuous path
 * Corresponding match with the OpenStreetMap network
 * NOTE: Traces in urban areas will have a negative effect on GPS accuracy
 
 
-## Criteria For Accurate Map-Match Results
+## Improving Map-Matching Results
 
 * `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
 * `gps_accuracy` - GPS accuracy in meters.
