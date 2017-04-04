@@ -24,7 +24,7 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 ## Criteria For More Accurate Map-Match Results
 
 * GPS accuracy is "good" meaning that there are few obstructions affecting GPS signals, which can be difficult in urban areas.
-* Trace point density is within the range of one per second and one per approximately 10 seconds.  The greater the range between them, the more chance of inaccurate results.
+* Trace point density is within the approximate range of one per second and one per 10 seconds. The greater the range between them, the more chance of inaccurate results.
 * Each trace represents one continuous path
 * Corresponding match with the OpenStreetMap network
 * NOTE: Traces in urban areas will have a negative effect on GPS accuracy
