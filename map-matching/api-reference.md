@@ -48,8 +48,9 @@ https://valhalla.mapzen.com/trace_route?api_key=
 
 ## Map-Matching Limitations
 
-* `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
 * `max_distance` - The maximum input shape distance is 200000.0 meters.
+* `max_gps_accuracy` - The maximum input gps accuracy is 100 meters.
+* `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
 * `max_shape` - The maximum number of input shape points is 16000.
 
 
