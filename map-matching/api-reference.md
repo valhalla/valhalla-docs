@@ -1,9 +1,9 @@
 
-# Mapzen Map-Matching service API reference
+# Mapzen Map Matching Service API reference
 
-Mapzen map-matching service is powered by the Valhalla engine. Valhalla is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the map-matching service.
+Mapzen Map Matching Service is powered by the Valhalla engine. Valhalla is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the Map Matching Service.
 
-There are two separate map-matching service calls that perform different operations on an input set of latitude,longitude coordinates.
+There are two separate Map Matching Service calls that perform different operations on an input set of latitude,longitude coordinates.
 
 The first action is called trace_route. The trace_route action takes the mode and a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
 * Sharing a recorded route. Turn a recorded GPS trace into a route, complete with shape snapped to the road network and a set of guidance directions. An example is turning a GPS traces from a bike route into a set of narrative instructions.
@@ -16,7 +16,7 @@ The second action is called trace_attributes. The trace_attributes action takes 
 
 Note that the attributes that are returned are Valhalla routing attributes, not the base OSM tags or base data. Valhalla imports OSM tags and “normalizes” many of them to a standard set of values used for routing. Users interested in the base OSM tags along a path would need to take the OSM way IDs (returned as attributes along the path) and query OSM via a process like overpass to get the actual base data.
 
-The map-matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
+The Map Matching Service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
@@ -30,7 +30,7 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 * NOTE: Traces in urban areas will have a negative effect on GPS accuracy
 
 
-## Improving Map-Matching Results
+## Improving Map Matching Results
 
 * `turn_penalty_factor` - To penalize turns from one road segment to next.  For a pedestrian trace_route, you may see a back-and-forth on side streets for your path.  Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
 * `gps_accuracy` - GPS accuracy in meters.
@@ -46,7 +46,7 @@ https://valhalla.mapzen.com/trace_route?api_key=
 ```
 
 
-## Map-Matching Limitations
+## Map Matching Service Limitations
 
 * `max_distance` - The maximum input shape distance is 200000.0 meters.
 * `max_gps_accuracy` - The maximum input gps accuracy is 100 meters.
@@ -54,11 +54,11 @@ https://valhalla.mapzen.com/trace_route?api_key=
 * `max_shape` - The maximum number of input shape points is 16000.
 
 
-## Map-Matching Service Actions:
+## Map Matching Service Actions:
 
-Our map-matching service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
+Our Map Matching Service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
 
-*Map-Matching Action 1*  `trace_route`
+*map-matching action 1*  `trace_route`
 
 *URL*
 
@@ -69,7 +69,7 @@ https://valhalla.mapzen.com/trace_route?api_key=
 {"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
 ```
 
-*Map-Matching Action 2*  `trace_attributes`
+*map-matching action 2*  `trace_attributes`
 
 *URL*
 
@@ -80,7 +80,7 @@ https://valhalla.mapzen.com/trace_attributes?api_key=
 {"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
 ```
 
-## Inputs to map-matching
+## Inputs to the Map Matching Service
 
 Example request: 
 *URL*
