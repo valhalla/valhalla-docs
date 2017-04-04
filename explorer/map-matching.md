@@ -8,20 +8,16 @@ When you have a GPX displaying on the map, you can style the line by either the 
 
 When you click a segment on the map, you can see detailed attributes for the matched segment. Some attribute values, such as the name, pavement type, and road category, are from OpenStreetMap source data, while others are from Mapzen Mobility routing calculations.
 
-If you are attempting to match your own GPX file and get an error when you upload it, make sure your GPX file is valid and not corrupted. If you can view the GPX on the map, but the map-matching alignment was not successful or gave unexpected results, please send a screenshot and your GPX file to routing@mapzen.com to help improve the results.
+If you are attempting to match your own GPX file and get an error when you upload it, make sure your GPX file is valid and not corrupted. If you can view the GPX on the map, but the map-matching alignment was not successful or gave unexpected results, please send a screenshot and your GPX file to routing@mapzen.com to help improve the results. Note that your file is being processed locally in your browser and not actually being saved to your account, so you will need to rerun the match if you want to see it again in the future.
 
 Mobility Explorer demonstrates only a few of the capabilities of the Mapzen Map Matching service, and there are many other map-matching tasks you can do through the API. For example, perhaps you recently took a bicycle ride on a scenic trail and captured the path with a GPS. You can use the map-matching API to re-create the turn-by-turn navigation directions so you can repeat your route in the future or share it with others.
 
 ## Choose a GPX file to match
 
 1. Under `Try Map Matching`, click the drop-down list and choose either a sample GPX file or the option to use your own file.
-
-  a. To use your own file, click the `Upload` button and browse to the file on disk. Note that your file is being processed locally in your browser and not actually being saved to your account, so you will need to rerun the match if you want to see it again in the future.
-
-  b. Choose the transportation mode in which the GPX was recorded. Setting the mode helps the matching process find the correct path if there are overlapping or adjacent segments along a roadway.
-  
-2. On the map, view the line as it was collected in the GPX and see the start and end points.
-3. Click `Match this GPX` to attempt to align the GPX to the nearest line path. The map shows the matched line.
+2. To use your own file, click the `Upload` button and browse to the file on disk. Choose the transportation mode in which the GPX was recorded. Setting the mode helps the matching process find the correct path if there are overlapping or adjacent segments along a roadway.
+3. On the map, view the line as it was collected in the GPX and see the start and end points.
+4. Click `Match this GPX` to attempt to align the GPX to the nearest line path. The map shows the matched line.
 
 ## View the attributes of the matched route
 
