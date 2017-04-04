@@ -15,8 +15,11 @@ Mobility Explorer demonstrates only a few of the capabilities of the Mapzen Map 
 ## Choose a GPX file to match
 
 1. Under `Try Map Matching`, click the drop-down list and choose either a sample GPX file or the option to use your own file.
+
   a. To use your own file, click the `Upload` button and browse to the file on disk. Note that your file is being processed locally in your browser and not actually being saved to your account, so you will need to rerun the match if you want to see it again in the future.
+
   b. Choose the transportation mode in which the GPX was recorded. Setting the mode helps the matching process find the correct path if there are overlapping or adjacent segments along a roadway.
+  
 2. On the map, view the line as it was collected in the GPX and see the start and end points.
 3. Click `Match this GPX` to attempt to align the GPX to the nearest line path. The map shows the matched line.
 
