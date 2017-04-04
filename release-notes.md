@@ -1,3 +1,7 @@
+## Release Date: 2017-04-04 Valhalla 2.1.8
+* **Map-Matching Release**
+  * Added max trace limits and out-of-bounds checks for customizable trace options
+
 ## Release Date: 2017-03-29 Valhalla 2.1.7
 * **Map-Matching Release**
   * Increased service limits for trace
