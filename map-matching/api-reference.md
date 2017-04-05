@@ -304,7 +304,7 @@ https://valhalla.mapzen.com/trace_route?api_key=
 
 ## Map Matching Service Limitations
 
-* `max_distance` - The maximum input shape distance is 200 kilometers when using the `map_snap` shape match and 1,000 kilometers when using the `edge_wlk` shape match.
+* `max_distance` - The maximum input shape distance is 200 kilometers when using the `map_snap` shape match and 1,000 kilometers when using the `edge_walk` shape match.
 * `max_shape` - The maximum number of input shape points is 16,000.
 * `max_gps_accuracy` - The maximum input gps accuracy is 100 meters.
 * `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
