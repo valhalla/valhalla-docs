@@ -1,28 +1,26 @@
 
-# Mapzen Map Matching Service API reference
+# Map Matching API reference
 
-Mapzen Map Matching Service is powered by the Valhalla engine. Valhalla is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the Map Matching Service.
+With the Mapzen Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
 
-There are two separate Map Matching Service calls that perform different operations on an input set of latitude,longitude coordinates.
+There are two separate Map Matching calls, `trace_route` and `trace_attributes`, that perform different operations on an input set of latitude,longitude coordinates.
 
-The first action is called trace_route. The trace_route action takes the mode and a list of latitude,longitude coordinates, for example from a GPS trace, and turns it into a route result. Sample use cases for trace_route include:
-* Sharing a recorded route. Turn a recorded GPS trace into a route, complete with shape snapped to the road network and a set of guidance directions. An example is turning a GPS traces from a bike route into a set of narrative instructions.
+The `trace_route` action takes the costing mode and a list of latitude,longitude coordinates, for example, from a GPS trace, to turn them into a route with the shape snapped to the road network and a set of guidance directions. You might use this to take a GPS trace from a bike route into a set of narrative instructions so you can re-create your trip or share it with others.
 
-The second action is called trace_attributes. The trace_attributes action takes the mode and a GPS trace or latitude, longitude positions from a portion of an existing route and returns detailed attribution along the portion of the route. This includes details for each section of road along the path as well as any intersections along the path. Sample use cases include:
-* Just-in-time information for navigation. Returning full details along an entire route can create a very large payload. Regular route responses from Valhalla include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high. An alternate approach is to request detailed information “just-in-time” for portions of the upcoming route.
-* Speed limits.  Speed limits along a path are a good example of just-in-time information that can be used for navigation. A single maneuver in a route (US-1 for example) may have many different speed limits along the full length of the maneuver. The trace_attributes action allows speed limits along each road segment to be determined and associated to portions of a maneuver.
-* Obtaining way Ids. Another use case is to turn a GPS trace into a set of way Ids that match the trace. The trace_attributes action enables this.
-* Finding the current road. A simple map-matching call with a recent set of GPS locations can be useful to find information about the current road, even if not doing navigation or have a route loaded on device. 
+The `trace_attributes` action takes the costing mode and a GPS trace or latitude,longitude positions and returns detailed attribution along the portion of the route. This includes details for each section of road along the path, as well as any intersections along the path. Some of the use cases for `trace_attributes` include getting:
 
-Note that the attributes that are returned are Valhalla routing attributes, not the base OSM tags or base data. Valhalla imports OSM tags and “normalizes” many of them to a standard set of values used for routing. Users interested in the base OSM tags along a path would need to take the OSM way IDs (returned as attributes along the path) and query OSM via a process like overpass to get the actual base data.
+* just-in-time information for navigation. Returning full details along an entire route can create a very large payload. Regular route responses include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high. An alternate approach is to request detailed information just-in-time for portions of the upcoming route.
+* speed limits. Speed limits along a path are a good example of just-in-time information that can be used for navigation. A single maneuver in a route (US-1, for example) may have many different speed limits along the full length of the maneuver. The `trace_attributes` action allows speed limits along each road segment to be determined and associated to portions of a maneuver.
+* way IDs. You can turn a GPS trace into a set of way IDs that match the trace.
+* the current road. A map-matching call with a recent set of GPS locations can be useful to find information about the current road, even if not doing navigation or having a route loaded on device.
 
-The Map Matching Service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
+Note that the attributes that are returned are Valhalla routing attributes, not the base OSM tags or base data. Valhalla imports OSM tags and normalizes many of them to a standard set of values used for routing. The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla). To get the base OSM tags along a path, you need to take the OSM way IDs that are returned as attributes along the path and query OSM directly through a process such as the [Overpass API](http://wiki.openstreetmap.org/wiki/Overpass_API).
 
-The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
+The Map Matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
 
-## Map Matching Service Actions:
+## Map Matching service actions
 
-Our Map Matching Service includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates, depending on your interest: `/trace_route?` or `/trace_attributes?`.  It is important to note that all service requests should be *POST* since shape or encoded_polyline can be fairly large.
+Map Matching includes two separate service calls that perform different operations on an input set of latitude, longitude coordinates: `/trace_route?` or `/trace_attributes?`. It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
 
 *map-matching action 1*  `trace_route`
 
@@ -48,56 +46,38 @@ https://valhalla.mapzen.com/trace_attributes?api_key=
 
 ## Inputs to the Map Matching Service
 
-Example request: 
+Example request:
 *URL*
-https://valhalla.mapzen.com/trace_attributes?api_key=
+`https://valhalla.mapzen.com/trace_attributes?api_key=`
 
-*POST Body*
+*POST body*
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 ```
 
-`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input. 
+`shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input.
 
 | `shape_match` type | Description |
 | :--------- | :----------- |
 | `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. |
 | `map_snap` | Indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
-| `walk_or_snap` | Also the default options. This will try edge walking and if this does not succeed it will fall-back and use map-matching. |
+| `walk_or_snap` | Also the default options. This will try edge walking and if this does not succeed, it will fall back and use map matching. |
 
-Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+### Costing models and other options
 
+Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
 
-### Costing models
+Costing for `multimodal` is not supported for map matching because it would be difficult to get favorable GPS traces.
 
-Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.
-
-| Costing model | Description |
-| :----------------- | :----------- |
-| `auto` | Standard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. `Auto` provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks.  Here is an example auto route request at the current date and time: `http://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"auto","directions_options":{"units":"miles"}}&api_key=mapzen-xxxxxxx`  Note that you must append your own [Mapzen API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. |
-| `auto_shorter` | Alternate costing for driving that provides a short path (though not guaranteed to be shortest distance) that obeys driving rules for access and turn restrictions. |
-| `bicycle` | Standard costing for travel by bicycle, with a slight preference for using [cycleways](http://wiki.openstreetmap.org/wiki/Key:cycleway) or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access. |
-| `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
-| `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
-| `multimodal` | We do NOT support `multimodal` for map-matching since it would be difficult to get favorable gps traces. |
-
-
-#### Directions options
-
-| Options | Description |
-| :------------------ | :----------- |
-| `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
-| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it). |
-| `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
-
+You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#directions-options) documentation for examples. 
 
 #### Attribute filters
 
-The trace_attribues api allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
+The `trace_attributes` allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
 
 Example to include attribute filters:
 *URL*
-https://valhalla.mapzen.com/trace_attributes?api_key=
+`https://valhalla.mapzen.com/trace_attributes?api_key=`
 
 *POST Body*
 ```
@@ -106,7 +86,7 @@ https://valhalla.mapzen.com/trace_attributes?api_key=
 
 Example to exclude attribute filters:
 *URL*
-https://valhalla.mapzen.com/trace_attributes?api_key=
+`https://valhalla.mapzen.com/trace_attributes?api_key=`
 
 *POST Body*
 ```
@@ -308,4 +288,3 @@ https://valhalla.mapzen.com/trace_route?api_key=
 * `max_shape` - The maximum number of input shape points is 16,000.
 * `max_gps_accuracy` - The maximum input gps accuracy is 100 meters.
 * `max_search_radius` - The maximum of the upper bounds of the search radius is 100 meters.
-
