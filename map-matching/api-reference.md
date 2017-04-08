@@ -1,13 +1,12 @@
-
-# Map Matching API reference
+# Map Matching service API reference
 
 With the Mapzen Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
 
-There are two separate Map Matching calls, `trace_route` and `trace_attributes`, that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` option returns with the shape snapped to the road network and a set of guidance directions, while `trace_attributes` returns detailed attribution along the portion of the route
+There are two separate Map Matching calls that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` option returns the shape snapped to the road network and a set of guidance directions, while `trace_attributes` returns detailed attribution along the portion of the route.
 
 It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
 
-The Map Matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
+The Map Matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [Valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
 
 ## Trace route action
 
@@ -17,7 +16,7 @@ The `trace_route` action takes the costing mode and a list of latitude,longitude
 
 The `trace_attributes` action takes the costing mode and a GPS trace or latitude,longitude positions and returns detailed attribution along the portion of the route. This includes details for each section of road along the path, as well as any intersections along the path. Some of the use cases for `trace_attributes` include getting:
 
-* just-in-time information for navigation. Returning full details along an entire route can create a very large payload. Regular route responses include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high. An alternate approach is to request detailed information just-in-time for portions of the upcoming route.
+* just-in-time information for navigation. Getting attributes only for portions of the upcoming route can improve performance because returning full details along an entire route can create a very large payload. For example, regular route responses include shape and a set of maneuvers along each route leg. The maneuvers are a generalization of the path to simplify the description. Detailed attributes and localization of attributes along a maneuver would require significant additions to the route response. For long and even moderate length routes this can be wasteful, as the chances of re-routing along a long route are high.
 * speed limits. Speed limits along a path are a good example of just-in-time information that can be used for navigation. A single maneuver in a route (US-1, for example) may have many different speed limits along the full length of the maneuver. The `trace_attributes` action allows speed limits along each road segment to be determined and associated to portions of a maneuver.
 * way IDs. You can turn a GPS trace into a set of way IDs that match the trace.
 * the current road. A map-matching call with a recent set of GPS locations can be useful to find information about the current road, even if not doing navigation or having a route loaded on device.
@@ -26,14 +25,16 @@ Note that the attributes that are returned are Valhalla routing attributes, not 
 
 ## Inputs of the Map Matching service
 
-The Mapzen Map Matching service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-map-matching) for more on API keys and rate limits.
+The Mapzen Map Matching service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, in the form of `api_key="your-mapzen-api-key"`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-map-matching) for more on API keys and rate limits.
+
+### Shape-matching parameters
 
 `shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input.
 
 | `shape_match` type | Description |
 | :--------- | :----------- |
-| `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching so it should only be used when the shape is from a prior Valhalla route. |
-| `map_snap` | Indicates that a map matching algorithm should be used since the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
+| `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching, so it should only be used when the shape is from a prior Valhalla route. |
+| `map_snap` | Indicates that a map-matching algorithm should be used because the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
 | `walk_or_snap` | Also the default options. This will try edge walking and if this does not succeed, it will fall back and use map matching. |
 
 ### Costing models and other options
@@ -44,15 +45,16 @@ Costing for `multimodal` is not supported for map matching because it would be d
 
 You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#directions-options) documentation for examples.
 
-#### Attribute filters
+#### Attribute filters (`trace_attributes` only)
 
-The `trace_attributes` allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response.  These filters are optional and can be added to the action string inside of the filters object.  The available list of filter keys are listed below.
+The `trace_attributes` action allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response. These filters are optional and can be added to the action string inside of the `filters` object.
 
-If no filters are used then we enable and return all attributes in the the trace_attributes response.
+If no filters are used, all attributes are enabled and returned in the `trace_attributes` response.
 
-Below is a list of filter keys - please find [descriptions](#outputs-of-trace_attributes) below.
+These are the available filter keys. Review their [descriptions](#outputs-of-trace_attributes) for more information.
+
 ```
-// Edge Filter Keys
+// Edge filter Keys
 edge.names
 edge.length
 edge.speed
@@ -94,7 +96,7 @@ edge.speed_limit
 edge.truck_speed
 edge.truck_route
 
-// Node Filter Keys
+// Node filter keys
 node.intersecting_edge.begin_heading
 node.intersecting_edge.from_edge_name_consistency
 node.intersecting_edge.to_edge_name_consistency
@@ -107,7 +109,7 @@ node.type
 node.fork
 node.time_zone
 
-// Other Filter Keys
+// Other filter keys
 osm_changeset
 shape
 admin.country_code
@@ -128,11 +130,11 @@ The `trace_attributes` results contains a list of edges and, optionally, the fol
 
 | Result item | Description |
 | :--------- | :---------- |
-| `edges` | List of edges associated with input shape. See below for details. |
-| `osm_changeset` | Base data version identifier. |
+| `edges` | List of edges associated with input shape. See the list of [edge items](#edge-items) for details. |
+| `osm_changeset` | Identifier of the OpenStreetMap base data version. |
 | `admins` | List of the administrative codes and names. |
 | `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
-| `units` | The specified units with the request, in either `kilometers` or `miles`. |
+| `units` | The specified units with the request, in either kilometers or miles. |
 
 #### Edge item
 
@@ -142,7 +144,7 @@ Each `edge` may include:
 | :--------- | :---------- |
 | `names` | List of names. |
 | `length` | Edge length in the units specified. The default is kilometers. |
-| `speed` | Edge speed in the units specified. The default is kph. |
+| `speed` | Edge speed in the units specified. The default is kilometers per hour. |
 | `road_class` | Road class values:<ul><li>`motorway`</li><li>`trunk`</li><li>`primary`</li><li>`secondary`</li><li>`tertiary`</li><li>`unclassified`</li><li>`residential`</li><li>`service_other`</li></ul> |
 | `begin_heading` | The direction at the beginning of an edge. The units are degrees from north in a clockwise direction. |
 | `end_heading` | The direction at the end of an edge. The units are degrees from north in a clockwise direction.. |
@@ -156,16 +158,16 @@ Each `edge` may include:
 | `bridge` | True if the edge is a bridge. |
 | `roundabout` | True if the edge is a roundabout. |
 | `internal_intersection` | True if the edge is an internal intersection. |
-| `drive_on_right` | True if the drive on the right side of the street flag is enabled. |
+| `drive_on_right` | True if the flag is enabled for driving on the right side of the street. |
 | `surface` | Surface values: <ul><li>`paved_smooth`</li><li>`paved`</li><li>`paved_rough`</li><li>`compacted`</li><li>`dirt`</li><li>`gravel`</li><li>`path`</li><li>`impassable`</li></ul> |
-| `sign` | Contains the interchange guide information associated with this edge. See below for details. |
+| `sign` | Contains the interchange guide information associated with this edge. See the list of [sign items](#sign-items) for details. |
 | `travel_mode` | Travel mode values:<ul><li>`drive`</li><li>`pedestrian`</li><li>`bicycle`</li><li>`transit`</li></ul> |
 | `vehicle_type` | Vehicle type values:<ul><li>`car`</li><li>`motorcycle`</li><li>`bus`</li><li>`tractor_trailer`</li></ul> |
 | `pedestrian_type` | Pedestrian type values:<ul><li>`foot`</li><li>`wheelchair`</li><li>`segway`</li></ul> |
 | `bicycle_type` | Bicycle type values:<ul><li>`road`</li><li>`cross`</li><li>`hybrid`</li><li>`mountain`</li></ul> |
 | `transit_type` | Transit type values: <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
 | `id` | Identifier of an edge within the tiled, hierarchical graph. |
-| `way_id` | Way identifier of the base data. |
+| `way_id` | Way identifier of the OpenStreetMap base data. |
 | `weighted_grade` | The weighted grade factor. |
 | `max_upward_grade` | The maximum upward slope. |
 | `max_downward_grade` | The maximum downward slope. |
@@ -174,10 +176,10 @@ Each `edge` may include:
 | `bicycle_network` | The bike network for this edge. |
 | `sidewalk` | Sidewalk values:<ul><li>`left`</li><li>`right`</li><li>`both`</li></ul> |
 | `density` | The relative density along the edge. |
-| `speed_limit` | Edge speed limit in the units specified. The default is kph. |
-| `truck_speed` | Edge truck speed in the units specified. The default is kph. |
+| `speed_limit` | Edge speed limit in the units specified. The default is kilometers per hour. |
+| `truck_speed` | Edge truck speed in the units specified. The default is kilometers per hour. |
 | `truck_route` | True if edge is part of a truck network/route. |
-| `end_node` | The node at the end of this edge. See below for details. |
+| `end_node` | The node at the end of this edge. See the list of [end node items](#end-node-items) for details. |
 
 #### Sign items
 
@@ -186,9 +188,9 @@ Each `sign` may include:
 | Sign item | Description |
 | :--------- | :---------- |
 | `exit_number` | List of exit number elements. If an exit number element exists, it is typically just one value. Element example: `91B` |
-| `exit_branch` | List of exit branch elements. The exit branch element is the subsequent road name or route number after the sign. Element example: `I 95 North` |
-| `exit_toward` | List of exit toward elements. The exit toward element is the location where the road ahead goes - the location is typically a control city, but may also be a future road name or route number. Element example: `New York` |
-| `exit_name` | List of exit name elements. The exit name element is the interchange identifier - typically not used in the US. Element example: `Gettysburg Pike` |
+| `exit_branch` | List of exit branch elements. An exit branch element is the subsequent road name or route number after the sign. Element example: `I 95 North` |
+| `exit_toward` | List of exit toward elements. The exit toward element is the location where the road ahead goes; the location is typically a control city, but may also be a future road name or route number. Element example: `New York` |
+| `exit_name` | List of exit name elements. The exit name element is the interchange identifier, although typically not used in the United States. Element example: `Gettysburg Pike` |
 
 #### End node items
 
@@ -196,9 +198,9 @@ Each `end_node` may include:
 
 | Node item | Description |
 | :--------- | :---------- |
-| `intersecting_edges` | List of intersecting edges at this node. See below for details. |
+| `intersecting_edges` | List of intersecting edges at this node. See the list of [intersecting edge items](#intersecting-edge-items) for details. |
 | `elapsed_time` | Elapsed time of the path to arrive at this node. |
-| `admin_index` | Index into the admin list. |
+| `admin_index` | Index value in the admin list. |
 | `type` | Node type values: <ul><li>`street_intersection`</li><li>`gate`</li><li>`bollard`</li><li>`toll_booth`</li><li>`multi_use_transit_stop`</li><li>`bike_share`</li><li>`parking`</li><li>`motor_way_junction`</li><li>`border_control`</li></ul> |
 | `fork` | True if this node is a fork. |
 | `time_zone` | Time zone string for this node. |
@@ -229,75 +231,73 @@ Each `admin` may include:
 
 ## Get better results
 
+Follow these guidelines to improve the Map Matching results.
+
 * You should have good GPS accuracy, meaning that there are few obstructions affecting GPS signals. This can be difficult in urban areas.
-* The trace point density is within the approximate range of one per second and one per 10 seconds. The greater the range between them, the more chance of inaccurate results.
-* Each trace represents one continuous path.
-* Corresponding match with the OpenStreetMap network
+* Make sure the trace point density is within the approximate range of one per second and one per 10 seconds. The greater the range between them, the more chance of inaccurate results.
+* Have each trace represent one continuous path.
+* Verify that there is a corresponding match with the OpenStreetMap network.
 
-* `turn_penalty_factor` - To penalize turns from one road segment to next. For a pedestrian trace_route, you may see a back-and-forth on side streets for your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
-* `gps_accuracy` - GPS accuracy in meters.
-* `search_radius` - To specify the search radius (in meters) within which to search road candidates for each measurement. The `max_search_radius` is 100 so this can only be increased to 100.  Note that performance may decrease with a higher `search_radius`.
+You can use certain parameters to tune the response.
 
-## Example requests
+* Use `turn_penalty_factor` to penalize turns from one road segment to next. For a pedestrian   `trace_route`, you may see a back-and-forth motion along the streets of your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* Set the `gps_accuracy` to indicate the accuracy in meters.
+* Apply a `search_radius` to specify the search radius (in meters) within which to search road candidates for each measurement. The maximum search radius is 100 meters. Note that performance may decrease with a higher search radius value.
 
-### Example `trace_route` with encoded polyline parameter
+## Example Map Matching requests
 
-*URL*
+### Example `trace_route` requests
 
-https://valhalla.mapzen.com/trace_route?api_key=
+The following are example requests for the `trace_routes` action. They use a base URL of `https://valhalla.mapzen.com/trace_route?api_key=`, where the code is the POST body.
 
-*POST Body*
+#### `trace_route` with encoded polyline parameter
+
+*POST body*
+
 ```
 {"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
 ```
 
-### Example `trace_route` with additional trace options
+#### `trace_route` with additional trace options
 
-*URL*
+*POST body*
 
-https://valhalla.mapzen.com/trace_route?api_key=
-
-*POST Body*
 ```
 {"encoded_polyline":"{gmagAp~_nhF[_AZqAjAaB`AkB\\cAZeAPcAHiAKiCQaAUeAe@cA]qAQsACqAF}AIsAg@{@s@i@sAw@i@uANyAPsAv@cAZ_ALqA_@cA_Ai@q@w@[uAm@}AaAqAs@s@m@u@c@oA]mAMiAIkAYqBRyATsANsBKyBAiA?iAFsALuAPsAXaBGgCg@oBKiBf@iBGiBg@oBHqA?{Ai@cA@oAbAgAj@g@j@k@n@q@p@e@n@k@d@}@\\cAFgAIoBg@m@y@[_ASu@K{AHgBP{@@w@Jy@L}@JsAMoAe@kAq@kAk@gAg@y@a@m@g@q@mAo@e@gAc@sAA_AI_BFu@LiALaALaAHoAFiAF{A@yABkAKmAKcAMiBU}AYu@MaBUqBu@{As@iAaAaA_Ao@aAi@s@q@{@{@a@sAi@oAGeAD}@[YiAmA[u@BgBXaBHgAQ}@]s@S]x@_BbC}@lAw@dAs@dAk@dAm@z@s@n@y@p@{@`Ao@z@_@z@u@jA_Af@aANiAAcBPsAl@s@X}@T{@PoAPeAl@{@t@_AbAgAjBk@r@e@~AY~@U~@YhAi@lAo@t@kBb@u@NyAX{@k@MoAi@{@eAx@aArAmBt@_ALgAPiAXkAf@w@j@u@p@_A^aA\\aA`@eAt@eATcAGcAG}@AeAX_Aj@q@r@aAp@wAt@sARk@xA?pBAvAu@Ps@_Bk@i@y@\\s@f@o@j@u@f@{@RwAb@mAZaARkATqANyAImAK}@C_AFqADiAC_AUs@[}Ao@eBm@q@_@_Bg@iAm@kAaAc@s@c@w@y@{AWcAc@{Am@c@yBF{@AkAYmA_@uBD{@B{@Gu@ScBIu@NaB^_B`@sAC{Ac@}A]yAg@aBHuAJ_BAaAEgAA_AAy@@eBX_AFw@JcB^s@VuA`AuAl@kBl@_AFeAJcAB{ABwAj@o@l@q@b@u@Z{AXmAaAm@o@oAwAsAcAsAu@u@cAe@iAy@eAk@iAc@gAOgAWgBe@wAo@}Ai@sBY{@u@s@y@Y{@[aA]s@oB\\eCPoARwAXgBV{Ab@sAf@oAb@kAFsA?kACeADeA^aABeAO_Be@gB]}@eAaB_AoAw@aAm@o@q@cBp@eBz@a@fAi@|@o@LiBAyAIoAu@qBkAuAiAa@gAa@cB_@eAQm@c@o@{ANaBf@{@h@_BV}@XcBz@?{@s@o@y@u@}@mAaBw@qCm@mG}@uJLoBVkBVaBh@iB`@gBXgBZ_BZaBNgACwASyAUqAGuBGsBTcBRiB^eCTmBTaBNoAVaB@kAMiBZcAd@eAf@q@z@mAVgB[gAq@aAk@s@UkAG{B_@sAW}ASoBMwBSuB]gBq@eBs@eBaAuAaAeAo@{@i@}@e@{@g@{@m@m@y@_@y@[aBk@a@cBFsB[iAaAGoA`@IcC^yA`@}AVkBNwBBmBR_Cr@{CrAyD|@mCf@kBXeB\\eBl@aCf@cBc@sBg@qAUkBe@sBw@eBi@uA{@gAyAc@qAk@[wB@gARqANgAPiAJsAAeAa@mBKmB@uBBwB@oBZoBJkCJkANaCY}Ac@aBa@iBc@iBu@qBu@sBu@sB_AiBcA}AiAqAaAqAeAaA}@]iANgAj@}@dAcAhAeAfAyAfAo@`@k@f@o@f@s@d@o@f@k@h@o@`@s@V_Br@wAv@{An@uAt@qAj@wAl@iAv@gA~@qAbA{A`AcBz@o@^{A`AmAhAo@b@sAxA_@z@]x@a@t@qAxAk@j@qAfAm@b@m@b@kAfAuA~@eAhAcAbAiAr@qA|@gAdAcA`A{@bA_AhAgA|@mAr@qA|@mAlA","shape_match":"map_snap","costing":"pedestrian","trace_options":{"turn_penalty_factor":500},"directions_options":{"units":"miles"}}
 ```
 
-### Example `trace_attribute` with shape parameter
+### Example `trace_attributes` requests
 
-*URL*
+The following are example requests for the `trace_attributes` action. They use a base URL of `https://valhalla.mapzen.com/trace_attributes?api_key=`.
 
-`https://valhalla.mapzen.com/trace_attributes?api_key=`
+#### `trace_attributes` with shape parameter
 
-*POST body with `shape`*
+*POST body*
+
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 ```
 
-### Example `trace_attributes` with encoded parameter
+#### `trace_attributes` with encoded polyline parameter
 
-*URL*
+*POST body*
 
-`https://valhalla.mapzen.com/trace_attributes?api_key=`
-
-*POST body with `encoded_polyline`*
 ```
 {"encoded_polyline":"_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA","shape_match":"map_snap","costing":"pedestrian","directions_options":{"units":"miles"}}
 ```
 
-### Example `trace_attributes` with an `include` attribute filter
-*URL*
-`https://valhalla.mapzen.com/trace_attributes?api_key=`
+#### `trace_attributes` with `include` attribute filter
 
-*POST Body*
+*POST body*
+
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.id", "edge.weighted_grade","edge.speed"],"action":"include"}}
 ```
 
-### Example `trace_attributes` with an `exclude` attribute filter
-*URL*
-`https://valhalla.mapzen.com/trace_attributes?api_key=`
+#### `trace_attributes` with `exclude` attribute filter
 
-*POST Body*
+*POST body*
+
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
 ```
