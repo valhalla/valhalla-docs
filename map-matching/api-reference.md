@@ -2,7 +2,7 @@
 
 With the Mapzen Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
 
-There are two separate Map Matching calls that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` option returns the shape snapped to the road network and a set of guidance directions, while `trace_attributes` returns detailed attribution along the portion of the route.
+There are two separate Map Matching calls that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` action returns the shape snapped to the road network and narrative directions, while `trace_attributes` returns detailed attribution along the portion of the route.
 
 It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
 
@@ -45,7 +45,7 @@ Costing for `multimodal` is not supported for map matching because it would be d
 
 You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#directions-options) documentation for examples.
 
-#### Attribute filters (`trace_attributes` only)
+### Attribute filters (`trace_attributes` only)
 
 The `trace_attributes` action allows you to apply filters to `include` or `exclude` specific attribute filter keys in your response. These filters are optional and can be added to the action string inside of the `filters` object.
 
