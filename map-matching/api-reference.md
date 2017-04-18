@@ -289,3 +289,7 @@ The following are example requests for the `trace_attributes` action. They use a
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
 ```
+*If you would like to visualize the map matched points that correlate to specified input locations - use the following filter*
+```
+"filters":{"attributes":["edge.id","matched.point","matched.edge_index","matched.distance_along_edge"],"action":"include"}
+```
