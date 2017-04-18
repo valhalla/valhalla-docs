@@ -238,6 +238,8 @@ Each `admin` may include:
 
 #### Matched point items
 
+Each `matched_point` may include:
+
 | Matched point item | Description |
 | :--------- | :---------- |
 | `lat` | The latitude of the matched point. |
