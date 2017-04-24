@@ -7,13 +7,15 @@
   * Some cleanup and simplification of the bidirectional A* algorithm.
   * Some cleanup and simplification of TripPathBuilder.
   * Make TileHierarchy data and methods static and remove tile_dir from the tile hierarchy.
+* **Map Matching Improvement**
+  * Return matched points with trace attributes when using map_snap.
 
 ## Release Date: 2017-04-04 Valhalla 2.1.8
-* **Map-Matching Release**
+* **Map Matching Release**
   * Added max trace limits and out-of-bounds checks for customizable trace options
 
 ## Release Date: 2017-03-29 Valhalla 2.1.7
-* **Map-Matching Release**
+* **Map Matching Release**
   * Increased service limits for trace
 * **Data Producer Updates**
   * Transit: Remove the dependency on using level 2 tiles for transit builder
