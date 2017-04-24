@@ -1,3 +1,13 @@
+## Release Date: 2017-04-24 Valhalla 2.1.9
+* **Elevation Update**
+  * Created a new EdgeElevation structure which includes max upward and downward slope (moved from DirectedEdge) and mean elevation.
+* **Routing Improvements**
+  * Destination only fix when "nested" destination only areas cause a route failure. Allow destination only edges (with penalty) on 2nd pass.
+  * Fix heading to properly use the partial edge shape rather than entire edge shape to determine heading at the begin and end locations.
+  * Some cleanup and simplification of the bidirectional A* algorithm.
+  * Some cleanup and simplification of TripPathBuilder.
+  * Make TileHierarchy data and methods static and remove tile_dir from the tile hierarchy.
+
 ## Release Date: 2017-04-04 Valhalla 2.1.8
 * **Map-Matching Release**
   * Added max trace limits and out-of-bounds checks for customizable trace options
