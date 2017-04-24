@@ -87,6 +87,7 @@ edge.way_id
 edge.weighted_grade
 edge.max_upward_grade
 edge.max_downward_grade
+edge.mean_elevation
 edge.lane_count
 edge.cycle_lane
 edge.bicycle_network
@@ -116,6 +117,11 @@ admin.country_code
 admin.country_text
 admin.state_code
 admin.state_text
+matched.point
+matched.type
+matched.edge_index
+matched.distance_along_edge
+matched.distance_from_trace_point
 ```
 
 ## Outputs of the Map Matching service
@@ -126,14 +132,15 @@ The outputs of the `trace_route` action are the same as the [outputs of a route]
 
 ### Outputs of `trace_attributes`
 
-The `trace_attributes` results contains a list of edges and, optionally, the following items: `osm_changeset`, list of `admins`, `shape`, and `units`.
+The `trace_attributes` results contains a list of edges and, optionally, the following items: `osm_changeset`, list of `admins`, `shape`, `matched_points`, and `units`.
 
 | Result item | Description |
 | :--------- | :---------- |
 | `edges` | List of edges associated with input shape. See the list of [edge items](#edge-items) for details. |
 | `osm_changeset` | Identifier of the OpenStreetMap base data version. |
-| `admins` | List of the administrative codes and names. |
+| `admins` | List of the administrative codes and names. See the list of [admin items](#admin-items) for details. |
 | `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
+| `matched_points` | List of match results when using the `map_snap` shape match algorithm. There is a one-to-one correspondence with the input set of latitude, longitude coordinates and this list of match results. See the list of [matched point items](#matched-point-items) for details. |
 | `units` | The specified units with the request, in either kilometers or miles. |
 
 #### Edge items
@@ -169,8 +176,9 @@ Each `edge` may include:
 | `id` | Identifier of an edge within the tiled, hierarchical graph. |
 | `way_id` | Way identifier of the OpenStreetMap base data. |
 | `weighted_grade` | The weighted grade factor. |
-| `max_upward_grade` | The maximum upward slope. |
-| `max_downward_grade` | The maximum downward slope. |
+| `max_upward_grade` | The maximum upward slope. A value of 32768 indicates no elevation data is available for this edge. |
+| `max_downward_grade` | The maximum downward slope. A value of 32768 indicates no elevation data is available for this edge. |
+| `mean_elevation` | The mean or average elevation along the edge. Units are meters by default. If the units are specified as miles, then the mean elevation is returned in feet. A value of 32768 indicates no elevation data is available for this edge. |
 | `lane_count` | The number of lanes for this edge. |
 | `cycle_lane` | The type (if any) of bicycle lane along this edge. |
 | `bicycle_network` | The bike network for this edge. |
@@ -228,6 +236,19 @@ Each `admin` may include:
 | `country_text` | Country name. |
 | `state_code` | State code. |
 | `state_text` | State name. |
+
+#### Matched point items
+
+Each `matched_point` may include:
+
+| Matched point item | Description |
+| :--------- | :---------- |
+| `lat` | The latitude of the matched point. |
+| `lon` | The longitude of the matched point. |
+| `type` | Describes the type of this match result - possible values include:<ul><li>`unmatched`</li><li>`interpolated`</li><li>`matched`</li></ul> |
+| `edge_index` | The index of the edge in the list of edges that this matched point is associated with. This value will not exist if this point was unmatched. |
+| `distance_along_edge` | The distance along the associated edge for this matched point. For example, if the matched point is halfway along the edge then the value would be 0.5. |
+| `distance_from_trace_point` | The distance from the trace point to the matched point. |
 
 ## Get better results
 
@@ -288,4 +309,8 @@ The following are example requests for the `trace_attributes` action. They use a
 
 ```
 {"shape":[{"lat":39.983841,"lon":-76.735741},{"lat":39.983704,"lon":-76.735298},{"lat":39.983578,"lon":-76.734848},{"lat":39.983551,"lon":-76.734253},{"lat":39.983555,"lon":-76.734116},{"lat":39.983589,"lon":-76.733315},{"lat":39.983719,"lon":-76.732445},{"lat":39.983818,"lon":-76.731712},{"lat":39.983776,"lon":-76.731506},{"lat":39.983696,"lon":-76.731369}],"costing":"auto","shape_match":"walk_or_snap","filters":{"attributes":["edge.names","edge.begin_shape_index","edge.end_shape_index","shape"],"action":"exclude"}}
+```
+*If you would like to visualize the map matched points that correlate to specified input locations - use the following filter*
+```
+"filters":{"attributes":["edge.id","matched.point","matched.edge_index","matched.distance_along_edge"],"action":"include"}
 ```
