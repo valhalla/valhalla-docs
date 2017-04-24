@@ -245,8 +245,8 @@ Each `matched_point` may include:
 | :--------- | :---------- |
 | `lat` | The latitude of the matched point. |
 | `lon` | The longitude of the matched point. |
-| `type` | Describes the type of this match result:<ul><li>`unmatched`</li><li>`interpolated`</li><li>`matched`</li></ul> |
-| `edge_index` | The index of the edge in the list of edges that this matched point is associated with. This value will not exist if this point was not needed during the path formation. |
+| `type` | Describes the type of this match result - possible values include:<ul><li>`unmatched`</li><li>`interpolated`</li><li>`matched`</li></ul> |
+| `edge_index` | The index of the edge in the list of edges that this matched point is associated with. This value will not exist if this point was unmatched. |
 | `distance_along_edge` | The distance along the associated edge for this matched point. For example, if the matched point is halfway along the edge then the value would be 0.5. |
 | `distance_from_trace_point` | The distance from the trace point to the matched point. |
 
