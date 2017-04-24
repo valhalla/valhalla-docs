@@ -9,6 +9,8 @@
   * Make TileHierarchy data and methods static and remove tile_dir from the tile hierarchy.
 * **Map Matching Improvement**
   * Return matched points with trace attributes when using map_snap.
+* **Data Producer Updates**
+  * lua updates so that the chunnel will work again.  
 
 ## Release Date: 2017-04-04 Valhalla 2.1.8
 * **Map Matching Release**
