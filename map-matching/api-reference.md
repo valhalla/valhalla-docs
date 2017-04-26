@@ -316,5 +316,5 @@ The following are example requests for the `trace_attributes` action. They use a
 ```
 *If you would like to visualize the map matched points that correlate to specified input locations - use the following filter*
 ```
-"filters":{"attributes":["edge.id","matched.point","matched.edge_index","matched.begin_route_discontinuity","matched.end_route_discontinuity","matched.distance_along_edge"],"action":"include"}
+"filters":{"attributes":["edge.id","matched.point","matched.type","matched.edge_index","matched.begin_route_discontinuity","matched.end_route_discontinuity","matched.distance_along_edge"],"action":"include"}
 ```
