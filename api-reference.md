@@ -2,7 +2,7 @@
 
 Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
 
-The routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub (use the [Thor repository](https://github.com/valhalla/thor) for comments about route paths or [Odin repository](https://github.com/valhalla/odin) for narration). You can also send a message to routing@mapzen.com.
+The routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an [issue in GitHub](https://github.com/valhalla/issues). You can use labels to be more specific about a given issue. For example, you can use the `thor` label for comments about route paths or the `odin` label for narration. You can also send a message to routing@mapzen.com.
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
@@ -16,11 +16,11 @@ This request provides automobile routing between the Detroit, Michigan area and 
 
 There is an option to name your route request. You can do this by appending the following to your request `&id=`. The `id` is returned with the response so a user could match to the corresponding request.
 
-The Mapzen Turn-by-Turn service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own API key to the URL, following `&api_key=` at the end. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-turn-by-turn) for more on API keys and rate limits.
+The Mapzen Turn-by-Turn service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own API key to the URL, following `&api_key=` at the end. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-turn-by-turn) for more on API keys, request rate and parameter limits.
 
 ### Locations
 
-You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.  See the `API keys and service limits` section above for the locations and distance limits.
+You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.  For the Mapzen Turn-by-Turn service limits on locations and distance see the [request limits](https://mapzen.com/documentation/overview/rate-limits/#mapzen-turn-by-turn) section.
 
 A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search), can be used to find places and geocode addresses, which must be converted to coordinates for input.  
 
@@ -35,6 +35,8 @@ To build a route, you need to specify two `break` locations. In addition, you ca
 | `heading_tolerance` | (optional) How close in degrees a given street's angle must be in order for it to be considered as in the same direction of the `heading` parameter. The default value is 60 degrees. |
 | `street` | (optional) Street name. The street name may be used to assist finding the correct routing location at the specified latitude, longitude. This is not currently implemented. |
 | `way_id` | (optional) OpenStreetMap identification number for a polyline [way](http://wiki.openstreetmap.org/wiki/Way). The way ID may be used to assist finding the correct routing location at the specified latitude, longitude. This is not currently implemented. |
+| `minimum_reachability` | When correlating this location to candidates within the route network, try to find candidates who are reachable from this many or more nodes (intersections). If a given candidate edge reaches less than this number of nodes its considered to be a disconnected island and we'll search for more candidates until we find at least one that isn't considered a disconnected island. If this value is larger than the configured service limit it will be clamped to that limit. The default is 0. |
+| `radius` | When correlating this location to candidates within the route network, try to only return results within this distance (meters). If there are no candidates within this distance it will return the closest candidate within reason. If this value is larger than the configured service limit it will be clamped to that limit. The default is 0. |
 
 Optionally, you can include the following location information without impacting the routing. This information is carried through the request and returned as a convenience.
 
