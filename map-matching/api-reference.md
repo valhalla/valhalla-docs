@@ -6,8 +6,6 @@ There are two separate Map Matching calls that perform different operations on a
 
 It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
 
-The Map Matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [Valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
-
 ## Trace route action
 
 The `trace_route` action takes the costing mode and a list of latitude,longitude coordinates, for example, from a GPS trace, to turn them into a route with the shape snapped to the road network and a set of guidance directions. You might use this to take a GPS trace from a bike route into a set of narrative instructions so you can re-create your trip or share it with others.
@@ -25,7 +23,7 @@ Note that the attributes that are returned are Valhalla routing attributes, not 
 
 ## Inputs of the Map Matching service
 
-The Mapzen Map Matching service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, in the form of `api_key="your-mapzen-api-key"`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-map-matching) for more on API keys and rate limits.
+The service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Shape-matching parameters
 
