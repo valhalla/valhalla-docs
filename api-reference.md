@@ -16,7 +16,7 @@ This request provides automobile routing between the Detroit, Michigan area and 
 
 There is an option to name your route request. You can do this by appending the following to your request `&id=`. The `id` is returned with the response so a user could match to the corresponding request.
 
-The Mapzen Turn-by-Turn service requires an API key. In a request, you must append your own API key to the URL, following `?api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
+The Mapzen Turn-by-Turn service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Locations
 
