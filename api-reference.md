@@ -1,12 +1,12 @@
 # Mapzen Turn-by-Turn routing service API reference
 
-Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. This page documents the inputs and outputs to the service.
-
-The routing service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub (use the [Thor repository](https://github.com/valhalla/thor) for comments about route paths or [Odin repository](https://github.com/valhalla/odin) for narration). You can also send a message to routing@mapzen.com.
+Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application.
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
 ## Inputs of a route
+
+The Mapzen Turn-by-Turn service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 The route request takes the form of `https://valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location information, name and options for the costing model, and output options. Here is an example request:
 
@@ -15,8 +15,6 @@ The route request takes the form of `https://valhalla.mapzen.com/route?json={}&a
 This request provides automobile routing between the Detroit, Michigan area and Buffalo, New York, with an optional street name parameter to improve navigation at the start and end points. It attempts to avoid routing north through Canada by adding a penalty for crossing international borders. The resulting route is displayed in miles.
 
 There is an option to name your route request. You can do this by appending the following to your request `&id=`. The `id` is returned with the response so a user could match to the corresponding request.
-
-The Mapzen Turn-by-Turn service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Locations
 
