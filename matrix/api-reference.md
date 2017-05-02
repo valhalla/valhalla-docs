@@ -19,8 +19,6 @@ An action for `/weight?` is being considered for the future.
 
 ## Inputs of the matrix service
 
-The matrix service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 An example request takes the form of `matrix.mapzen.com/one_to_many?json={}&api_key=`, where the `one_to_many?` represents the type of matrix and the JSON inputs inside the ``{}`` include an array of at least two locations and options for the route costing model.
 
 For example, while at your office, you want to know the times and distances to walk to several restaurants where you could have dinner, as well as the times and distances from each restaurant to the train station for your commute home. This will help you determine where to eat. The API request for this uses `many_to_many` and `pedestrian` costing.
@@ -50,6 +48,8 @@ matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73
 ```
 
 There is an option to name your matrix request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
+
+The matrix service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Location parameters
 
