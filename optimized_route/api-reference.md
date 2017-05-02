@@ -12,8 +12,6 @@ You can request the following action from the Optimized Route service: `/optimiz
 
 ## Inputs of the optimized route service
 
-The optimized route service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 An example request takes the form of `matrix.mapzen.com/optimized_route?json={}&api_key=`, where the `optimized_route?` represents the type of query and the JSON inputs inside the ``{}`` include an array of at least four locations and options for the route costing model.
 
 Here is an example of an Optimized Route scenario:
@@ -25,6 +23,8 @@ https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.042072,"l
 ```
 
 There is an option to name your optimized request. You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
+
+The optimized route service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Location parameters
 
