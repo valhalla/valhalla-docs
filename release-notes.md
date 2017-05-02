@@ -1,6 +1,6 @@
 ## Release Date: 2017-05-xx Valhalla 2.2.0
 * **Guidance Improvement**
-  * Added Russian (RU-ru) narrative file.
+  * Added Russian (ru-RU) narrative file.
 * **Map Matching Improvement**
   * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
 
