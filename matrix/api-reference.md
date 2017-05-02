@@ -2,24 +2,6 @@
 
 The Time-Distance Matrix service provides a quick computation of time and distance between a set of locations and returns them to you in the resulting matrix table.
 
-The Time-Distance matrix service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Valhalla GitHub repository](https://github.com/valhalla/valhalla/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
-
-## API keys and service limits
-
-To use the Time-Distance Matrix service, you must first obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys.
-
-As a shared service, there are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
-
-The following limitations are currently in place.
-
-* `max_locations` is  50 for `one_to_many`, `many_to_one`, `many_to_many` and `sources_to_targets` requests.  For `sources_to_targets`, we check to make sure both sources and targets do not exceed 50 locations.
-* `max_distance` is the maximum "crow-flies" distance between two locations and is 200,000 meters (200 km) for all matrix types. For `one_to_many`, the distance between the first location and any of the others cannot exceed the maximum. For `many_to_one`, the distance between the last location and any of the others cannot exceed the maximum. Finally, for `many_to_many`, the distance between any pair of locations cannot exceed the maximum.
-* rate limits are two queries per second and 5,000 queries per day.
-
-You can also refer to the [Mapzen Turn-by-Turn documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#api-keys-and-service-limits) to view the current routing limitations that are in place for the Mapzen Turn-by-Turn service.
-
-If you need more capacity, contact [routing@mapzen.com](mailto:routing@mapzen.com). You can also set up your own instance of Valhalla, which has access to functions similar to Mapzen's services.
-
 ## Matrix service actions
 
 You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?`, `/many_to_many?` or `/sources_to_targets?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one`, a square matrix for a `many_to_many` or any of the three matrices using `sources_to_targets`.  
@@ -41,25 +23,33 @@ An example request takes the form of `matrix.mapzen.com/one_to_many?json={}&api_
 
 For example, while at your office, you want to know the times and distances to walk to several restaurants where you could have dinner, as well as the times and distances from each restaurant to the train station for your commute home. This will help you determine where to eat. The API request for this uses `many_to_many` and `pedestrian` costing.
 
-    matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=mapzen-xxxxxx
+```
+matrix.mapzen.com/many_to_many?json={"locations":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=your-mapzen-api-key
+```
 
 These are similar examples as above, but using `sources_to_targets`.
 
-| one-to-many using /sources_to_targets? |
+`one-to-many using /sources_to_targets?`
 
-    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=mapzen-xxxxxx
+```
+matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=your-mapzen-api-key
+```
 
-| many-to-one using /sources_to_targets? |
+`many-to-one using /sources_to_targets?`
 
-    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+```
+matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=matrix-xxxxxx
+```
 
-| many-to-many using /sources_to_targets? |
+`many-to-many using /sources_to_targets?`
 
-    matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=mapzen-xxxxxx
+```
+matrix.mapzen.com/sources_to_targets?json={"sources":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"targets":[{"lat":40.744014,"lon":-73.990508},{"lat":40.739735,"lon":-73.979713},{"lat":40.752522,"lon":-73.985015},{"lat":40.750117,"lon":-73.983704},{"lat":40.750552,"lon":-73.993519}],"costing":"pedestrian"}&id=ManyToMany_NYC_work_dinner&api_key=your-mapzen-api-key
+```
 
 There is an option to name your matrix request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
-Note that you must append your own [Matrix API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+The matrix service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Location parameters
 
@@ -72,13 +62,13 @@ When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, loca
 
 You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using `type` in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
 
-### Source & Target parameters
+### Source and target parameters
 
-When using the `sources_to_targets` action, you specify sources & targets as ordered lists of one or more locations within a JSON array, depending on the type of matrix result you are expecting.  See the `API keys and service limits` section above for the locations and distance limits.
+When using the `sources_to_targets` action, you specify sources and targets as ordered lists of one or more locations within a JSON array, depending on the type of matrix result you are expecting.
 
-A source & target must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search) or [Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim), can be used to find places and geocode addresses, which must be converted to coordinates for input.  
+A source and target must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on.
 
-| Source & Target parameters | Description |
+| Source and target parameters | Description |
 | :--------- | :----------- |
 | `lat` | Latitude of the source/target in degrees. |
 | `lon` | Longitude of the source/target in degrees. |

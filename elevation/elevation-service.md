@@ -1,16 +1,6 @@
 # Elevation service API reference
 
-Mapzen's elevation service is an open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and navigation data, including computing the steepness of edges or generating an elevation profile along a route. This page documents the inputs and outputs to the service.
-
-The elevation service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in [Skadi GitHub repository](https://github.com/valhalla/skadi/issues). If you find a unique use for the elevation service, let the developers know at [routing@mapzen.com](mailto:routing@mapzen.com)!
-
-## API keys and service limits
-
-To use Mapzen's elevation service, you must first obtain a Mapzen API key. Sign in at https://mapzen.com/developers to create and manage your API keys.
-
-This is a shared service. As such, there are limitations on the number of sampling points to prevent individual users from degrading the overall system performance. The limits are related to the number of points for which you request elevations, rather than the resolution of the DEM in that area.
-
-Limits may be increased in the future, but you can contact routing@mapzen.com if you encounter rate limit status messages and need higher limits in the meantime.
+Mapzen's elevation service is an open-source web API (and C++ library) that provides digital elevation model (DEM) data as the result of a query. The elevation service data has many applications when combined with other routing and navigation data, including computing the steepness of edges or generating an elevation profile along a route.
 
 ## Inputs of the elevation service
 
@@ -18,9 +8,9 @@ The elevation service currently has a single action, `/height?`, that can be req
 
 An elevation service request takes the form of `elevation.mapzen.com/height?json={}&api_key=`, where the JSON inputs inside the ``{}`` includes location information and the optional range parameter.
 
-There is an option to name your elevation request.  You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
+There is an option to name your elevation request. You can do this by appending the following to your request `&id=`.  The `id` is returned with the response so a user could match to the corresponding request.
 
-Note that you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end.
+The elevation service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Use a shape list for input locations
 
@@ -35,21 +25,27 @@ These parameters are available for `shape`.
 
 Here is an example of a profile request using `shape`:
 
-    elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville&api_key=mapzen-xxxxxx
+```
+elevation.mapzen.com/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville&api_key=your-mapzen-api-key
+```
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the `range` and `height` (as `range_height` in the response) for each point.
 
-    {"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"range_height":[[0,307],[8467,272],[25380,204],[32162,204],[42309,180],[54533,198]]}
+```
+{"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"range_height":[[0,307],[8467,272],[25380,204],[32162,204],[42309,180],[54533,198]]}
+```
 
 Without the `range`, the result looks something like this, with only a `height`:
 
-    {"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"height":[307,272,204,204,180,198]}
+```
+{"shape":[{"lat":40.712433,"lon":-76.504913},{"lat":40.712276,"lon":-76.605263},{"lat":40.712124,"lon":-76.805695},{"lat":40.722431,"lon":-76.884918},{"lat":40.812275,"lon":-76.905258},{"lat":40.912121,"lon":-76.965691}],"height":[307,272,204,204,180,198]}
+```
 
 ### Use an encoded polyline for input locations
 
 The `encoded_polyline` parameter is a string of a polyline-encoded, with six degrees of precision, shape and has the following parameters.
 
-You can find more information and [code samples for how to decode an encoded polyline](https://mapzen.com/documentation/mobility/decoding/) in the Mapzen Mobility documentation. 
+You can find more information and [code samples for how to decode an encoded polyline](https://mapzen.com/documentation/mobility/decoding/) in the Mapzen Mobility documentation.
 
 | Encoded polyline parameters | Description |
 | :--------- | :----------- |
@@ -57,7 +53,9 @@ You can find more information and [code samples for how to decode an encoded pol
 
 Here is an example `encoded_polyline` request:
 
-    elevation.mapzen.com/height?json={"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}&api_key=mapzen-xxxxxx
+```
+elevation.mapzen.com/height?json={"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}&api_key=your-mapzen-api-key
+```
 
 ### Get height and distance with the range parameter
 
@@ -69,12 +67,11 @@ The `range` is optional and assumed to be `false` if omitted.
 | :--------- | :----------- |
 | `range` | `true` or `false`. Defaults to `false`.|
 
-###Other request options
+### Other request options
 
 | Options | Description |
 | :------------------ | :----------- |
 | `id` | Name your elevation request. If `id` is specified, the naming will be sent thru to the response. |
-
 
 ## Outputs of the elevation service
 
@@ -93,4 +90,4 @@ The profile results are returned with the form of shape (shape points or encoded
 
 ## Data sources and known issues
 
-Currently, the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/), [NED](https://nationalmap.gov/elevation.html) and [ETOPO1](https://www.ngdc.noaa.gov/mgg/global/) DEMs. These sets provide global coverage at varying resolutions up to approximately 10 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water with a value of zero to indicate mean sea level; in these areas, ETOPO1 provides bathymetry (as well as in regions which are not covered by NED, SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. We are considering how to best integrate other sources such as NRCAN and are always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets, please let us know by filing an issue in this [GitHub repository](https://github.com/tilezen/joerd/issues).
+Currently, the underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/), [NED](https://nationalmap.gov/elevation.html) and [ETOPO1](https://www.ngdc.noaa.gov/mgg/global/) DEMs. These sets provide global coverage at varying resolutions up to approximately 10 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water with a value of zero to indicate mean sea level; in these areas, ETOPO1 provides bathymetry (as well as in regions which are not covered by NED, SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. Mapzen is considering how to best integrate other sources such as NRCAN and is always looking for better datasets. If you find any data issues or can suggest any supplemental open datasets, please add an issue in this [GitHub repository](https://github.com/tilezen/joerd/issues).

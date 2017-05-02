@@ -12,7 +12,7 @@ Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, 
 
 In this tutorial, you will be planning a family [vacation](https://en.wikipedia.org/wiki/National_Lampoon%27s_Vacation) for travel by car from your home of Chicago, Illinois to visit a popular theme park in Anaheim, California. In your code, you will enter the start and end points of your trip and Mapzen Turn-by-Turn will calculate the route.
 
-To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You also need a Mapzen API key, which you can get by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/#developer-accounts-and-api-keys).
+To complete the tutorial, you should have some familiarity with HTML and JavaScript, although all the source code is provided. You also need a Mapzen API key, which you can get by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/).
 
 You can use any text editor and operating system, but must maintain an Internet connection while you are working. The [Mapzen developer guide](https://mapzen.com/documentation/guides/install-text-editor/) has recommendations for text editors. The tutorial should take about an hour to complete.
 
@@ -145,7 +145,7 @@ To display a map on a page, you need a `<div>` element with an ID value, as well
     <div id="map"></div>
     ```
 
-3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map. The `"your-mapzen-api-key"` text is a placeholder for your actual Mapzen API key; paste your own API key inside the quotation marks. You can get an API key by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/#developer-accounts-and-api-keys).
+3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map. The `"your-mapzen-api-key"` text is a placeholder for your actual Mapzen API key; paste your own API key inside the quotation marks. You can get an API key by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/).
 
   ```html
   <script>

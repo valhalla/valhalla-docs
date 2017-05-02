@@ -14,11 +14,13 @@ A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, wher
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
-    matrix.mapzen.com/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
+```
+matrix.mapzen.com/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
+```
 
 There is an option to name your isochrone request by appending `&id=`. The `id` is returned with the response so you can match it to your corresponding request.
 
-The Mapzen Isochrone service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, following `&api_key=` at the end. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-isochrone) for more on API keys and rate limits.
+The isochrone service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Location parameters
 
