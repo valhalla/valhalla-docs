@@ -1,3 +1,9 @@
+## Release Date: 2017-05-xx Valhalla 2.2.0
+* **Guidance Improvement**
+  * Added Russian (RU-ru) narrative file.
+* **Map Matching Improvement**
+  * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
+
 ## Release Date: 2017-04-24 Valhalla 2.1.9
 * **Elevation Update**
   * Created a new EdgeElevation structure which includes max upward and downward slope (moved from DirectedEdge) and mean elevation.
