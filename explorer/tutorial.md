@@ -69,8 +69,19 @@ Get GeoJSON, save it into a map.
 
 Similar to what you saw for the details of operators and routes, the stop also has a Onestop ID. This time, though, the Onestop ID is `s-9q9p1erf53-broadway~wgrandav`, where the `s` designates it is a transit stop.
 
-You can see a list of the routes that serve this stop, which are different routes that are all from one transit operator. This is the power of Transitland, which aggregates data from many operators but connects them so they can be queried at the same time. For example, in downtown San Francisco, there are some locations where two different transit operators (BART and San Francisco Municipal Transportation Agency) have colocated underground metro rail stations, plus there are bus lines and light rail stops on the surface. You can click that stop and get information for all the transit options at that stop, even if they are served by different operators.
+You can see a list of the routes that serve this stop, which are different routes that are all from one transit operator. This is the power of Transitland, which aggregates data from many operators but connects them so they can be queried at the same time. For example, in downtown San Francisco, there are some locations where two different transit operators (BART and San Francisco Municipal Transportation Agency) have colocated underground metro rail stations, plus there are bus lines and light rail stops on the surface. You can click that stop and get information for all the transit options there, even if they are served by different operators.
 
-## View travel times to a location
+## View travel times from a location
 
-With a point on the map, either a selected stop or marker from a search, you can calculate travel times. 
+With a point on the map, either a selected stop or marker from a search, you can see where you can travel within a certain amount of time. You can specify the mode of transportation, such as walking, biking, driving, or taking transit, and see a series of rings to represent where you can reach within various increments of time, ranging from 15 to 60 minutes.
+
+This is known as an isochrone, which is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. Isochrone functionality is also sometimes referred to as a service area, a drive-time analysis to show where you can drive from a point within a certain time, or a walkshed. A walkshed, which is a transportation planning term, calculates an area within a range of a location that can be reached by walking (or a bikeshed for areas that can be traveled by bicycle within those time ranges).
+
+The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps.
+
+1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
+2. Under `Analyze access`, click `Generate isochrones`.
+3. Click the option for `walking` to see where you can walk from this point. The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments.
+4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving map does not yet consider current traffic conditions._
+5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
+6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
