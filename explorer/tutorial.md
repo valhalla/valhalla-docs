@@ -105,7 +105,14 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Analyze access`, click `Generate isochrones`.
-3. Click the option for `walking` to see where you can walk from this point. The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments.
+3. Click the option for `walking` to see where you can walk from this point.
+
+  ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
+
+  The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area.
+
+  ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
+
 4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
@@ -115,9 +122,19 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to see what happens if there is a maintenance issue that causes subway service outage or an event or parade that closes a street. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
 
 1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
-2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present.
+2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present. _Note: These images reflect travel during a weekday in morning commute hours._
+
+  ![Map of isochrones for transit](/images/mobility-explorer-isochrones-transit.png)
+
 3. Click `Include or exclude operators`.
-4. Under the `Exclude` column, check `Bay Area Rapid Transit` to see where you can go without taking BART. Because BART serves a large regional area, your isochrones are much closer to the starting location.
+4. Under the `Exclude` column, check `Bay Area Rapid Transit` to see where you can go without taking BART.
+
+  ![Remove BART from transit options](/images/mobility-explorer-isochrones-transit-nobart.png)
+
+Because BART serves a large regional area, your isochrones are much closer to the starting location.
+
+  ![Remove BART from transit options](/images/mobility-explorer-isochrones-transit-nobart-map.png)
+
 5. Try including or excluding other operators to see the result.
 6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see the biggest difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends northeast of the location on one part of its route.
 
