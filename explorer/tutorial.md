@@ -60,7 +60,8 @@ The route line and stops that are displayed by default are a representation of t
 
 ## Extract GeoJSON for this query
 
-Get GeoJSON, save it into a map.
+_NOTE: Get GeoJSON, save it into a map._
+_TODO: Add steps about how to save GeoJSON in every section_
 
 ## Explore transit stops near a location
 
@@ -85,3 +86,22 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
+
+## See the effect on travel times if you remove certain operators or routes
+
+You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to see what happens if there is a maintenance issue that causes subway service outage or an event or parade that closes a street. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
+
+1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
+2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present.
+3. Click `Include or exclude operators`.
+4. Under the `Exclude` column, check `Bay Area Rapid Transit` to see where you can go without taking BART. Because BART serves a large regional area, your isochrones are much closer to the starting location.
+5. Try including or excluding other operators to see the result.
+6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see the biggest difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends northeast of the location on one part of its route.
+
+_NOTE: THERE IS SOME WEIRDNESS WITH BART. It shows ferry routes that you can take. It looks like there is no change when BART is included, only when it is excluded._
+
+## Make your own transit map
+
+_NOTE: Take your GeoJSON files from before and put them onto a website so you can make your own transit map._
+
+## Tutorial summary
