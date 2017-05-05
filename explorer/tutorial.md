@@ -26,17 +26,23 @@ You will first see which transit operators, or agencies, provide service in Oakl
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by the transit service provided by each operator. Essentially, the polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator.
 4. Hover over the polygons on the map to see the operator name.
 
-Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators to see the service area.
+  Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators to see the service area.
 
 5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train system, to see where this operator serves.
 
-The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
+  The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
 
-A Onestop ID is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
+  A Onestop ID is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
 
 4. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
+
+  ![Area of BART service area](./images/mobility-explorer-bart-polygon.png)
+
 5. Click `View routes operated by Bay Area Rapid Transit`. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
-7. Explore BART's routes by hovering over a line on the map. If you click a route on the map or in the drop-down list, you can get details about the route.
+7. Explore BART's routes by hovering over a line on the map.
+  ![Hover over a route for basic information](./images/mobility-explorer-bart-route-hover.png)
+8. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more details about the route.
+  ![Choose a route to get details about it](./images/mobility-explorer-bart-route-details.png)
 
 ## Get details about a route
 
@@ -44,19 +50,28 @@ When you are displaying routes in the map, you can choose whether to color them 
 
 _Tip: At anytime you want to start over with your search, click `Show routes` to search within the current map extent._
 
-1. In the search box, type `2201 Broadway, Oakland` The search box has been customized to show only certain parts of matched addresses, so make sure you type the address and Oakland to make sure you are choosing the proper location.
+1. In the search box, type `2201 Broadway, Oakland` and press Enter. The search box has been customized to show only certain parts of matched addresses, so make sure you type that text as suggested to make sure you are choosing the proper location.
+  ![Search for an address on the map](./images/mobility-explorer-search-address.png)
 2. Click `Show routes` to see the transit routes near this location. The total number of routes is shown on the drop-down list, and similar to BART, the individual route names are there, too. You can hover over a route on the map for more information.
+  Currently, the routes are being drawn in the same color, but you can style them so they are classified by the mode or the operator.
+3. Under `Style routes by`, click `Mode`. When you do this, each mode of transit (such as metro, bus, rail, or ferry) is drawn with a unique color. Depending on your zoom level, you may not see more than one mode available. If this happens, zoom out slightly and click `Redo search in map area`.
+  ![Style routes by mode](./images/mobility-explorer-routes-mode.png)
 
-Currently, the routes are being drawn in the same color, but you can style them so they are classified by the mode or the operator.
-3. Under `Style routes by` click `Mode`. When you do this, each mode of transit (such as metro, bus, rail, or ferry) is drawn with a unique color. Depending on your zoom level, you may not see more than one mode available. If this happens, zoom out slightly and click `Redo search in map area`.
-4. Under `Style routes by` click `Operator`. This shows each transit operator in a different color.
-5. Hover over route `12` near the point, and click it on the map (or in the drop-down list) to see its details. This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
+4. Under `Style routes by` click `Operator`. This shows each transit operator in a different color (your colors may vary from those shown in the images here).
+5. Hover over route `12` near the address point, and click it on the map (or in the drop-down list) to see its details.
+  ![Hover over route 12](./images/mobility-explorer-route12.png)
+
+This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
+
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
+  ![Stops along route 12](./images/mobility-explorer-route12-stops.png)
 
 The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
 
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route. For this route, there are two patterns, which you can click to see the differences between them.
+
+  ![RouteStopPattern for route 12](./images/mobility-explorer-route12-rsp.png)
 
 ## Extract GeoJSON for this query
 
