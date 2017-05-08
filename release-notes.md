@@ -4,6 +4,8 @@
   * Updated Slovenian (sl-SI) narrative file.
 * **Data Producer Update**
   * Assign destination sign info on bidirectional ramps.
+  * Update ReclassifyLinks. Use a "link-tree" which is formed from the exit node and terminates at entrance nodes. Exit nodes are sorted by classification so motorway exits are done before trunks, etc. Updated the turn channel logic - now more consistently applies turn channel use.
+  * Updated traffic segment associations to properly work with elevation and lane connectivity information (which is stored after the traffic association).
 
 ## Release Date: 2017-04-24 Valhalla 2.1.9
 * **Elevation Update**
