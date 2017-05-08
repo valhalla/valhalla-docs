@@ -2,7 +2,7 @@
 * **Guidance Improvement**
   * Added Russian (ru-RU) narrative file.
   * Updated Slovenian (sl-SI) narrative file.
-* **Data Producer Update**
+* **Data Producer Updates**
   * Assign destination sign info on bidirectional ramps.
   * Update ReclassifyLinks. Use a "link-tree" which is formed from the exit node and terminates at entrance nodes. Exit nodes are sorted by classification so motorway exits are done before trunks, etc. Updated the turn channel logic - now more consistently applies turn channel use.
   * Updated traffic segment associations to properly work with elevation and lane connectivity information (which is stored after the traffic association).
