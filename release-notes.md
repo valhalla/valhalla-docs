@@ -1,9 +1,9 @@
-## Release Date: 2017-05-xx Valhalla 2.2.0
+## Release Date: 2017-05-08 Valhalla 2.2.0
 * **Guidance Improvement**
   * Added Russian (ru-RU) narrative file.
   * Updated Slovenian (sl-SI) narrative file.
-* **Map Matching Improvement**
-  * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
+* **Data Producer Update**
+  * Assign destination sign info on bidirectional ramps.
 
 ## Release Date: 2017-04-24 Valhalla 2.1.9
 * **Elevation Update**
