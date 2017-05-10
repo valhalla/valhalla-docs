@@ -1,7 +1,7 @@
 ## Release Date: 2017-05-xx Valhalla 2.2.1
 * **Map Matching Improvement**
   * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
-* ** Isochrone Improvements**
+* **Isochrone Improvements**
   * Add logic to make sure the center location remains fixed at the center of a tile/grid in the isotile.
   * Add a default generalization factor that is based on the grid size. Users can still override this factor but the default behavior is improved.
   * Add ExpandForward and ExpandReverse methods as is done in bidirectional A*. This improves handling of transitions between hierarchy levels.
