@@ -6,8 +6,6 @@ There are two separate Map Matching calls that perform different operations on a
 
 It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
 
-The Map Matching service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in GitHub within the [Valhalla repository](https://github.com/valhalla/valhalla). You can also send a message to routing@mapzen.com.
-
 ## Trace route action
 
 The `trace_route` action takes the costing mode and a list of latitude,longitude coordinates, for example, from a GPS trace, to turn them into a route with the shape snapped to the road network and a set of guidance directions. You might use this to take a GPS trace from a bike route into a set of narrative instructions so you can re-create your trip or share it with others.
@@ -25,7 +23,7 @@ Note that the attributes that are returned are Valhalla routing attributes, not 
 
 ## Inputs of the Map Matching service
 
-The Mapzen Map Matching service requires an API key and there are limits on the number of requests, locations, and other parameters. In a request, you must append your own [API key](https://mapzen.com/developers) to the URL, in the form of `api_key="your-mapzen-api-key"`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/#mapzen-map-matching) for more on API keys and rate limits.
+The service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
 
 ### Shape-matching parameters
 
@@ -120,6 +118,8 @@ admin.state_text
 matched.point
 matched.type
 matched.edge_index
+matched.begin_route_discontinuity
+matched.end_route_discontinuity
 matched.distance_along_edge
 matched.distance_from_trace_point
 ```
@@ -247,8 +247,10 @@ Each `matched_point` may include:
 | `lon` | The longitude of the matched point. |
 | `type` | Describes the type of this match result - possible values include:<ul><li>`unmatched`</li><li>`interpolated`</li><li>`matched`</li></ul> |
 | `edge_index` | The index of the edge in the list of edges that this matched point is associated with. This value will not exist if this point was unmatched. |
-| `distance_along_edge` | The distance along the associated edge for this matched point. For example, if the matched point is halfway along the edge then the value would be 0.5. |
-| `distance_from_trace_point` | The distance from the trace point to the matched point. |
+| `begin_route_discontinuity` | The boolean value is true if this match result is the begin location of a route disconnect. This value will not exist if this is false. |
+| `end_route_discontinuity` |  The boolean value is true if this match result is the end location of a route disconnect.  This value will not exist if this is false. |
+| `distance_along_edge` | The distance along the associated edge for this matched point. For example, if the matched point is halfway along the edge then the value would be 0.5. This value will not exist if this point was unmatched. |
+| `distance_from_trace_point` | The distance from the trace point to the matched point. This value will not exist if this point was unmatched. |
 
 ## Get better results
 
@@ -312,5 +314,5 @@ The following are example requests for the `trace_attributes` action. They use a
 ```
 *If you would like to visualize the map matched points that correlate to specified input locations - use the following filter*
 ```
-"filters":{"attributes":["edge.id","matched.point","matched.edge_index","matched.distance_along_edge"],"action":"include"}
+"filters":{"attributes":["edge.id","matched.point","matched.type","matched.edge_index","matched.begin_route_discontinuity","matched.end_route_discontinuity","matched.distance_along_edge"],"action":"include"}
 ```

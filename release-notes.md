@@ -1,3 +1,20 @@
+## Release Date: 2017-05-xx Valhalla 2.2.1
+* **Map Matching Improvement**
+  * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
+* **Isochrone Improvements**
+  * Add logic to make sure the center location remains fixed at the center of a tile/grid in the isotile.
+  * Add a default generalization factor that is based on the grid size. Users can still override this factor but the default behavior is improved.
+  * Add ExpandForward and ExpandReverse methods as is done in bidirectional A*. This improves handling of transitions between hierarchy levels.
+
+## Release Date: 2017-05-08 Valhalla 2.2.0
+* **Guidance Improvements**
+  * Added Russian (ru-RU) narrative file.
+  * Updated Slovenian (sl-SI) narrative file.
+* **Data Producer Updates**
+  * Assign destination sign info on bidirectional ramps.
+  * Update ReclassifyLinks. Use a "link-tree" which is formed from the exit node and terminates at entrance nodes. Exit nodes are sorted by classification so motorway exits are done before trunks, etc. Updated the turn channel logic - now more consistently applies turn channel use.
+  * Updated traffic segment associations to properly work with elevation and lane connectivity information (which is stored after the traffic association).
+
 ## Release Date: 2017-04-24 Valhalla 2.1.9
 * **Elevation Update**
   * Created a new EdgeElevation structure which includes max upward and downward slope (moved from DirectedEdge) and mean elevation.

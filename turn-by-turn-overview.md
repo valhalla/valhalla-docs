@@ -2,8 +2,6 @@
 
 [Mapzen Turn-by-Turn](https://mapzen.com/projects/valhalla) is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. The service works globally, and provides dynamic and customizable routing by driving, walking, bicycling, and using multimodal and transit options, with clear directions for maneuvers along the route.
 
-To use the service, you first need to obtain an API key from Mapzen. Sign in at https://mapzen.com/developers to create and manage your API keys. There are limitations on requests, maximum distances, and numbers of locations to prevent individual users from degrading the overall system performance.
-
 ## Route requests and results
 
 When you [request a route](api-reference.md#inputs-of-a-valhalla-route), you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. In the JSON array, you need to specify the [locations](api-reference.md#locations) to visit on the route, the [costing model](api-reference.md#costing-options) that represents the mode of travel, such as car or bicycle, and your API key. The location coordinates, given in decimal degrees, can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service such as [Mapzen Search](https://mapzen.com/projects/search), and so on. Costing methods can have several options that can be adjusted to develop the the route path and estimate the time along the path.
@@ -16,4 +14,4 @@ The JSON returned from the route query can be drawn on a map and shown as instru
 
 Mapzen Turn-by-Turn draws data from OpenStreetMap and from [Transitland](https://transit.land), the open transit data aggregation project that Mapzen sponsors. Apps can also query the Transitland API to build maps and analyses that enrich that journey and provide context around Points A and B, as well as the many multimodal transportation options that connect them. Journeys planned by Mapzen Turn-by-Turn and data in Transitland all include Onestop IDs, an open identifier scheme that catalogs transit operators, stops, and routes from around the world.
 
-Mapzen Turn-by-Turn is powered by the Valhalla routing engine, and is available for both commercial and non-commercial purposes. The [source code](https://github.com/valhalla) is open to view and modify, and contributions are welcomed.
+The [source code](https://github.com/valhalla) is open to view and modify, and contributions are welcomed.
