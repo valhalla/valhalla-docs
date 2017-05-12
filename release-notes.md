@@ -5,6 +5,8 @@
   * Add logic to make sure the center location remains fixed at the center of a tile/grid in the isotile.
   * Add a default generalization factor that is based on the grid size. Users can still override this factor but the default behavior is improved.
   * Add ExpandForward and ExpandReverse methods as is done in bidirectional A*. This improves handling of transitions between hierarchy levels.
+* **Graph Correlation Improvements**
+  * Add options to control both radius and reachability per input location (with defaults) to control correlation of input locations to the graph in such a way as to avoid routing between disconnected regions and favor more likely paths.
 
 ## Release Date: 2017-05-08 Valhalla 2.2.0
 * **Guidance Improvements**
