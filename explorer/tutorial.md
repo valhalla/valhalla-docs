@@ -1,21 +1,26 @@
 # Explore routes and stops
 
-[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will ask questions about routes and stops and make your own transit map.
+[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops and make your own transit map.
 
 You can follow along with the location in the tutorial, or choose your own region.
 
 To complete the tutorial, all you need is a browser and an Internet connection while you are working. No special knowledge of coding or transit data is needed. The tutorial should take about an hour to complete.
 
-## Explore Transitland and Feed Registry
+## Get to know Transitland
 
-Transitland is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. It has several components to it, including Feed Registry and Datastore.
+[Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer.
 
-- Feed Registry is a directory of transit operators and data feeds. Through the Feed Registry, you can browse operators, feeds, and usage and license information, as well as contribute additional feeds.
-- Datastore brings together data from the Feed Registry with contributions, edits, and fixes from transit enthusiasts and developers. The Datastore provides a web API for querying and editing.
+Transitland has several components to it, including Feed Registry and Datastore.
+
+- [Feed Registry](https://transit.land/feed-registry/) is a directory of transit operators and data feeds. Through the Feed Registry, you can browse operators, feeds, and usage and license information, as well as contribute additional feeds or browse the data on a map or in Mobility Explorer. You can search for certain operators or locations to filter the results.
+  ![Feed Registry showing Bay Area feeds](/images/feed-registry-bay-area.png)
+
+- [Datastore](https://transit.land/documentation/datastore/) brings together data from the Feed Registry with edits and fixes from transit enthusiasts and developers. The Datastore provides a web API for querying and editing.
+![Datastore API documentation](/images/datastore-api.png)
 
 Mobility Explorer is a view into Datastore, allowing you to query the data using a user interface and see the results on a map.
 
-## Meet Mobility Explorer
+## View public transit networks
 
 Now that you have seen the source data in Transitland, you can better understand where the data comes from that you see in Mobility Explorer.
 
@@ -48,7 +53,7 @@ You will first see which transit operators, or agencies, provide service in Oakl
 
 When you are displaying routes in the map, you can choose whether to color them based on the mode, such as train or bus, or the operator.
 
-_Tip: At anytime you want to start over with your search, click `Show routes` to search within the current map extent._
+_Tip: Anytime you want to start over with your search, click `Show routes` to search within the current map extent._
 
 1. In the search box, type `2201 Broadway, Oakland` and press Enter. The search box has been customized to show only certain parts of matched addresses, so make sure you type that text as suggested to make sure you are choosing the proper location.
   ![Search for an address on the map](/images/mobility-explorer-search-address.png)
@@ -137,8 +142,6 @@ Because BART serves a large regional area, your isochrones are much closer to th
 
 5. Try including or excluding other operators to see the result.
 6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see the biggest difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends northeast of the location on one part of its route.
-
-_NOTE: THERE IS SOME WEIRDNESS WITH BART. It shows ferry routes that you can take. It looks like there is no change when BART is included, only when it is excluded._
 
 ## Make your own transit map
 
