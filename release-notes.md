@@ -1,4 +1,4 @@
-## Release Date: 2017-05-15 Valhalla 2.2.1
+## Release Date: 2017-05-15 Valhalla 2.2.2
 * **Map Matching Improvement**
   * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
 * **Isochrone Improvements**
