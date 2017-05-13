@@ -8,7 +8,7 @@ To complete the tutorial, all you need is a browser and an Internet connection w
 
 ## Get to know Transitland
 
-[Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer.
+[Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer, as well as the multimodal routing for [Mapzen Turn-by-Turn](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/).
 
 Transitland aggregates publicly available transit datasets that use the [General Transit Feed Specification](https://developers.google.com/transit/gtfs/), which is a common way of organizing transit schedules, routes, and associated content. A GTFS feed consists of a .zip file that contains a series of specific text files with this information. Transitland has several components to it, including Feed Registry and Datastore.
 
@@ -105,6 +105,8 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
 
+In earlier exercises, your requests have been to the Transitland API. Isochrones, however, use the Mapzen Mobility API. You can see the Mapzen Mobility API request using the link on the sidebar. For example, a request for pedestrian isochrones takes the form of https://matrix.mapzen.com/isochrone?json=%7B%22locations%22:%5B%7B%22lat%22:%2237.811204%22,%22lon%22:%22-122.267494%22%7D%5D,%22costing%22:%22pedestrian%22,%22denoise%22:0.3,%22polygons%22:true,%22generalize%22:50,%22costing_options%22:%7B%22pedestrian%22:%7B%22use_ferry%22:0%7D%7D,%22contours%22:%5B%7B%22time%22:15%7D,%7B%22time%22:30%7D,%7B%22time%22:45%7D,%7B%22time%22:60%7D%5D%7D
+
 ## See the effect on travel times if you remove certain operators or routes
 
 You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to see what happens if there is a maintenance issue that causes subway service outage or an event or parade that closes a street. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
@@ -121,13 +123,27 @@ Because BART serves a large regional area, your isochrones are much closer to th
 6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
   ![Remove routes from transit options](/images/mobility-explorer-isochrones-transit-nobart-sfia.png)
 
-## Make your own transit map
+## Extra credit: Make your own transit map
 
-So far, you have been using Mobility Explorer to query and visualize transit data.
+So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time, In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries in Mobility Explorer and copy them into an external mapping app.
+
+One app you can use is Tangram Play, which is an interactive text editor for creating maps using Mapzen’s Tangram rendering engine. With Play, you can write and edit map styles and preview the changes live in the web browser. Tangram uses a human-readable format called `.yaml` to organize all the styling elements needed to draw a map. This file, known as a scene, specifies the source of the data, which layers from that source to display on the map, and rules about how to draw those layers, such as color and line thickness.
+
+Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
+
+1. In a new browser tab, open [map name].
+2. Explore the entries on the text-editing panel on the right. Notice that there are data `sources` defined for each map layer, where the URL is the request to the Transitland and Mapzen Mobility APIs.
+3. Under `layers`, you can define the style rules for how to display the features on the map.
+4. Experiment with the colors and line widths to draw the map as you want.
+5. Optionally, use Mobility Explorer to build queries, and paste in the URLs for the `sources`.
 
 ## Tutorial summary
 
-You have explored transit data, including its operators, routes, and stops. You also calculated how far you can travel from a particular location by creating an isochrone map.
+You have explored transit data, including its operators, routes, and stops. You also calculated how far you can travel from a particular location by creating an isochrone map. You also have experimented with the map styles using Tangram Play to customize your transit map.
+
+If you want to learn more about Transitland and Mapzen Mobility, review the [documentation](https://mapzen.com/documentation/mobility/).
+
+The Transitland project is open source, so you are encouraged to get involved by submitting suggestions or even contributing code: https://github.com/transitland. In addition, if you know of public GTFS feeds that are not currently part of Feed Registry, please [submit](https://transit.land/feed-registry/feeds/new) them.
 
 ## Data credits
 
