@@ -58,23 +58,16 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
   Currently, the routes are being drawn in the same color, but you can style them so they are classified by the mode or the operator.
 3. Under `Style routes by`, click `Mode`. When you do this, each mode of transit (such as metro, bus, or rail) is drawn with a unique color. Depending on your zoom level, you may not see more than one mode available. If this happens, zoom out slightly and click `Redo search in map area`.
   ![Style routes by mode](/images/mobility-explorer-routes-mode.png)
-
 4. Under `Style routes by` click `Operator`. This shows each transit operator in a different color (your colors may vary from those shown in the images here).
 5. Hover over route `12` near the address point, and click it on the map (or in the drop-down list) to see its details.
   ![Hover over route 12](/images/mobility-explorer-route12.png)
-
-This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
-
-_Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID._
-
+  This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
+  _Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID._
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
   ![Stops along route 12](/images/mobility-explorer-route12-stops.png)
-
-The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
-
+  The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route. For this route, there are two patterns, which you can click to see the differences between them.
-
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
 
 ## Explore transit stops near a location
@@ -105,13 +98,9 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Analyze access`, click `Generate isochrones`.
 3. Click the option for `walking` to see where you can walk from this point.
-
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
-
   The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area.
-
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-
 4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
@@ -122,21 +111,14 @@ You can exclude operators and routes to see the effect on the resulting isochron
 
 1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
 2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present. _Note: These images reflect travel during a weekday in morning commute hours._
-
   ![Map of isochrones for transit](/images/mobility-explorer-isochrones-transit.png)
-
 3. Click `Include or exclude operators`.
 4. Under the `Exclude` column, check `Bay Area Rapid Transit` to see where you can go without taking BART.
-
   ![Remove BART from transit options](/images/mobility-explorer-isochrones-transit-nobart.png)
-
 Because BART serves a large regional area, your isochrones are much closer to the starting location.
-
   ![Map where BART is excluded](/images/mobility-explorer-isochrones-transit-nobart-map.png)
-
 5. Try including or excluding other operators to see the result.
 6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
-
   ![Remove routes from transit options](/images/mobility-explorer-isochrones-transit-nobart-sfia.png)
 
 ## Make your own transit map
