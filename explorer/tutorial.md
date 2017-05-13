@@ -10,56 +10,53 @@ To complete the tutorial, all you need is a browser and an Internet connection w
 
 [Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer.
 
-Transitland has several components to it, including Feed Registry and Datastore.
+Transitland aggregates publicly available transit datasets that use the [General Transit Feed Specification](https://developers.google.com/transit/gtfs/), which is a common way of organizing transit schedules, routes, and associated content. A GTFS feed consists of a .zip file that contains a series of specific text files with this information. Transitland has several components to it, including Feed Registry and Datastore.
 
-- [Feed Registry](https://transit.land/feed-registry/) is a directory of transit operators and data feeds. Through the Feed Registry, you can browse operators, feeds, and usage and license information, as well as contribute additional feeds or browse the data on a map or in Mobility Explorer. You can search for certain operators or locations to filter the results.
+- [Feed Registry](https://transit.land/feed-registry/) is a directory of transit operators and GTFS data feeds. Through the Feed Registry, you can browse operators, feeds, and usage and license information, as well as contribute additional feeds or browse the data on a map or in Mobility Explorer. You can search for certain operators or locations to filter the results.
   ![Feed Registry showing Bay Area feeds](/images/feed-registry-bay-area.png)
 
 - [Datastore](https://transit.land/documentation/datastore/) brings together data from the Feed Registry with edits and fixes from transit enthusiasts and developers. The Datastore provides a web API for querying and editing.
 ![Datastore API documentation](/images/datastore-api.png)
 
-Mobility Explorer is a view into Datastore, allowing you to query the data using a user interface and see the results on a map.
+Mobility Explorer is actually a view into Datastore, allowing you to query the data using a user interface and see the results on a map.
 
 ## View public transit networks
 
-Now that you have seen the source data in Transitland, you can better understand where the data comes from that you see in Mobility Explorer.
+Now that you have seen the source data in Transitland, you can better understand the origins of the data you see in Mobility Explorer. You will first see which transit operators, or agencies, provide service in Oakland, California, and explore transit routes and stops in a later exercise.
 
-You will first see which transit operators, or agencies, provide service in Oakland, California, and explore transit routes and stops in a later exercise.
+Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
 2. In the search box on the map, type `Oakland, California`. The search box uses Mapzen Search, Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by the transit service provided by each operator. Essentially, the polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator.
 4. Hover over the polygons on the map to see the operator name.
-
   Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators to see the service area.
-
-5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train system, to see where this operator serves.
-
+5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train and subway system, to see where this operator serves.
   The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
-
   A Onestop ID is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
-
-4. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
-
+6. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
   ![Area of BART service area](/images/mobility-explorer-bart-polygon.png)
-
-5. Click `View routes operated by Bay Area Rapid Transit`. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
-7. Explore BART's routes by hovering over a line on the map.
+7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
+8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer.
   ![Hover over a route for basic information](/images/mobility-explorer-bart-route-hover.png)
-8. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more details about the route.
+9. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more information about the route.
   ![Choose a route to get details about it](/images/mobility-explorer-bart-route-details.png)
+
+On the sidebar, at the end of the section, there are links to view the Transitland API request and to see the results in GeoJSON format. For example, the query for routes operated by BART is https://transit.land/api/v1/routes?&operated_by=o-9q9-bart. You can use this link outside of Mobility Explorer to get the raw results of the query, as well as within Mapzen's Tangram to draw a custom transit map.
+
+If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs.
 
 ## Get details about a route
 
 When you are displaying routes in the map, you can choose whether to color them based on the mode, such as train or bus, or the operator.
 
-_Tip: Anytime you want to start over with your search, click `Show routes` to search within the current map extent._
+_Tip: Any time you want to start over with your search, click `Show routes` to search within the current map extent._
 
 1. In the search box, type `2201 Broadway, Oakland` and press Enter. The search box has been customized to show only certain parts of matched addresses, so make sure you type that text as suggested to make sure you are choosing the proper location.
   ![Search for an address on the map](/images/mobility-explorer-search-address.png)
 2. Click `Show routes` to see the transit routes near this location. The total number of routes is shown on the drop-down list, and similar to BART, the individual route names are there, too. You can hover over a route on the map for more information.
   Currently, the routes are being drawn in the same color, but you can style them so they are classified by the mode or the operator.
-3. Under `Style routes by`, click `Mode`. When you do this, each mode of transit (such as metro, bus, rail, or ferry) is drawn with a unique color. Depending on your zoom level, you may not see more than one mode available. If this happens, zoom out slightly and click `Redo search in map area`.
+3. Under `Style routes by`, click `Mode`. When you do this, each mode of transit (such as metro, bus, or rail) is drawn with a unique color. Depending on your zoom level, you may not see more than one mode available. If this happens, zoom out slightly and click `Redo search in map area`.
   ![Style routes by mode](/images/mobility-explorer-routes-mode.png)
 
 4. Under `Style routes by` click `Operator`. This shows each transit operator in a different color (your colors may vary from those shown in the images here).
@@ -67,6 +64,8 @@ _Tip: Anytime you want to start over with your search, click `Show routes` to se
   ![Hover over route 12](/images/mobility-explorer-route12.png)
 
 This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
+
+_Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID._
 
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
@@ -77,11 +76,6 @@ The route line and stops that are displayed by default are a representation of t
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route. For this route, there are two patterns, which you can click to see the differences between them.
 
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
-
-## Extract GeoJSON for this query
-
-_NOTE: Get GeoJSON, save it into a map._
-_TODO: Add steps about how to save GeoJSON in every section_
 
 ## Explore transit stops near a location
 
@@ -138,13 +132,21 @@ You can exclude operators and routes to see the effect on the resulting isochron
 
 Because BART serves a large regional area, your isochrones are much closer to the starting location.
 
-  ![Remove BART from transit options](/images/mobility-explorer-isochrones-transit-nobart-map.png)
+  ![Map where BART is excluded](/images/mobility-explorer-isochrones-transit-nobart-map.png)
 
 5. Try including or excluding other operators to see the result.
-6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see the biggest difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends northeast of the location on one part of its route.
+6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
+
+  ![Remove routes from transit options](/images/mobility-explorer-isochrones-transit-nobart-sfia.png)
 
 ## Make your own transit map
 
-_NOTE: Take your GeoJSON files from before and put them onto a website so you can make your own transit map._
+So far, you have been using Mobility Explorer to query and visualize transit data.
 
 ## Tutorial summary
+
+You have explored transit data, including its operators, routes, and stops. You also calculated how far you can travel from a particular location by creating an isochrone map.
+
+## Data credits
+
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
