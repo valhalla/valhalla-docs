@@ -118,7 +118,7 @@ In earlier exercises, your requests have been to the Transitland API, but isochr
 
 ## See the effect on travel times if you remove certain operators or routes
 
-You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to see what happens if there is a maintenance issue that causes subway service outage or an event or parade that closes a street. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
+You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to determine what happens if there is a maintenance issue that causes a subway service outage or an event or a parade that closes a street and buses can no longer run there. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
 
 1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
 2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present. _Note: These images reflect travel during a weekday in morning commute hours._
