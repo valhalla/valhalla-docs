@@ -1,12 +1,14 @@
-# Explore routes and stops
+# Explore transit routes, stops, and travel times
 
-[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops and make your own transit map.
+[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops, filter the kinds of transit data displayed on a map, and view travel times from a place. You can use these queries to build a custom transit map.
 
-You can follow along with the location in the tutorial, or choose your own region.
+You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and to analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/).
+
+You can follow along with the location example used in the tutorial, or choose your own address or place to view transit in that area.
 
 To complete the tutorial, all you need is a browser and an Internet connection while you are working. No special knowledge of coding or transit data is needed. The tutorial should take about an hour to complete.
 
-## Get to know Transitland
+## Get to know Transitland data
 
 [Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer, as well as the multimodal routing for [Mapzen Turn-by-Turn](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/).
 
@@ -28,16 +30,19 @@ Each query or map update is maintained as a separate URL, which means that you c
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
 2. In the search box on the map, type `Oakland, California`. The search box uses Mapzen Search, Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
+  ![Map showing Oakland, California](/images/mobility-explorer-oakland-point.png)
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by the transit service provided by each operator. Essentially, the polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator.
+  ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
 4. Hover over the polygons on the map to see the operator name.
   Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators to see the service area.
 5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train and subway system, to see where this operator serves.
+  ![Transit operators near Oakland, California](/images/mobility-explorer-operator-details-bart.png)
   The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
   A Onestop ID is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
 6. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
   ![Area of BART service area](/images/mobility-explorer-bart-polygon.png)
 7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
-8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer.
+8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer. _Note: Right now, the route lines overlap each other when they should be offset so you can see all of them at once._
   ![Hover over a route for basic information](/images/mobility-explorer-bart-route-hover.png)
 9. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more information about the route.
   ![Choose a route to get details about it](/images/mobility-explorer-bart-route-details.png)
@@ -67,8 +72,10 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
   ![Stops along route 12](/images/mobility-explorer-route12-stops.png)
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
-8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route. For this route, there are two patterns, which you can click to see the differences between them.
+8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route.
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
+9. Click each of the patterns to view them on the map. For example, you can see segments of the route where there are differences because road is divided with a median in between lanes.
+  ![Details of RouteStopPattern showing differences](/images/mobility-explorer-route12-rsp-details.png)
 
 ## Explore transit stops near a location
 
@@ -99,13 +106,15 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 2. Under `Analyze access`, click `Generate isochrones`.
 3. Click the option for `walking` to see where you can walk from this point.
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
-  The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area.
+  The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area. Notice that you cannot reach Alameda (the island area to the south of Oakland) by walking from this point because there is no direct pedestrian access from here. It requires taking either ferry or having a vehicle to cross over by tunnel.
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving map does not yet consider current traffic conditions._
+4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel.) _Note: The driving map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
 
-In earlier exercises, your requests have been to the Transitland API. Isochrones, however, use the Mapzen Mobility API. You can see the Mapzen Mobility API request using the link on the sidebar. For example, a request for pedestrian isochrones takes the form of https://matrix.mapzen.com/isochrone?json=%7B%22locations%22:%5B%7B%22lat%22:%2237.811204%22,%22lon%22:%22-122.267494%22%7D%5D,%22costing%22:%22pedestrian%22,%22denoise%22:0.3,%22polygons%22:true,%22generalize%22:50,%22costing_options%22:%7B%22pedestrian%22:%7B%22use_ferry%22:0%7D%7D,%22contours%22:%5B%7B%22time%22:15%7D,%7B%22time%22:30%7D,%7B%22time%22:45%7D,%7B%22time%22:60%7D%5D%7D
+Notice that there are some areas that are disconnected from the main groupings in Oakland. These rings surround distant train stations or ferry terminals.
+
+In earlier exercises, your requests have been to the Transitland API, but isochrones use the Mapzen Mobility API. You can see the Mapzen Mobility API request using the link on the sidebar.
 
 ## See the effect on travel times if you remove certain operators or routes
 
@@ -113,7 +122,7 @@ You can exclude operators and routes to see the effect on the resulting isochron
 
 1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
 2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present. _Note: These images reflect travel during a weekday in morning commute hours._
-  ![Map of isochrones for transit](/images/mobility-explorer-isochrones-transit.png)
+  ![Map of isochrones for transit](/images/mobility-explorer-isochrones-transit-region.png)
 3. Click `Include or exclude operators`.
 4. Under the `Exclude` column, check `Bay Area Rapid Transit` to see where you can go without taking BART.
   ![Remove BART from transit options](/images/mobility-explorer-isochrones-transit-nobart.png)
