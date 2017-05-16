@@ -142,7 +142,7 @@ Because BART serves a large regional area, your isochrones are much closer to th
 You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
   ![Remove routes from transit options](/images/mobility-explorer-isochrones-transit-nobart-sfia.png)
 
-## Extra credit: Make your own transit map with Tangram Play
+## Make your own transit map with Tangram Play
 
 So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time. In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries or GeoJSON files from Mobility Explorer and copy them into an external mapping app.
 
@@ -150,7 +150,7 @@ One mapping app you can use is [Tangram Play](https://mapzen.com/tangram/play/),
 
 With Tangram Play, you can write and edit map styles and preview the changes live in the web browser. Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
 
-In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. To customize the map, add a line representing bus 12 that you viewed in Mobility Explorer, or the GeoJSON resulting from any other query.
+In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland.
 
 1. Copy `goo.gl/pdE0oL` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
@@ -160,22 +160,24 @@ In this exercise, you will open a map with lines representing the transit routes
   ![Inspect mode in Tangram Play with BART](/images/mobility-explorer-tangram-play-inspect-bart.png)
 4. Click `Inspect` again to turn off this mode.
 
-## Add transit layers to the map
+## Add a transit route and stop to the map
 
-In the YAML, notice that there are data `sources` defined for each map layer, where the source URLs are requests to the Transitland and Mapzen Mobility APIs displayed as GeoJSON files. Under `layers`, you can define the style rules for how to display the features on the map. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
+Under `sources`, notice that the data sources are from URLs that request GeoJSON from the Transitland and Mapzen Mobility APIs. Under `layers`, you define the style rules for how to display those features on the map. For example, the BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
+
+To customize the map, you will add a line representing bus route 12 that you viewed in Mobility Explorer, as well as a point for the bus stop along Broadway. This point is the location from which the isochrones are calculated.
 
 _Tip: You can find a completed version of the YAML file at the end of this page._
 
-1. Within the `sources` block, after the `_isochrone` block, paste the following YAML text that uses a query for the bus 12 Onestop ID.
+1. Within the `sources` block, after the `_isochrone` block, paste the following YAML text. The URL is a Transitland query for the Onestop ID of bus route 12.
   ```yaml
   _bus12:
     type: GeoJSON
     #result from Transitland query
     url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
   ```
-  _Tip: Be careful to follow the proper indentation levels as you paste; there are vertical guidelines to help you. You can also select multiple lines and press the Tab key to indent them all at once._
   The underscore in front of `_bus12` is a Tangram best practice to indicate that the name is a user-generated variable, compared to syntax required by Tangram.
-2. Scroll down the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the line.
+  _Tip: Be careful to follow the proper indentation levels as you paste; there are vertical guidelines to help you. You can also select multiple lines and press the Tab key to indent them all at once._
+2. Scroll the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the bus route line.
 ```yaml
   _bus12:
     data:
@@ -192,9 +194,9 @@ _Tip: You can find a completed version of the YAML file at the end of this page.
 ```
 The map should look something like this:
   ![Transit and isochrone layers in Tangram Play](/images/mobility-explorer-tangram-play-map.png)
-3. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
+3. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color).
   ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
-The isochrone layers were added for you, but they should have an indication of the origin point. Next, you can add a point representing the bus stop along Broadway that you mapped earlier.
+Next, you can add a point representing the bus stop along Broadway that you mapped earlier.
 4. Within the `sources` block, after the `_bus12` block that you added, paste in this query for that stop.
 ```yaml
   _stopBroadway:
@@ -214,7 +216,7 @@ The isochrone layers were added for you, but they should have an indication of t
             size: 24px
             order: 2000
 ```
-6. Optionally, continue adding data layers to your map and setting their display properties. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
+6. Optionally, continue adding data layers to your map and setting their display properties. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so it displays on a map.
 7. When you are done, click `Save` to download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
@@ -245,11 +247,11 @@ sources:
         url: https://transit.land/api/v1/routes.geojson?&operated_by=o-9q9-bart
     _isochrone:
         type: GeoJSON
-        #result
+        #result from Isochrone query
         url: https://matrix.mapzen.com/isochrone?json=%7B%22locations%22:%5B%7B%22lat%22:%2237.811204%22,%22lon%22:%22-122.267494%22%7D%5D,%22costing%22:%22pedestrian%22,%22denoise%22:0.3,%22polygons%22:true,%22generalize%22:50,%22costing_options%22:%7B%22pedestrian%22:%7B%22use_ferry%22:0%7D%7D,%22contours%22:%5B%7B%22time%22:15%7D,%7B%22time%22:30%7D,%7B%22time%22:45%7D,%7B%22time%22:60%7D%5D%7D
     _bus12:
         type: GeoJSON
-    #result from Transitland query
+        #result from Transitland query
         url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
     _stopBroadway:
          type: GeoJSON
@@ -296,13 +298,13 @@ layers:
         data:
             source: _bus12
         draw:
-        #style this data as a line feature
+            #style this data as a line feature
             lines:
-            #add line width
+                #add line width
                 width: 5px
-            #define the color
+                #define the color
                 color: blue
-            #add order to draw on top of basemap
+                #add order to draw on top of basemap
                 order: 1005
     #style rules for the bus stop along Broadway
     _stopBroadway:
