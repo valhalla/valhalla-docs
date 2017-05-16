@@ -47,7 +47,9 @@ Each query or map update is maintained as a separate URL, which means that you c
 9. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more information about the route.
   ![Choose a route to get details about it](/images/mobility-explorer-bart-route-details.png)
 
-On the sidebar, at the end of the section, there are links to view the Transitland API request and to see the results in GeoJSON format. For example, the query for routes operated by BART is https://transit.land/api/v1/routes?&operated_by=o-9q9-bart. You can use this link outside of Mobility Explorer to get the raw results of the query, as well as within Mapzen's Tangram to draw a custom transit map.
+On the sidebar, at the end of the section, there are links to view the Transitland API request and get the result as GeoJSON, which is a geographic data format commonly used with web mapping. For example, the API query for routes operated by BART is https://transit.land/api/v1/routes?&operated_by=o-9q9-bart.
+
+The request for GeoJSON is similar, but includes `geojson` in it: https://transit.land/api/v1/routes.geojson?&operated_by=o-9q9-bart. Later in the tutorial, you will use the GeoJSON to draw a custom transit map with Mapzen's Tangram Play map editor.
 
 If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs.
 
@@ -134,17 +136,46 @@ Because BART serves a large regional area, your isochrones are much closer to th
 
 ## Extra credit: Make your own transit map
 
-So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time, In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries in Mobility Explorer and copy them into an external mapping app.
+So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time, In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries or GeoJSON files from Mobility Explorer and copy them into an external mapping app.
 
-One app you can use is Tangram Play, which is an interactive text editor for creating maps using Mapzen’s Tangram rendering engine. With Play, you can write and edit map styles and preview the changes live in the web browser. Tangram uses a human-readable format called `.yaml` to organize all the styling elements needed to draw a map. This file, known as a scene, specifies the source of the data, which layers from that source to display on the map, and rules about how to draw those layers, such as color and line thickness.
+One app you can use is [Tangram Play](https://mapzen.com/tangram/play/), which is an interactive text editor for Mapzen’s [Tangram](https://mapzen.com/products/tangram/) map engine. Tangram uses a human-readable format called `.yaml` to organize all the styling elements needed to draw a map. This file specifies the source of the data, which layers from that source to display on the map, and rules about how to draw those layers, such as color and line thickness.
 
-Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
+With Tangram Play, you can write and edit map styles and preview the changes live in the web browser. Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
 
-1. In a new browser tab, open [map name].
-2. Explore the entries on the text-editing panel on the right. Notice that there are data `sources` defined for each map layer, where the URL is the request to the Transitland and Mapzen Mobility APIs.
-3. Under `layers`, you can define the style rules for how to display the features on the map.
-4. Experiment with the colors and line widths to draw the map as you want.
-5. Optionally, use Mobility Explorer to build queries, and paste in the URLs for the `sources`.
+Explore the entries on the text on the right. Notice that there are data `sources` defined for each map layer, where the source URL is the request to the Transitland and Mapzen Mobility APIs displayed as a GeoJSON. Under `layers`, you can define the style rules for how to display the features on the map. The color information is from special JavaScript function, which enables advanced drawing capabilities.
+
+1. In a new browser tab, go to [goo.gl/pdE0oL](goo.gl/pdE0oL). This is a shortened link to a Tangram Play map.
+
+  ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
+This map shows the lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file.
+To customize the map, add the line representing bus 12 that you mapped in the earlier exercises.
+2. Within the `sources` block, after the `_isochrone` block, paste the following text. Be careful to follow the proper indentation levels as you paste.
+  ```
+  _bus12:
+    type: GeoJSON
+    # result from Transitland query
+    url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
+  ```
+  The underscore in front of `_bus12` is a Tangram best practice to indicate that the name is a user-generated variable, compared to syntax required by Tangram.
+3. Scroll down the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the line.
+  ```
+  _bus12:
+    data:
+        source: _bus12
+    draw:
+        #style this data as a line feature
+        lines:
+            #add line width
+            width: 5px
+            #define the color
+            color: blue
+            #add order to draw on top of basemap
+            order: 1005
+  ```
+4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker where you can choose a new hue.
+  ![Color ](/images/mobility-explorer-tangram-color.png)
+5. Optionally, continue adding data layers to your map and setting their display properties, following those examples.
+6. When you are done, you can download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
 
