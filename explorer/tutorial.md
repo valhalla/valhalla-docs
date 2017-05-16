@@ -69,7 +69,7 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
 5. Hover over route `12` near the address point, and click it on the map (or in the drop-down list) to see its details.
   ![Hover over route 12](/images/mobility-explorer-route12.png)
   This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
-  _Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID._
+  _Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID. Use https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12 to get its GeoJSON._
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
   ![Stops along route 12](/images/mobility-explorer-route12-stops.png)
@@ -131,7 +131,9 @@ You can exclude operators and routes to see the effect on the resulting isochron
 Because BART serves a large regional area, your isochrones are much closer to the starting location.
   ![Map where BART is excluded](/images/mobility-explorer-isochrones-transit-nobart-map.png)
 5. Try including or excluding other operators to see the result.
-6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box. You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
+6. Try including or excluding routes, such as `12` or `Pittsburg/Bay Point - SFIA/Millbrae`, by checking the `Exclude` box.
+
+You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA/Millbrae` because that is a BART route that extends to the far northeastern part of the region.
   ![Remove routes from transit options](/images/mobility-explorer-isochrones-transit-nobart-sfia.png)
 
 ## Extra credit: Make your own transit map
@@ -142,23 +144,24 @@ One app you can use is [Tangram Play](https://mapzen.com/tangram/play/), which i
 
 With Tangram Play, you can write and edit map styles and preview the changes live in the web browser. Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
 
-Explore the entries on the text on the right. Notice that there are data `sources` defined for each map layer, where the source URL is the request to the Transitland and Mapzen Mobility APIs displayed as a GeoJSON. Under `layers`, you can define the style rules for how to display the features on the map. The color information is from special JavaScript function, which enables advanced drawing capabilities.
+In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. To customize the map, add a line representing bus 12 that you viewed in Mobility Explorer, or the GeoJSON from any other query.
 
-1. In a new browser tab, go to [goo.gl/pdE0oL](goo.gl/pdE0oL). This is a shortened link to a Tangram Play map.
-
+1. Copy `goo.gl/pdE0oL` and paste it into the location bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
-This map shows the lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file.
-To customize the map, add the line representing bus 12 that you mapped in the earlier exercises.
+Notice that there are data `sources` defined for each map layer, where the source URL is the request to the Transitland and Mapzen Mobility APIs displayed as a GeoJSON. Under `layers`, you can define the style rules for how to display the features on the map. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. The color information is creating using a special JavaScript function, which enables advanced drawing capabilities.
 2. Within the `sources` block, after the `_isochrone` block, paste the following text. Be careful to follow the proper indentation levels as you paste.
-  ```
+
+  ```yaml
   _bus12:
     type: GeoJSON
-    # result from Transitland query
+    #result from Transitland query
     url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
   ```
+
   The underscore in front of `_bus12` is a Tangram best practice to indicate that the name is a user-generated variable, compared to syntax required by Tangram.
 3. Scroll down the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the line.
-  ```
+
+  ```yaml
   _bus12:
     data:
         source: _bus12
@@ -172,9 +175,10 @@ To customize the map, add the line representing bus 12 that you mapped in the ea
             #add order to draw on top of basemap
             order: 1005
   ```
-4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker where you can choose a new hue.
+
+4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
   ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
-5. Optionally, continue adding data layers to your map and setting their display properties, following those examples. When copying the API requests from Mobility Explorer, make sure you copy the URL for the GeoJSON response so you can display it on a map.
+5. Optionally, continue adding data layers to your map and setting their display properties, following these examples. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
 6. When you are done, you can download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
