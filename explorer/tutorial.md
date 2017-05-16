@@ -175,7 +175,8 @@ Notice that there are data `sources` defined for each map layer, where the sourc
             #add order to draw on top of basemap
             order: 1005
   ```
-
+The map should look something like this:
+  ![Transit and isochrone layers in Tangram Play](/images/mobility-explorer-tangram-play-map.png)
 4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
   ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
 5. Optionally, continue adding data layers to your map and setting their display properties, following these examples. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
