@@ -76,10 +76,12 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route.
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
-9. Click each of the patterns to view them on the map. For example, you can see segments of the route where there are differences because road is divided with a median in between lanes.
+9. Click each of the patterns to view them on the map. For example, you can see segments of the route where there are differences because the road is divided with a median in between lanes.
   ![Details of RouteStopPattern showing differences](/images/mobility-explorer-route12-rsp-details.png)
 
 ## Explore transit stops near a location
+
+You have explored transit operators and routes, so you will now look at stops.
 
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Visualize public transit networks`, click `Show stops`.
@@ -104,13 +106,15 @@ This is known as an isochrone, which is a line that connects points of equal tra
 
 The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
 
+Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) to help determine which roads and bicycle paths can be reached. 
+
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Analyze access`, click `Generate isochrones`.
 3. Click the option for `walking` to see where you can walk from this point.
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
   The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area. Notice that you cannot reach Alameda (the island area to the south of Oakland) by walking from this point because there is no direct pedestrian access from here. It requires taking either ferry or having a vehicle to cross over by tunnel.
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel.) _Note: The driving isochrone map does not yet consider current traffic conditions._
+4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel). _Note: The driving isochrone map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences.
 
