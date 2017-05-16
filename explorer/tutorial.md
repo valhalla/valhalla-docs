@@ -2,11 +2,11 @@
 
 [Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops, filter the kinds of transit data displayed on a map, and view travel times from a place. You can use these queries to build a custom transit map.
 
-You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and to analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/).
+You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/).
 
 You can follow along with the location example used in the tutorial, or choose your own address or place to view transit in that area.
 
-To complete the tutorial, all you need is a browser and an Internet connection while you are working. No special knowledge of coding or transit data is needed. The tutorial should take about an hour to complete.
+To complete the tutorial, all you need is a browser and an internet connection while you are working. No special knowledge of coding or transit data is needed. The tutorial should take about an hour to complete.
 
 ## Get to know Transitland data
 
@@ -29,12 +29,12 @@ Now that you have seen the source data in Transitland, you can better understand
 Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
-2. In the search box on the map, type `Oakland, California`. The search box uses Mapzen Search, Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
+2. In the search box on the map, type `Oakland, California`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
   ![Map showing Oakland, California](/images/mobility-explorer-oakland-point.png)
-3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by the transit service provided by each operator. Essentially, the polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator.
+3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator, forming a minimum bounding extent.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
 4. Hover over the polygons on the map to see the operator name.
-  Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators to see the service area.
+  Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators choose a particular one.
 5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train and subway system, to see where this operator serves.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-details-bart.png)
   The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
@@ -42,20 +42,20 @@ Each query or map update is maintained as a separate URL, which means that you c
 6. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
   ![Area of BART service area](/images/mobility-explorer-bart-polygon.png)
 7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
-8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer. _Note: Right now, the route lines overlap each other when they should be offset so you can see all of them at once._
+8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer. _Note: Right now, the route lines overlap each other, yet they should be offset so you can see all of them at once._
   ![Hover over a route for basic information](/images/mobility-explorer-bart-route-hover.png)
 9. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more information about the route.
   ![Choose a route to get details about it](/images/mobility-explorer-bart-route-details.png)
 
 On the sidebar, at the end of the section, there are links to view the Transitland API request and get the result as GeoJSON, which is a geographic data format commonly used with web mapping. For example, the API query for routes operated by BART is https://transit.land/api/v1/routes?&operated_by=o-9q9-bart.
 
-The request for GeoJSON is similar, but includes `geojson` in it: https://transit.land/api/v1/routes.geojson?&operated_by=o-9q9-bart. Later in the tutorial, you will use the GeoJSON to draw a custom transit map with Mapzen's Tangram Play map editor.
+The request for GeoJSON is similar, but includes `geojson` in it: https://transit.land/api/v1/routes.geojson?&operated_by=o-9q9-bart. Later in the tutorial, you will use the GeoJSON URL to draw a custom transit map with Mapzen's Tangram Play map editor.
 
 If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs.
 
 ## Get details about a route
 
-When you are displaying routes in the map, you can choose whether to color them based on the mode, such as train or bus, or the operator.
+When you are displaying routes in the map, you can choose whether to color them based on the mode, such as train or bus, or the operator. Now, you will find a route and get more information about it.
 
 _Tip: Any time you want to start over with your search, click `Show routes` to search within the current map extent._
 
@@ -102,7 +102,7 @@ With a point on the map, either a selected stop or marker from a search, you can
 
 This is known as an isochrone, which is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. Isochrone functionality is also sometimes referred to as a service area, a drive-time analysis to show where you can drive from a point within a certain time, or a walkshed. A walkshed, which is a transportation planning term, calculates an area within a range of a location that can be reached by walking (or a bikeshed for areas that can be traveled by bicycle within those time ranges).
 
-The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps.
+The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
 
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Analyze access`, click `Generate isochrones`.
@@ -110,17 +110,17 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
   The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area. Notice that you cannot reach Alameda (the island area to the south of Oakland) by walking from this point because there is no direct pedestrian access from here. It requires taking either ferry or having a vehicle to cross over by tunnel.
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel.) _Note: The driving map does not yet consider current traffic conditions._
+4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel.) _Note: The driving isochrone map does not yet consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
-6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences. Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
+6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences.
 
-Notice that there are some areas that are disconnected from the main groupings in Oakland. These rings surround distant train stations or ferry terminals.
+Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
 
-In earlier exercises, your requests have been to the Transitland API, but isochrones use the Mapzen Mobility API. You can see the Mapzen Mobility API request using the link on the sidebar.
+Notice that there are some areas that are disconnected from the main groupings in Oakland. These rings likely surround distant train stations or ferry terminals.
 
-## See the effect on travel times if you remove certain operators or routes
+## See the effect on travel times without certain operators or routes
 
-You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to determine what happens if there is a maintenance issue that causes a subway service outage or an event or a parade that closes a street and buses can no longer run there. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
+You can exclude operators and routes to see the effect on the resulting isochrones. You might want to do this to determine what happens if there is a maintenance issue that causes a subway service outage, or an event or a parade that closes a street and buses can no longer run there. In addition, perhaps you have purchased a ticket that is valid on one transit agency, so you want to see where you can travel using only that operator.
 
 1. Make sure you have a point on the map. If not, repeat the search for `2201 Broadway, Oakland` to return to your original location, and click `Generate isochrones`.
 2. Click `transit`. Optionally, choose the date and time of your departure, if you want to travel at a time different from the present. _Note: These images reflect travel during a weekday in morning commute hours._
@@ -138,30 +138,27 @@ You will likely see a big difference if you turn off `Pittsburg/Bay Point - SFIA
 
 ## Extra credit: Make your own transit map
 
-So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time, In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries or GeoJSON files from Mobility Explorer and copy them into an external mapping app.
+So far, you have been using Mobility Explorer to query and visualize transit data. While Mobility Explorer lets you ask diverse questions about data, you can display the results of only one query at a time. In addition, the basemap and map symbol colors are already designed for you. If you want to make a truly custom transit map, use the URLs of your queries or GeoJSON files from Mobility Explorer and copy them into an external mapping app.
 
-One app you can use is [Tangram Play](https://mapzen.com/tangram/play/), which is an interactive text editor for Mapzen’s [Tangram](https://mapzen.com/products/tangram/) map engine. Tangram uses a human-readable format called `.yaml` to organize all the styling elements needed to draw a map. This file specifies the source of the data, which layers from that source to display on the map, and rules about how to draw those layers, such as color and line thickness.
+One mapping app you can use is [Tangram Play](https://mapzen.com/tangram/play/), which is an interactive text editor for Mapzen’s [Tangram](https://mapzen.com/products/tangram/) map engine. Tangram uses a human-readable format called `.yaml` to organize all the styling elements needed to draw a map. This file specifies the source of the data, which layers from that source to display on the map, and rules about how to draw those layers, such as color and line thickness.
 
 With Tangram Play, you can write and edit map styles and preview the changes live in the web browser. Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
 
-In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. To customize the map, add a line representing bus 12 that you viewed in Mobility Explorer, or the GeoJSON from any other query.
+In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland. To customize the map, add a line representing bus 12 that you viewed in Mobility Explorer, or the GeoJSON resulting from any other query.
 
-1. Copy `goo.gl/pdE0oL` and paste it into the location bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
+1. Copy `goo.gl/pdE0oL` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
-Notice that there are data `sources` defined for each map layer, where the source URL is the request to the Transitland and Mapzen Mobility APIs displayed as a GeoJSON. Under `layers`, you can define the style rules for how to display the features on the map. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. The color information is creating using a special JavaScript function, which enables advanced drawing capabilities.
-2. Within the `sources` block, after the `_isochrone` block, paste the following text. Be careful to follow the proper indentation levels as you paste.
-
+Notice that there are data `sources` defined for each map layer, where the source URLs are requests to the Transitland and Mapzen Mobility APIs displayed as GeoJSON files. Under `layers`, you can define the style rules for how to display the features on the map. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
+2. Within the `sources` block, after the `_isochrone` block, paste the following YAML text that uses a query for the bus 12 Onestop ID. Be careful to follow the proper indentation levels as you paste.
   ```yaml
   _bus12:
     type: GeoJSON
     #result from Transitland query
     url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
   ```
-
   The underscore in front of `_bus12` is a Tangram best practice to indicate that the name is a user-generated variable, compared to syntax required by Tangram.
 3. Scroll down the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the line.
-
-  ```yaml
+```yaml
   _bus12:
     data:
         source: _bus12
@@ -174,13 +171,13 @@ Notice that there are data `sources` defined for each map layer, where the sourc
             color: blue
             #add order to draw on top of basemap
             order: 1005
-  ```
+```
 The map should look something like this:
   ![Transit and isochrone layers in Tangram Play](/images/mobility-explorer-tangram-play-map.png)
-4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
+4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
   ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
-5. Optionally, continue adding data layers to your map and setting their display properties, following these examples. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
-6. When you are done, you can download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
+5. Optionally, continue adding data layers to your map and setting their display properties. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
+6. When you are done, click `Save` to download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
 
