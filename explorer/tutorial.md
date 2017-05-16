@@ -94,6 +94,8 @@ You can see a list of the routes that serve this stop, which are different route
 
 ![Stop details for bus stop](/images/mobility-explorer-stop-brdwy-details.png)
 
+You can get the GeoJSON for this location with a query of https://transit.land/api/v1/stops.geojson?onestop_id=s-9q9p1erf53-broadway~wgrandav.
+
 In this case, Alameda-Contra Costa Transit District is the only operator serving this stop. However, part of the power of Transitland is that it aggregates data from many operators and merges them so they can be queried at the same time.
 
 For example, if you search for stops in downtown San Francisco, there are some locations where two different transit operators (BART and San Francisco Municipal Transportation Agency) have colocated underground metro rail stations, plus there are bus lines and light rail stops on the surface. You can click a shared stop and get information for all the transit options there, even if they are served by different operators.
@@ -106,7 +108,7 @@ This is known as an isochrone, which is a line that connects points of equal tra
 
 The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland Datastore API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
 
-Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) to help determine which roads and bicycle paths can be reached. 
+Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) to help determine which roads and bicycle paths can be reached.
 
 1. Repeat the search for `2201 Broadway, Oakland` to return to your original location.
 2. Under `Analyze access`, click `Generate isochrones`.
@@ -153,7 +155,7 @@ In this exercise, you will open a map with lines representing the transit routes
 1. Copy `goo.gl/pdE0oL` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
 Notice that there are data `sources` defined for each map layer, where the source URLs are requests to the Transitland and Mapzen Mobility APIs displayed as GeoJSON files. Under `layers`, you can define the style rules for how to display the features on the map. The BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
-2. Within the `sources` block, after the `_isochrone` block, paste the following YAML text that uses a query for the bus 12 Onestop ID. Be careful to follow the proper indentation levels as you paste.
+2. Within the `sources` block, after the `_isochrone` block, paste the following YAML text that uses a query for the bus 12 Onestop ID. Be careful to follow the proper indentation levels as you paste; there are vertical guidelines to help you.
   ```yaml
   _bus12:
     type: GeoJSON
@@ -180,8 +182,25 @@ The map should look something like this:
   ![Transit and isochrone layers in Tangram Play](/images/mobility-explorer-tangram-play-map.png)
 4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can open a color picker, or use any of the other [ways of specifying a color](https://mapzen.com/documentation/tangram/draw/#color) if you want to change it.
   ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
-5. Optionally, continue adding data layers to your map and setting their display properties. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
-6. When you are done, click `Save` to download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
+The isochrone layers were added for you, but they should have an indication of the origin point. Next, you can add a point representing the bus stop along Broadway that you mapped earlier.
+5. Within the `sources` block, after the `_bus12` block that you added, paste in this query for that stop.
+```yaml
+  _stopBroadway:
+    type: GeoJSON
+    url: https://transit.land/api/v1/stops.geojson?onestop_id=s-9q9p1erf53-broadway~wgrandav
+```
+6. As you did before, within the `layers` block, after the `_bus12` block, paste this text to define how to style the point.
+```yaml
+_stopBroadway:
+    data:
+        source: _stopBroadway
+    draw:
+        points:
+            color: red
+            order: 1003
+```
+7. Optionally, continue adding data layers to your map and setting their display properties. When copying the API requests from Mobility Explorer, make sure you use the URL for the GeoJSON response so you can display it on a map.
+8. When you are done, click `Save` to download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
 
