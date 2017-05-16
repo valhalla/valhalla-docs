@@ -1,6 +1,6 @@
 # Explore transit routes, stops, and travel times
 
-[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops, filter the kinds of transit data displayed on a map, and view travel times from a place. You can use these queries to build a custom transit map.
+[Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transportation datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops, filter the kinds of transit data displayed on a map, and view travel times from a place. You can use these queries to build a custom transit map.
 
 You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/).
 
@@ -17,8 +17,8 @@ Transitland aggregates publicly available transit datasets that use the [General
 - [Feed Registry](https://transit.land/feed-registry/) is a directory of transit operators and GTFS data feeds. Through the Feed Registry, you can browse operators, feeds, and usage and license information, as well as contribute additional feeds or browse the data on a map or in Mobility Explorer. You can search for certain operators or locations to filter the results.
   ![Feed Registry showing Bay Area feeds](/images/feed-registry-bay-area.png)
 
-- [Datastore](https://transit.land/documentation/datastore/) brings together data from the Feed Registry with edits and fixes from transit enthusiasts and developers. The Datastore provides a web API for querying and editing.
-![Datastore API documentation](/images/datastore-api.png)
+- [Datastore](https://transit.land/documentation/datastore/) is the web service API that powers the Feed Registry and other views into Transitland data. Datastore imports the contents of GTFS feeds, merges new records with existing records, allows edits and fixes, and provides an API for further querying and editing.
+  ![Datastore API documentation](/images/datastore-api.png)
 
 Mobility Explorer is actually a view into Datastore, allowing you to query the data using a user interface and see the results on a map.
 
@@ -31,17 +31,17 @@ Each query or map update is maintained as a separate URL, which means that you c
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
 2. In the search box on the map, type `Oakland, California`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
   ![Map showing Oakland, California](/images/mobility-explorer-oakland-point.png)
-3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created by drawing a line that connects at the endpoints of the transit routes for that operator, forming a minimum bounding extent.
+3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created to surround all of the stop locations served by a given operator.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
 4. Hover over the polygons on the map to see the operator name.
   Sometimes, it can be hard to get information about a polygon because it is overlapped by other polygons. You can use the drop-down list of operators choose a particular one.
-5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a light-rail commuter train and subway system, to see where this operator serves.
+5. Click the drop-down list of operators and click `Bay Area Rapid Transit (BART)`, which is a metro network, to see where this operator serves.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-details-bart.png)
   The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
-  A Onestop ID is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
+  A [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
 6. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
   ![Area of BART service area](/images/mobility-explorer-bart-polygon.png)
-7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the datastore for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
+7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the Datastore API for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
 8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer. _Note: Right now, the route lines overlap each other, yet they should be offset so you can see all of them at once._
   ![Hover over a route for basic information](/images/mobility-explorer-bart-route-hover.png)
 9. Look in the `Show routes` section for the name of the route. If you click a route on the map or in the drop-down list, you can get even more information about the route.
@@ -68,12 +68,12 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
 4. Under `Style routes by` click `Operator`. This shows each transit operator in a different color (your colors may vary from those shown in the images here).
 5. Hover over route `12` near the address point, and click it on the map (or in the drop-down list) to see its details.
   ![Hover over route 12](/images/mobility-explorer-route12.png)
-  This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data item.
+  This is a bus route operated by the Alameda-Contra Costa Transit District, and has a Onestop ID of `r-9q9p3-12`. The Onestop ID starts with the letter `r` to indicate it is a route data entity.
   _Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID. Use https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12 to get its GeoJSON._
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
   ![Stops along route 12](/images/mobility-explorer-route12-stops.png)
-  The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a RouteStopPattern in the Transitland API.
+  The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a [RouteStopPattern](https://transit.land/documentation/datastore/routes-and-route-stop-patterns.html#route_stop_patterns) in the Transitland API.
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route.
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
 9. Click each of the patterns to view them on the map. For example, you can see segments of the route where there are differences because the road is divided with a median in between lanes.
@@ -94,7 +94,7 @@ You can see a list of the routes that serve this stop, which are different route
 
 ![Stop details for bus stop](/images/mobility-explorer-stop-brdwy-details.png)
 
-In this case, Alameda-Contra Costa Transit District is the only operator serving this stop. However, part of the power of Transitland is that it aggregates data from many operators but connects them so they can be queried at the same time.
+In this case, Alameda-Contra Costa Transit District is the only operator serving this stop. However, part of the power of Transitland is that it aggregates data from many operators and merges them so they can be queried at the same time.
 
 For example, if you search for stops in downtown San Francisco, there are some locations where two different transit operators (BART and San Francisco Municipal Transportation Agency) have colocated underground metro rail stations, plus there are bus lines and light rail stops on the surface. You can click a shared stop and get information for all the transit options there, even if they are served by different operators.
 
@@ -104,7 +104,7 @@ With a point on the map, either a selected stop or marker from a search, you can
 
 This is known as an isochrone, which is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. Isochrone functionality is also sometimes referred to as a service area, a drive-time analysis to show where you can drive from a point within a certain time, or a walkshed. A walkshed, which is a transportation planning term, calculates an area within a range of a location that can be reached by walking (or a bikeshed for areas that can be traveled by bicycle within those time ranges).
 
-The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
+The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland Datastore API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
 
 Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) to help determine which roads and bicycle paths can be reached. 
 
@@ -114,13 +114,13 @@ Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) t
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
   The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area. Notice that you cannot reach Alameda (the island area to the south of Oakland) by walking from this point because there is no direct pedestrian access from here. It requires taking either ferry or having a vehicle to cross over by tunnel.
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel). _Note: The driving isochrone map does not yet consider current traffic conditions._
+4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel). _Note: The driving isochrone map does not [yet](https://mapzen.com/blog/announcing-open-traffic/) consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences.
 
 Typically, transit service is reduced at night and on weekends, so it is likely that the polygons are much smaller then than during working hours.
 
-Notice that there are some areas that are disconnected from the main groupings in Oakland. These rings likely surround distant train stations or ferry terminals.
+Notice that there are some areas that are disconnected from the main groupings in Oakland. These rings likely surround train stations or ferry terminals that are geographically distant but within reach of fast transit service.
 
 ## See the effect on travel times without certain operators or routes
 
@@ -187,7 +187,7 @@ The map should look something like this:
 
 You have explored transit data, including its operators, routes, and stops. You also calculated how far you can travel from a particular location by creating an isochrone map. You also have experimented with the map styles using Tangram Play to customize your transit map.
 
-If you want to learn more about Transitland and Mapzen Mobility, review the [documentation](https://mapzen.com/documentation/mobility/).
+If you want to learn more, review the [Transitland documentation](https://transit.land/documentation/) and the [Mapzen Mobility API documentation](https://mapzen.com/documentation/mobility/).
 
 The Transitland project is open source, so you are encouraged to get involved by submitting suggestions or even contributing code: https://github.com/transitland. In addition, if you know of public GTFS feeds that are not currently part of Feed Registry, please [submit](https://transit.land/feed-registry/feeds/new) them.
 
