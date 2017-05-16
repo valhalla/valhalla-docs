@@ -173,8 +173,8 @@ To customize the map, add the line representing bus 12 that you mapped in the ea
             order: 1005
   ```
 4. Optionally, modify the line width or color to change how the bus line is displayed on the map. You can click the button next to the current value to open a color picker where you can choose a new hue.
-  ![Color ](/images/mobility-explorer-tangram-color.png)
-5. Optionally, continue adding data layers to your map and setting their display properties, following those examples.
+  ![Color picker in Tangram Play](/images/mobility-explorer-tangram-color.png)
+5. Optionally, continue adding data layers to your map and setting their display properties, following those examples. When copying the API requests from Mobility Explorer, make sure you copy the URL for the GeoJSON response so you can display it on a map.
 6. When you are done, you can download the YAML file so you can re-create your map in the future. You can also sign in to your Mapzen account (after [creating one](https://mapzen.com/documentation/overview/), if needed) and save the map to your Mapzen account.
 
 ## Tutorial summary
