@@ -1,3 +1,9 @@
+## Release Date: 2017-05-15 Valhalla 2.2.4
+* **Bug Fixes**
+  * Fix isochrone bug where the default access mode was used - this rejected edges that should not have been rejected for cases than automobile.
+  * Fix A* handling of edge costs for trivial routes. This fixed an issue with disconnected regions that projected to a single edge.
+  * Fix TripPathBuilder crash if first edge is a transition edge (was occurring with map-matching in rare occasions).
+  
 ## Release Date: 2017-05-15 Valhalla 2.2.3
 * **Map Matching Improvement**
   * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
