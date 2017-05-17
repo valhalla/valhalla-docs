@@ -1,4 +1,4 @@
-## Release Date: 2017-05-15 Valhalla 2.2.4
+## Release Date: 2017-05-17 Valhalla 2.2.4
 * **Bug Fixes**
   * Fix isochrone bug where the default access mode was used - this rejected edges that should not have been rejected for cases than automobile.
   * Fix A* handling of edge costs for trivial routes. This fixed an issue with disconnected regions that projected to a single edge.
