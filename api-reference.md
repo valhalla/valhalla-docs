@@ -6,7 +6,7 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 
 ## Inputs of a route
 
-The route request takes the form of `https://valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the ``{}`` include location information, name and options for the costing model, and output options. Here is an example request:
+The route request takes the form of `https://valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the `{}` include location information, name and options for the costing model, and output options. Here is an example request:
 
 ``` https://valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"},"id":"my_work_route"}&api_key=your-mapzen-api-key
 ```
@@ -146,7 +146,9 @@ When using `filters`, you need to include a [Onestop ID](https://transit.land/do
 
 A multimodal request at the current date and time:
 
-> [/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=your-mapzen-api-key](https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}})
+```
+https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=your-mapzen-api-key
+```
 
 A multimodal request departing on 2016-03-29 at 08:00:
 
