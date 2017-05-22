@@ -114,9 +114,9 @@ Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) t
 2. Under `Analyze access`, click `Generate isochrones`.
 3. Click the option for `walking` to see where you can walk from this point.
   ![Generate isochrones for walking](/images/mobility-explorer-isochrones-walking.png)
-  The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area. Notice that you cannot reach Alameda (the island area to the south of Oakland) by walking from this point because there is no direct pedestrian access from here. It requires taking either ferry or having a vehicle to cross over by tunnel.
+  The map updates to show color-coded rings that represent where you can reach within 15-, 30-, 45-, and 60-minute time increments. You may need to zoom out to see the entire walkshed area.
   ![Map of isochrones for walking](/images/mobility-explorer-isochrones-walking-map.png)
-4. Try the biking and driving options to see how the shapes compare to walking. With a bicycle or car, you could get to Alameda (by bicycle because you can access a bridge toward the southeast or by car because you can take the tunnel). _Note: The driving isochrone map does not [yet](https://mapzen.com/blog/announcing-open-traffic/) consider current traffic conditions._
+4. Try the biking and driving options to see how the shapes compare to walking. _Note: The driving isochrone map does not [yet](https://mapzen.com/blog/announcing-open-traffic/) consider current traffic conditions._
 5. Click `transit` to view where you can travel by transit. By default, isochrones are calculated for the current time.
 6. Click the clock button and try changing the departure time to be during workday commute hours, weekends, and after midnight to see the differences.
 
@@ -152,7 +152,7 @@ With Tangram Play, you can write and edit map styles and preview the changes liv
 
 In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland.
 
-1. Copy `goo.gl/pdE0oL` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
+1. Copy `goo.gl/9immhW` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
 2. Click `Inspect` on the toolbar at the top to enable a mode where you can get attributes about the features you click.
   ![Inspect mode in Tangram Play](/images/mobility-explorer-tangram-play-inspect.png)
@@ -164,11 +164,11 @@ In this exercise, you will open a map with lines representing the transit routes
 
 Under `sources`, notice that the data sources are from URLs that request GeoJSON from the Transitland and Mapzen Mobility APIs. Under `layers`, you define the style rules for how to display those features on the map. For example, the BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
 
-To customize the map, you will add a line representing bus route 12 that you viewed in Mobility Explorer, as well as a point for the bus stop along Broadway. This point is the location from which the isochrones are calculated.
+To customize the map, you will add a line representing bus route 12 that you viewed in Mobility Explorer, as well as a point for the bus stop along Broadway.
 
 _Tip: You can find a completed version of the YAML file at the end of this page._
 
-1. Within the `sources` block, after the `_isochrone` block, paste the following YAML text. The URL is a Transitland query for the Onestop ID of bus route 12.
+1. Within the `sources` block, after the `_bart` block, paste the following YAML text. The URL is a Transitland query for the Onestop ID of bus route 12.
   ```yaml
   _bus12:
     type: GeoJSON
@@ -177,7 +177,7 @@ _Tip: You can find a completed version of the YAML file at the end of this page.
   ```
   The underscore in front of `_bus12` is a Tangram best practice to indicate that the name is a user-generated variable, compared to syntax required by Tangram.
   _Tip: Be careful to follow the proper indentation levels as you paste; there are vertical guidelines to help you. You can also select multiple lines and press the Tab key to indent them all at once._
-2. Scroll the YAML to the end. Within the `layers` block, after the `_isochrone` block, paste this text to define how to style the bus route line.
+2. Scroll the YAML to the end. Within the `layers` block, after the `_bart` block, paste this text to define how to style the bus route line.
 ```yaml
   _bus12:
     data:
@@ -209,9 +209,9 @@ Next, you can add a point representing the bus stop along Broadway that you mapp
     data:
         source: _stopBroadway
     draw:
-    #style this data as a point feature
+      #style this data as a point feature
         points:
-        # add a color and size (in pixels)
+          # add a color and size (in pixels)
             color: red
             size: 24px
             order: 2000
@@ -236,6 +236,8 @@ The images are from Mobility Explorer and Tangram Play, which include data from 
 The completed YAML for the basic transit map should look something like this:
 
 ```yaml
+# Supplemental file for Mobility Explorer tutorial: https://mapzen.com/documentation/mobility/explorer/tutorial/
+
 # imports the Bubble Wrap map style
 import: https://mapzen.com/carto/bubble-wrap-style/6/bubble-wrap-style.zip
 
@@ -245,19 +247,13 @@ sources:
         type: GeoJSON
         # result from Transitland query
         url: https://transit.land/api/v1/routes.geojson?&operated_by=o-9q9-bart
-    _isochrone:
-        type: GeoJSON
-        #result from Isochrone query
-        url: https://matrix.mapzen.com/isochrone?json=%7B%22locations%22:%5B%7B%22lat%22:%2237.811204%22,%22lon%22:%22-122.267494%22%7D%5D,%22costing%22:%22pedestrian%22,%22denoise%22:0.3,%22polygons%22:true,%22generalize%22:50,%22costing_options%22:%7B%22pedestrian%22:%7B%22use_ferry%22:0%7D%7D,%22contours%22:%5B%7B%22time%22:15%7D,%7B%22time%22:30%7D,%7B%22time%22:45%7D,%7B%22time%22:60%7D%5D%7D
     _bus12:
         type: GeoJSON
         #result from Transitland query
         url: https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12
     _stopBroadway:
-         type: GeoJSON
-         #result from Transitland query
-         url: https://transit.land/api/v1/stops.geojson?onestop_id=s-9q9p1erf53-broadway~wgrandav
-
+        type: GeoJSON
+        url: https://transit.land/api/v1/stops.geojson?onestop_id=s-9q9p1erf53-broadway~wgrandav
 layers:
     #style rules for BART line
     _bart:
@@ -276,24 +272,6 @@ layers:
                     }
                 #add order to draw on top of basemap
                 order: 1004
-    #style rules for isochrones
-    _isochrone:
-        #select data source to be isochrone data
-        data:
-            source: _isochrone
-        draw:
-            #style this data as a line feature
-            lines:
-                #add line width
-                width: 5px
-                #add color (can be in RGB, HEX, or HTML color codes)
-                color: |
-                    function() {
-                        return feature.fill;
-                    }
-                #add order to draw on top of basemap
-                order: 1002
-    #style rules for bus route 12
     _bus12:
         data:
             source: _bus12
@@ -306,14 +284,13 @@ layers:
                 color: blue
                 #add order to draw on top of basemap
                 order: 1005
-    #style rules for the bus stop along Broadway
     _stopBroadway:
         data:
             source: _stopBroadway
         draw:
-        #style this data as a point feature
+            #style this data as a point feature
             points:
-            # add a color and size (in pixels)
+              # add a color and size (in pixels)
                 color: red
                 size: 24px
                 order: 2000
