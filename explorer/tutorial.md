@@ -150,7 +150,7 @@ One mapping app you can use is [Tangram Play](https://mapzen.com/tangram/play/),
 
 With Tangram Play, you can write and edit map styles and preview the changes live in the web browser. Tangram Play has two main interface components: the map preview and the editing pane. The map preview will show any changes made by writing in the editing pane on the fly.
 
-In this exercise, you will open a map with lines representing the transit routes operated by BART and the pedestrian isochrones from the location in Oakland.
+In this exercise, you will open a map with lines representing the transit routes operated by BART.
 
 1. Copy `goo.gl/9immhW` and paste it into the address bar of a new browser tab. This is a shortened link to a Tangram Play map, which opens to display a basemap with several transit-related layers.
   ![Transit map in Tangram Play](/images/mobility-explorer-tangram-play.png)
@@ -162,7 +162,7 @@ In this exercise, you will open a map with lines representing the transit routes
 
 ## Add a transit route and stop to the map
 
-Under `sources`, notice that the data sources are from URLs that request GeoJSON from the Transitland and Mapzen Mobility APIs. Under `layers`, you define the style rules for how to display those features on the map. For example, the BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
+Under `sources`, notice that the data sources are from URLs that request GeoJSON from the Transitland API. Under `layers`, you define the style rules for how to display those features on the map. For example, the BART route lines are drawn with the route colors from the data in Transitland, which originates from the GTFS file. This color information is created using a special JavaScript function that enables advanced drawing capabilities.
 
 To customize the map, you will add a line representing bus route 12 that you viewed in Mobility Explorer, as well as a point for the bus stop along Broadway.
 
