@@ -29,7 +29,7 @@ Now that you have seen the source data in Transitland, you can better understand
 Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
-2. In the search box on the map, type `Oakland, California`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
+2. In the search box on the map, type `Oakland, CA`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
   ![Map showing Oakland, California](/images/mobility-explorer-oakland-point.png)
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created to surround all of the stop locations served by a given operator.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
@@ -59,7 +59,7 @@ When you are displaying routes in the map, you can choose whether to color them 
 
 _Tip: Any time you want to start over with your search, click `Show routes` to search within the current map extent._
 
-1. In the search box, type `2201 Broadway, Oakland` and press Enter. The search box has been customized to show only certain parts of matched addresses, so make sure you type that text as suggested to make sure you are choosing the proper location.
+1. In the search box, type `2201 Broadway, Oakland` and press Enter.
   ![Search for an address on the map](/images/mobility-explorer-search-address.png)
 2. Click `Show routes` to see the transit routes near this location. The total number of routes is shown on the drop-down list, and similar to BART, the individual route names are there, too. You can hover over a route on the map for more information.
   Currently, the routes are being drawn in the same color, but you can style them so they are classified by the mode or the operator.
