@@ -1,3 +1,7 @@
+## Release Date: 2017-06-05 Valhalla 2.2.5
+* **Bug Fixes**
+  * Fixed matched point edge_index by skipping transition edge.
+
 ## Release Date: 2017-05-17 Valhalla 2.2.4
 * **Bug Fixes**
   * Fix isochrone bug where the default access mode was used - this rejected edges that should not have been rejected for cases than automobile.
