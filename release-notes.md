@@ -1,6 +1,8 @@
 ## Release Date: 2017-06-05 Valhalla 2.2.5
 * **Bug Fixes**
-  * Fixed matched point edge_index by skipping transition edge.
+  * Fixed matched point edge_index by skipping transition edges.
+  * Use double precision in meili grid traversal to fix some incorrect grid cases.
+  * Update meili to use DoubleBucketQueue and GraphReader methods rather than internal methods.
 
 ## Release Date: 2017-05-17 Valhalla 2.2.4
 * **Bug Fixes**
