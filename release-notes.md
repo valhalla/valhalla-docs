@@ -1,3 +1,9 @@
+## Release Date: 2017-06-12 Valhalla 2.2.6
+* **Bug Fixes**
+  * Fixed the begin shape index where an end_route_discontinuity exists
+* **Guidance Improvements**
+  * Updated Slovenian (sl-SI) narrative file.
+
 ## Release Date: 2017-06-05 Valhalla 2.2.5
 * **Bug Fixes**
   * Fixed matched point edge_index by skipping transition edges.
