@@ -3,6 +3,8 @@
   * Fixed the begin shape index where an end_route_discontinuity exists
 * **Guidance Improvements**
   * Updated Slovenian (sl-SI) narrative file.
+* **Data Producer Updates**
+  * Added support for per mode restrictions (e.g., restriction:&lt;type&gt;)  Saved these restrictions as "complex" restrictions which currently support per mode lookup (unlike simple restrictions which are assumed to apply to all driving modes).
 
 ## Release Date: 2017-06-05 Valhalla 2.2.5
 * **Bug Fixes**
