@@ -175,7 +175,7 @@ Each `edge` may include:
 | `transit_type` | Transit type values: <ul><li>`tram`</li><li>`metro`</li><li>`rail`</li><li>`bus`</li><li>`ferry`</li><li>`cable_car`</li><li>`gondola`</li><li>`funicular`</li></ul>|
 | `id` | Identifier of an edge within the tiled, hierarchical graph. |
 | `way_id` | Way identifier of the OpenStreetMap base data. |
-| `weighted_grade` | The weighted grade factor. |
+| `weighted_grade` | The weighted grade factor. Valhalla manufactures a `weighted_grade` from elevation data. It is a measure used for hill avoidance in routing - sort of a relative energy use along an edge. But since an edge in Valhalla can possibly go up and down over several hills it might not equate to what most folks think of as grade. |
 | `max_upward_grade` | The maximum upward slope. A value of 32768 indicates no elevation data is available for this edge. |
 | `max_downward_grade` | The maximum downward slope. A value of 32768 indicates no elevation data is available for this edge. |
 | `mean_elevation` | The mean or average elevation along the edge. Units are meters by default. If the units are specified as miles, then the mean elevation is returned in feet. A value of 32768 indicates no elevation data is available for this edge. |
