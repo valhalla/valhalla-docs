@@ -1,14 +1,21 @@
 # Match GPS locations to mapped road segments
 
-With [Mobility Explorer](https://mapzen.com/mobility/explorer), you can match GPS locations to roads and paths that have been mapped in OpenStreetMap. You can match, or snap, the GPS locations to the shape of the closest path, and also obtain attribute values from that matched line.
+With [Mobility Explorer](https://mapzen.com/mobility/explorer), you can match GPS locations to roads and paths that have been mapped in OpenStreetMap. You can match, or snap, the GPS locations to the shape of the closest path, and view attribute values from that matched line. You can also generate turn-by-turn navigation instructions if you want to take your route again.
 
-To use map matching in Mobility Explorer, you need a [GPS Exchange Format file](https://en.wikipedia.org/wiki/GPS_Exchange_Format). This file, also known as GPX, is a common output format for recording a GPS track. There are many apps designed to capture GPS locations from a mobile device and export them into GPX format. Mobility Explorer also includes sample GPX files you can use for experimenting.
+Here is an example of a line collected by GPS, shown with a dashed line, and the result when it is matched, shown with a solid line. Notice that the source GPS data shows some variation, compared to the straight line of the path to which it was matched.
 
-## Choose a GPX file to match
+![Original and matched lines](/images/mobility-explorer-source-matched-lines.png)
+
+## Match a GPX file
+
+To use map matching in Mobility Explorer, you need a [GPS Exchange Format file](https://en.wikipedia.org/wiki/GPS_Exchange_Format). This file, also known as GPX, is a common output format for recording a GPS track.
+
+There are many apps designed to capture GPS locations from a mobile device and export them into GPX format. Mobility Explorer also includes sample GPX files you can use for experimenting.
+
+Note that your GPX file is being processed locally in your browser and not actually being saved to your account. This means you will need to rerun the match if you want to see it again in the future. No changes are made to your source data.
 
 1. Under `Try Map Matching`, click the drop-down list and choose either a sample GPX file or the option to use your own file.
 2. To use your own file, click the `Upload` button and browse to the file on disk. Choose the transportation mode in which the GPX was recorded. Setting the mode helps the matching process find the correct path if there are overlapping or adjacent segments along a roadway.
-    Note that your file is being processed locally in your browser and not actually being saved to your account, so you will need to rerun the match if you want to see it again in the future.
 4. On the map, you can view the raw line as it was collected in the GPX and see the start and end points. Click `View matched route` to attempt to align the GPX to the nearest line path. The map shows the matched line.
 5. When you are done, you can remove the match from the map and click `Try Map Match` to start over with a new GPX.
 
@@ -16,10 +23,12 @@ _Note: If you are attempting to match your own GPX file and get an error when yo
 
 ## Get turn-by-turn directions for the route
 
-Perhaps you recently took a bicycle ride on a scenic trail and captured the path with a GPS. You can use the map-matching API to re-create the turn-by-turn navigation directions so you can repeat your route in the future or share it with others.
+Perhaps you recently took a bicycle ride on a scenic trail and captured the path with a GPS. You can use the map-matching API to re-create the turn-by-turn navigation directions so you can repeat your route in the future or share it with others. You can copy the directions and paste the text into an email, for example.
+
+![Matched directions for the route](/images/mobility-explorer-matched-directions.png)
 
 1. Make sure you have a GPX file loaded and displaying on the map.
-2. Click `Directions for the matched route` to see turn-by-turn narrative guidance for how to re-create your route.
+2. Click `Directions for the matched route`.
 
 ## View the attributes of the matched route
 
@@ -27,9 +36,15 @@ When you have a GPX displaying on the map, you can style the line by either the 
 
 The grade is calculated as a slope that considers the most extreme of the upward or downward value when both exist within a segment. The speed is from the speed limit value from the OpenStreetMap source data, if it exists, or a default speed value for that category of road otherwise. In both cases, keep in mind that these values are from the matched data, not from your source GPX.
 
+![Matched line styled by segment grade](/images/mobility-explorer-style-by-grade.png)
+
 When you click a segment on the map, you can see detailed attributes for the matched segment. Some attribute values, such as the name, pavement type, and road category, are from OpenStreetMap source data, while others are from Mapzen Mobility routing calculations.
 
 1. Make sure you have a GPX file loaded and displaying on the map.
 2. Style the line by the grade or speed along a segment.
 3. Click a segment on the map to see a pop-up with the attribute being drawn.
 4. In the table, view detailed attributes from OpenStreetMap about the line. These include the name, the OSM identification number, surface type (such as pavement), and the category of the road.
+
+## Data credits
+
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
