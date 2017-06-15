@@ -19,7 +19,11 @@ Note that your GPX file is being processed locally in your browser and not actua
 4. On the map, you can view the raw line as it was collected in the GPX and see the start and end points. Click `View matched route` to attempt to align the GPX to the nearest line path. The map shows the matched line.
 5. When you are done, you can remove the match from the map and click `Try Map Match` to start over with a new GPX.
 
-_Note: If you are attempting to match your own GPX file and get an error when you upload it, make sure your GPX file is valid and not corrupted. If you can view the GPX on the map, but the map-matching alignment was not successful or gave unexpected results, please send a screenshot and your GPX file to routing@mapzen.com to help improve the results._
+### Issues with matching
+
+If you are attempting to match your own GPX file and get an error when you upload it, make sure your GPX file is valid and not corrupted.
+
+In the case where you can load the GPX but the map-matching alignment was not successful or gave unexpected results, the issue could be caused by a discontinuity with the source data in OpenStreetMap. The segments that could not be matched are displayed, along with links to the shape in OpenStreetMap. If you see an error in OpenStreetMap, you can fix it there to improve the data quality for all users.
 
 ## Get turn-by-turn directions for the route
 
