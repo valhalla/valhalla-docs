@@ -6,6 +6,7 @@
   * Set up isochrone to be able to handle multi-location queries in the future
 * **Data Producer Updates**
   * Fixes to valhalla_associate_segments to address threading issue.
+  * Added support for restrictions that refers only to appropriate type of vehicle.
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
