@@ -125,7 +125,7 @@ To display a map on a page, you need a `<div>` element with an ID value, as well
     <div id="map"></div>
     ```
 
-3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map and set your API key. You can get an API key by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/).
+3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map and set your [API key](https://mapzen.com/documentation/overview/).
 
     ```html
     <script>
@@ -167,7 +167,7 @@ Your `<body>` section should look like this:
 [...]
 ```
 
-If your map is not loading properly, first check the browser console for status messages and resolve any 404 errors. You can also copy the example source code at the end of the section in case you mistyped any of the steps. If your project worked until now, ensure that your browser has WebGL support enabled (although it is unusual for it to be turned off) or turn on the developer tools in your browser to see if you can debug further. If you are still having trouble, add an issue to the [documentation GitHub repository](https://github.com/valhalla/valhalla-docs/issues) so it can be investigated.
+If your map is not loading properly, first check the browser console for status messages and resolve any 404 errors. You can also copy the example source code at the end of the section in case you mistyped any of the steps. If your project worked until now, ensure that your browser has WebGL support enabled (although it is unusual for it to be turned off) or turn on the developer tools in your browser to see if you can debug further. If you are still having trouble, [contact Mapzen](https://mapzen.com/documentation/overview/support/) or add an issue to the [documentation GitHub repository](https://github.com/valhalla/valhalla-docs/issues) so it can be investigated.
 
 ## Add waypoints for routing
 
@@ -251,7 +251,7 @@ The symbols for the map are defined in the basemap, but the route line may be ha
     ]},
     ```
 
-2. Save your edits and refresh the browser. The line should change hues and look thicker than before.
+2. Save your edits and refresh the browser. The line should look thicker than before.
 
     ![Map showing updated route line color](images/route-map-valhalla-line-color.png)
 
