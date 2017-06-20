@@ -1,3 +1,6 @@
+## Release Date: TBD Valhalla 2.2.7
+* **Bug Fixes**
+
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
   * Fixed the begin shape index where an end_route_discontinuity exists
