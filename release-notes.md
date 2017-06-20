@@ -9,6 +9,8 @@
   * Added support for restrictions that refers only to appropriate type of vehicle.
 * **Navigator**
   * Added pre-alpha implementation that will perform guidance for mobile devices.
+* **Map Matching Updates**
+  * Added capability to customize match_options  
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
