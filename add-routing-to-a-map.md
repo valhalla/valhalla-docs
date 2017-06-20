@@ -66,7 +66,7 @@ A cascading style sheet (CSS) is used to style a webpage, including layout and f
 
 When you request a route from Mapzen Turn-by-Turn, you are sending and receiving [JSON](https://en.wikipedia.org/wiki/JSON), which is a human-readable text format. This JSON can then be drawn on a map and shown as instructions for maneuvers along the route. The [Leaflet JavaScript library](http://leafletjs.com/) provides tools for building an interactive map for web and mobile devices. Leaflet is extensible, and developers have built additional tools for Leaflet maps.
 
-Because you are working with several external cascading style sheet (CSS) and JavaScript files, you need to add references to them in your index.html file. You will need to add these into the `<head>` and `<body>` sections of the index.html. In addition, you will reference the [mapzen.js library](https://www.mapzen.com/documentation/mapzen-js/), which simplifies the process of using Mapzen's maps within Leaflet. Mapzen.js contains all the Leaflet functionality, as well as additional tools for working with Mapzen maps.
+You will reference the [mapzen.js library](https://www.mapzen.com/documentation/mapzen-js/), which simplifies the process of using Mapzen's maps within Leaflet. Mapzen.js contains all the Leaflet functionality, as well as additional tools for working with Mapzen maps.
 
 You are linking to these CSS and JS files from a remote website, rather than from a file on your machine. You can also download the source files or install them through a package manager if you prefer to use a local copy.
 
@@ -76,28 +76,10 @@ You are linking to these CSS and JS files from a remote website, rather than fro
     <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
     ```
 
-2. In the `<head>` section, add a reference to the Mapzen CSS file.
-
-    ```html
-    <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.css">
-    ```
-
-3. In the `<body>` section, add the mapzen.js JavaScript file.
+2. In the `<body>` section, add the mapzen.js JavaScript file.
 
     ```html
     <script src="https://mapzen.com/js/mapzen.js"></script>
-    ```
-
-5. In the `<body>` section, add the Leaflet Routing Machine JavaScript file. This is a plug-in to Leaflet to add routing functionality.
-
-    ```html
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
-    ```
-
-6. In the `<body>` section, add the Mapzen routing JavaScript file, which extends the Leaflet Routing Machine to support Mapzen Turn-by-Turn.
-
-    ```html
-    <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
     ```
 
 7. Save your edits and refresh the browser.
@@ -111,12 +93,9 @@ After adding these, your index.html file should look something like this. Note t
   <title>My Routing Map</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
-  <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.css">
 </head>
 <body>
   <script src="https://mapzen.com/js/mapzen.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
-  <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
 </body>
 </html>
 ```
@@ -136,6 +115,7 @@ To display a map on a page, you need a `<div>` element with an ID value, as well
         width: 100%;
         position: absolute;
       }
+      html,body{margin: 0; padding: 0;}
     </style>
     ```
 
@@ -175,10 +155,8 @@ Your `<body>` section should look like this:
 <body>
   <div id="map"></div>
   <script src="https://mapzen.com/js/mapzen.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
-  <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
+    L.Mapzen.apiKey = "your-mapzen-api-key";
 
     var map = L.Mapzen.map("map", {
       center: [41.8758,-87.6189],
@@ -206,24 +184,23 @@ In the simplest implementation, your map will not provide the ability to search 
 2. Inside the `<script>` tag, but after the closing `});` you added in the previous section, initialize routing with the following code. You can substitute your own coordinates for the start and end locations of the routing. These coordinates take you from Chicago, Illinois, to the entrance gates of the theme park in Anaheim, California.
 
     ```js
-    L.Routing.control({
+    var routingControl = L.Mapzen.routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen("your-mapzen-api-key", {costing:"your-routing-mode"}),
-      formatter: new L.Routing.mapzenFormatter(),
+      router: L.Mapzen.routing.router({costing:"your-routing-mode"}),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
     ```
 
-    You are using Mapzen Turn-by-Turn as the routing engine by setting the `router:` to Mapzen and initializing a `formatter:` with functions for units and other conversions. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+    By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has a placeholder for `"your-routing-mode"` that you will update these in the next steps.
 
-3. Change the options for `"your-mapzen-api-key"` to your actual API key, and update the transportation mode `{costing:"your-routing-mode"}` to `{costing:"auto"}` to perform routing by automobile, again maintaining the quotation marks.
+3. Update the transportation mode `{costing:"your-routing-mode"}` to `{costing:"auto"}` to perform routing by automobile, again maintaining the quotation marks.
 
     ```js
-    router: L.Routing.mapzen("your-mapzen-api-key", {costing:"auto"}),
+    router: L.Mapzen.routing.router({costing:"auto"}),
     ```
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and icons and summary text in the narration box.
@@ -237,23 +214,20 @@ The `<body>` section should look something like this, but with your own API key 
 <body>
   <div id="map"></div>
   <script src="https://mapzen.com/js/mapzen.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
-  <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
     L.Mapzen.apiKey = "your-mapzen-api-key";
 
     var map = L.Mapzen.map("map", {
-      // center: [41.8758,-87.6189],
+      //center: [41.8758,-87.6189],
       zoom: 16
     });
 
-    L.Routing.control({
+    var routingControl = L.Mapzen.routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
       ],
-      router: L.Routing.mapzen("your-mapzen-api-key", {costing:"your-routing-mode"}), //paste your actual API key here and update the costing to "auto"
-      formatter: new L.Routing.mapzenFormatter(),
+      router: L.Mapzen.routing.router({costing:"auto"}),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
@@ -262,7 +236,7 @@ The `<body>` section should look something like this, but with your own API key 
 [...]
 ```
 
-Mapzen Turn-by-Turn also provides the ability to specify additional waypoints through which your route should pass, such as visiting family in Kansas and Arizona and bobbing your head at Grand Canyon National Park. Currently, you can drag the start and end points (and add waypoints in between) to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, although this can be slow and costly to make many queries. You can read more about the options available for `L.Routing.control` in the [Leaflet Routing Machine API documentation](http://www.liedman.net/leaflet-routing-machine/api/).
+Mapzen Turn-by-Turn also provides the ability to specify additional waypoints through which your route should pass, such as visiting family in Kansas and Arizona and bobbing your head at Grand Canyon National Park. Currently, you can drag the start and end points (and add waypoints in between) to update the routing, but the route will not be recalculated until you drop the points. On your own, you can set the option for `routeWhileDragging` to `true` if you want to update the route while moving points on the map, although this can be slow and costly to make many queries.
 
 ## Change the route line color
 
@@ -277,7 +251,7 @@ The symbols for the map are defined in the basemap, but the route line may be ha
     ]},
     ```
 
-2. Save your edits and refresh the browser. The line should change to blue and look thicker than before.
+2. Save your edits and refresh the browser. The line should change hues and look thicker than before.
 
     ![Map showing updated route line color](images/route-map-valhalla-line-color.png)
 
@@ -285,7 +259,7 @@ The symbols for the map are defined in the basemap, but the route line may be ha
 
     ![Arrival at your destination](images/route-map-valhalla-destination.png)
 
-The `<body>` section should look something like this, but with your own API key for the `router`:
+The completed HTML should look something like this:
 
 ```html
 <!DOCTYPE html>
@@ -294,29 +268,27 @@ The `<body>` section should look something like this, but with your own API key 
   <title>My Routing Map</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
-  <link rel="stylesheet" href="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.css">
   <style>
     #map {
       height: 100%;
       width: 100%;
       position: absolute;
     }
+      html,body{margin: 0; padding: 0;}
   </style>
 </head>
 <body>
   <div id="map"></div>
   <script src="https://mapzen.com/js/mapzen.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
-  <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
+    L.Mapzen.apiKey = "your-mapzen-api-key";
 
     var map = L.Mapzen.map("map", {
-      // center: [41.8758,-87.6189],
+      //center: [41.8758,-87.6189],
       zoom: 16
     });
 
-    L.Routing.control({
+    var routingControl = L.Mapzen.routing.control({
       waypoints: [
         L.latLng(41.8758,-87.6189),
         L.latLng(33.8128,-117.9259)
@@ -325,8 +297,7 @@ The `<body>` section should look something like this, but with your own API key 
         styles: [ {color: "white",opacity: 0.8, weight: 12},
                 {color: "#2676C6", opacity: 1, weight: 6}
       ]},
-      router: L.Routing.mapzen("your-mapzen-api-key", {costing:"auto"}), // paste your actual API key here
-      formatter: new L.Routing.mapzenFormatter(),
+      router: L.Mapzen.routing.router({costing:"auto"}),
       summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
       routeWhileDragging: false
     }).addTo(map);
