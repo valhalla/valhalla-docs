@@ -14,6 +14,8 @@
   * Updated Slovenian (sl-SI) narrative file.
 * **Data Producer Updates**
   * Added support for per mode restrictions (e.g., restriction:&lt;type&gt;)  Saved these restrictions as "complex" restrictions which currently support per mode lookup (unlike simple restrictions which are assumed to apply to all driving modes).
+* **Matrix Updates**
+  * Increased max distance threshold for auto costing and other similar costings to 400 km instead of 200 km
 
 ## Release Date: 2017-06-05 Valhalla 2.2.5
 * **Bug Fixes**
