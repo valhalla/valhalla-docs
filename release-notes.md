@@ -4,6 +4,8 @@
   * Traffic segment matcher is robust to consecutive transition edges in matched path
 * **Isochrone Changes**
   * Set up isochrone to be able to handle multi-location queries in the future
+* **Data Producer Updates**
+  * Fixes to valhalla_associate_segments to address threading issue.
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
