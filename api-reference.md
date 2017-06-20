@@ -174,8 +174,24 @@ https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.
 | Options | Description |
 | :------------------ | :----------- |
 | `units` | Distance units for output. Allowable unit types are miles (or mi) and kilometers (or km). If no unit type is specified, the units default to kilometers. |
-| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. Currently supported language tags with alias in parentheses:  ca-ES (ca), cs-CZ (cs), de-DE (de), en-US (en), en-US-x-pirate (pirate), es-ES (es), fr-FR (fr), hi-IN (hi), it-IT (it), sl-SI (sl). |
+| `language` | The language of the narration instructions based on the [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag string. If no language is specified or the specified language is unsupported, United States-based English (en-US) is used. [Currently supported language list](#supported-language-tags |
 | `narrative` |  Boolean to allow you to disable narrative production. Locations, shape, length, and time are still returned. The narrative production is enabled by default. Set the value to `false` to disable the narrative. |
+
+##### Supported language tags
+
+| Language tag | Language alias | Description |
+| :------------------ | :----------- | :----------- |
+| `ca-ES` | `ca` | Catalan (Spain) |
+| `cs-CZ` | `cs` | Czech (Czech Republic) |
+| `de-DE` | `de` | German (Germany) |
+| `en-US` | `en` | English (United States) |
+| `en-US-x-pirate` | `pirate` | English (United States) Pirate |
+| `es-ES` | `es` | Spanish (Spain) |
+| `fr-FR` | `fr` | French (France) |
+| `hi-IN` | `hi` | Hindi (India) |
+| `it-IT` | `it` | Italian (Italy) |
+| `ru-RU` | `ru` | Russian (Russia) |
+| `sl-SI` | `sl` | Slovenian (Slovenia) |
 
 #### Other request options
 
