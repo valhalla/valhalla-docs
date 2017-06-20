@@ -2,6 +2,8 @@
 * **Bug Fixes**
   * Python traffic matcher makes use of accuracy per point in the input
   * Python traffic matcher is robust to consecutive transition edges in matched path
+* **Isochrone Changes**
+  * Set up isochrone to be able to handle multi-location queries in the future
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
