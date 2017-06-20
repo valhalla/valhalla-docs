@@ -1,4 +1,4 @@
-## Release Date: TBD Valhalla 2.2.7
+## Release Date: 2017-06-20 Valhalla 2.2.7
 * **Bug Fixes**
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
