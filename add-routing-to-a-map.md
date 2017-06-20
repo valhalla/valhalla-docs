@@ -145,24 +145,24 @@ To display a map on a page, you need a `<div>` element with an ID value, as well
     <div id="map"></div>
     ```
 
-3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map. The `"your-mapzen-api-key"` text is a placeholder for your actual Mapzen API key; paste your own API key inside the quotation marks. You can get an API key by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/).
+3. Directly after the other `<script>` references, add this JavaScript code within a `<script>` tag to initialize a map and set your API key. You can get an API key by following the steps in the Mapzen [developer overview](https://mapzen.com/documentation/overview/).
 
-  ```html
-  <script>
-    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
+    ```html
+    <script>
+      L.Mapzen.apiKey = "your-mapzen-api-key";
 
-    var map = L.Mapzen.map("map", {
-      center: [41.8758,-87.6189],
-      zoom: 16
-    });
-  </script>
-  ```
+      var map = L.Mapzen.map("map", {
+        center: [41.8758,-87.6189],
+        zoom: 16
+      });
+    </script>
+    ```
 
-`L.xxxxx` is a convention used with the Leaflet API. To make sure the scripts load in the proper order, this code must be placed after the dependencies.
+    `L.xxxxx` is a convention used with the Leaflet API. To make sure the scripts load in the proper order, this code must be placed after the dependencies.
 
-The `center: [41.8758,-87.6189]` parameter sets the center point of the map, in decimal degrees, in Chicago, Illinois.
+    The `center: [41.8758,-87.6189]` parameter sets the center point of the map, in decimal degrees, in Chicago, Illinois.
 
-The next line sets the `zoom` level, which is like a map scale or resolution, where a smaller value shows a larger area in less detail, and a larger zoom level value depicts smaller area in great detail.
+    The next line sets the `zoom` level, which is like a map scale or resolution, where a smaller value shows a larger area in less detail, and a larger zoom level value depicts smaller area in great detail.
 
 4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.
 
@@ -218,7 +218,7 @@ In the simplest implementation, your map will not provide the ability to search 
     }).addTo(map);
     ```
 
-You are using Mapzen Turn-by-Turn as the routing engine by setting the `router:` to Mapzen and initializing a `formatter:` with functions for units and other conversions. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
+    You are using Mapzen Turn-by-Turn as the routing engine by setting the `router:` to Mapzen and initializing a `formatter:` with functions for units and other conversions. By including a `summaryTemplate`, the directions can include totals of the length and expected time en route. Note that the `router:` has two items with placeholders; you will update these in the next steps.
 
 3. Change the options for `"your-mapzen-api-key"` to your actual API key, and update the transportation mode `{costing:"your-routing-mode"}` to `{costing:"auto"}` to perform routing by automobile, again maintaining the quotation marks.
 
@@ -240,7 +240,7 @@ The `<body>` section should look something like this, but with your own API key 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.5/leaflet-routing-machine.min.js"></script>
   <script src="https://unpkg.com/lrm-mapzen@1.1.7/dist/lrm-mapzen.js"></script>
   <script>
-    L.Mapzen.apiKey = "your-mapzen-api-key"; // paste your actual API key here
+    L.Mapzen.apiKey = "your-mapzen-api-key";
 
     var map = L.Mapzen.map("map", {
       // center: [41.8758,-87.6189],
