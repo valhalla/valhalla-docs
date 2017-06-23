@@ -1,3 +1,11 @@
+## Release Date: 2017-06-23 Valhalla 2.2.8
+* **Bug Fix**
+  * Traffic segment matcher (exposed through Python bindings) - fix cases where partial (or no) results could be returned when breaking out of loop in form_segments early.
+* **Traffic Matching Update**
+  * Traffic segment matcher - handle special cases when entering and exiting turn channels.
+* **Guidance Improvements**
+  * Added Swedish (se-SV) narrative file.
+  
 ## Release Date: 2017-06-20 Valhalla 2.2.7
 * **Bug Fixes**
   * Traffic segment matcher (exposed through Python bindings) makes use of accuracy per point in the input
