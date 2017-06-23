@@ -47,11 +47,11 @@ Perhaps you recently took a bicycle ride on a scenic trail and captured the path
 
 If you are attempting to match your own GPX file and get an error when you upload it, make sure your GPX file is valid and not corrupted.
 
-If you can load the GPX but the map-matching alignment encountered an error or gave unexpected results, you see an entry for segments that could not be matched.
+If you can load the GPX but the map-matching process encountered an error or gave unexpected results, you see an entry for segments that could not be matched.
 
 ![Symbols for various states of matched lines](/images/mobility-explorer-match-segments-legend.png)
 
-The issue could be related to low GPS accuracy when you collected the trace. Reduced GPS accuracy may occur in urban environments, dense forests, valleys, or any other location where signals can be affected.
+Sometimes, problems with matching are related to low GPS accuracy when you collected the trace. Reduced GPS accuracy may occur in urban environments, dense forests, valleys, or any other location where signals can be affected.
 
 In addition, if a discontinuity exists in the OpenStreetMap source data, the results may be incomplete because there are no lines to match. Mobility Explorer has a list of unmatched segments, along with links to zoom to them on the map and see the areas in OpenStreetMap. If you notice incorrect or missing features in OpenStreetMap, fix them to improve the data quality for all users.
 
