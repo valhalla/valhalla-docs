@@ -16,8 +16,8 @@ Note that your GPX file is being processed locally in your browser and not actua
 
 1. Under `Try Map Matching`, click the drop-down list and choose either a sample GPX file or the option to use your own file.
 2. To use your own file, click the `Upload` button and browse to the file on disk. Choose the transportation mode in which the GPX was recorded. Setting the mode helps the matching process find the correct path if there are overlapping or adjacent segments along a roadway.
-4. On the map, you can view the raw line as it was collected in the GPX and see the start and end points. Click `View matched route` to attempt to align the GPX to the nearest line path. The map shows the matched line.
-5. When you are done, you can remove the match from the map and click `Try Map Match` to start over with a new GPX.
+3. On the map, you can view the raw line as it was collected in the GPX and see the start and end points. Click `View matched route` to attempt to align the GPX to the nearest line path. The map shows the matched line.
+4. To see another trace, choose it from the list or upload your own.
 
 ## View the attributes of the matched route
 
