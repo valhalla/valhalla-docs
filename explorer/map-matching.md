@@ -19,15 +19,6 @@ Note that your GPX file is being processed locally in your browser and not actua
 4. On the map, you can view the raw line as it was collected in the GPX and see the start and end points. Click `View matched route` to attempt to align the GPX to the nearest line path. The map shows the matched line.
 5. When you are done, you can remove the match from the map and click `Try Map Match` to start over with a new GPX.
 
-## Get turn-by-turn directions for the route
-
-Perhaps you recently took a bicycle ride on a scenic trail and captured the path with a GPS. You can use map-matching to get turn-by-turn directions so you can repeat your route in the future or share it with others. You can copy the directions and paste the text into an email, for example.
-
-![Matched directions for the route](/images/mobility-explorer-matched-directions.png)
-
-1. Make sure you have a GPX file loaded and displaying on the map.
-2. Click `Directions for the matched route`.
-
 ## View the attributes of the matched route
 
 When you have a GPX displaying on the map, you can style the line by either the grade or the speed and see different colors for the individual segments of the line.
@@ -39,9 +30,18 @@ The grade is calculated as a slope that considers the most extreme of the upward
 When you click a segment on the map, you can see detailed attributes for the matched segment. Some attribute values, such as the name, pavement type, and road category, are from OpenStreetMap source data, while others are from Mapzen Mobility routing calculations.
 
 1. Make sure you have a GPX file loaded and displaying on the map.
-2. Style the line by the grade or speed along a segment.
+2. Style the line by the grade or speed limit along a segment.
 3. Click a segment on the map to see a pop-up with the attribute being drawn.
 4. In the table, view detailed attributes from OpenStreetMap about the line. These include the name, the OSM identification number, surface type (such as pavement), and the category of the road.
+
+## Get turn-by-turn directions for the route
+
+Perhaps you recently took a bicycle ride on a scenic trail and captured the path with a GPS. You can use map-matching to get turn-by-turn directions so you can repeat your route in the future or share it with others. You can copy the directions and paste the text into an email, for example.
+
+![Matched directions for the route](/images/mobility-explorer-matched-directions.png)
+
+1. Make sure you have a GPX file loaded and displaying on the map.
+2. Click `Directions for the matched route`.
 
 ## Issues with matching
 
@@ -53,9 +53,9 @@ If you can load the GPX but the map-matching alignment encountered an error or g
 
 The issue could be related to low GPS accuracy when you collected the trace. Reduced GPS accuracy may occur in urban environments, dense forests, valleys, or any other location where signals can be affected.
 
-In addition, if a discontinuity exists in the OpenStreetMap source data, the results may be incomplete because there are no lines to be matched. Mobility Explorer has a list of unmatched segments, along with links to zoom the map and see the area in OpenStreetMap. If you notice incorrect or missing features in OpenStreetMap, fix it to improve the data quality for all users.
+In addition, if a discontinuity exists in the OpenStreetMap source data, the results may be incomplete because there are no lines to match. Mobility Explorer has a list of unmatched segments, along with links to zoom to them on the map and see the areas in OpenStreetMap. If you notice incorrect or missing features in OpenStreetMap, fix them to improve the data quality for all users.
 
-When the match results in an error, you can style the segments but are not able to get turn-by-turn directions for your route.
+When the match results in an error, you can style the segments by attribute but are not able to get turn-by-turn directions for your route.
 
 ## Data credits
 
