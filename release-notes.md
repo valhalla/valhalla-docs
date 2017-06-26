@@ -1,3 +1,7 @@
+## Release Date: 2017-06-26 Valhalla 2.2.9
+* **Bug Fix**
+  * Fix a bug introduced in 2.2.8 where map matching search extent was incorrect in longitude axis. 
+  
 ## Release Date: 2017-06-23 Valhalla 2.2.8
 * **Bug Fix**
   * Traffic segment matcher (exposed through Python bindings) - fix cases where partial (or no) results could be returned when breaking out of loop in form_segments early.
