@@ -23,7 +23,9 @@ Note that your GPX file is being processed locally in your browser and not actua
 
 When you have a GPX displaying on the map, you can style the line by either the grade or the speed and see different colors for the individual segments of the line.
 
-The grade is calculated as a slope that considers the most extreme of the upward or downward value when both exist within a segment. The speed is from the speed limit value from the OpenStreetMap source data, if it exists, or a default speed value for that category of road otherwise. In both cases, keep in mind that these values are from the matched data, not from your source GPX.
+The weighted grade provides an idea of the average grade for each segment, calculated from elevation data. It can be used to avoid hills when routing, particularly upward ones that require more energy. Within a segment, there may be some steeper slopes than this value indicates because a segment could go up and down over several hills. The `max upward grade` and `max downward grade` attributes provide more information about these.
+
+The speed is from the speed limit value from the OpenStreetMap source data, if it exists, or a default speed value for that category of road otherwise. In both cases, keep in mind that these values are from the matched data, not from your source GPX.
 
 ![Matched line styled by segment grade](/images/mobility-explorer-style-by-grade.png)
 
