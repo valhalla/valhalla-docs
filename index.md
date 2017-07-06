@@ -10,4 +10,4 @@ Use Mapzen Isochrone to get a computation of areas that are reachable within spe
 
 Mapzen Map Matching matches coordinates to known roads so you can turn a path into a route with narrative instructions and get the attribute values from that matched line.
 
-Use [Mobility Explorer](https://mapzen.com/mobility/explorer/) to query and visualize transit data from Transitland, a community-edited, open transit data aggregation project that Mapzen sponsors, and to analyze access using Mapzen Mobility services.
+Use [Mobility Explorer](https://mapzen.com/mobility/explorer/) to query and visualize transit data from Transitland and analyze access using Mapzen Mobility services.
