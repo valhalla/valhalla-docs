@@ -1,4 +1,4 @@
-## Release Date: 2017-07-?? Valhalla 2.3.0
+## Release Date: 2017-07-10 Valhalla 2.3.0
 * **Bug Fix**
   * Fixed a bug in traffic segment matcher where length was populated but had invalid times
 * **Embedded Compilation**
