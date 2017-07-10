@@ -4,6 +4,8 @@
 * **Embedded Compilation**
   * Decoupled the service components from the rest of the worker objects so that the worker objects could be used in non http service contexts
    * Added an actor class which encapsulates the various worker objects and allows the various end points to be called /route /height etc. without needing to run a service
+* **Low-Stress Bicycle**
+  * Worked on creating a new low-stress biking option that focuses more on taking safer roads like cycle ways or residential roads than the standard bike costing option does.
   
 ## Release Date: 2017-06-26 Valhalla 2.2.9
 * **Bug Fix**
