@@ -1,3 +1,10 @@
+## Release Date: 2017-07-?? Valhalla 2.3.0
+* **Bug Fix**
+  * Fixed a bug in traffic segment matcher where length was populated but had invalid times
+* **Embedded Compilation**
+  * Decoupled the service components from the rest of the worker objects so that the worker objects could be used in non http service contexts
+   * Added an actor class which encapsulates the various worker objects and allows the various end points to be called /route /height etc. without needing to run a service
+  
 ## Release Date: 2017-06-26 Valhalla 2.2.9
 * **Bug Fix**
   * Fix a bug introduced in 2.2.8 where map matching search extent was incorrect in longitude axis. 
