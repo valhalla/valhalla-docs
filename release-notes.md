@@ -2,12 +2,15 @@
 * **Bug Fix**
   * Update to use oneway:psv if oneway:bus does not exist.
   * Fix out of bounds memory issue in DoubleBucketQueue.
+  * Many things are now taken into consideration to determine which sides of the road have what cyclelanes, because they were not being parsed correctly before
+  * Fixed issue where sometimes a "oneway:bicycle=no" tag on a two-way street would cause the road to become a oneway for bicycles
 * **Enhancement**
   * Improve multi-modal routes by adjusting the pedestrian mode factor (routes use less walking in favor of public transit).
   * Added interface framework to support "top-k" paths within map-matching.
   * Created a base EdgeLabel class that contains all data needed within costing methods and supports the basic path algorithms (forward direction, A*, with accumulated path distance). Derive class for bidirectional algorithms (BDEdgeLabel) and for multimodal algorithms. Lowers memory use by combining some fields (using spare bits from GraphId).
   * Added elapsed time estimates to map-matching labels in preparation for using timestamps in map-matching.
-
+  * Added parsing of various OSM tags: "bicycle=use_sidepath", "bicycle=dismount", "shoulder=*", "cycleway:buffer=*", and several variations of these.
+  
 ## Release Date: 2017-07-10 Valhalla 2.3.0
 * **Bug Fix**
   * Fixed a bug in traffic segment matcher where length was populated but had invalid times
