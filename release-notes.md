@@ -2,7 +2,7 @@
 * **Bug Fix**
   * Update to use oneway:psv if oneway:bus does not exist.
   * Fix out of bounds memory issue in DoubleBucketQueue.
-* **Enhanacement**
+* **Enhancement**
   * Improve multi-modal routes by adjusting the pedestrian mode factor (routes use less walking in favor of public transit).
   * Added interface framework to support "top-k" paths within map-matching.
   * Created a base EdgeLabel class that contains all data needed within costing methods and supports the basic path algorithms (forward direction, A*, with accumulated path distance). Derive class for bidirectional algorithms (BDEdgeLabel) and for multimodal algorithms. Lowers memory use by combining some fields (using spare bits from GraphId).
