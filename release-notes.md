@@ -10,7 +10,7 @@
   * Added interface framework to support "top-k" paths within map-matching.
   * Created a base EdgeLabel class that contains all data needed within costing methods and supports the basic path algorithms (forward direction, A*, with accumulated path distance). Derive class for bidirectional algorithms (BDEdgeLabel) and for multimodal algorithms. Lowers memory use by combining some fields (using spare bits from GraphId).
   * Added elapsed time estimates to map-matching labels in preparation for using timestamps in map-matching.
-  * Added parsing of various OSM tags: "bicycle=use_sidepath", "bicycle=dismount", "shoulder=*", "cycleway:buffer=*", and several variations of these.
+  * Added parsing of various OSM tags: "bicycle=use_sidepath", "bicycle=dismount", "segregated=*", "shoulder=*", "cycleway:buffer=*", and several variations of these.
   * Both trace_route and trace_attributes will parse `time` and `accuracy` parameters when the shape is provided as unencoded
   * Map-matching will now use the time (in seconds) of each gps reading (if provided) to narrow the search space and avoid finding matches that are impossibly fast
   
