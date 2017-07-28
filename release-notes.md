@@ -5,6 +5,7 @@
   * Many things are now taken into consideration to determine which sides of the road have what cyclelanes, because they were not being parsed correctly before
   * Fixed issue where sometimes a "oneway:bicycle=no" tag on a two-way street would cause the road to become a oneway for bicycles
   * Fixed trace_attributes edge_walk cases where the start or end points in the shape are close to graph nodes (intersections)
+  * Fixed 32bit architecture crashing for certain routes with non-deterministic placement of edges labels in bucketized queue datastructure
 * **Enhancement**
   * Improve multi-modal routes by adjusting the pedestrian mode factor (routes use less walking in favor of public transit).
   * Added interface framework to support "top-k" paths within map-matching.
