@@ -1,4 +1,4 @@
-## Release Date: 2017-07-25 Valhalla 2.3.1
+## Release Date: 2017-07-31 Valhalla 2.3.2
 * **Bug Fix**
   * Update to use oneway:psv if oneway:bus does not exist.
   * Fix out of bounds memory issue in DoubleBucketQueue.
