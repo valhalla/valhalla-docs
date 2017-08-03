@@ -1,6 +1,8 @@
 # Isochrone service API reference
 
-An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. The Mapzen Isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map. You can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Isochrone, or visit https://mapzen.com/products/isochrone/ for sample maps.
+An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. The Mapzen Isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map.
+
+For an interactive demo, you can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Isochrone, or visit https://mapzen.com/products/isochrone/ for sample maps.
 
 Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
