@@ -6,7 +6,7 @@ The Time-Distance Matrix service provides a quick computation of time and distan
 
 You can request the following actions from the Time-Distance Matrix service: `/one_to_many?`, `/many_to_one?`, `/many_to_many?` or `/sources_to_targets?`. These queries compute different types of matrices: a row matrix for a `one_to_many`, a column matrix for a `many_to_one`, a square matrix for a `many_to_many` or any of the three matrices using `sources_to_targets`.  
 
-The `/sources_to_targets` action takes a `sources` and `targets` parameter instead of the `locations` parameter. To make a one-to-many request, insert your origin location lat/lng into the sources array and the rest of your destination locations in the targets array. To make a many-to-one request, then insert all of your origin location lat/lngs into the sources array and your destination location lat/lng in the targets array.  Finally, for a many-to-many request, insert all of your origin location lat/lngs into the sources array and add them again to your targets array.
+The `/sources_to_targets` action takes a `sources` and `targets` parameter instead of the `locations` parameter. This allows you to set the origin locations separately from the destination locations. Because of this, the previously mentioned matrix types can be though of as special cases of the `/sources_to_targes` request formulation. The difference here is that the set of origins may be disjoint (not overlapping) with the set of destinations. In other words, the target locations don't have to include any locations from source locations.
 
 An action for `/weight?` is being considered for the future.
 
