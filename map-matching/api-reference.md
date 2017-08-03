@@ -2,7 +2,7 @@
 
 With the Mapzen Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
 
-For an interactive demo, you can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Map Matching and try tracing your own data, or visit https://mapzen.com/products/map-matching/ for a sample.
+For an interactive demo, you can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment and try tracing your own data, or visit https://mapzen.com/products/map-matching/ for a sample.
 
 There are two separate Map Matching calls that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` action returns the shape snapped to the road network and narrative directions, while `trace_attributes` returns detailed attribution along the portion of the route.
 
