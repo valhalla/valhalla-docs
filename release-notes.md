@@ -8,7 +8,7 @@
 * **Enhancement**
   * Folded Low-Stress Biking Code into the regular Bicycle code and removed the LowStressBicycleCost class. Now when making a query for bicycle routing, a value of 0 for use_hills and use_roads produces low-stress biking routes, while a value of 1 for both provides more intense professional bike routes.
   * Bike costing default values changed. use_roads and use_hills are now 0.25 by default instead of 0.5 and the default bike is now a hybrid bike instead of a road bike.
-  * Added logic to use station hierarchy from transitland.  osm and egress nodes are connected by transitconnections.  egress and stations are connected by egressconnections.  stations and platforms are connected by platformconnections.  This includes narrative updates for Odin as well.  
+  * Added logic to use station hierarchy from transitland.  Osm and egress nodes are connected by transitconnections.  Egress and stations are connected by egressconnections.  Stations and platforms are connected by platformconnections.  This includes narrative updates for Odin as well.  
 
 ## Release Date: 2017-07-31 Valhalla 2.3.2
 * **Bug Fix**
