@@ -1,3 +1,13 @@
+## Release Date: 2017-08-14 Valhalla 2.3.3
+* **Bug Fix**
+  * Maximum osm node reached now causes bitset to resize to accomodate when building tiles
+  * Fix wrong side of street information and remove redundant node snapping
+  * Fix path differences between services and `valhalla_run_route`
+  * Fix map matching crash when interpolating duplicate input points
+  * Fix unhandled exception when trace_route or trace_attributes when there are no continuous matches
+* **Enhancement**
+  * 
+
 ## Release Date: 2017-07-31 Valhalla 2.3.2
 * **Bug Fix**
   * Update to use oneway:psv if oneway:bus does not exist.
