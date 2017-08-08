@@ -2,6 +2,8 @@
 
 The Optimized Route service provides a quick computation of time and distance between a set of location sources and location targets and returns them in an optimized route order, along with the shape.
 
+For an interactive demo, see https://mapzen.com/products/optimized-route.
+
 ## Optimized route service action
 
 You can request the following action from the Optimized Route service: `/optimized_route?`. Since an optimized route is really an extension of the `many_to_many` matrix, the first step is to compute a cost matrix by sending a `many_to_many` matrix request.  Then, we send our resulting cost matrix (resulting time or distance) to the optimizer which will return our optimized path.
@@ -70,7 +72,3 @@ This is an example which it returns: `400::Location at index 3 is unreachable`
 ```
 
 See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
-
-## Sample optimized route demonstration
-
-If you want to see the results of the Optimized Route service, please try out the sample demonstration utility: [Optimized Route Test Utility](http://valhalla.github.io/demos/optimized_route/index.html#loc=13,40.748600,-73.969000)
