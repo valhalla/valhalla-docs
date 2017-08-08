@@ -6,7 +6,8 @@
   * Fix map matching crash when interpolating duplicate input points
   * Fix unhandled exception when trace_route or trace_attributes when there are no continuous matches
 * **Enhancement**
-  * 
+  * Folded Low-Stress Biking Code into the regular Bicycle code and removed the LowStressBicycleCost class. Now when making a query for bicycle routing, a value of 0 for use_hills and use_roads produces low-stress biking routes, while a value of 1 for both provides more intense professional bike routes.
+  * Bike costing default values changed. use_roads and use_hills are now 0.25 by default instead of 0.5 and the default bike is now a hybrid bike instead of a road bike.
 
 ## Release Date: 2017-07-31 Valhalla 2.3.2
 * **Bug Fix**
