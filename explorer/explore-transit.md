@@ -2,7 +2,7 @@
 
 [Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transit datasets, including among different transportation modes and operators. Search for a place or browse the map, and use the buttons to ask questions about fixed-route transit options in the area. For example, you can find a transit stop and see all the routes, available modes of transit, and transit agencies or operators that serve it. You can combine this information with Mapzen Mobility tools to see the area served by the stop to find out where you can travel from it within a certain amount of time.
 
-Each time you click buttons or navigate the map on Mobility Explorer, you are sending a query to the [Transitland](https://transit.land/documentation/datastore/api-endpoints.html) or [Mapzen Mobility](https://mapzen.com/documentation/mobility/) APIs. You can click `See the Transitland API request for these results` to view the raw API request in your browser’s address bar and resulting JSON response from the server links. If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs. Mobility Explorer also has links to download the resulting features as a GeoJSON file, which is a format that can be displayed in many mapping applications. 
+Each time you click buttons or navigate the map on Mobility Explorer, you are sending a query to the [Transitland](https://transit.land/documentation/datastore/api-endpoints.html) or [Mapzen Mobility](https://mapzen.com/documentation/mobility/) APIs. You can click `See the Transitland API request for these results` to view the raw API request in your browser’s address bar and resulting JSON response from the server links. If you want to interact with these APIs programmatically, looking at the query can help you understand the components and create a properly formatted query that you can save and reuse in other projects that integrate these APIs. Mobility Explorer also has links to download the resulting features as a GeoJSON file, which is a format that can be displayed in many mapping applications.
 
 Start exploring at https://mapzen.com/mobility/explorer by searching for a place or address in the box on the map or by panning and zooming to your area of interest. Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
@@ -27,7 +27,7 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
   ![Transit stops within an area](/images/mobility-explorer-stops.png)
 2. Click a point to get full details.
 3. From the details panel, you can see which routes and operators serve that stop. Clicking the links for the individual routes or all routes serving the stop takes you to a query on the routes under `Show routes`.
-4. To view where you can travel within a certain amount of time from the stop location, click the link to view [isochrones](isochrones.md). This takes you to a query under `Generate isochrones` with transit automatically set as the mode of transportation. You can use the current time for your departure, or enter a different date and time. To choose a different mode, click it in the list, such as clicking `walking` to see how far you can walk within intervals of 15 to 60 minutes. 
+4. To view where you can travel within a certain amount of time from the stop location, click the link to view [isochrones](isochrones.md). This takes you to a query under `Generate isochrones` with transit automatically set as the mode of transportation. You can use the current time for your departure, or enter a different date and time. To choose a different mode, click it in the list, such as clicking `walking` to see how far you can walk within intervals of 15 to 60 minutes.
 
 ## Explore operators
 
@@ -37,4 +37,4 @@ Hover over a point, line, or polygon on the map to get a preview of its name and
 
 ## Data credits
 
-The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land) and [OpenStreetMap](http://www.openstreetmap.org/).

@@ -229,7 +229,7 @@ The Transitland project is open source, so you are encouraged to get involved by
 
 ## Data credits
 
-The images are from Mobility Explorer and Tangram Play, which include data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land) and [OpenStreetMap](http://www.openstreetmap.org/).
 
 ## Completed YAML for Tangram Play
 
