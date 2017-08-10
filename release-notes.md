@@ -1,3 +1,7 @@
+## Release Date: 2017-08-14 Valhalla 2.3.4
+* **Bug Fix**
+  * Enforce limits on maximum per point accuracy to avoid long running map matching computations
+
 ## Release Date: 2017-08-14 Valhalla 2.3.3
 * **Bug Fix**
   * Maximum osm node reached now causes bitset to resize to accomodate when building tiles
