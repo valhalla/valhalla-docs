@@ -20,4 +20,4 @@ The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/
 
 ## Data credits
 
-The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land) and [OpenStreetMap](http://www.openstreetmap.org/).
