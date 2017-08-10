@@ -30,7 +30,6 @@ Each query or map update is maintained as a separate URL, which means that you c
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
 2. In the search box on the map, type `Oakland, CA`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
-  ![Map showing Oakland, California](/images/mobility-explorer-oakland-point.png)
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created to surround all of the stop locations served by a given operator.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
 4. Hover over the polygons on the map to see the operator name.
@@ -40,7 +39,6 @@ Each query or map update is maintained as a separate URL, which means that you c
   The sidebar shows details about the operator, including its name and website, and something called a Onestop ID. Under the operator details, there are also links to view the routes and stops for this operator.
   A [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) is a unique identifier from Transitland that helps label and connect data about public transit that are coming from many agencies. BART's Onestop ID is `o-9q9-bart`, with the first letter `o` indicating it is identifying an `operator`.
 6. Zoom out so you can see the entire BART polygon by using the buttons on the map or your mouse wheel.
-  ![Area of BART service area](/images/mobility-explorer-bart-polygon.png)
 7. Click `View routes operated by Bay Area Rapid Transit` on the sidebar. Behind the scenes, this is querying the Datastore API for the transit route lines. In addition, when you do this, Mobility Explorer expands the `Show routes` section.
 8. Explore BART's routes by hovering over a line on the map. The colors of the lines are listed in the source GTFS data, and are used to display the lines in Mobility Explorer. _Note: Right now, the route lines overlap each other, yet they should be offset so you can see all of them at once._
   ![Hover over a route for basic information](/images/mobility-explorer-bart-route-hover.png)
@@ -72,7 +70,6 @@ _Tip: Any time you want to start over with your search, click `Show routes` to s
   _Tip: You can query for this route using https://transit.land/api/v1/routes?onestop_id=r-9q9p3-12, which searches for the route's Onestop ID. Use https://transit.land/api/v1/routes.geojson?onestop_id=r-9q9p3-12 to get its GeoJSON._
 6. Zoom out so you can see the full extent of this route, which goes between Oakland and the nearby city of Berkeley.
 7. Check the box to `Show stops served by this route` to see dots on the map representing bus stops.
-  ![Stops along route 12](/images/mobility-explorer-route12-stops.png)
   The route line and stops that are displayed by default are a representation of the most common shape of that route. However, a route may be different at certain times, for example, in inbound or return directions, or to consider one-way roads. These differences are known as a [RouteStopPattern](https://transit.land/documentation/datastore/routes-and-route-stop-patterns.html#route_stop_patterns) in the Transitland API.
 8. Click the link to `Show route stop patterns` to view the unique combinations of shape lines for trips and stops along this route.
   ![RouteStopPattern for route 12](/images/mobility-explorer-route12-rsp.png)
