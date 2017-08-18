@@ -108,6 +108,6 @@ See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-re
 
 ## Sample matrix demonstration
 
-If you want to see the results of the Time-Distance Matrix service, try this [interactive demo](https://mapzen.com/products/optimized-route).
+If you want to see the results of the Time-Distance Matrix service, try this [interactive demo](https://mapzen.com/products/time-distance-matrix/).
 
 The [code](https://github.com/valhalla/demos/tree/gh-pages/matrix) shows integration of the Time-Distance Matrix results into a map and a table. This demo does not use the `sources_to_targets` action call.
