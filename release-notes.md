@@ -1,3 +1,10 @@
+## Release Date: 2017-08-22 Valhalla 2.3.5
+* **Bug Fix**
+  * Clamp the edge score in thor. Extreme values were causing bad alloc crashes.
+  * Fix multimodal isochrones. EdgeLabel refactor caused issues.
+* **Data Producer Update**
+  * Update lua logic to properly handle vehicle=no tags.
+  
 ## Release Date: 2017-08-14 Valhalla 2.3.4
 * **Bug Fix**
   * Enforce limits on maximum per point accuracy to avoid long running map matching computations
