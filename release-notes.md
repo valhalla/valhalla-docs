@@ -1,3 +1,12 @@
+## Release Date: 2017-08-29 Valhalla 2.3.6
+* **Bug Fix**
+  * Pedestrian paths including ferries no longer cause circuitous routes
+  * Fix a crash in map matching route finding where heading from shape was using a `nullptr` tile
+  * Spanish language narrative corrections
+  * Fix traffic segment matcher to always set the start time of a segment when its known
+* **Enhancement**
+  * Location correlation scoring improvements to avoid situations where less likely start or ending locations are selected
+
 ## Release Date: 2017-08-22 Valhalla 2.3.5
 * **Bug Fix**
   * Clamp the edge score in thor. Extreme values were causing bad alloc crashes.
