@@ -2,8 +2,8 @@
 * **Bug Fix**
   * Update bidirectional connections to handle cases where the connecting edge is one of the origin (or destination) edges and the cost is high. Fixes some pedestrian route issues that were reported.
 *  **Data Producer Update**
-  * Added support for motorroad tag (default and per country).
-  * Update OSMLR segment association logic to fix issue where chunks wrote over leftover segments. Fix search along edges to include a radius so any nearby edges are also considered.
+   * Added support for motorroad tag (default and per country).
+   * Update OSMLR segment association logic to fix issue where chunks wrote over leftover segments. Fix search along edges to include a radius so any nearby edges are also considered.
   
 ## Release Date: 2017-08-29 Valhalla 2.3.6
 * **Bug Fix**
