@@ -6,7 +6,7 @@ Tiles are split up into three levels or hierarchies.  Hierarchy 0 contains edges
 So in python, the levels are defined as: 
 `valhalla_tiles = [{'level': 2, 'size': 0.25}, {'level': 1, 'size': 1.0}, {'level': 0, 'size': 4.0}]`
 
-###The World at Level 0
+### The World at Level 0
 
 The following image shows the world at level 0.  Using a world bounding box (-180, -90, 180, 90) the world is split up into 4 degree tiles.  The rows and columns start from the bottom left and increase to the top right.  Tiles are row ordered increasing from west to east.
 
