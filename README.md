@@ -12,6 +12,7 @@ Documentation available within the valhalla-docs repository includes:
 - [Release Notes](./release-notes.md) - Contains information about changes  to the API, changes to the data import processing, new features, and general software updates of importance.
 - [Add Routing to a Map](./add-routing-to-a-map.md) - A tutorial showing how to add Mapzen Turn-by-Turn (powered by Valhalla) to web based maps using the Leaflet Routing Machine with Mapzen plugins.
 - [Decoding Shape](./decoding.md) - Describes how to decode the route path's shape (returned as an encoded polyline). Contains sample code in several languages.
+- [Tile Description](./tiles.md) - Describes the tiling system used within Valhalla. Discusses the road hierarchy and tile numbering system.
 
 Data source listing and attribution information can be found here:
 
