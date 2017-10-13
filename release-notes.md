@@ -1,3 +1,8 @@
+## Release Date: 2017-10-XX Valhalla 2.3.8
+* **Bug Fix**
+  * Fixed the roundabout exit count for bicycles when the roundaout is a road and not a cycleway
+  * Enable a pedestrian path to remain on roundabout instead of getting off and back on
+  
 ## Release Date: 2017-9-11 Valhalla 2.3.7
 * **Bug Fix**
   * Update bidirectional connections to handle cases where the connecting edge is one of the origin (or destination) edges and the cost is high. Fixes some pedestrian route issues that were reported.
