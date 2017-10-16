@@ -1,6 +1,6 @@
 ## Release Date: 2017-10-17 Valhalla 2.3.8
 * **Bug Fix**
-  * Fixed the roundabout exit count for bicycles when the roundaout is a road and not a cycleway
+  * Fixed the roundabout exit count for bicycles when the roundabout is a road and not a cycleway
   * Enable a pedestrian path to remain on roundabout instead of getting off and back on
   * Fixed the penalization of candidate locations in the uni-directional A* algorithm (used for trivial paths)
   
