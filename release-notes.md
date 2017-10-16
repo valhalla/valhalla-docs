@@ -3,6 +3,8 @@
   * Fixed the roundabout exit count for bicycles when the roundabout is a road and not a cycleway
   * Enable a pedestrian path to remain on roundabout instead of getting off and back on
   * Fixed the penalization of candidate locations in the uni-directional A* algorithm (used for trivial paths)
+*  **Data Producer Update**
+  * Added logic to set bike forward and tag to true where kv["sac_scale"] == "hiking". All other values for sac_scale turn off bicycle access.  If sac_scale or mtb keys are found and a surface tag is not set we default to kPath.
   
 ## Release Date: 2017-9-11 Valhalla 2.3.7
 * **Bug Fix**
