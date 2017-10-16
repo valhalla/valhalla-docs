@@ -2,7 +2,7 @@
 * **Bug Fix**
   * Fixed the roundabout exit count for bicycles when the roundaout is a road and not a cycleway
   * Enable a pedestrian path to remain on roundabout instead of getting off and back on
-  * Fixed the penalization candidate locations in the uni-directional A* algorithm (used for trivial paths)
+  * Fixed the penalization of candidate locations in the uni-directional A* algorithm (used for trivial paths)
   
 ## Release Date: 2017-9-11 Valhalla 2.3.7
 * **Bug Fix**
