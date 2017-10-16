@@ -5,6 +5,7 @@
   * Fixed the penalization of candidate locations in the uni-directional A* algorithm (used for trivial paths)
 *  **Data Producer Update**
    * Added logic to set bike forward and tag to true where kv["sac_scale"] == "hiking". All other values for sac_scale turn off bicycle access.  If sac_scale or mtb keys are found and a surface tag is not set we default to kPath.
+   * Fixed a bug where surface=unpaved was being assigned Surface::kPavedSmooth.
   
 ## Release Date: 2017-9-11 Valhalla 2.3.7
 * **Bug Fix**
