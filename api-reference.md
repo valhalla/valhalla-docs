@@ -113,9 +113,9 @@ These additional options are available for bicycle costing methods.
 | `use_ferry` | This value indicates the willingness to take ferries. This is range of values between 0 and 1. Values near 0 attempt to avoid ferries and values near 1 will favor ferries. Note that sometimes ferries are required to complete a route so values of 0 are not guaranteed to avoid ferries entirely. The default value is 0.5. |
 
 ##### Motor_scooter costing options
-Standard costing for travel by motor scooter or moped.  By default, motor_scooter costing will avoid higher class roads unless the country overrides allows motor scooters on these roads.  Motor scooter routes follow regular roads when needed, but avoid roads without motor_scooter, moped, or mofa access. The costing model recognizes factors unique to motor_scootor travel and offers options for tuning motor_scootor routes. Factors unique to travel by motor_scootor influence the resulting route.
+Standard costing for travel by motor scooter or moped.  By default, motor_scooter costing will avoid higher class roads unless the country overrides allows motor scooters on these roads.  Motor scooter routes follow regular roads when needed, but avoid roads without motor_scooter, moped, or mofa access. The costing model recognizes factors unique to motor_scooter travel and offers options for tuning motor_scooter routes. Factors unique to travel by motor_scooter influence the resulting route.
 
-All of the options described above for autos also apply to motor_scootor costing methods.  These additional options are available for motor_scootor costing methods.
+All of the options described above for autos also apply to motor_scooter costing methods.  These additional options are available for motor_scooter costing methods.
 
 | Motor_scooter options | Description |
 | :-------------------------- | :----------- |
