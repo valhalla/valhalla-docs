@@ -1,3 +1,17 @@
+## Release Date: 2017-11-07 Valhalla 2.3.9
+* **Enhancement**
+  * Top-K map matched path generation now only returns unique paths and does so with fewer iterations
+  * Navigator call outs for both imperial and metric units
+  * The surface types allowed for a given bike route can now be controlled via a request parameter `avoid_bad_surfaces`
+  * Improved support for motorscooter costing via surface types, road classification and vehicle specific tagging
+* **Bug Fix**
+  * Connectivity maps now include information about transit tiles
+  * Lane counts for singly digitized roads are now correct for a given directed edge
+  * Edge merging code for assigning osmlr segments is now robust to partial tile sets
+  * Fix matrix path finding to allow transitioning down to lower levels when appropriate
+*  **Data Producer Update**
+   * Duration tags are now used to properly set the speed of travel for a ferry routes
+   
 ## Release Date: 2017-10-17 Valhalla 2.3.8
 * **Bug Fix**
   * Fixed the roundabout exit count for bicycles when the roundabout is a road and not a cycleway
