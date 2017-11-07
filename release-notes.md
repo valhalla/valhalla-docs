@@ -8,7 +8,7 @@
   * Connectivity maps now include information about transit tiles
   * Lane counts for singly digitized roads are now correct for a given directed edge
   * Edge merging code for assigning osmlr segments is now robust to partial tile sets
-  * Fix matrix path finding to allow transitioning down to lower levels when appropriate
+  * Fix matrix path finding to allow transitioning down to lower levels when appropriate. In particular, do not supersede shortcut edges until no longer expanding on the next level.
 *  **Data Producer Update**
    * Duration tags are now used to properly set the speed of travel for a ferry routes
    
