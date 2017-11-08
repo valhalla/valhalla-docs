@@ -1,3 +1,8 @@
+## Release Date: 2017-11-07 Valhalla 2.4.0
+*  **Data Producer Update**
+   * Added logic to support restriction = x with a the except tag.  We apply the restriction to everything except for modes in the except tag.
+   * Added logic to support railway_service and coach_service in transit. 
+
 ## Release Date: 2017-11-07 Valhalla 2.3.9
 * **Enhancement**
   * Top-K map matched path generation now only returns unique paths and does so with fewer iterations
