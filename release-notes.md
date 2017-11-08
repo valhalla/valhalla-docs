@@ -3,7 +3,7 @@
    * Added logic to support restriction = x with a the except tag.  We apply the restriction to everything except for modes in the except tag.
    * Added logic to support railway_service and coach_service in transit. 
 * **Bug Fix**
-  * TBD
+  * Return proper edge_walk path for requested shape_match=walk_or_snap 
 
 ## Release Date: 2017-11-07 Valhalla 2.3.9
 * **Enhancement**
