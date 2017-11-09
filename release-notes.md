@@ -1,3 +1,6 @@
+## Release Date: 2017-11-09 Valhalla 2.4.1
+*  **Data Producer Update**
+   * Added kMopedAccess to modes for complex restrictions.  Remove the kMopedAccess when auto access is removed.  Also, add the kMopedAccess when an auto restriction is found.
 ## Release Date: 2017-11-08 Valhalla 2.4.0
 *  **Data Producer Update**
    * Added logic to support restriction = x with a the except tag.  We apply the restriction to everything except for modes in the except tag.
