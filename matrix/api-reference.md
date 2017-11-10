@@ -62,7 +62,7 @@ When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, loca
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-You can refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.  NOTE: Using `type` in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
+You can refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md/#locations) for more information on specifying locations.  NOTE: Using `type` in addition to the `lat` and `lon` within the location parameter has no meaning for matrices.
 
 ### Source and target parameters
 
@@ -77,7 +77,7 @@ A source and target must include a latitude and longitude in decimal degrees. Th
 
 ### Costing parameters
 
-The Time-Distance Matrix service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service.  The **multimodal costing is not supported** for the Time-Distance Matrix service at this time.  Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+The Time-Distance Matrix service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service.  The **multimodal costing is not supported** for the Time-Distance Matrix service at this time.  Refer to the [Turn-by-Turn costing options](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
 
 ### Other request options
 
@@ -104,7 +104,7 @@ These are the results of a request to the Time-Distance Matrix service.
 | `locations` | The specified array of lat/lngs from the input request.
 | `units` | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. |
 
-See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md/#return-codes-and-conditions) for more on messages you might receive from the service.
 
 ## Sample matrix demonstration
 

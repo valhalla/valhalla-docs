@@ -39,11 +39,11 @@ The service requires an API key. In a request, you must append your own API key 
 
 ### Costing models and other options
 
-Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
 
 Costing for `multimodal` is not supported for map matching because it would be difficult to get favorable GPS traces.
 
-You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#directions-options) documentation for examples.
+You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](/turn-by-turn/api-reference.md/#directions-options) documentation for examples.
 
 ### Attribute filters (`trace_attributes` only)
 
@@ -130,7 +130,7 @@ matched.distance_from_trace_point
 
 ### Outputs of `trace_route`
 
-The outputs of the `trace_route` action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
+The outputs of the `trace_route` action are the same as the [outputs of a route](/turn-by-turn/api-reference.md/#outputs-of-a-route) action.
 
 ### Outputs of `trace_attributes`
 
@@ -141,7 +141,7 @@ The `trace_attributes` results contains a list of edges and, optionally, the fol
 | `edges` | List of edges associated with input shape. See the list of [edge items](#edge-items) for details. |
 | `osm_changeset` | Identifier of the OpenStreetMap base data version. |
 | `admins` | List of the administrative codes and names. See the list of [admin items](#admin-items) for details. |
-| `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
+| `shape` | The [encoded polyline](decoding.md) of the matched path. |
 | `matched_points` | List of match results when using the `map_snap` shape match algorithm. There is a one-to-one correspondence with the input set of latitude, longitude coordinates and this list of match results. See the list of [matched point items](#matched-point-items) for details. |
 | `units` | The specified units with the request, in either kilometers or miles. |
 

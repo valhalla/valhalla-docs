@@ -37,7 +37,7 @@ Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.m
 
 ### Costing parameters
 
-Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
 
 ### Other request parameters
 
@@ -56,7 +56,7 @@ In the service response, the isochrone contours are returned as [GeoJSON](http:/
 
 The contours are calculated using rasters and are returned as either polygon or line features, depending on your input setting for the `polygons` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
 
-See the [HTTP return codes](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference//#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md/#return-codes-and-conditions) for more on messages you might receive from the service.
 
 ### Draw isochrones on a map
 
@@ -70,7 +70,7 @@ Mapzen is working on improving the polygon isochrone output and rendering capabi
 
 Mapzen's [Mobility Explorer](https://mapzen.com/mobility/explorer) helps you understand transportation networks around the world and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
 
-You can review the [documentation](explorer/overview.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
+You can review the [documentation](/explorer/overview.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
 
 ## Future work on the isochrone service
 
