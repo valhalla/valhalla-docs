@@ -58,7 +58,7 @@ Your HTML should look like this:
 ```
 6. Drag your index.html file onto a web browser tab. It should show your title, `My Routing Map`, but the web page canvas will be blank.
 
-![Browser tab with title](images/local-browser.png)
+![Browser tab with title](/images/local-browser.png)
 
 ## Add references to CSS and JavaScript files
 
@@ -146,7 +146,7 @@ To display a map on a page, you need a `<div>` element with an ID value, as well
 
 4. Save your edits and refresh the browser. You should see a gray canvas with zoom controls and a Leaflet attribution in the bottom corner.
 
-    ![Initial map showing Chicago area](images/browser-initial-map.png)
+    ![Initial map showing Chicago area](/images/browser-initial-map.png)
 
 Your `<body>` section should look like this:
 
@@ -205,7 +205,7 @@ In the simplest implementation, your map will not provide the ability to search 
 
 5. Save your edits and refresh the browser. You should see a map, the route line, and icons and summary text in the narration box.
 
-    ![Map showing Mapzen Turn-by-Turn route and directions](images/route-map-valhalla.png)
+    ![Map showing Mapzen Turn-by-Turn route and directions](/images/route-map-valhalla.png)
 
 The `<body>` section should look something like this, but with your own API key for the `router`:
 
@@ -253,11 +253,11 @@ The symbols for the map are defined in the basemap, but the route line may be ha
 
 2. Save your edits and refresh the browser. The line should look thicker than before.
 
-    ![Map showing updated route line color](images/route-map-valhalla-line-color.png)
+    ![Map showing updated route line color](/images/route-map-valhalla-line-color.png)
 
 3. Click through the points in the directions list to pan and zoom the map to the location of each maneuver, including your destination.
 
-    ![Arrival at your destination](images/route-map-valhalla-destination.png)
+    ![Arrival at your destination](/images/route-map-valhalla-destination.png)
 
 The completed HTML should look something like this:
 
