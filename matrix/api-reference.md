@@ -55,7 +55,7 @@ The matrix service requires an API key. In a request, you must append your own A
 
 ### Location parameters
 
-When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/documentation/search/) can be used to find places and geocode addresses, whose coordinates can be used as input to the Time-Distance Matrix service.
+When using the `one_to_many`, `many_to_one` or `many_to_many` actions only, location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the Time-Distance Matrix service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
@@ -77,7 +77,7 @@ A source and target must include a latitude and longitude in decimal degrees. Th
 
 ### Costing parameters
 
-The Time-Distance Matrix service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service.  The **multimodal costing is not supported** for the Time-Distance Matrix service at this time.  Refer to the [Turn-by-Turn costing options](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
+The Time-Distance Matrix service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service.  The **multimodal costing is not supported** for the Time-Distance Matrix service at this time.  Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
 
 ### Other request options
 
@@ -104,7 +104,7 @@ These are the results of a request to the Time-Distance Matrix service.
 | `locations` | The specified array of lat/lngs from the input request.
 | `units` | Distance units for output. Allowable unit types are mi (miles) and km (kilometers). If no unit type is specified, the units default to kilometers. |
 
-See the [HTTP return codes](/turn-by-turn/api-reference.md/#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md/#http-status-codes-and-conditions) for more on messages you might receive from the service.
 
 ## Sample matrix demonstration
 

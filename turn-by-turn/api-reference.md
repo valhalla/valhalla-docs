@@ -24,7 +24,7 @@ The Mapzen Turn-by-Turn service requires an API key. In a request, you must appe
 
 You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search), can be used to find places and geocode addresses, which must be converted to coordinates for input.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding), can be used to find places and geocode addresses, which must be converted to coordinates for input.
 
 To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path.
 
@@ -262,7 +262,7 @@ Each maneuver includes:
 | `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
 | `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
 | `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
-| `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
+| `transit_info` | Contains the attributes that describe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
 | `travel_mode` | Travel mode.<ul><li>"drive"</li><li>"pedestrian"</li><li>"bicycle"</li><li>"transit"</li></ul>|
 | `travel_type` | Travel type for drive.<ul><li>"car"</li></ul>Travel type for pedestrian.<ul><li>"foot"</li></ul>Travel type for bicycle.<ul><li>"road"</li></ul>Travel type for transit.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
@@ -358,7 +358,7 @@ Continuing with the earlier routing example from the Detroit, Michigan area, a m
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
-### HTTP Status codes and conditions
+### HTTP status codes and conditions
 
 The following is a table of HTTP status error code conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
 

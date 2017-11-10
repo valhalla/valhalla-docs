@@ -1,6 +1,6 @@
 # Turn-by-Turn overview
 
-[Mapzen Turn-by-Turn](https://mapzen.com/projects/valhalla) is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. The service works globally, and provides dynamic and customizable routing by driving, walking, bicycling, and using multimodal and transit options, with clear directions for maneuvers along the route.
+[Mapzen Turn-by-Turn](https://mapzen.com/products/mobility/turn-by-turn/) is an open-source routing service that lets you integrate routing and navigation into a web or mobile application. The service works globally, and provides dynamic and customizable routing by driving, walking, bicycling, and using multimodal and transit options, with clear directions for maneuvers along the route.
 
 ## Route requests and results
 
