@@ -12,7 +12,7 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 ## Inputs of the Isochrone service
 
-A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models).
+A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
@@ -33,7 +33,7 @@ The `locations` must include a latitude and longitude in decimal degrees. The co
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#locations) for more information on specifying locations.
+Refer to the [Turn-by-Turn location documentation](/turn-by-turn.md/api-reference/#locations) for more information on specifying locations.
 
 ### Costing parameters
 
