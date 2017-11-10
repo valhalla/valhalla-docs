@@ -1,4 +1,4 @@
-# Optimized Route service API reference HELLO
+# Optimized Route service API reference
 
 The Optimized Route service provides a quick computation of time and distance between a set of location sources and location targets and returns them in an optimized route order, along with the shape.
 

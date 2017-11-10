@@ -1,4 +1,4 @@
-# Add Mapzen Turn-by-Turn routing to a map HELLO
+# Add Mapzen Turn-by-Turn routing to a map
 
 Mapzen Turn-by-Turn, which is a routing service powered by the Valhalla engine, adds routing and navigation to web or mobile applications. The service works globally, and provides dynamic and customizable routing by driving, walking, using multimodal and transit options, or bicycling, with clear directions for maneuvers along the route. In this walkthrough, you will learn how to make a map featuring Mapzen Turn-by-Turn. The map you create will provide:
 
