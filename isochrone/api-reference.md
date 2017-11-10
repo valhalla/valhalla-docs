@@ -33,11 +33,11 @@ The `locations` must include a latitude and longitude in decimal degrees. The co
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md/#locations) for more information on specifying locations.
+Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
 ### Costing parameters
 
-Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md/#costing-models) and [costing options](/turn-by-turn/api-reference.md/#costing-options) documentation for more on how to specify this input.
+Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 ### Other request parameters
 
@@ -56,7 +56,7 @@ In the service response, the isochrone contours are returned as [GeoJSON](http:/
 
 The contours are calculated using rasters and are returned as either polygon or line features, depending on your input setting for the `polygons` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
 
-See the [HTTP return codes](/turn-by-turn/api-reference.md/#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md#http-status-codes-and-conditions) for more on messages you might receive from the service.
 
 ### Draw isochrones on a map
 

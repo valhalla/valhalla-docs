@@ -142,7 +142,7 @@ These options are available for transit costing when the multimodal costing mode
 When using `filters`, you need to include a [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) to identify the stop, routes, or operators to include or exclude in your query. Depending on how you are interacting with transit data from Transitland, there are different ways of obtaining the Onestop ID.
 
 - Turn-by-Turn API: Query a transit route query and parse the returned JSON maneuver  for `transit_info` to find `operator_onestop_id` and the route `onestop_id`. A `transit_stop` contains the `onestop_id` for the stop.
-- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](/explorer/overview.md/) for more information.
+- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](/explorer/explore-transit/) for more information.
 - [Transitland](https://transit.land/): Use the Transitland Datastore API to query directly for stops, routes, and operators using a number of options. For example, you can filter for only [subway routes](http://transit.land/api/v1/routes?vehicle_type=metro) or [bus routes](http://transit.land/api/v1/routes?vehicle_type=bus). See the [Transitland Datastore API documentation](https://transit.land/documentation/datastore/api-endpoints.html) for details.
 
 ##### Sample multimodal requests with transit
@@ -235,7 +235,7 @@ The summary JSON object includes:
 
 A `trip` contains one or more `legs`. For *n* number of `break` locations, there are *n-1* legs. `Through` locations do not create separate legs.
 
-Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](/mobility/decoding.md/).
+Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](/decoding.md).
 
 Each maneuver includes:
 
@@ -388,9 +388,9 @@ The following is a table of HTTP status error code conditions that may occur for
 
 ### Internal error codes and conditions
 
-The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects.
+The following is a table of exception internal error code conditions that may occur for a particular request. An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects.
 
-The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla#organization).
+The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla).
 
 | Error code | Error |
 | :--------- | :---------- |
