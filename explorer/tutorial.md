@@ -2,7 +2,7 @@
 
 [Mobility Explorer](https://mapzen.com/mobility/explorer) highlights the connections between transportation datasets, including among different transportation modes and operators. In this tutorial, you will use Mobility Explorer to ask questions about routes and stops, filter the kinds of transit data displayed on a map, and view travel times from a place. You can use these queries to build a custom transit map.
 
-You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](/isochrone/api-reference.md/).
+You will use Mobility Explorer to query and visualize transit data from [Transitland](https://transit.land), a community-edited, open transit data aggregation project that Mapzen sponsors, and analyze access using other Mapzen Mobility services, including [Mapzen Isochrone](/isochrone/api-reference.md).
 
 You can follow along with the location example used in the tutorial, or choose your own address or place to view transit in that area.
 
@@ -10,7 +10,7 @@ To complete the tutorial, all you need is a browser and an internet connection w
 
 ## Get to know Transitland data
 
-[Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer, as well as the multimodal routing for [Mapzen Turn-by-Turn](/turn-by-turn/api-reference.md/).
+[Transitland](https://transit.land) is an open-source database of transit information, and brings together many sources of transit data to build a directory of operators and feeds that can be edited by transit enthusiasts and developers. Transitland is the source of transit data you see and query in Mobility Explorer, as well as the multimodal routing for [Mapzen Turn-by-Turn](/turn-by-turn/api-reference.md).
 
 Transitland aggregates publicly available transit datasets that use the [General Transit Feed Specification](https://developers.google.com/transit/gtfs/), which is a common way of organizing transit schedules, routes, and associated content. A GTFS feed consists of a .zip file that contains a series of specific text files with this information. Transitland has several components to it, including Feed Registry and Datastore.
 
@@ -29,7 +29,7 @@ Now that you have seen the source data in Transitland, you can better understand
 Each query or map update is maintained as a separate URL, which means that you can return to your previous map by clicking the back button in your browser window. You can also share this URL with others and they will see the same results that you see.
 
 1. In your browser, go to https://mapzen.com/mobility/explorer/. Mobility Explorer opens to a default location, with a map on the right and a sidebar on the left where you can visualize and analyze transit data.
-2. In the search box on the map, type `Oakland, CA`. The search box uses [Mapzen Search](https://mapzen.com/products/search/), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
+2. In the search box on the map, type `Oakland, CA`. The search box uses [Mapzen Search](https://mapzen.com/products/search/geocoding), Mapzen's open-source geocoder, and the text automatically completes as you type. When you press Enter, the map extent updates and adds a pin in Oakland.
 3. On the left, under `Visualize public transit networks`, click `Show Operators`. This shows polygons representing the area served by each operator. Essentially, each polygon is created to surround all of the stop locations served by a given operator.
   ![Transit operators near Oakland, California](/images/mobility-explorer-operator-polygons.png)
 4. Hover over the polygons on the map to see the operator name.
@@ -103,7 +103,7 @@ With a point on the map, either a selected stop or marker from a search, you can
 
 This is known as an isochrone, which is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. Isochrone functionality is also sometimes referred to as a service area, a drive-time analysis to show where you can drive from a point within a certain time, or a walkshed. A walkshed, which is a transportation planning term, calculates an area within a range of a location that can be reached by walking (or a bikeshed for areas that can be traveled by bicycle within those time ranges).
 
-The analysis comes from the [Mapzen Isochrone](/isochrone.md/api-reference/) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland Datastore API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
+The analysis comes from the [Mapzen Isochrone](/isochrone.md/api-reference.md) service, which you can use as an API in your own apps. In earlier exercises, your requests have been to the Transitland Datastore API, but isochrones use the Mapzen Mobility API. You can also see the Mapzen Mobility API request using the link on the sidebar.
 
 Mapzen Isochrone uses data from [OpenStreetMap](http://www.openstreetmap.org/) to help determine which roads and bicycle paths can be reached.
 
