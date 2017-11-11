@@ -31,7 +31,7 @@ The service requires an API key. In a request, you must append your own API key 
 
 `shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input.
 
-| `shape_match` type | Description |
+| shape_match type | Description |
 | :--------- | :----------- |
 | `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching, so it should only be used when the shape is from a prior Valhalla route. |
 | `map_snap` | Indicates that a map-matching algorithm should be used because the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
