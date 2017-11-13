@@ -24,7 +24,7 @@ The Mapzen Turn-by-Turn service requires an API key. In a request, you must appe
 
 You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search), can be used to find places and geocode addresses, which must be converted to coordinates for input.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding), can be used to find places and geocode addresses, which must be converted to coordinates for input.
 
 To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path.
 
@@ -143,7 +143,7 @@ These options are available for transit costing when the multimodal costing mode
 When using `filters`, you need to include a [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) to identify the stop, routes, or operators to include or exclude in your query. Depending on how you are interacting with transit data from Transitland, there are different ways of obtaining the Onestop ID.
 
 - Turn-by-Turn API: Query a transit route query and parse the returned JSON maneuver  for `transit_info` to find `operator_onestop_id` and the route `onestop_id`. A `transit_stop` contains the `onestop_id` for the stop.
-- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](https://mapzen.com/documentation/mobility/explorer/overview/) for more information.
+- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](/explorer/explore-transit/) for more information.
 - [Transitland](https://transit.land/): Use the Transitland Datastore API to query directly for stops, routes, and operators using a number of options. For example, you can filter for only [subway routes](http://transit.land/api/v1/routes?vehicle_type=metro) or [bus routes](http://transit.land/api/v1/routes?vehicle_type=bus). See the [Transitland Datastore API documentation](https://transit.land/documentation/datastore/api-endpoints.html) for details.
 
 ##### Sample multimodal requests with transit
@@ -236,7 +236,7 @@ The summary JSON object includes:
 
 A `trip` contains one or more `legs`. For *n* number of `break` locations, there are *n-1* legs. `Through` locations do not create separate legs.
 
-Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](https://mapzen.com/documentation/mobility/decoding/).
+Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](/decoding.md).
 
 Each maneuver includes:
 
@@ -263,7 +263,7 @@ Each maneuver includes:
 | `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
 | `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
 | `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
-| `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
+| `transit_info` | Contains the attributes that describe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
 | `travel_mode` | Travel mode.<ul><li>"drive"</li><li>"pedestrian"</li><li>"bicycle"</li><li>"transit"</li></ul>|
 | `travel_type` | Travel type for drive.<ul><li>"car"</li></ul>Travel type for pedestrian.<ul><li>"foot"</li></ul>Travel type for bicycle.<ul><li>"road"</li></ul>Travel type for transit.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
@@ -359,7 +359,7 @@ Continuing with the earlier routing example from the Detroit, Michigan area, a m
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
-### HTTP Status codes and conditions
+### HTTP status codes and conditions
 
 The following is a table of HTTP status error code conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
 
@@ -389,9 +389,9 @@ The following is a table of HTTP status error code conditions that may occur for
 
 ### Internal error codes and conditions
 
-The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects.
+The following is a table of exception internal error code conditions that may occur for a particular request. An [error code utility header file](https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h) can be included by any of the Valhalla service projects.
 
-The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla#organization).
+The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla).
 
 | Error code | Error |
 | :--------- | :---------- |

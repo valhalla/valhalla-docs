@@ -30,18 +30,18 @@ The optimized route service requires an API key. In a request, you must append y
 
 ### Location parameters
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/turn-by-turn/api-reference/#locations) for more information on specifying locations.
+Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
 ### Costing parameters
 
-The Optimized Route service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. The **multimodal costing is not supported** for the Optimized Route service at this time.  Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+The Optimized Route service uses the `auto`, `bicycle` and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. The **multimodal costing is not supported** for the Optimized Route service at this time.  Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 ### Other request options
 
@@ -71,4 +71,4 @@ This is an example which it returns: `400::Location at index 3 is unreachable`
    https://matrix.mapzen.com/optimized_route?json={"locations":[{"lat":40.306600,"lon":-76.900022},{"lat":40.293246,"lon":-76.936230},{"lat":40.448678,"lon":-76.932885},{"lat":40.419753,"lon":-76.999632},{"lat":40.211050,"lon":-76.777071},{"lat":40.306600,"lon":-76.900022}],"costing":"auto"}&api_key=your-mapzen-api-key
 ```
 
-See the [HTTP return codes](https://mapzen.com/documentation/turn-by-turn/api-reference/#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md#http-status-codes-and-conditions) for more on messages you might receive from the service.

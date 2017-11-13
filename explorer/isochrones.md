@@ -8,7 +8,7 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 Isochrone functionality is also sometimes referred to as a service area, a drive-time analysis to show where you can drive from a point within a certain time, or a walkshed. A walkshed, which is a transportation planning term, calculates an area within a range of a location that can be reached by walking (or a bikeshed for areas that can be traveled by bicycle within those time ranges).
 
-The analysis comes from the [Mapzen Isochrone](https://mapzen.com/documentation/mobility/isochrone/api-reference/) service, which you can use as an API in your own apps.
+The analysis comes from the [Mapzen Isochrone](/isochrone/api-reference.md) service, which you can use as an API in your own apps.
 
 1. Search for a place in the box or click a location on the map. You need to have a point on your map to generate isochrones.
 2. Click `Generate isochrones`.

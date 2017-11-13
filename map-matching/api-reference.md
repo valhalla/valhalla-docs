@@ -31,7 +31,7 @@ The service requires an API key. In a request, you must append your own API key 
 
 `shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input.
 
-| `shape_match` type | Description |
+| shape_match type | Description |
 | :--------- | :----------- |
 | `edge_walk` | Indicates an edge walking algorithm can be used. This algorithm requires nearly exact shape matching, so it should only be used when the shape is from a prior Valhalla route. |
 | `map_snap` | Indicates that a map-matching algorithm should be used because the input shape might not closely match Valhalla edges. This algorithm is more expensive. |
@@ -39,11 +39,11 @@ The service requires an API key. In a request, you must append your own API key 
 
 ### Costing models and other options
 
-Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 Costing for `multimodal` is not supported for map matching because it would be difficult to get favorable GPS traces.
 
-You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#directions-options) documentation for examples.
+You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](/turn-by-turn/api-reference.md#directions-options) documentation for examples.
 
 ### Attribute filters (`trace_attributes` only)
 
@@ -130,7 +130,7 @@ matched.distance_from_trace_point
 
 ### Outputs of `trace_route`
 
-The outputs of the `trace_route` action are the same as the [outputs of a route](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#outputs-of-a-route) action.
+The outputs of the `trace_route` action are the same as the [outputs of a route](/turn-by-turn/api-reference.md#outputs-of-a-route) action.
 
 ### Outputs of `trace_attributes`
 
@@ -141,7 +141,7 @@ The `trace_attributes` results contains a list of edges and, optionally, the fol
 | `edges` | List of edges associated with input shape. See the list of [edge items](#edge-items) for details. |
 | `osm_changeset` | Identifier of the OpenStreetMap base data version. |
 | `admins` | List of the administrative codes and names. See the list of [admin items](#admin-items) for details. |
-| `shape` | The [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. |
+| `shape` | The [encoded polyline](/decoding.md) of the matched path. |
 | `matched_points` | List of match results when using the `map_snap` shape match algorithm. There is a one-to-one correspondence with the input set of latitude, longitude coordinates and this list of match results. See the list of [matched point items](#matched-point-items) for details. |
 | `units` | The specified units with the request, in either kilometers or miles. |
 
@@ -265,7 +265,7 @@ Follow these guidelines to improve the Map Matching results.
 
 You can use certain parameters to tune the response.
 
-* Use `turn_penalty_factor` to penalize turns from one road segment to next. For a pedestrian   `trace_route`, you may see a back-and-forth motion along the streets of your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* Use `turn_penalty_factor` to penalize turns from one road segment to next. For a pedestrian `trace_route`, you may see a back-and-forth motion along the streets of your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
 * Set the `gps_accuracy` to indicate the accuracy in meters.
 * Apply a `search_radius` to specify the search radius (in meters) within which to search road candidates for each measurement. The maximum search radius is 100 meters. Note that performance may decrease with a higher search radius value.
 
