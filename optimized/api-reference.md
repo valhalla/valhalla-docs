@@ -2,7 +2,7 @@
 
 The Optimized Route service provides a quick computation of time and distance between a set of location sources and location targets and returns them in an optimized route order, along with the shape.
 
-For an interactive demo, see https://mapzen.com/products/optimized-route.
+[View an interactive demo](https://mapzen.com/products/mobility/optimized-route)
 
 ## Optimized route service action
 

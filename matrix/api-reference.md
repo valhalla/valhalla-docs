@@ -2,7 +2,7 @@
 
 The Time-Distance Matrix service provides a quick computation of time and distance between a set of locations and returns them to you in the resulting matrix table.
 
-For an interactive demo, see https://mapzen.com/products/time-distance-matrix/.
+[View an interactive demo](https://mapzen.com/products/mobility/time-distance-matrix/)
 
 ## Matrix service actions
 
