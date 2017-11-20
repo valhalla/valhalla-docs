@@ -10,4 +10,6 @@ Use [Mapzen Isochrone](https://mapzen.com/products/mobility/isochrone/) to get a
 
 [Mapzen Map Matching](https://mapzen.com/products/mobility/map-matching/) matches coordinates to known roads so you can turn a path into a route with narrative instructions and get the attribute values from that matched line.
 
+Use [Mapzen Transit Available](https://mapzen.com/products/mobility/transit-available/) to check the availability of transit for at least 1 location.
+
 Use [Mobility Explorer](https://mapzen.com/mobility/explorer/) to query and visualize transit data from Transitland and analyze access using Mapzen Mobility services.
