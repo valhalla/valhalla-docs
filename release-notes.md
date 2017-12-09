@@ -2,6 +2,7 @@
 * **Enhancement**
    * Remove union from GraphId speeds up some platforms
    * Use SAC scale in pedestrian costing
+   * Expanded python bindings to include all actions (route, matrix, isochrone, etc)
 * **Bug Fix**
    * French translation typo fixes
 *  **Data Producer Update**
