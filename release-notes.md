@@ -1,3 +1,13 @@
+## Release Date: 2017-12-09 Valhalla 2.4.2
+* **Enhancement**
+   * Remove union from GraphId speeds up some platforms
+   * Use SAC scale in pedestrian costing
+* **Bug Fix**
+   * French translation typo fixes
+*  **Data Producer Update**
+   * Handling shapes that intersect the poles when binning
+   * Handling when transit shapes are less than 2 points
+   
 ## Release Date: 2017-11-09 Valhalla 2.4.1
 *  **Data Producer Update**
    * Added kMopedAccess to modes for complex restrictions.  Remove the kMopedAccess when auto access is removed.  Also, add the kMopedAccess when an auto restriction is found.
