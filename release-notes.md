@@ -1,4 +1,4 @@
-## Release Date: 2017-12-09 Valhalla 2.4.2
+## Release Date: 2017-12-11 Valhalla 2.4.3
 * **Enhancement**
    * Remove union from GraphId speeds up some platforms
    * Use SAC scale in pedestrian costing
