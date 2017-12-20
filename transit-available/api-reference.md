@@ -33,7 +33,7 @@ A location must include a latitude and longitude in decimal degrees. The coordin
 
 Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
-## Outputs of the optimized route service
+## Outputs of the transit availability service
 
 These are the results of a request to the Transit Availability service.
 
