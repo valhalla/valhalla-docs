@@ -1,8 +1,8 @@
-# Speed values in Mapzen Mobility APIs
+# Speed values in Valhalla APIs
 
-To calculate speed and related factors when routing, such as travel times, Mapzen Mobility APIs consider speed limits in the OpenStreetMap source data, defaults for a particular category of road, or a measure of whether the road is in an urban or rural environment.
+To calculate speed and related factors when routing, such as travel times, Valhalla APIs consider speed limits in the OpenStreetMap source data, defaults for a particular category of road, or a measure of whether the road is in an urban or rural environment.
 
-Real-time or historical traffic information is not currently included in speed calculations. Mapzen is working towards these capabilities, and the tiled data structures of Valhalla (the open-source project that powers the Mobility APIs) and dynamic costing approach can readily support traffic information when available.
+Real-time or historical traffic information is not currently included in speed calculations. Valhalla is working towards these capabilities, and the tiled data structures of Valhalla and dynamic costing approach can readily support traffic information when available.
 
 ## Assignment of speeds to roadways
 
