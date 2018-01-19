@@ -1,6 +1,6 @@
 ## Valhalla open source routing
 
-This is the early history of Valhalla and the Mapzen Turn-by-Turn service based on it.
+This is the early history of Valhalla.
 
 Routing is a wily beast and many valiant efforts have been made to slay it, with limited success. However, we have brought a mighty new Mjölnir-like weapon to bear on this beast: Open Source!
 
