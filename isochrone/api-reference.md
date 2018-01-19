@@ -1,8 +1,6 @@
 # Isochrone service API reference
 
-An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. The Mapzen Isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map.
-
-You can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Isochrone, or view an [interactive demo](https://mapzen.com/products/mobility/isochrone/).
+An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. Valhalla's isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map.
 
 Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
@@ -10,34 +8,36 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 ![Isochrones for travel times by driving in Melbourne from Mobility Explorer](/images/melbourne-isochrones.png)
 
+## Using the hosted Mapbox Isochrone Service
+
+The Mapbox isochrone service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
+
 ## Inputs of the Isochrone service
 
-A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
+A request takes the form of `servername/isochrone?json={}`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
 ```
-matrix.mapzen.com/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office&api_key=your-mapzen-api-key
+**TBD**/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
 ```
 
 There is an option to name your isochrone request by appending `&id=`. The `id` is returned with the response so you can match it to your corresponding request.
 
-The isochrone service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 ### Location parameters
 
-The `locations` must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
+The `locations` must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapbox Geocoding](https://www.mapbox.com/api-documentation/#geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
+Refer to the [route location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
 ### Costing parameters
 
-Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
+The isochrone service uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Valhalla Turn-by-Turn service. Refer to the [route costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 ### Other request parameters
 
@@ -64,17 +64,15 @@ Most JavaScript-based GeoJSON renderers, including [Leaflet](http://leafletjs.co
 
 When making a map, drawing the isochrone contours as lines is more straightforward than polygons, and, therefore, currently is the default and recommended method. When deciding between the output as lines and polygons, consider your use case and the additional styling considerations involved with polygons. For example, fills should be rendered as semi-transparent over the other map layers so they are visible, although you may have more flexibility when using a vector-based map. In addition, polygons from multiple contour levels do not have overlapping areas cut out or removed. In other words, the outer contours include the areas of any inner contours, causing the colors and transparencies to blend when multiple contour polygons are drawn at the same time.
 
-Mapzen is working on improving the polygon isochrone output and rendering capabilities, including by demoting some rings to be inners of other rings and removing potential self-intersections in polygon geometries.
+The Valhalla team has plans to improving the polygon isochrone output and rendering capabilities, including by demoting some rings to be inners of other rings and removing potential self-intersections in polygon geometries.
 
 ## Isochrone demonstration in Mobility Explorer
 
-Mapzen's [Mobility Explorer](https://mapzen.com/mobility/explorer) helps you understand transportation networks around the world and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
-
-You can review the [documentation](/explorer/isochrones.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
+The open-source [Mobility Explorer](https://github.com/transitland/mobility-explorer) tool helps you understand transportation networks around the world and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
 
 ## Future work on the isochrone service
 
-The Isochrone service is in active development. You can follow the [Mapzen blog](https://mapzen.com/blog) to get updates. To report software issues or suggest enhancements, open an issue in the [Valhalla GitHub repository](https://github.com/valhalla/valhalla/issues) or send a message to [routing@mapzen.com](mailto:routing@mapzen.com).
+The Isochrone service is in active development. To report software issues or suggest enhancements, open an issue in the [Valhalla GitHub repository](https://github.com/valhalla/valhalla/issues).
 
 Several other options are being considered as future service enhancements. These include:
 
@@ -83,7 +81,7 @@ Several other options are being considered as future service enhancements. These
 * Removing self intersections from polygonal contours.
 * Allowing multiple locations to compute the region reachable from any of the locations within a specified time.
 * Generating contours with reverse access logic to see the region that can reach a specific location within the specified time.
-* Returning raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location, including improvements with one-to-many requests to the Mapzen Time-Distance Matrix service.
+* Returning raster data for potential animation using OpenGL shaders. This also has analysis use for being able to query thousands of locations to determine the time to each location, including improvements with one-to-many requests to the Valhalla Time-Distance Matrix service.
 
 ## Data credits
 
