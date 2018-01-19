@@ -19,11 +19,9 @@ Here is an example of an Transit Availability request:
 https://valhalla.mapzen.com/transit_available?json={"locations":[{"lat":35.647452, "lon":-79.597477, "radius":20}, {"lat":34.766908, "lon":-80.325936,"radius":10}]}&api_key=your-mapzen-api-key
 ```
 
-The transit availability service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 ### Location parameters
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapbox Geocoding](https://www.mapbox.com/api-documentation/#geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
