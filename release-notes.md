@@ -1,3 +1,8 @@
+## Release Date: 2017-01-19 Valhalla 2.4.4
+* **Enhancement**
+   * Elevation service speed improvments and the ability to serve lz4hc compressed data
+   * Basic support for downloading routing tiles on demand
+   
 ## Release Date: 2017-12-11 Valhalla 2.4.3
 * **Enhancement**
    * Remove union from GraphId speeds up some platforms
