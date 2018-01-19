@@ -2,6 +2,7 @@
 * **Enhancement**
    * Elevation service speed improvments and the ability to serve lz4hc compressed data
    * Basic support for downloading routing tiles on demand
+   * Deprecated `valhalla_route_service`, now all services (including elevation) are found under `valhalla_service`
    
 ## Release Date: 2017-12-11 Valhalla 2.4.3
 * **Enhancement**
