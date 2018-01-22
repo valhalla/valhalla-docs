@@ -1,12 +1,16 @@
 # Map Matching service API reference
 
-With the Mapzen Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
+With the Mapbox Map Matching service, you can match coordinates, such as GPS locations, to roads and paths that have been mapped in OpenStreetMap. By doing this, you can turn a path into a route with narrative instructions and also get the attribute values from that matched line.
 
-You can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment and try tracing your own data, or view an [interactive demo](https://mapzen.com/products/mobility/map-matching/).
+You can view an [interactive demo](http://valhalla.github.io/demos/map_matching/) or use [Mobility Explorer](https://github.com/transitland/mobility-explorer). 
 
 There are two separate Map Matching calls that perform different operations on an input set of latitude,longitude coordinates. The `trace_route` action returns the shape snapped to the road network and narrative directions, while `trace_attributes` returns detailed attribution along the portion of the route.
 
 It is important to note that all service requests should be *POST* because `shape` or `encoded_polyline` can be fairly large.
+
+## Using the hosted Mapbox Valhalla Map Matching Service
+
+The Mapbox Valhalla map-matching service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
 
 ## Trace route action
 
@@ -25,8 +29,6 @@ Note that the attributes that are returned are Valhalla routing attributes, not 
 
 ## Inputs of the Map Matching service
 
-The service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 ### Shape-matching parameters
 
 `shape_match` is an optional string input parameter. It allows some control of the matching algorithm based on the type of input.
@@ -39,11 +41,11 @@ The service requires an API key. In a request, you must append your own API key 
 
 ### Costing models and other options
 
-Mapzen Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
+Mapbox Map Matching uses the `auto`, `auto_shorter`, `bicycle`, `bus`, and `pedestrian` costing models available in the Valhalla route service. Refer to the [route costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 Costing for `multimodal` is not supported for map matching because it would be difficult to get favorable GPS traces.
 
-You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [Turn-by-Turn directions options](/turn-by-turn/api-reference.md#directions-options) documentation for examples.
+You can also set `directions_options` to specify output units, language, and whether or not to return directions in a narrative form. Refer to the [route options](/turn-by-turn/api-reference.md#directions-options) documentation for examples.
 
 ### Attribute filters (`trace_attributes` only)
 
@@ -273,7 +275,7 @@ You can use certain parameters to tune the response.
 
 ### Example `trace_route` requests
 
-The following are example requests for the `trace_routes` action. They use a base URL of `https://valhalla.mapzen.com/trace_route?api_key=`, where the code is the POST body.
+The following are example requests for the `trace_routes` action. They use a base URL of **`TBD/trace_route?access_token=`, where the code is the POST body.**
 
 *`trace_route` with encoded polyline parameter*
 
@@ -289,7 +291,7 @@ The following are example requests for the `trace_routes` action. They use a bas
 
 ### Example `trace_attributes` requests
 
-The following are example requests for the `trace_attributes` action. They use a base URL of `https://valhalla.mapzen.com/trace_attributes?api_key=`, where the code is the POST body.
+The following are example requests for the `trace_attributes` action. They use a base URL of **`TBD/trace_attributes?access_token=`, where the code is the POST body.**
 
 *`trace_attributes` with shape parameter*
 
