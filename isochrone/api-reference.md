@@ -2,7 +2,7 @@
 
 An isochrone is a line that connects points of equal travel time about a given location, from the Greek roots of `iso` for equal and `chrone` for time. The Mapzen Isochrone service computes areas that are reachable within specified time intervals from a location, and returns the reachable regions as contours of polygons or lines that you can display on a map.
 
-For an interactive demo, you can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Isochrone, or visit https://mapzen.com/products/isochrone/ for sample maps.
+You can use [Mobility Explorer](https://mapzen.com/mobility/explorer) to experiment with Mapzen Isochrone, or view an [interactive demo](https://mapzen.com/products/mobility/isochrone/).
 
 Isochrone maps share some of the same concepts and terminology with familiar topographic maps, which depict contour lines for points of equal elevation. For this reason other terms common in topography apply, such as contours or isolines.
 
@@ -12,7 +12,7 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 ## Inputs of the Isochrone service
 
-A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models).
+A request takes the form of `matrix.mapzen.com/isochrone?json={}&api_key=`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
@@ -26,18 +26,18 @@ The isochrone service requires an API key. In a request, you must append your ow
 
 ### Location parameters
 
-The `locations` must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/documentation/search/) can be used to find places and geocode addresses, whose coordinates can be used as input to the Isochrone service.
+The `locations` must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding) can be used to find places and geocode addresses, whose coordinates can be used as input to the service.
 
 | Location parameters | Description |
 | :--------- | :----------- |
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Refer to the [Turn-by-Turn location documentation](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#locations) for more information on specifying locations.
+Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
 ### Costing parameters
 
-Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-models) and [costing options](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference/#costing-options) documentation for more on how to specify this input.
+Mapzen Isochrone uses the `auto`, `bicycle`, `pedestrian`, and `multimodal` costing models available in the Mapzen Turn-by-Turn service. Refer to the [Turn-by-Turn costing models](/turn-by-turn/api-reference.md#costing-models) and [costing options](/turn-by-turn/api-reference.md#costing-options) documentation for more on how to specify this input.
 
 ### Other request parameters
 
@@ -56,7 +56,7 @@ In the service response, the isochrone contours are returned as [GeoJSON](http:/
 
 The contours are calculated using rasters and are returned as either polygon or line features, depending on your input setting for the `polygons` parameter. If an isochrone request has been named using the optional `&id=` input, then the `id` is returned as a name property for the feature collection within the GeoJSON response.
 
-See the [HTTP return codes](https://mapzen.com/documentation/mobility/turn-by-turn/api-reference//#return-codes-and-conditions) for more on messages you might receive from the service.
+See the [HTTP return codes](/turn-by-turn/api-reference.md#http-status-codes-and-conditions) for more on messages you might receive from the service.
 
 ### Draw isochrones on a map
 
@@ -70,7 +70,7 @@ Mapzen is working on improving the polygon isochrone output and rendering capabi
 
 Mapzen's [Mobility Explorer](https://mapzen.com/mobility/explorer) helps you understand transportation networks around the world and has tools for adding isochrones to a map. Search for a location and add a point to the map, then generate isochrones for certain modes of transit from that location.
 
-You can review the [documentation](explorer/overview.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
+You can review the [documentation](/explorer/isochrones.md) and get started with Mobility Explorer at https://mapzen.com/mobility/explorer.
 
 ## Future work on the isochrone service
 
@@ -87,4 +87,4 @@ Several other options are being considered as future service enhancements. These
 
 ## Data credits
 
-The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land), [OpenStreetMap](http://www.openstreetmap.org/), and [CARTO](https://carto.com/).
+The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land) and [OpenStreetMap](http://www.openstreetmap.org/).

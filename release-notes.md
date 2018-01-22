@@ -1,3 +1,47 @@
+## Release Date: 2017-01-19 Valhalla 2.4.4
+* **Enhancement**
+   * Elevation service speed improvments and the ability to serve lz4hc compressed data
+   * Basic support for downloading routing tiles on demand
+   * Deprecated `valhalla_route_service`, now all services (including elevation) are found under `valhalla_service`
+   
+## Release Date: 2017-12-11 Valhalla 2.4.3
+* **Enhancement**
+   * Remove union from GraphId speeds up some platforms
+   * Use SAC scale in pedestrian costing
+   * Expanded python bindings to include all actions (route, matrix, isochrone, etc)
+* **Bug Fix**
+   * French translation typo fixes
+*  **Data Producer Update**
+   * Handling shapes that intersect the poles when binning
+   * Handling when transit shapes are less than 2 points
+   
+## Release Date: 2017-11-09 Valhalla 2.4.1
+*  **Data Producer Update**
+   * Added kMopedAccess to modes for complex restrictions.  Remove the kMopedAccess when auto access is removed.  Also, add the kMopedAccess when an auto restriction is found.
+   
+## Release Date: 2017-11-08 Valhalla 2.4.0
+*  **Data Producer Update**
+   * Added logic to support restriction = x with a the except tag.  We apply the restriction to everything except for modes in the except tag.
+   * Added logic to support railway_service and coach_service in transit. 
+* **Bug Fix**
+  * Return proper edge_walk path for requested shape_match=walk_or_snap
+  * Skip invalid stateid for Top-K requests
+
+## Release Date: 2017-11-07 Valhalla 2.3.9
+* **Enhancement**
+  * Top-K map matched path generation now only returns unique paths and does so with fewer iterations
+  * Navigator call outs for both imperial and metric units
+  * The surface types allowed for a given bike route can now be controlled via a request parameter `avoid_bad_surfaces`
+  * Improved support for motorscooter costing via surface types, road classification and vehicle specific tagging
+* **Bug Fix**
+  * Connectivity maps now include information about transit tiles
+  * Lane counts for singly digitized roads are now correct for a given directed edge
+  * Edge merging code for assigning osmlr segments is now robust to partial tile sets
+  * Fix matrix path finding to allow transitioning down to lower levels when appropriate. In particular, do not supersede shortcut edges until no longer expanding on the next level.
+  * Fix optimizer rotate location method. This fixes a bug where optimal ordering was bad for large location sets.
+*  **Data Producer Update**
+   * Duration tags are now used to properly set the speed of travel for a ferry routes
+   
 ## Release Date: 2017-10-17 Valhalla 2.3.8
 * **Bug Fix**
   * Fixed the roundabout exit count for bicycles when the roundabout is a road and not a cycleway

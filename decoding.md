@@ -2,9 +2,11 @@
 
 Mapzen Turn-by-Turn uses the encoded polyline format to store a series of latitude, longitude coordinates as a single string. Polyline encoding greatly reduces the size of the route response, especially for longer routes. A description is found here: [polyline encoding](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
 
-Note that Mapzen APIs use six digits of decimal precision, rather than five as referenced in the Google algorithms documentation.
+**Note: Mapzen Mobility APIs use six digits of decimal precision.**
 
-Below are some sample algorithms to decode the string to create a list of latitude,longitude coordinates.
+It is very important that you use six digits, rather than five as referenced in the Google algorithms documentation. With fewer than six digits, your locations are incorrectly placed (commonly, in the middle of an ocean), and you may receive errors with your API requests.
+
+Below are some sample algorithms to decode the string to create a list of latitude,longitude coordinates. Using this [demo tool](http://mapzen.github.io/marketing/demos/polyline/index.html), you can also paste an encoded polyline string, decode it, and see the locations on a map (and save to GeoJSON). Use it to test and verify that your points are placed where you expected them.
 
 ## JavaScript
 

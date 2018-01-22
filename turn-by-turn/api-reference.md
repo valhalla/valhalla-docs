@@ -2,7 +2,7 @@
 
 Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application.
 
-For an interactive demo, see https://mapzen.com/products/turn-by-turn/.
+[View an interactive demo](https://mapzen.com/products/mobility/turn-by-turn/)
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
@@ -24,7 +24,7 @@ The Mapzen Turn-by-Turn service requires an API key. In a request, you must appe
 
 You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/projects/search), can be used to find places and geocode addresses, which must be converted to coordinates for input.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding), can be used to find places and geocode addresses, which must be converted to coordinates for input.
 
 To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path.
 
@@ -110,7 +110,8 @@ These additional options are available for bicycle costing methods.
 | `cycling_speed` | Cycling speed is the average travel speed along smooth, flat roads. This is meant to be the speed a rider can comfortably maintain over the desired distance of the route. It can be modified (in the costing method) by surface type in conjunction with bicycle type and (coming soon) by hilliness of the road section. When no speed is specifically provided, the default speed is determined by the bicycle type and are as follows: Road = 25 KPH (15.5 MPH), Cross = 20 KPH (13 MPH), Hybrid/City = 18 KPH (11.5 MPH), and Mountain = 16 KPH (10 MPH). |
 | `use_roads` | A cyclist's propensity to use roads alongside other vehicles. This is a range of values from 0 to 1, where 0 attempts to avoid roads and stay on cycleways and paths, and 1 indicates the rider is more comfortable riding on roads. Based on the `use_roads` factor, roads with certain classifications and higher speeds are penalized in an attempt to avoid them when finding the best path. The default value is 0.5. |
 | `use_hills` | A cyclist's desire to tackle hills in their routes. This is a range of values from 0 to 1, where 0 attempts to avoid hills and steep grades even if it means a longer (time and distance) path, while 1 indicates the rider does not fear hills and steeper grades. Based on the `use_hills` factor, penalties are applied to roads based on elevation change and grade. These penalties help the path avoid hilly roads in favor of flatter roads or less steep grades where available. Note that it is not always possible to find alternate paths to avoid hills (for example when route locations are in mountainous areas). The default value is 0.5. |
-| `use_ferry` | This value indicates the willingness to take ferries. This is range of values between 0 and 1. Values near 0 attempt to avoid ferries and values near 1 will favor ferries. Note that sometimes ferries are required to complete a route so values of 0 are not guaranteed to avoid ferries entirely. The default value is 0.5. |
+| `use_ferry` | This value indicates the willingness to take ferries. This is a range of values between 0 and 1. Values near 0 attempt to avoid ferries and values near 1 will favor ferries. Note that sometimes ferries are required to complete a route so values of 0 are not guaranteed to avoid ferries entirely. The default value is 0.5. |
+| `avoid_bad_surfaces` | This value is meant to represent how much a cyclist wants to avoid roads with poor surfaces relative to the bicycle type being used. This is a range of values between 0 and 1. When the value is 0, there is no penalization of roads with different surface types; only bicycle speed on each surface is taken into account. As the value approaches 1, roads with poor surfaces for the bike are penalized heavier so that they are only taken if they significantly improve travel time. When the value is equal to 1, all bad surfaces are completely disallowed from routing, including start and end points. The default value is 0.25. |
 
 ##### Motor_scooter costing options (BETA)
 Standard costing for travel by motor scooter or moped.  By default, motor_scooter costing will avoid higher class roads unless the country overrides allows motor scooters on these roads.  Motor scooter routes follow regular roads when needed, but avoid roads without motor_scooter, moped, or mofa access. The costing model recognizes factors unique to motor_scooter travel and offers options for tuning motor_scooter routes. Factors unique to travel by motor_scooter influence the resulting route.
@@ -154,7 +155,7 @@ These options are available for transit costing when the multimodal costing mode
 When using `filters`, you need to include a [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) to identify the stop, routes, or operators to include or exclude in your query. Depending on how you are interacting with transit data from Transitland, there are different ways of obtaining the Onestop ID.
 
 - Turn-by-Turn API: Query a transit route query and parse the returned JSON maneuver  for `transit_info` to find `operator_onestop_id` and the route `onestop_id`. A `transit_stop` contains the `onestop_id` for the stop.
-- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](https://mapzen.com/documentation/mobility/explorer/overview/) for more information.
+- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](/explorer/explore-transit/) for more information.
 - [Transitland](https://transit.land/): Use the Transitland Datastore API to query directly for stops, routes, and operators using a number of options. For example, you can filter for only [subway routes](http://transit.land/api/v1/routes?vehicle_type=metro) or [bus routes](http://transit.land/api/v1/routes?vehicle_type=bus). See the [Transitland Datastore API documentation](https://transit.land/documentation/datastore/api-endpoints.html) for details.
 
 ##### Sample multimodal requests with transit
@@ -247,7 +248,7 @@ The summary JSON object includes:
 
 A `trip` contains one or more `legs`. For *n* number of `break` locations, there are *n-1* legs. `Through` locations do not create separate legs.
 
-Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](https://mapzen.com/documentation/mobility/decoding/).
+Each leg of the trip includes a summary, which is comprised of the same information as a trip summary but applied to the single leg of the trip. It also includes a `shape`, which is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the route path, and a list of `maneuvers` as a JSON array. For more about decoding route shapes, see these [code examples](/decoding.md).
 
 Each maneuver includes:
 
@@ -274,7 +275,7 @@ Each maneuver includes:
 | `verbal_depart_instruction` | Text suitable for use as a verbal depart time instruction. Typically used with a transit maneuver, such as "Depart at 8:04 AM from 8 St - NYU". |
 | `arrive_instruction` | Written arrive time instruction. Typically used with a transit maneuver, such as "Arrive: 8:10 AM at 34 St - Herald Sq". |
 | `verbal_arrive_instruction` | Text suitable for use as a verbal arrive time instruction. Typically used with a transit maneuver, such as "Arrive at 8:10 AM at 34 St - Herald Sq". |
-| `transit_info` | Contains the attributes that descibe a specific transit route. See below for details. |
+| `transit_info` | Contains the attributes that describe a specific transit route. See below for details. |
 | `verbal_multi_cue` | True if the `verbal_pre_transition_instruction` has been appended with the verbal instruction of the next maneuver. |
 | `travel_mode` | Travel mode.<ul><li>"drive"</li><li>"pedestrian"</li><li>"bicycle"</li><li>"transit"</li></ul>|
 | `travel_type` | Travel type for drive.<ul><li>"car"</li></ul>Travel type for pedestrian.<ul><li>"foot"</li></ul>Travel type for bicycle.<ul><li>"road"</li></ul>Travel type for transit.<ul><li>Tram or light rail = "tram"</li><li>Metro or subway = "metro"</li><li>Rail = "rail"</li><li>Bus = "bus"</li><li>Ferry = "ferry"</li><li>Cable car = "cable_car"</li><li>Gondola = "gondola"</li><li>Funicular = "funicular"</li></ul>|
@@ -370,7 +371,7 @@ Continuing with the earlier routing example from the Detroit, Michigan area, a m
 
 In the future, look for additional maneuver information to enhance navigation applications, including landmark usage.
 
-### HTTP Status codes and conditions
+### HTTP status codes and conditions
 
 The following is a table of HTTP status error code conditions that may occur for a particular request. In general, the service follows the [HTTP specification](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). That is to say that `5xx` returns are generally ephemeral server problems that should be resolved shortly or are the result of a bug. `4xx` returns are used to mark requests that cannot be carried out, generally due to bad input in the request or problems with the underlying data. A `2xx` return is expected when there is a successful route result or `trip`, as described above.
 
@@ -400,9 +401,9 @@ The following is a table of HTTP status error code conditions that may occur for
 
 ### Internal error codes and conditions
 
-The following is a table of Valhalla exception internal error code conditions that may occur for a particular request.  An error code utility header file has been created within https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h and can be included by any of the Valhalla service projects.
+The following is a table of exception internal error code conditions that may occur for a particular request. An [error code utility header file](https://raw.githubusercontent.com/valhalla/baldr/master/valhalla/baldr/errorcode_util.h) can be included by any of the Valhalla service projects.
 
-The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla#organization).
+The codes correspond to code returned from a particular [Valhalla project](https://github.com/valhalla/valhalla).
 
 | Error code | Error |
 | :--------- | :---------- |
