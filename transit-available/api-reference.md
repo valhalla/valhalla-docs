@@ -12,11 +12,11 @@ You can request the following action from the Transit Availability service: `/tr
 
 ## Inputs of the transit availability service
 
-An example request takes the form of `valhalla.mapzen.com/transit_available?json={}&api_key=`, where the `transit_available?` represents the type of query and the JSON inputs inside the ``{}`` include an array of at least one location and with optional radius per location.
+An example request takes the form of `TBD/transit_available?json={}`, where the `transit_available?` represents the type of query and the JSON inputs inside the ``{}`` include an array of at least one location and with optional radius per location.
 
 Here is an example of an Transit Availability request:
 ```
-https://valhalla.mapzen.com/transit_available?json={"locations":[{"lat":35.647452, "lon":-79.597477, "radius":20}, {"lat":34.766908, "lon":-80.325936,"radius":10}]}&api_key=your-mapzen-api-key
+TBD/transit_available?json={"locations":[{"lat":35.647452, "lon":-79.597477, "radius":20}, {"lat":34.766908, "lon":-80.325936,"radius":10}]}
 ```
 
 ### Location parameters
@@ -29,7 +29,7 @@ A location must include a latitude and longitude in decimal degrees. The coordin
 | `lon` | Longitude of the location in degrees. |
 | `radius` | The number of meters about this input location within which edges (roads between intersections) will be considered as candidates for said location. When correlating this location to the route network, try to only return results within this distance (meters) from this location. If there are no candidates within this distance it will return the closest candidate within reason. If this value is larger than the configured service limit it will be clamped to that limit. The default is 0 meters. |
 
-Refer to the [Turn-by-Turn location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
+Refer to the [route location documentation](/turn-by-turn/api-reference.md#locations) for more information on specifying locations.
 
 ## Outputs of the transit availability service
 
