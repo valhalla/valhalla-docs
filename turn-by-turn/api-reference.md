@@ -1,30 +1,32 @@
-# Mapzen Turn-by-Turn routing service API reference
+# Valhalla routing service API reference
 
-Mapzen Turn-by-Turn, powered by the Valhalla engine, is an open-source routing service that lets you integrate routing and navigation into a web or mobile application.
+Valhalla's routing service (a.k.a. turn-by-turn), is an open-source routing service that lets you integrate routing and navigation into a web or mobile application.
 
-[View an interactive demo](https://mapzen.com/products/mobility/turn-by-turn/)
+[View an interactive demo](http://valhalla.github.io/demos/routing)
 
 The default logic for the OpenStreetMap tags, keys, and values used when routing are documented on an [OSM wiki page](http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Valhalla).
 
+## Using the hosted Mapbox Routing Service
+
+The Mapbox routing service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
+
 ## Inputs of a route
 
-The route request takes the form of `https://valhalla.mapzen.com/route?json={}&api_key=`, where the JSON inputs inside the `{}` include location information, name and options for the costing model, and output options. Here is an example request:
+The route request takes the form of `servername/route?json={}`, where the JSON inputs inside the `{}` include location information, name and options for the costing model, and output options. Here is an example request:
 
 ```
-https://valhalla.mapzen.com/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"},"id":"my_work_route"}&api_key=your-mapzen-api-key
+TBD/route?json={"locations":[{"lat":42.358528,"lon":-83.271400,"street":"Appleton"},{"lat":42.996613,"lon":-78.749855,"street":"Ranch Trail"}],"costing":"auto","costing_options":{"auto":{"country_crossing_penalty":2000.0}},"directions_options":{"units":"miles"},"id":"my_work_route"}&access_token=your-mapbox-access-token
 ```
 
 This request provides automobile routing between the Detroit, Michigan area and Buffalo, New York, with an optional street name parameter to improve navigation at the start and end points. It attempts to avoid routing north through Canada by adding a penalty for crossing international borders. The resulting route is displayed in miles.
 
 There is an option to name your route request. You can do this by appending the following to your request `&id=`. The `id` is returned with the response so a user could match to the corresponding request.
 
-The Mapzen Turn-by-Turn service requires an API key. In a request, you must append your own API key to the URL, following `api_key=`. See the [Mapzen developer overview](https://mapzen.com/documentation/overview/) for more on API keys and rate limits.
-
 ### Locations
 
 You specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.
 
-A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that Mapzen Turn-by-Turn is a routing service only, so cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapzen Search](https://mapzen.com/products/search/geocoding), can be used to find places and geocode addresses, which must be converted to coordinates for input.
+A location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on. Note that the Valhalla cannot search for names or addresses or perform geocoding or reverse geocoding. External search services, such as [Mapbox Geocoding](https://www.mapbox.com/api-documentation/#geocoding), can be used to find places and geocode addresses, which must be converted to coordinates for input.
 
 To build a route, you need to specify two `break` locations. In addition, you can include `through` locations to influence the route path.
 
@@ -56,7 +58,7 @@ Future development work includes adding location options and information related
 
 ### Costing models
 
-Mapzen Turn-by-Turn uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.
+Valhalla's routing service uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.
 
 | Costing model | Description |
 | :----------------- | :----------- |
@@ -136,6 +138,7 @@ These options are available for pedestrian costing methods.
 | `driveway_factor` | A factor that modifies (multiplies) the cost when encountering a [driveway](http://wiki.openstreetmap.org/wiki/Tag:service%3Ddriveway), which is often a private, service road. Pedestrian routes generally want to avoid driveways (private). The default driveway factor is 5.0. |
 | `step_penalty` | A penalty in seconds added to each transition onto a path with [steps or stairs](http://wiki.openstreetmap.org/wiki/Tag:highway%3Dsteps). Higher values apply larger cost penalties to avoid paths that contain flights of steps. |
 | `use_ferry` | This value indicates the willingness to take ferries. This is range of values between 0 and 1. Values near 0 attempt to avoid ferries and values near 1 will favor ferries. The default value is 0.5. Note that sometimes ferries are required to complete a route so values of 0 are not guaranteed to avoid ferries entirely. |
+| 'max_hiking_difficulty' | This value indicates the maximum difficulty of hiking trails that is allowed. Values between 0 and 6 are allowed. The values correspond to *sac_scale* values within OpenStreetMap, see reference [here](https://wiki.openstreetmap.org/wiki/Key:sac_scale). The default value is 1 which means that well cleared trails that are mostly flat or slightly sloped are allowed. Higher difficulty trails can be allowed by specifying a higher value for max_hiking_difficulty.
 
 ##### Transit costing options
 
@@ -155,7 +158,7 @@ These options are available for transit costing when the multimodal costing mode
 When using `filters`, you need to include a [Onestop ID](https://transit.land/documentation/onestop-id-scheme/) to identify the stop, routes, or operators to include or exclude in your query. Depending on how you are interacting with transit data from Transitland, there are different ways of obtaining the Onestop ID.
 
 - Turn-by-Turn API: Query a transit route query and parse the returned JSON maneuver  for `transit_info` to find `operator_onestop_id` and the route `onestop_id`. A `transit_stop` contains the `onestop_id` for the stop.
-- [Mobility Explorer](https://mapzen.com/mobility/explorer/): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. See the [Mobility Explorer documentation](/explorer/explore-transit/) for more information.
+- [Mobility Explorer](https://github.com/transitland/mobility-explorer): Click a single route, stop, or operator on the map, or use the drop-down menu to find the Onestop ID for routes and operators. The Onestop ID, among other details, is listed in the sidebar. 
 - [Transitland](https://transit.land/): Use the Transitland Datastore API to query directly for stops, routes, and operators using a number of options. For example, you can filter for only [subway routes](http://transit.land/api/v1/routes?vehicle_type=metro) or [bus routes](http://transit.land/api/v1/routes?vehicle_type=bus). See the [Transitland Datastore API documentation](https://transit.land/documentation/datastore/api-endpoints.html) for details.
 
 ##### Sample multimodal requests with transit
@@ -163,25 +166,25 @@ When using `filters`, you need to include a [Onestop ID](https://transit.land/do
 A multimodal request at the current date and time:
 
 ```
-https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&api_key=your-mapzen-api-key
+TBD/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","directions_options":{"units":"miles"}}&access_token=your-mapbox-access-token
 ```
 
 A multimodal request departing on 2016-03-29 at 08:00:
 
 ```
-https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","date_time":{"type":1,"value":"2016-03-29T08:00"}}&api_key=your-mapzen-api-key
+TBD/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","date_time":{"type":1,"value":"2016-03-29T08:00"}}&access_token=your-mapbox-access-token
 ```
 
 A multimodal request for a route favoring buses and a person walking at a set speed of 4.1 km/h:
 
 ```
-https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&api_key=your-mapzen-api-key
+TBD/route?json={"locations":[{"lat":40.749706,"lon":-73.991562,"type":"break","street":"Penn Plaza"},{"lat":40.73093,"lon":-73.991379,"type":"break","street":"Wanamaker Place"}],"costing":"multimodal","costing_options":{"transit":{"use_bus":"1.0","use_rail":"0.0","use_transfers":"0.3"},"pedestrian":{"walking_speed":"4.1"}}}&access_token=your-mapbox-access-token
 ```
 
 A multimodal request with a filter for certain Onestop IDs:
 
 ```
-https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","costing_options":{"transit":{"filters":{"stops":{"ids":["s-dr5rsq8pqg-8st~nyu&#60;r21n","s-dr5rsr9wyg-14st&#126;unionsq&#60;r20n"],"action":"exclude"},"routes":{"ids":["r-dr5r-r"],"action":"exclude"},"operators":{"ids":["o-dr5r-path"],"action":"include"}}}},"directions_options":{"units":"miles"}}&api_key=your-mapzen-api-key
+TBD/route?json={"locations":[{"lat":40.730930,"lon":-73.991379,"street":"Wanamaker Place"},{"lat":40.749706,"lon":-73.991562,"street":"Penn Plaza"}],"costing":"multimodal","costing_options":{"transit":{"filters":{"stops":{"ids":["s-dr5rsq8pqg-8st~nyu&#60;r21n","s-dr5rsr9wyg-14st&#126;unionsq&#60;r20n"],"action":"exclude"},"routes":{"ids":["r-dr5r-r"],"action":"exclude"},"operators":{"ids":["o-dr5r-path"],"action":"include"}}}},"directions_options":{"units":"miles"}}&access_token=your-mapbox-access-token
 ```
 
 #### Directions options
@@ -213,7 +216,7 @@ https://valhalla.mapzen.com/route?json={"locations":[{"lat":40.730930,"lon":-73.
 | Options | Description |
 | :------------------ | :----------- |
 | `avoid_locations` |  A set of locations to exclude or avoid within a route can be specified using a JSON array of avoid_locations. The avoid_locations have the same format as the locations list. At a minimum each avoid location must include latitude and longitude. The avoid_locations are mapped to the closest road or roads and these roads are excluded from the route path computation.|
-| `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. Not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time is specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival.  For example "2016-07-03T08:06"</li></ul><ul><b>NOTE: This option is not supported for the Mapzen Matrix service.</b><ul> |
+| `date_time` | This is the local date and time at the location.<ul><li>`type`<ul><li>0 - Current departure time.</li><li>1 - Specified departure time</li><li>2 - Specified arrival time. Not yet implemented for multimodal costing method.</li></ul></li><li>`value` - the date and time is specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival.  For example "2016-07-03T08:06"</li></ul><ul><b>NOTE: This option is not supported for Valhalla's matrix service.</b><ul> |
 | `out_format` | Output format. If no `out_format` is specified, JSON is returned. Future work includes PBF (protocol buffer) support. |
 | `id` | Name your route request. If `id` is specified, the naming will be sent thru to the response. |
 
