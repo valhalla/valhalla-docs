@@ -1,8 +1,7 @@
 ## Valhalla to Mapbox transition guide
 
 1. Sign up for Mapbox account [here](https://www.mapbox.com/signup/)
-2. Get your Mapbox access token [here](https://www.mapbox.com/api-documentation/#access-tokens)
-    a. Remove the Mapzen `access_key` parameter from your url and replace it with the Mapbox token: `access_token=YOUR_TOKEN_HERE`
+2. Get your Mapbox access token [here](https://www.mapbox.com/api-documentation/#access-tokens) and replace the Mapzen `access_key` parameter in your url with: `access_token=YOUR_TOKEN_HERE`
 3. Adjust the URLs of your desired API(s) accordingly:
 
 **Matrix**
