@@ -1,4 +1,4 @@
-Valhalla services are moving to Mapbox infrastructure effictive January 26 2018. Read further for steps on how to make the transition to avoid service interruptions.
+*Valhalla services are moving to Mapbox infrastructure effictive **January 26 2018**. Read further for steps on how to make the transition to avoid service interruptions.*
 
 ## Valhalla to Mapbox transition guide
 
