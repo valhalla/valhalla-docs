@@ -8,7 +8,7 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 
 ## Using the hosted Mapbox Locate Service
 
-The Mapbox routing service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
+The Mapbox locate service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
 
 ## Inputs of a locate request
 
