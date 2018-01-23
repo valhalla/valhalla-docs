@@ -5,32 +5,39 @@
 3. Adjust the URLs of your desired API(s) accordingly:
 
 **Matrix**
+
     https://matrix.mapzen.com/sources_to_targets ->
         https://api.mapbox.com/valhalla/v1/sources_to_targets
 
 **Route/Turn-by-Turn**
+
     https://valhalla.mapzen.com/route ->
         https://api.mapbox.com/valhalla/v1/route
 
 **Map Matching**
+
     https://valhalla.mapzen.com/trace_route ->
         https://api.mapbox.com/valhalla/v1/trace_route
     https://valhalla.mapzen.com/trace_attributes ->
         https://api.mapbox.com/valhalla/v1/trace_attributes
 
 **Elevation**
+
     https://elevation.mapzen.com/height ->
         https://api.mapbox.com/valhalla/v1/height
 
 **Optimized route**
+
     https://matrix.mapzen.com/optimized_route ->
         https://api.mapbox.com/valhalla/v1/optimized_route
 
 **Isochrone**
+
     https://matrix.mapzen.com/isochrone ->
         https://api.mapbox.com/valhalla/v1/isochrone
         
 **Locate**
+
     https://valhalla.mapzen.com/locate ->
         https://api.mapbox.com/valhalla/v1/locate
 
