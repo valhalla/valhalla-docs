@@ -2,7 +2,7 @@
 
 1. Sign up for Mapbox account [here](https://www.mapbox.com/signup/)
 2. Get your Mapbox access token [here](https://www.mapbox.com/api-documentation/#access-tokens)
-    2.1 Remove the Mapzen `access_key` parameter from your url and replace it with the Mapbox token: `access_token=YOUR_TOKEN_HERE`
+    a. Remove the Mapzen `access_key` parameter from your url and replace it with the Mapbox token: `access_token=YOUR_TOKEN_HERE`
 3. Adjust the URLs of your desired API(s) accordingly:
 
 **Matrix**
