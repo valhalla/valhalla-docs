@@ -1,7 +1,7 @@
 ## Valhalla to Mapbox transition guide
 
 1. Sign up for Mapbox account [here](https://www.mapbox.com/signup/)
-2. Get your Mapbox access token (is this the best page  to send people? https://www.mapbox.com/help/define-access-token/ or this one https://www.mapbox.com/api-documentation/#access-tokens)
+2. Get your Mapbox access token [here](https://www.mapbox.com/api-documentation/#access-tokens)
 3. Adjust the URLs of your desired API(s) accordingly:
 
 **Matrix**
