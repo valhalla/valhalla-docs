@@ -12,6 +12,16 @@ It is important to note that all service requests should be *POST* because `shap
 
 The Mapbox Valhalla map-matching service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
 
+A request to the Mapbox hosted Valhalla map-matching (trace_route) service takes the following form:
+
+https://api.mapbox.com/valhalla/v1/trace_route?json={}&access_token=your_mapbox_access_token
+
+A request to the Mapbox hosted Valhalla map-matching attribute (trace_attributes) service takes the following form:
+
+https://api.mapbox.com/valhalla/v1/trace_attributes?json={}&access_token=your_mapbox_access_token
+
+For both cases the JSON payload inside the `{}` is documented (with examples) below.
+
 ## Trace route action
 
 The `trace_route` action takes the costing mode and a list of latitude,longitude coordinates, for example, from a GPS trace, to turn them into a route with the shape snapped to the road network and a set of guidance directions. You might use this to take a GPS trace from a bike route into a set of narrative instructions so you can re-create your trip or share it with others.
@@ -267,7 +277,7 @@ Follow these guidelines to improve the Map Matching results.
 
 You can use certain parameters to tune the response.
 
-* Use `turn_penalty_factor` to penalize turns from one road segment to next. For a pedestrian `trace_route`, you may see a back-and-forth motion along the streets of your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.  
+* Use `turn_penalty_factor` to penalize turns from one road segment to next. For a pedestrian `trace_route`, you may see a back-and-forth motion along the streets of your path. Try increasing the turn penalty factor to 500 to smooth out jittering of points. Note that if GPS accuracy is already good, increasing this will have a negative affect on your results.
 * Set the `gps_accuracy` to indicate the accuracy in meters.
 * Apply a `search_radius` to specify the search radius (in meters) within which to search road candidates for each measurement. The maximum search radius is 100 meters. Note that performance may decrease with a higher search radius value.
 
@@ -275,7 +285,7 @@ You can use certain parameters to tune the response.
 
 ### Example `trace_route` requests
 
-The following are example requests for the `trace_routes` action. They use a base URL of **`TBD/trace_route?access_token=`, where the code is the POST body.**
+The following are example JSON payloads for POST requests for the `trace_routes` action.
 
 *`trace_route` with encoded polyline parameter*
 
@@ -291,7 +301,7 @@ The following are example requests for the `trace_routes` action. They use a bas
 
 ### Example `trace_attributes` requests
 
-The following are example requests for the `trace_attributes` action. They use a base URL of **`TBD/trace_attributes?access_token=`, where the code is the POST body.**
+The following are example JSON payloads for POST requests for the `trace_attributes` action.
 
 *`trace_attributes` with shape parameter*
 

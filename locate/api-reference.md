@@ -10,12 +10,19 @@ The default logic for the OpenStreetMap tags, keys, and values used when routing
 
 The Mapbox locate service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
 
+A request to the Mapbox hosted Valhalla locate service takes the following form:
+
+https://api.mapbox.com/valhalla/v1/locate?json={}&access_token=your_mapbox_access_token
+
+where the JSON payload inside the `{}` are documented (with examples) below.
+
+
 ## Inputs of a locate request
 
-The path and query portion of a locate URI takes the form of `/locate?json={}`, where the JSON inputs inside the `{}` include location information, name and options for the costing model, and output options. Here is an example:
+The locate request run locally takes the form of `localhost:8002/locate?json={}`, where the JSON inputs inside the `{}` include location information, name and options for the costing model, and output options. Here is the JSON payload for an example request:
 
 ```
-/locate?json={"verbose":true,"locations":[{"lat":42.358528,"lon":-83.271400},{"lat":42.996613,"lon":-78.749855}],"costing":"bicycle","costing_options":{"bicycle":{"bicycle_type":"road"}},"directions_options":{"units":"miles"},"id":"12abc3afe23984fe"}&access_token=your-mapbox-access-token
+json={"verbose":true,"locations":[{"lat":42.358528,"lon":-83.271400},{"lat":42.996613,"lon":-78.749855}],"costing":"bicycle","costing_options":{"bicycle":{"bicycle_type":"road"}},"directions_options":{"units":"miles"},"id":"12abc3afe23984fe"}
 ```
 
 This request provides detailed information about specific streets and intersections near the two input locations. Steets which do not have a surface type condusive to road bicycles will be excluded from the results. The units used for the lengths of the street sections will be displayed in miles.
