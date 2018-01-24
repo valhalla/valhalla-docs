@@ -100,9 +100,8 @@ The profile results are returned with the form of shape (shape points or encoded
 | `y coordinate` | The height or elevation of the associated latitude, longitude pair. The height is returned as `null` if no height data exists for a given location. |
 | `height` | An array of height for the associated latitude, longitude coordinates. |
 
-## Data sources and known issues
+## Data sources
 
 Elevation data is obtained from the [Amazon Web Services Public Datasets](https://aws.amazon.com/public-datasets/terrain/). 
 
-**TBD The underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/), [NED](https://nationalmap.gov/elevation.html) and [ETOPO1](https://www.ngdc.noaa.gov/mgg/global/) DEMs. These sets provide global coverage at varying resolutions up to approximately 10 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water with a value of zero to indicate mean sea level; in these areas, ETOPO1 provides bathymetry (as well as in regions which are not covered by NED, SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. The geographic data community working with elevation data is considering how to best integrate other sources such as NRCAN and is always looking for better datasets. If you find any data issues or can suggest any slemental open datasets, please add an issue in this [GitHub repository](https://github.com/tilezen/joerd/issues).**
 
