@@ -16,13 +16,7 @@ There is an option to name your elevation request. You can do this by appending 
 
 ## Using the hosted Mapbox Elevation Service
 
-The Mapbox elevation service requires an access token. In a request, you must append your own access_token to the URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
-
-A request to the Mapbox hosted Valhalla elevation service takes the following form:
-
-https://api.mapbox.com/valhalla/v1/height?json={}&access_token=your_mapbox_access_token
-
-where the JSON payload inside the `{}` are documented (with examples) below.
+The Mapbox elevation service requires an access token. In a request, you must append your own access_token to the URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ### Use a shape list for input locations
 

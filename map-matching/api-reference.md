@@ -10,17 +10,7 @@ It is important to note that all service requests should be *POST* because `shap
 
 ## Using the hosted Mapbox Valhalla Map Matching Service
 
-The Mapbox Valhalla map-matching service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
-
-A request to the Mapbox hosted Valhalla map-matching (trace_route) service takes the following form:
-
-https://api.mapbox.com/valhalla/v1/trace_route?json={}&access_token=your_mapbox_access_token
-
-A request to the Mapbox hosted Valhalla map-matching attribute (trace_attributes) service takes the following form:
-
-https://api.mapbox.com/valhalla/v1/trace_attributes?json={}&access_token=your_mapbox_access_token
-
-For both cases the JSON payload inside the `{}` is documented (with examples) below.
+The Mapbox Valhalla map-matching service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ## Trace route action
 

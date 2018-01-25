@@ -10,13 +10,7 @@ This is an example of isochrones showing the travel times by driving from a loca
 
 ## Using the hosted Mapbox Isochrone Service
 
-The Mapbox isochrone service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
-
-An isochrone request to the Mapbox hosted Valhalla isochrone service takes the following form:
-
-https://api.mapbox.com/valhalla/v1/isochrone?json={}&access_token=your_mapbox_access_token
-
-where the JSON payload inside the `{}` are documented (with examples) below.
+The Mapbox isochrone service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ## Inputs of the Isochrone service
 

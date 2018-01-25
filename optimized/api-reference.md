@@ -6,14 +6,7 @@ The Optimized Route service provides a quick computation of time and distance be
 
 ## Using the hosted Mapbox Optimized Routing Service
 
-The Mapbox optimized route service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
-
-A request to the Mapbox hosted Valhalla optimized routing service takes the following form:
-
-https://api.mapbox.com/valhalla/v1/route?json={}&access_token=your_mapbox_access_token
-
-where the JSON payload inside the `{}` are documented (with examples) below.
-
+The Mapbox optimized route service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ## Optimized route service action
 
