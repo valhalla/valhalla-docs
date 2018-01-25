@@ -14,7 +14,7 @@ The Mapbox isochrone service requires an access token. In a request, you must ap
 
 An isochrone request to the Mapbox hosted Valhalla isochrone service takes the following form:
 
-https://api.mapbox.com/valhalla/v1/isocrhone?json={}&access_token=your_mapbox_access_token
+https://api.mapbox.com/valhalla/v1/isochrone?json={}&access_token=your_mapbox_access_token
 
 where the JSON payload inside the `{}` are documented (with examples) below.
 
@@ -25,7 +25,7 @@ An isochrone request run locally takes the form of `localhost:8002/isochrone?jso
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
 ```
-json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
+{"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
 ```
 
 There is an option to name your isochrone request by appending `&id=`. The `id` is returned with the response so you can match it to your corresponding request.
