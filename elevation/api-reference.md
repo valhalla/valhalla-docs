@@ -16,9 +16,11 @@ There is an option to name your elevation request. You can do this by appending 
 
 ## Using the hosted Mapbox Elevation Service
 
-The Mapbox elevation service requires an access token. In a request, you must append your own access_token to the URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
+The Mapbox elevation service requires an access token. In a request, you must append your own access_token to the URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ### Use a shape list for input locations
+
+The elevation request run locally takes the form of `localhost:8002/height?json={}`, where the JSON inputs inside the `{}` are described below.
 
 A `shape` request must include a latitude and longitude in decimal degrees, and the locations are visited in the order specified. The input coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on.
 
@@ -29,10 +31,10 @@ These parameters are available for `shape`.
 | `lat` | Latitude of the location in degrees. |
 | `lon` | Longitude of the location in degrees. |
 
-Here is an example of a profile request using `shape`:
+Here is an example JSON payload for a profile request using `shape`:
 
 ```
-**TBD**/height?json={"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville&access_token=your-mapbox-access-token
+{"range":true,"shape":[{"lat":40.712431,"lon":-76.504916},{"lat":40.712275,"lon":-76.605259},{"lat":40.712122,"lon":-76.805694},{"lat":40.722431,"lon":-76.884916},{"lat":40.812275,"lon":-76.905259},{"lat":40.912122,"lon":-76.965694}]}&id=Pottsville
 ```
 
 This request provides `shape` points near Pottsville, Pennsylvania. The resulting profile response displays the input shape, as well as the `range` and `height` (as `range_height` in the response) for each point.
@@ -49,18 +51,16 @@ Without the `range`, the result looks something like this, with only a `height`:
 
 ### Use an encoded polyline for input locations
 
-The `encoded_polyline` parameter is a string of a polyline-encoded, with **six degrees of precision**, shape and has the following parameters.
-
-**TBD - resources and code samples for encoding/decoding polylines**
+The `encoded_polyline` parameter is a string of a polyline-encoded, with **six degrees of precision**, shape and has the following parameters. Details on polyline encoding and decoding can be found [here](/decoding.md).
 
 | Encoded polyline parameters | Description |
 | :--------- | :----------- |
 | `encoded_polyline` | A set of encoded latitude, longitude pairs of a line or shape.|
 
-Here is an example `encoded_polyline` request:
+Here is an example of the JSON payload for an `encoded_polyline` POST request:
 
 ```
-**TBD**/height?json={"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}&access_token=your-mapbox-access-token
+{"range":true,"encoded_polyline":"s{cplAfiz{pCa]xBxBx`AhC|gApBrz@{[hBsZhB_c@rFodDbRaG\\ypAfDec@l@mrBnHg|@?}TzAia@dFw^xKqWhNe^hWegBfvAcGpG{dAdy@_`CpoBqGfC_SnI{KrFgx@?ofA_Tus@c[qfAgw@s_Agc@}^}JcF{@_Dz@eFfEsArEs@pHm@pg@wDpkEx\\vjT}Djj@eUppAeKzj@eZpuE_IxaIcF~|@cBngJiMjj@_I`HwXlJuO^kKj@gJkAeaBy`AgNoHwDkAeELwD|@uDfC_i@bq@mOjUaCvDqBrEcAbGWbG|@jVd@rPkAbGsAfDqBvCaIrFsP~RoNjWajBlnD{OtZoNfXyBtE{B~HyAtEsFhL_DvDsGrF_I`HwDpGoH|T_IzLaMzKuOrFqfAbPwCl@_h@fN}OnI"}
 ```
 
 ### Get height and distance with the range parameter
@@ -94,9 +94,8 @@ The profile results are returned with the form of shape (shape points or encoded
 | `y coordinate` | The height or elevation of the associated latitude, longitude pair. The height is returned as `null` if no height data exists for a given location. |
 | `height` | An array of height for the associated latitude, longitude coordinates. |
 
-## Data sources and known issues
+## Data sources
 
 Elevation data is obtained from the [Amazon Web Services Public Datasets](https://aws.amazon.com/public-datasets/terrain/). 
 
-**TBD The underlying data sources for the service are a mix of [SRTM](http://www2.jpl.nasa.gov/srtm/), [GMTED](http://topotools.cr.usgs.gov/gmted_viewer/), [NED](https://nationalmap.gov/elevation.html) and [ETOPO1](https://www.ngdc.noaa.gov/mgg/global/) DEMs. These sets provide global coverage at varying resolutions up to approximately 10 meters. It should be noted that both SRTM and GMTED fill oceans and other bodies of water with a value of zero to indicate mean sea level; in these areas, ETOPO1 provides bathymetry (as well as in regions which are not covered by NED, SRTM and GMTED). Many other classical DEM-related issues occur in these datasets. It is not uncommon to see large variations in elevation in areas with large buildings and other such structures. The geographic data community working with elevation data is considering how to best integrate other sources such as NRCAN and is always looking for better datasets. If you find any data issues or can suggest any slemental open datasets, please add an issue in this [GitHub repository](https://github.com/tilezen/joerd/issues).**
 

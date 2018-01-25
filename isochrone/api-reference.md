@@ -6,20 +6,20 @@ Isochrone maps share some of the same concepts and terminology with familiar top
 
 This is an example of isochrones showing the travel times by driving from a location in Melbourne, as depicted in Mobility Explorer.
 
-![Isochrones for travel times by driving in Melbourne from Mobility Explorer](/images/melbourne-isochrones.png)
+![Isochrones for travel times by walking in Lancaster, PA](/images/isochrone.png)
 
 ## Using the hosted Mapbox Isochrone Service
 
-The Mapbox isochrone service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens.
+The Mapbox isochrone service requires an access token. In a request, you must append your own access_token to the request URL, following access_token=. See the [Mapbox API documentation](https://www.mapbox.com/api-documentation/#access-tokens) for more on access tokens. Contact Mapbox for instructions on accessing this API.
 
 ## Inputs of the Isochrone service
 
-A request takes the form of `servername/isochrone?json={}`, where `isochrone?` indicates an isochrone is requested and the JSON inputs inside the ``{}`` include an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
+An isochrone request run locally takes the form of `localhost:8002/isochrone?json={}`, where the JSON inputs inside the `{}` includes an array of at least one location and options for the [route costing model](/turn-by-turn/api-reference/#costing-models).
 
 For example, you can use the isochrone service to find out where you can travel within a 15-minute walk from your office building. The API request for this uses `isochrone?` as the request action, `pedestrian` costing, and a single contour for a 15-minute time interval. The response is GeoJSON, which you can display on a map to visualize where you might be able to walk.
 
 ```
-**TBD**/isochrone?json={"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
+{"locations":[{"lat":40.744014,"lon":-73.990508}],"costing":"pedestrian","contours":[{"time":15,"color":"ff0000"}]}&id=Walk_From_Office
 ```
 
 There is an option to name your isochrone request by appending `&id=`. The `id` is returned with the response so you can match it to your corresponding request.
@@ -85,4 +85,4 @@ Several other options are being considered as future service enhancements. These
 
 ## Data credits
 
-The images are from Mobility Explorer, which includes data from [Transitland](https://transit.land) and [OpenStreetMap](http://www.openstreetmap.org/).
+The image includes data from [OpenStreetMap](http://www.openstreetmap.org/).
