@@ -1,4 +1,14 @@
-## Release Date: 2017-01-19 Valhalla 2.4.4
+## Release Date: 2017-01-26 Valhalla 2.4.6
+* **Enhancement**
+   * Elevation library will lazy load RAW formatted sources
+
+## Release Date: 2017-01-24 Valhalla 2.4.5
+* **Enhancement**
+   * Elevation packing utility can unpack lz4hc now
+* **Bug Fix**
+   * Fixed broken darwin builds
+
+## Release Date: 2017-01-23 Valhalla 2.4.4
 * **Enhancement**
    * Elevation service speed improvments and the ability to serve lz4hc compressed data
    * Basic support for downloading routing tiles on demand
