@@ -1,3 +1,9 @@
+## Release Date: 2017-02-8 Valhalla 2.4.7
+* **Enhancement**
+   * Speed up building tiles from small OSM imports by using boost directory iterator rather than going through all possible tiles and testing each if the file exists.
+* **Bug Fix**
+   * Protect against overflow in string to float conversion inside OSM parsing.
+   
 ## Release Date: 2017-01-26 Valhalla 2.4.6
 * **Enhancement**
    * Elevation library will lazy load RAW formatted sources
