@@ -1,4 +1,15 @@
-## Release Date: 2017-02-8 Valhalla 2.4.7
+## Release Date: 2017-03-26 Valhalla 2.4.8
+* **Enhancement**
+   * Optionally disable candidate edge penalty in path finding
+   * OSRM compatible route, matrix and map matching response generation
+   * Minimal Windows build compatibility
+   * Refactoring to use PBF as the IPC mechanism for all objects   
+   * Improvements to internal intersection marking to reduce false positives
+* **Bug Fix**
+   * Cap candidate edge penalty in path finding to reduce excessive expansion
+   * Fix trivial paths at deadends
+   
+## Release Date: 2017-02-08 Valhalla 2.4.7
 * **Enhancement**
    * Speed up building tiles from small OSM imports by using boost directory iterator rather than going through all possible tiles and testing each if the file exists.
 * **Bug Fix**
