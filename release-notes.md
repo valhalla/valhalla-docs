@@ -1,5 +1,7 @@
 ## Release Date: 2017-03-26 Valhalla 2.4.8
 * **Enhancement**
+   * Updates for Italian verbal translations
+   * Optionally remove driveways at graph creation time
    * Optionally disable candidate edge penalty in path finding
    * OSRM compatible route, matrix and map matching response generation
    * Minimal Windows build compatibility
