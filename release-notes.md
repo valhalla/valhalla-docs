@@ -1,3 +1,7 @@
+## Release Date: 2017-XX-XX Valhalla 2.4.X
+* **Enhancement**
+   * Added European Portuguese localization for Valhalla
+
 ## Release Date: 2017-03-27 Valhalla 2.4.8
 * **Enhancement**
    * Updates for Italian verbal translations
