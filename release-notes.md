@@ -1,6 +1,8 @@
-## Release Date: 2017-XX-XX Valhalla 2.4.X
+## Release Date: 2017-04-11 Valhalla 2.4.9
 * **Enhancement**
    * Added European Portuguese localization for Valhalla
+*  **Data Producer Update**
+   * Added logic to protect against setting a speed of 0 for ferries.
 
 ## Release Date: 2017-03-27 Valhalla 2.4.8
 * **Enhancement**
