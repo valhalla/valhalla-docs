@@ -1,6 +1,9 @@
 ## Release Date: 2017-04-11 Valhalla 2.4.9
 * **Enhancement**
    * Added European Portuguese localization for Valhalla
+   * Updates to EdgeStatus to improve performance. Use an unordered_map of tile Id and allocate an array for each edge in the tile. This allows using pointers to access status for sequential edges. This improves performance by 50% or so.
+   * A couple of bicycle costing updates to improve route quality: avoid roads marked as part of a truck network, to remove the density penalty for transition costs.
+   * When optimal matrix type is selected, now use CostMatrix for source to target pedestrian and bicycle matrix calls when both counts are above some threshold. This improves performance in general and lessens some long running requests.
 *  **Data Producer Update**
    * Added logic to protect against setting a speed of 0 for ferries.
 
