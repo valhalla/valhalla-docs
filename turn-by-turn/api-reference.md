@@ -208,6 +208,7 @@ A multimodal request with a filter for certain Onestop IDs:
 | `fr-FR` | `fr` | French (France) |
 | `hi-IN` | `hi` | Hindi (India) |
 | `it-IT` | `it` | Italian (Italy) |
+| `pt-PT` | `pt` | Portuguese (Portugal) |
 | `ru-RU` | `ru` | Russian (Russia) |
 | `sl-SI` | `sl` | Slovenian (Slovenia) |
 
