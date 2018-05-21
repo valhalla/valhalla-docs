@@ -2,6 +2,7 @@
 * **Enhancement**
    * Add time dependnet forward and reverse A* methods.
    * Add code formatting and linting.
+   * Added new motorcycle costing, motorcycle access flag in data and use_trails option.
 * **Bug Fix**
    * Increase minimum threshold for driving routes in bidirectional A* (fixes some instances of bad paths).
 *  **Data Producer Update**
