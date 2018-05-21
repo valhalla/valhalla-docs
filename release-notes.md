@@ -8,6 +8,7 @@
 *  **Data Producer Update**
    * Updates to properly handle cycleway crossings.
    * Conditionally include driveways that are private.
+   * Added logic to set motorcycle access.  This includes lua, country access, and user access flags for motorcycles.
    
 ## Release Date: 2017-04-11 Valhalla 2.4.9
 * **Enhancement**
