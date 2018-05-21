@@ -1,3 +1,13 @@
+## Release Date: 2017-05-21 Valhalla 2.5.0
+* **Enhancement**
+   * Add time dependnet forward and reverse A* methods.
+   * Add code formatting and linting.
+* **Bug Fix**
+   * Increase minimum threshold for driving routes in bidirectional A* (fixes some instances of bad paths).
+*  **Data Producer Update**
+   * Updates to properly handle cycleway crossings.
+   * Conditionally include driveways that are private.
+   
 ## Release Date: 2017-04-11 Valhalla 2.4.9
 * **Enhancement**
    * Added European Portuguese localization for Valhalla
