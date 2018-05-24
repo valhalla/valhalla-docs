@@ -69,6 +69,7 @@ Valhalla's routing service uses dynamic, run-time costing to generate the route 
 | `bus` | Standard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads. |
 | `hov` | Standard costing for high-occupancy vehicle (HOV) routes. HOV costing inherits the auto costing behaviors, but checks for HOV lane access on the roads and favors those roads.|
 | `motor_scooter` | Standard costing for travel by motor scooter or moped.  By default, motor_scooter costing will avoid higher class roads unless the country overrides allows motor scooters on these roads.  Motor scooter routes follow regular roads when needed, but avoid roads without motor_scooter, moped, or mofa access. |
+|**BETA** `motorcycle` | Standard costing for travel by motorcycle (touring, adventure, etc.).  Motorcycle costing will default to using higher class roads.  There is also a use_trails option that can be tuned to use trails, tracks and bad surface types. |
 | `multimodal` | Currently supports pedestrian and transit. In the future, multimodal will support a combination of all of the above. |
 | `pedestrian` | Standard walking route that excludes roads without pedestrian access. In general, pedestrian routes are shortest distance with the following exceptions: walkways and footpaths are slightly favored, while steps or stairs and alleys are slightly avoided. |
 
@@ -126,6 +127,17 @@ All of the options described above for autos also apply to motor_scooter costing
 | `top_speed` | Top speed the motorized scooter can go. Used to avoid roads with higher speeds than this value.  The default value is 45 KPH (~28 MPH) |
 | `use_primary` | A riders's propensity to use primary roads. This is a range of values from 0 to 1, where 0 attempts to avoid primary roads, and 1 indicates the rider is more comfortable riding on primary roads. Based on the `use_primary` factor, roads with certain classifications and higher speeds are penalized in an attempt to avoid them when finding the best path. The default value is 0.5. |
 | `use_hills` | A riders's desire to tackle hills in their routes. This is a range of values from 0 to 1, where 0 attempts to avoid hills and steep grades even if it means a longer (time and distance) path, while 1 indicates the rider does not fear hills and steeper grades. Based on the `use_hills` factor, penalties are applied to roads based on elevation change and grade. These penalties help the path avoid hilly roads in favor of flatter roads or less steep grades where available. Note that it is not always possible to find alternate paths to avoid hills (for example when route locations are in mountainous areas). The default value is 0.5. |
+
+##### Motorcycle costing options
+**BETA**
+Standard costing for travel by motorcycle.  By default, motorcycle costing will default to higher class roads.  The costing model recognizes factors unique to motorcycle travel and offers options for tuning motorcycle routes. Factors unique to travel by motorcycle influence the resulting route.
+
+All of the options described above for autos also apply to motorcycle costing methods.  These additional options are available for motorcycle costing methods.
+
+| Motorcycle options | Description |
+| :-------------------------- | :----------- |
+| `use_primary` | A riders's propensity to use primary roads. This is a range of values from 0 to 1, where 0 attempts to avoid primary roads, and 1 indicates the rider is more comfortable riding on primary roads. Based on the `use_primary` factor, roads with certain classifications and higher speeds are penalized in an attempt to avoid them when finding the best path. The default value is 0.5. |
+| `use_trails` | A riders's desire for adventure in their routes.  This is a range of values from 0 to 1, where 0 will avoid trails, tracks or bad surfaces and 1 should be used if a rider desires to travel on trails, tracks or bad surfaces.  The default value is 0.0. |
 
 ##### Pedestrian costing options
 
