@@ -1,4 +1,11 @@
-## Release Date: 2017-05-21 Valhalla 2.5.0
+## Release Date: 2018-05-28 Valhalla 2.6.0
+* **Infrastructure**:
+   * CHANGED: Update cmake buildsystem to replace autoconf [#1272](https://github.com/valhalla/valhalla/pull/1272)
+* **API**:
+   * CHANGED: Move `trace_options` parsing to map matcher factory [#1260](https://github.com/valhalla/valhalla/pull/1260)
+   * ADDED: New costing method for AutoDataFix [#1283](https://github.com/valhalla/valhalla/pull/1283)
+
+## Release Date: 2018-05-21 Valhalla 2.5.0
 * **Enhancement**
    * Add time dependnet forward and reverse A* methods.
    * Add code formatting and linting.
@@ -10,7 +17,7 @@
    * Conditionally include driveways that are private.
    * Added logic to set motorcycle access.  This includes lua, country access, and user access flags for motorcycles.
    
-## Release Date: 2017-04-11 Valhalla 2.4.9
+## Release Date: 2018-04-11 Valhalla 2.4.9
 * **Enhancement**
    * Added European Portuguese localization for Valhalla
    * Updates to EdgeStatus to improve performance. Use an unordered_map of tile Id and allocate an array for each edge in the tile. This allows using pointers to access status for sequential edges. This improves performance by 50% or so.
@@ -19,7 +26,7 @@
 *  **Data Producer Update**
    * Added logic to protect against setting a speed of 0 for ferries.
 
-## Release Date: 2017-03-27 Valhalla 2.4.8
+## Release Date: 2018-03-27 Valhalla 2.4.8
 * **Enhancement**
    * Updates for Italian verbal translations
    * Optionally remove driveways at graph creation time
@@ -32,23 +39,23 @@
    * Cap candidate edge penalty in path finding to reduce excessive expansion
    * Fix trivial paths at deadends
    
-## Release Date: 2017-02-08 Valhalla 2.4.7
+## Release Date: 2018-02-08 Valhalla 2.4.7
 * **Enhancement**
    * Speed up building tiles from small OSM imports by using boost directory iterator rather than going through all possible tiles and testing each if the file exists.
 * **Bug Fix**
    * Protect against overflow in string to float conversion inside OSM parsing.
    
-## Release Date: 2017-01-26 Valhalla 2.4.6
+## Release Date: 2018-01-26 Valhalla 2.4.6
 * **Enhancement**
    * Elevation library will lazy load RAW formatted sources
 
-## Release Date: 2017-01-24 Valhalla 2.4.5
+## Release Date: 2018-01-24 Valhalla 2.4.5
 * **Enhancement**
    * Elevation packing utility can unpack lz4hc now
 * **Bug Fix**
    * Fixed broken darwin builds
 
-## Release Date: 2017-01-23 Valhalla 2.4.4
+## Release Date: 2018-01-23 Valhalla 2.4.4
 * **Enhancement**
    * Elevation service speed improvments and the ability to serve lz4hc compressed data
    * Basic support for downloading routing tiles on demand
