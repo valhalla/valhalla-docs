@@ -1,3 +1,8 @@
+## Release Date: TBD Valhalla 2.6.1
+*  **Data Producer Update**
+  * Allow busses to route on hov=designated roads.
+  * Route on roads if any lane on the road is not `designated` (even if `hov=designated`)
+
 ## Release Date: 2018-05-28 Valhalla 2.6.0
 * **Infrastructure**:
    * CHANGED: Update cmake buildsystem to replace autoconf [#1272](https://github.com/valhalla/valhalla/pull/1272)
