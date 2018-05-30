@@ -129,14 +129,15 @@ All of the options described above for autos also apply to motor_scooter costing
 | `use_hills` | A riders's desire to tackle hills in their routes. This is a range of values from 0 to 1, where 0 attempts to avoid hills and steep grades even if it means a longer (time and distance) path, while 1 indicates the rider does not fear hills and steeper grades. Based on the `use_hills` factor, penalties are applied to roads based on elevation change and grade. These penalties help the path avoid hilly roads in favor of flatter roads or less steep grades where available. Note that it is not always possible to find alternate paths to avoid hills (for example when route locations are in mountainous areas). The default value is 0.5. |
 
 ##### Motorcycle costing options -> **BETA**
-Standard costing for travel by motorcycle.  By default, motorcycle costing will default to higher class roads.  The costing model recognizes factors unique to motorcycle travel and offers options for tuning motorcycle routes. Factors unique to travel by motorcycle influence the resulting route.
+Standard costing for travel by motorcycle.  By default, motorcycle costing will default to higher class roads.  The costing model recognizes factors unique to motorcycle travel and offers options for tuning motorcycle routes.
 
-All of the options described above for autos also apply to motorcycle costing methods.  These additional options are available for motorcycle costing methods.
+All of the options described above for autos also apply to motorcycle costing methods.
+The following options are available for motorcycle costing:
 
 | Motorcycle options | Description |
 | :-------------------------- | :----------- |
 | `use_highway` | A riders's propensity to prefer the use of highways. This is a range of values from 0 to 1, where 0 attempts to avoid highways, and 1 indicates the rider prefers highways. The default value is 1.0. |
-| `use_trails` | A riders's desire for adventure in their routes.  This is a range of values from 0 to 1, where 0 will avoid trails, tracks or bad surfaces and 1 should be used if a rider desires to travel on trails, tracks or bad surfaces.  The default value is 0.0. |
+| `use_trails` | A riders's desire for adventure in their routes.  This is a range of values from 0 to 1, where 0 will avoid trails, tracks, unclassified or bad surfaces and 1 should be used if a rider desires to travel on trails, tracks, unclassified or bad surfaces.  The default value is 0.0. |
 
 ##### Pedestrian costing options
 
