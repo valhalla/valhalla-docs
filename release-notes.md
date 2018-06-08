@@ -1,7 +1,9 @@
-## Release Date: TBD Valhalla 2.6.1
-*  **Data Producer Update**
-  * Allow busses to route on hov=designated roads.
-  * Route on roads if any lane on the road is not `designated` (even if `hov=designated`)
+## Release Date: 2018-06-01 Valhalla 2.6.1
+* **Data Producer Update**
+   * Allow busses to route on hov=designated roads.
+   * Route on roads if any lane on the road is not `designated` (even if `hov=designated`)
+* **Infrastructure**:
+   * CHANGED: Fix install targets [#1330](https://github.com/valhalla/valhalla/pull/1330)
 
 ## Release Date: 2018-05-28 Valhalla 2.6.0
 * **Infrastructure**:
@@ -21,7 +23,7 @@
    * Updates to properly handle cycleway crossings.
    * Conditionally include driveways that are private.
    * Added logic to set motorcycle access.  This includes lua, country access, and user access flags for motorcycles.
-   
+
 ## Release Date: 2018-04-11 Valhalla 2.4.9
 * **Enhancement**
    * Added European Portuguese localization for Valhalla
@@ -38,18 +40,18 @@
    * Optionally disable candidate edge penalty in path finding
    * OSRM compatible route, matrix and map matching response generation
    * Minimal Windows build compatibility
-   * Refactoring to use PBF as the IPC mechanism for all objects   
+   * Refactoring to use PBF as the IPC mechanism for all objects
    * Improvements to internal intersection marking to reduce false positives
 * **Bug Fix**
    * Cap candidate edge penalty in path finding to reduce excessive expansion
    * Fix trivial paths at deadends
-   
+
 ## Release Date: 2018-02-08 Valhalla 2.4.7
 * **Enhancement**
    * Speed up building tiles from small OSM imports by using boost directory iterator rather than going through all possible tiles and testing each if the file exists.
 * **Bug Fix**
    * Protect against overflow in string to float conversion inside OSM parsing.
-   
+
 ## Release Date: 2018-01-26 Valhalla 2.4.6
 * **Enhancement**
    * Elevation library will lazy load RAW formatted sources
@@ -65,7 +67,7 @@
    * Elevation service speed improvments and the ability to serve lz4hc compressed data
    * Basic support for downloading routing tiles on demand
    * Deprecated `valhalla_route_service`, now all services (including elevation) are found under `valhalla_service`
-   
+
 ## Release Date: 2017-12-11 Valhalla 2.4.3
 * **Enhancement**
    * Remove union from GraphId speeds up some platforms
@@ -76,15 +78,15 @@
 *  **Data Producer Update**
    * Handling shapes that intersect the poles when binning
    * Handling when transit shapes are less than 2 points
-   
+
 ## Release Date: 2017-11-09 Valhalla 2.4.1
 *  **Data Producer Update**
    * Added kMopedAccess to modes for complex restrictions.  Remove the kMopedAccess when auto access is removed.  Also, add the kMopedAccess when an auto restriction is found.
-   
+
 ## Release Date: 2017-11-08 Valhalla 2.4.0
 *  **Data Producer Update**
    * Added logic to support restriction = x with a the except tag.  We apply the restriction to everything except for modes in the except tag.
-   * Added logic to support railway_service and coach_service in transit. 
+   * Added logic to support railway_service and coach_service in transit.
 * **Bug Fix**
   * Return proper edge_walk path for requested shape_match=walk_or_snap
   * Skip invalid stateid for Top-K requests
@@ -103,7 +105,7 @@
   * Fix optimizer rotate location method. This fixes a bug where optimal ordering was bad for large location sets.
 *  **Data Producer Update**
    * Duration tags are now used to properly set the speed of travel for a ferry routes
-   
+
 ## Release Date: 2017-10-17 Valhalla 2.3.8
 * **Bug Fix**
   * Fixed the roundabout exit count for bicycles when the roundabout is a road and not a cycleway
@@ -112,14 +114,14 @@
 *  **Data Producer Update**
    * Added logic to set bike forward and tag to true where kv["sac_scale"] == "hiking". All other values for sac_scale turn off bicycle access.  If sac_scale or mtb keys are found and a surface tag is not set we default to kPath.
    * Fixed a bug where surface=unpaved was being assigned Surface::kPavedSmooth.
-  
+
 ## Release Date: 2017-9-11 Valhalla 2.3.7
 * **Bug Fix**
   * Update bidirectional connections to handle cases where the connecting edge is one of the origin (or destination) edges and the cost is high. Fixes some pedestrian route issues that were reported.
 *  **Data Producer Update**
    * Added support for motorroad tag (default and per country).
    * Update OSMLR segment association logic to fix issue where chunks wrote over leftover segments. Fix search along edges to include a radius so any nearby edges are also considered.
-  
+
 ## Release Date: 2017-08-29 Valhalla 2.3.6
 * **Bug Fix**
   * Pedestrian paths including ferries no longer cause circuitous routes
@@ -135,7 +137,7 @@
   * Fix multimodal isochrones. EdgeLabel refactor caused issues.
 * **Data Producer Update**
   * Update lua logic to properly handle vehicle=no tags.
-  
+
 ## Release Date: 2017-08-14 Valhalla 2.3.4
 * **Bug Fix**
   * Enforce limits on maximum per point accuracy to avoid long running map matching computations
@@ -150,7 +152,7 @@
 * **Enhancement**
   * Folded Low-Stress Biking Code into the regular Bicycle code and removed the LowStressBicycleCost class. Now when making a query for bicycle routing, a value of 0 for use_hills and use_roads produces low-stress biking routes, while a value of 1 for both provides more intense professional bike routes.
   * Bike costing default values changed. use_roads and use_hills are now 0.25 by default instead of 0.5 and the default bike is now a hybrid bike instead of a road bike.
-  * Added logic to use station hierarchy from transitland.  Osm and egress nodes are connected by transitconnections.  Egress and stations are connected by egressconnections.  Stations and platforms are connected by platformconnections.  This includes narrative updates for Odin as well.  
+  * Added logic to use station hierarchy from transitland.  Osm and egress nodes are connected by transitconnections.  Egress and stations are connected by egressconnections.  Stations and platforms are connected by platformconnections.  This includes narrative updates for Odin as well.
 
 ## Release Date: 2017-07-31 Valhalla 2.3.2
 * **Bug Fix**
@@ -168,7 +170,7 @@
   * Added parsing of various OSM tags: "bicycle=use_sidepath", "bicycle=dismount", "segregated=*", "shoulder=*", "cycleway:buffer=*", and several variations of these.
   * Both trace_route and trace_attributes will parse `time` and `accuracy` parameters when the shape is provided as unencoded
   * Map-matching will now use the time (in seconds) of each gps reading (if provided) to narrow the search space and avoid finding matches that are impossibly fast
-  
+
 ## Release Date: 2017-07-10 Valhalla 2.3.0
 * **Bug Fix**
   * Fixed a bug in traffic segment matcher where length was populated but had invalid times
@@ -177,11 +179,11 @@
    * Added an actor class which encapsulates the various worker objects and allows the various end points to be called /route /height etc. without needing to run a service
 * **Low-Stress Bicycle**
   * Worked on creating a new low-stress biking option that focuses more on taking safer roads like cycle ways or residential roads than the standard bike costing option does.
-  
+
 ## Release Date: 2017-06-26 Valhalla 2.2.9
 * **Bug Fix**
-  * Fix a bug introduced in 2.2.8 where map matching search extent was incorrect in longitude axis. 
-  
+  * Fix a bug introduced in 2.2.8 where map matching search extent was incorrect in longitude axis.
+
 ## Release Date: 2017-06-23 Valhalla 2.2.8
 * **Bug Fix**
   * Traffic segment matcher (exposed through Python bindings) - fix cases where partial (or no) results could be returned when breaking out of loop in form_segments early.
@@ -189,7 +191,7 @@
   * Traffic segment matcher - handle special cases when entering and exiting turn channels.
 * **Guidance Improvements**
   * Added Swedish (se-SV) narrative file.
-  
+
 ## Release Date: 2017-06-20 Valhalla 2.2.7
 * **Bug Fixes**
   * Traffic segment matcher (exposed through Python bindings) makes use of accuracy per point in the input
@@ -202,7 +204,7 @@
 * **Navigator**
   * Added pre-alpha implementation that will perform guidance for mobile devices.
 * **Map Matching Updates**
-  * Added capability to customize match_options  
+  * Added capability to customize match_options
 
 ## Release Date: 2017-06-12 Valhalla 2.2.6
 * **Bug Fixes**
@@ -225,7 +227,7 @@
   * Fix isochrone bug where the default access mode was used - this rejected edges that should not have been rejected for cases than automobile.
   * Fix A* handling of edge costs for trivial routes. This fixed an issue with disconnected regions that projected to a single edge.
   * Fix TripPathBuilder crash if first edge is a transition edge (was occurring with map-matching in rare occasions).
-  
+
 ## Release Date: 2017-05-15 Valhalla 2.2.3
 * **Map Matching Improvement**
   * Return begin and end route discontinuities. Also, returns partial shape of edge at route discontinuity.
@@ -257,7 +259,7 @@
 * **Map Matching Improvement**
   * Return matched points with trace attributes when using map_snap.
 * **Data Producer Updates**
-  * lua updates so that the chunnel will work again.  
+  * lua updates so that the chunnel will work again.
 
 ## Release Date: 2017-04-04 Valhalla 2.1.8
 * **Map Matching Release**
@@ -275,7 +277,7 @@
 * **Routing Improvements**
   * Level the forward and reverse paths in bidirectional A * to account for distance approximation differences.
   * Add logic for Use==kPath to bicycle costing so that paths are favored (as are footways).
-  
+
 ## Release Date: 2017-03-10 Valhalla 2.1.3
 * **Guidance Improvement**
   * Corrections to Slovenian narrative language file
@@ -290,10 +292,10 @@
   * Fix through location reverse ordering bug (introduced in 2.0.9) in output of route responses for depart_at routes
   * Fix edge_walking method to handle cases where more than 1 initial edge is found
 * **Data Producer Updates**
-  * Improved transit by processing frequency based schedules. 
-  * Updated graph validation to more aggressively check graph consistency on level 0 and level 1 
+  * Improved transit by processing frequency based schedules.
+  * Updated graph validation to more aggressively check graph consistency on level 0 and level 1
   * Fix the EdgeInfo hash to not create duplicate edge info records when creating hierarchies
-  
+
 ## Release Date: 2017-02-21 Valhalla 2.0.9
 * **Guidance Improvement**
   * Improved Italian narrative by handling articulated prepositions
@@ -313,12 +315,12 @@
   * Transit:  Fixed an issue where add_service_day and remove_service_day was not using the tile creation date, but the service start date for transit.
   * Transit:  Added acceptance test logic.
   * Transit:  Added fallback option if the associated wayid is not found.  Use distance approximator to find the closest edge.
-  * Transit:  Added URL encoding for one stop ids that contain diacriticals.  Also, added include_geometry=false for route requests. 
+  * Transit:  Added URL encoding for one stop ids that contain diacriticals.  Also, added include_geometry=false for route requests.
 * **Optimized Routing Update**
   * Added an original index to the location object in the optimized route response
 * **Trace Route Improvement**
   * Updated find_start_node to fix "GraphTile NodeInfo index out of bounds" error
-  
+
 ## Release Date: 2017-01-30 Valhalla 2.0.6
 * **Guidance Improvement**
   * Italian phrases were updated
@@ -327,7 +329,7 @@
   * Fixed an encoding issue that was discovered for tranist_fetcher.  We were not encoding onestop_ids or route_ids.  Also, added exclude_geometry=true for route API calls.
 * **Data Producer Updates**
   * Added logic to grab a single feed in valhalla_build_transit.
-  
+
 ## Release Date: 2017-01-04 Valhalla 2.0.3
 * **Service Improvement**
   * Added support for interrupting requests. If the connection is closed, route computation and map-matching can be interrupted prior to completion.
@@ -337,12 +339,12 @@
   * Fixed consistent name assignment for ramps and turn lanes which improved guidance.
   * Added a flag to directed edges indicating if the edge has names. This can potentially be used in costing methods.
   * Allow future use of spare GraphId bits within DirectedEdge.
-  
+
 ## Release Date: 2016-12-13 Valhalla 2.0.2
 * **Routing Improvement**
   * Added support for multi-way restrictions to matrix and isochrones.
   * Added HOV costing model.
-  * Speed limit updates.   Added logic to save average speed separately from speed limits.  
+  * Speed limit updates.   Added logic to save average speed separately from speed limits.
   * Added transit include and exclude logic to multimodal isochrone.
   * Fix some edge cases for trivial (single edge) paths.
   * Better treatment of destination access only when using bidirectional A*.
@@ -360,7 +362,7 @@
 ## Release Date: 2016-11-15 Valhalla 2.0
 
 * **Tile Redesign**
-  * Updated the graph tiles to store edges only on the hierarchy level they belong to. Prior to this, the highways were stored on all levels, they now exist only on the highway hierarchy. Similar changes were made for arterial level roads. This leads to about a 20% reduction in tile size. 
+  * Updated the graph tiles to store edges only on the hierarchy level they belong to. Prior to this, the highways were stored on all levels, they now exist only on the highway hierarchy. Similar changes were made for arterial level roads. This leads to about a 20% reduction in tile size.
   * The tile redesign required changes to the path generation algorithms. They must now transition freely beteeen levels, even for pedestrian and bicycle routes. To offset the extra transitions, the main algorithms were changed to expand nodes at each level that has directed edges, rather than adding the transition edges to the priority queue/adjacency list. This change helps performance. The hierarchy limits that are used to speed the computation of driving routes by utilizing the highway hierarchy were adjusted to work with the new path algorithms.
   * Some changes to costing were also required, for example pedestrian and bicycle routes skip shortcut edges.
   * Many tile data structures were altered to explicitly size different fields and make room for "spare" fields that will allow future growth. In addition, the tile itself has extra "spare" records that can be appended to the end of the tile and referenced from the tile header. This also will allow future growth without breaking backward compatibility.
@@ -407,8 +409,8 @@
   * Added Spanish narrative
   * Updated the start and end edge heading calculation to be based on road class and edge use
 * **Bicycle Routing Improvements**
-  * Prevent getting off a higher class road for a small detour only to get back onto the road immediately. 
-  * Redo the speed penalties and road class factors - they were doubly penalizing many roads with very high values. 
+  * Prevent getting off a higher class road for a small detour only to get back onto the road immediately.
+  * Redo the speed penalties and road class factors - they were doubly penalizing many roads with very high values.
   * Simplify the computation of weighting factor for roads that do not have cycle lanes. Apply speed penalty to slightly reduce favoring
 of non-separated bicycle lanes on high speed roads.
 * **Routing Improvements**
@@ -487,7 +489,7 @@ of non-separated bicycle lanes on high speed roads.
  * **Updated ferry defaults** -  Bumped up use_ferry to 0.65 so that we don't penalize ferries as much.
 
 ## Release Date: 2016-03-31
- * **Data producer updates** - Do not generate shortcuts across a node which is a fork. This caused missing fork maneuvers on longer routes.  GetNames update ("Broadway fix").  Fixed an issue with looking up a name in the ref map and not the name map.  Also, removed duplicate names.  Private = false was unsetting destination only flags for parking aisles.         
+ * **Data producer updates** - Do not generate shortcuts across a node which is a fork. This caused missing fork maneuvers on longer routes.  GetNames update ("Broadway fix").  Fixed an issue with looking up a name in the ref map and not the name map.  Also, removed duplicate names.  Private = false was unsetting destination only flags for parking aisles.
 
 ## Release Date: 2016-03-30
  * **TripPathBuilder Bug Fix** - Fixed an exception that was being thrown when trying to read directed edges past the end of the list within a tile. This was due to errors in setting walkability and cyclability on upper hierarchies.
